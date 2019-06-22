@@ -9,7 +9,7 @@
  * GameCharacter implementation
  */
 
-GameCharacter::GameCharacter(int x, int y, float h, bool onf) : posX(x), posY(y), health(h), onFire(onf) {}
+GameCharacter::GameCharacter(int x, int y, bool onf, float h) : posX(x), posY(y),  onFire(onf), health(h) {}
 
 
 void GameCharacter::attack() {

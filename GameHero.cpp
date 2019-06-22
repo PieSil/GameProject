@@ -11,8 +11,4 @@
 
 const float GameHero::DEFHealth = 20.;
 
-GameHero::GameHero(int x, int y, float h, bool onf) : GameCharacter(x, y, h, onf) {}
-
-void GameHero::specialBehaviour() {
-
-}
+GameHero::GameHero(int x, int y, bool onf, float h) : GameCharacter(x, y, onf, h) {}

@@ -11,10 +11,10 @@
 
 class GameHero: public GameCharacter {
 public:
-    GameHero(int x, int y, float h = DEFHealth, bool onf = false);
-    virtual ~GameHero() = 0;
+    GameHero(int x, int y, bool onf = false, float h = DEFHealth);
+    virtual ~GameHero() {};
     
-virtual void specialBehaviour();
+virtual void specialBehaviour() = 0;
 
 protected:
     static const float DEFHealth;  //Default health value for all game heroes

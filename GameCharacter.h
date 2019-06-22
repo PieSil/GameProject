@@ -9,7 +9,7 @@
 class GameCharacter {
 public: 
 
-    GameCharacter(int x, int y, float h, bool onf = false);
+    GameCharacter(int x, int y, bool onf = false, float h = 10);
     virtual ~GameCharacter() {};
 
     virtual void attack();
@@ -53,8 +53,8 @@ public:
 protected:
     int posX;
     int posY;
-    float health;
     bool onFire;
+    float health;
 };
 
 #endif //_GAMECHARACTER_H
