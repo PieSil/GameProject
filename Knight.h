@@ -10,6 +10,7 @@
 
 
 class Knight: public GameHero {
+public:
     Knight(int x,int y, float h = DEFHealth, bool onf = false);
     virtual ~Knight() {};
 };
