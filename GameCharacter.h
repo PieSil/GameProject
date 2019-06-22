@@ -12,7 +12,7 @@ public:
     GameCharacter(int x, int y, float h, bool onf = false);
     virtual ~GameCharacter() {};
 
-    virtual void attack() = 0;
+    virtual void attack();
 
     virtual void move();
 
