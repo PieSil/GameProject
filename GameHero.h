@@ -17,7 +17,7 @@ public:
 virtual void specialBehaviour() = 0;
 
 protected:
-    static const float DEFHealth;  //Default health value for all game heroes
+    static const float DEFHealth;
 };
 
 #endif //_GAMEHERO_H
