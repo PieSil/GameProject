@@ -10,8 +10,21 @@
 
 
 class Wizard: public GameHero {
+public:
+    Wizard(int x, int y, bool onf = false, float h = DEFHealth, float m = 10.);
+
+    void specialBehaviour() override;
+
+    float getMana() const {
+        return mana;
+    }
+
+    void setMana(float mana) {
+        Wizard::mana = mana;
+    }
+
 protected: 
-    int mana;
+    float mana;
 };
 
 #endif //_WIZARD_H
