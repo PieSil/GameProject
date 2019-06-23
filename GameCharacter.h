@@ -11,12 +11,12 @@
 class GameCharacter : public GameEntity {
 public: 
 
-    GameCharacter(int x, int y, bool onf = false, float h = 10);
+    GameCharacter(int x, int y, bool onf = false, float h = 10, bool facingR = true);
     ~GameCharacter() {};
 
     virtual void attack();
 
-    virtual void move();
+    virtual void updateMovement();
 
     virtual void jump();
 

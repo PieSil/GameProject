@@ -11,7 +11,7 @@
 
 class Wizard: public GameHero {
 public:
-    Wizard(int x, int y, bool onf = false, float h = DEFHealth, float m = 10.);
+    Wizard(int x, int y, bool onf = false, float h = defHealth, float m = 10.);
 
     void specialBehaviour() override;
 

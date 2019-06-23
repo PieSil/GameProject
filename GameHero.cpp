@@ -10,6 +10,8 @@
  * GameHero implementation
  */
 
-const float GameHero::DEFHealth = DEF_GAMEHERO_HEALTH;
+const float GameHero::defHealth = DEF_GAMEHERO_HEALTH;
 
-GameHero::GameHero(int x, int y, bool onf, float h) : GameCharacter(x, y, onf, h) {}
+GameHero::GameHero(int x, int y, bool onf, float h, bool facingR) : GameCharacter(x, y, onf, h, facingR) {
+
+}

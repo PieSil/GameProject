@@ -10,7 +10,8 @@
 
 class GameEntity {
 public:
-    explicit GameEntity(sf::Texture t = sf::Texture(), sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
+    explicit GameEntity(bool facingR = true, sf::Texture t = sf::Texture(),
+                        sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
     virtual ~GameEntity() {};
 
 
@@ -66,6 +67,9 @@ protected:
     sf::RectangleShape collisionRect;
     sf::Text text;
     sf::Sprite sprite;
+    float movementSpeed;
+    bool facingRight; //boolean value used to determine if the character is facing right or left
+    int movingCounter;//counter used to update sprite in order to generate walking/moving animation
 };
 
 

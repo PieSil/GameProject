@@ -45,6 +45,7 @@ int main(){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  {
             heroSprite.move(-HERO_SPEED,0);
         }*/
+        knight.updateMovement();
 
         window.display();
     }

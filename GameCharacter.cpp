@@ -10,14 +10,17 @@
  * GameCharacter implementation
  */
 
-GameCharacter::GameCharacter(int x, int y, bool onf, float h) : posX(x), posY(y), onFire(onf), health(h) {}
+GameCharacter::GameCharacter(int x, int y, bool onf, float h, bool facingR) : posX(x), posY(y), onFire(onf), health(h),
+                             GameEntity(facingR, sf::Texture(), sf::RectangleShape(),sf::Text()) {
+
+}
 
 
 void GameCharacter::attack() {
 
 }
 
-void GameCharacter::move() {
+void GameCharacter::updateMovement() {
 
 }
 
