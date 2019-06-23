@@ -5,7 +5,11 @@
 #include "GameEntity.h"
 
 GameEntity::GameEntity(sf::Texture t, sf::RectangleShape collR, sf::Text txt) : collisionRect(collR), text(txt) {
-    if (!texture.loadFromFile("../GameAssets/Sprites/Default_Sprite.png")) {
+    loadTexture("../GameAssets/Sprites/Default_Sprite.png");
+}
+
+void GameEntity::loadTexture(const std::string &path) {
+    if(!texture.loadFromFile(path)) {
         //exception
     }
 

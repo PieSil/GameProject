@@ -6,11 +6,13 @@
 #ifndef _GAMECHARACTER_H
 #define _GAMECHARACTER_H
 
-class GameCharacter {
+#include "GameEntity.h"
+
+class GameCharacter : public GameEntity {
 public: 
 
     GameCharacter(int x, int y, bool onf = false, float h = 10);
-    virtual ~GameCharacter() {};
+    ~GameCharacter() {};
 
     virtual void attack();
 

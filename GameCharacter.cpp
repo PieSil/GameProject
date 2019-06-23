@@ -4,12 +4,13 @@
 
 
 #include "GameCharacter.h"
+#include "GameEntity.h"
 
 /**
  * GameCharacter implementation
  */
 
-GameCharacter::GameCharacter(int x, int y, bool onf, float h) : posX(x), posY(y),  onFire(onf), health(h) {}
+GameCharacter::GameCharacter(int x, int y, bool onf, float h) : posX(x), posY(y), onFire(onf), health(h) {}
 
 
 void GameCharacter::attack() {

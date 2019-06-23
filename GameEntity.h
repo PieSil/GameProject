@@ -5,18 +5,20 @@
 #ifndef GAMEPROJECT_GAMEENTITY_H
 #define GAMEPROJECT_GAMEENTITY_H
 
-#include <queue>
 #include <SFML/Graphics.hpp>
 
 
 class GameEntity {
 public:
     explicit GameEntity(sf::Texture t = sf::Texture(), sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
+    virtual ~GameEntity() {};
 
 
     void updateSprite() {
         sprite.setTexture(texture);
     }
+
+    void loadTexture(const std::string &path);
 
     const sf::RectangleShape &getCollisionRect() const {
         return collisionRect;
