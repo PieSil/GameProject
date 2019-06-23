@@ -5,6 +5,7 @@
 #include "gtest/gtest.h"
 #include "Wizard.h"
 #include "defaultValues.h"
+#include <SFML/Graphics.hpp>
 
 TEST(WizardTest, DefaultConstructorTest) {
     Wizard w(1,1);

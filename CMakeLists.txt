@@ -13,3 +13,4 @@ set(SOURCE_FILES BossEnemy.cpp BossEnemy.h Collectible.cpp Collectible.h Enemy.c
 add_executable(GameProject main.cpp ${SOURCE_FILES})
 add_library(core ${SOURCE_FILES})
 target_link_libraries(GameProject sfml-graphics sfml-audio)
+target_link_libraries(core sfml-graphics sfml-audio)

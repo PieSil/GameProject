@@ -5,6 +5,7 @@
 #include "gtest/gtest.h"
 #include "Knight.h"
 #include "defaultValues.h"
+#include <SFML/Graphics.hpp>
 
 TEST(KnightTest, DefaultConstructorTest) {
     Knight k(5, 0);
