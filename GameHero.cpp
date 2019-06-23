@@ -12,6 +12,6 @@
 
 const float GameHero::defHealth = DEF_GAMEHERO_HEALTH;
 
-GameHero::GameHero(int x, int y, bool onf, float h, bool facingR) : GameCharacter(x, y, onf, h, facingR) {
+GameHero::GameHero(int x, int y, bool onf, float h, bool facingR, float s) : GameCharacter(x, y, onf, h, s, facingR) {
 
 }

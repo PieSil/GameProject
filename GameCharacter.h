@@ -11,7 +11,7 @@
 class GameCharacter : public GameEntity {
 public: 
 
-    GameCharacter(int x, int y, bool onf = false, float h = 10, bool facingR = true);
+    GameCharacter(int x, int y, bool onf = false, float h = 10, float s = 1., bool facingR = true);
     ~GameCharacter() {};
 
     virtual void attack();

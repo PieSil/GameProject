@@ -4,8 +4,8 @@
 
 #include "GameEntity.h"
 
-GameEntity::GameEntity(bool facingR, sf::Texture t, sf::RectangleShape collR, sf::Text txt) :
-                       facingRight(facingR), collisionRect(collR), text(txt), movingCounter(0) {
+GameEntity::GameEntity(float s,bool facingR, sf::Texture t, sf::RectangleShape collR, sf::Text txt) :
+                       movementSpeed(s), facingRight(facingR), collisionRect(collR), text(txt), movingCounter(0) {
     loadTexture("../GameAssets/Sprites/Default_Sprite.png");
 }
 

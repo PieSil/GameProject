@@ -10,7 +10,7 @@
 
 class GameEntity {
 public:
-    explicit GameEntity(bool facingR = true, sf::Texture t = sf::Texture(),
+    explicit GameEntity(float s = 0., bool facingR = true, sf::Texture t = sf::Texture(),
                         sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
     virtual ~GameEntity() {};
 

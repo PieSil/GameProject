@@ -10,8 +10,8 @@
  * GameCharacter implementation
  */
 
-GameCharacter::GameCharacter(int x, int y, bool onf, float h, bool facingR) : posX(x), posY(y), onFire(onf), health(h),
-                             GameEntity(facingR, sf::Texture(), sf::RectangleShape(),sf::Text()) {
+GameCharacter::GameCharacter(int x, int y, bool onf, float h, float s, bool facingR) : posX(x), posY(y), onFire(onf), health(h),
+                             GameEntity(s, facingR, sf::Texture(), sf::RectangleShape(),sf::Text()) {
 
 }
 

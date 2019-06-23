@@ -12,7 +12,7 @@
 
 class GameHero: public GameCharacter {
 public:
-    GameHero(int x, int y, bool onf = false, float h = defHealth, bool facingR = true);
+    GameHero(int x, int y, bool onf = false, float h = defHealth, bool facingR = true, float s = HERO_SPEED);
     virtual ~GameHero() {};
     
 virtual void specialBehaviour() = 0;

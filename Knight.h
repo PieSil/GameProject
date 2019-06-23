@@ -11,7 +11,7 @@
 
 class Knight: public GameHero {
 public:
-    Knight(int x, int y, bool onf = false, float h = defHealth, bool facingR = true);
+    Knight(int x, int y, bool onf = false, float h = defHealth, bool facingR = true, float s = HERO_SPEED);
     virtual ~Knight() {};
 
     void specialBehaviour() override;
