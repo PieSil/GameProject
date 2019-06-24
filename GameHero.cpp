@@ -16,12 +16,12 @@ GameHero::GameHero(float x, float y, bool onf, float h, bool facingR, float s) :
 
 }
 
-void GameHero::updateMovement(int width, int height, float scale) {
+void GameHero::updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) {
 
     //move right
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         sprite.move(this->movementSpeed, 0);
-        sprite.setTextureRect(sf::IntRect(width * movingCounter, height * 4, width, height));
+        sprite.setTextureRect(sf::IntRect(width * movingCounter, height * rowSelector, width, height));
         if (!facingRight) { //flip horizontally
             sprite.setScale(scale * 1.f, scale * 1.f);
             facingRight = true;
@@ -31,7 +31,7 @@ void GameHero::updateMovement(int width, int height, float scale) {
     //move left
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         sprite.move(-(this->movementSpeed), 0);
-        sprite.setTextureRect(sf::IntRect(width * movingCounter, height * 4, width, height));
+        sprite.setTextureRect(sf::IntRect(width * movingCounter, height * rowSelector, width, height));
         if (facingRight) { //flip horizontally
             sprite.setScale(scale * (-1.f), scale * 1.f);
             facingRight = false;
@@ -41,7 +41,8 @@ void GameHero::updateMovement(int width, int height, float scale) {
 
         movingCounter++;
 
-        if (movingCounter > 7) {
+        if (movingCounter > lastColumn) {
             movingCounter = 0;
         }
 }
+

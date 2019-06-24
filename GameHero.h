@@ -17,7 +17,9 @@ public:
     
 virtual void specialBehaviour() = 0;
 
-void updateMovement(int width, int height, float scale) override ;
+void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) override;
+
+void updateMovement();
 
 protected:
     static const float defHealth;

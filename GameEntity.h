@@ -25,6 +25,8 @@ public:
         return collisionRect;
     }
 
+    virtual void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) = 0;
+
     void setCollisionRect(const sf::RectangleShape &collisionRect) {
         GameEntity::collisionRect = collisionRect;
     }

@@ -11,9 +11,11 @@
 
 class Wizard: public GameHero {
 public:
-    Wizard(int x, int y, bool onf = false, float h = defHealth, float m = 10.);
+    Wizard(float x, float y, bool onf = false, float m = 10., float h = defHealth, bool facingR = true, float s = HERO_SPEED);
 
     void specialBehaviour() override;
+
+    void updateMovement();
 
     float getMana() const {
         return mana;

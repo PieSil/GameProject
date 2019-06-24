@@ -28,32 +28,6 @@ void Knight::specialBehaviour() {
 }
 
 void Knight::updateMovement() {
-
-    GameHero::updateMovement(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE);
-    /*
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        sprite.move(movementSpeed, 0);
-        sprite.setTextureRect(sf::IntRect(KNIGHT_WIDTH*movingCounter,KNIGHT_HEIGHT*4,KNIGHT_WIDTH,KNIGHT_HEIGHT));
-        if (!facingRight) {
-            sprite.setScale(KNIGHT_SCALE*1.f,KNIGHT_SCALE*1.f);
-            facingRight = true;
-        }
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        sprite.move(-movementSpeed, 0);
-        sprite.setTextureRect(sf::IntRect(KNIGHT_WIDTH*movingCounter,KNIGHT_HEIGHT*4,KNIGHT_WIDTH,KNIGHT_HEIGHT));
-        if (facingRight) {
-            sprite.setScale(-KNIGHT_SCALE*1.f,KNIGHT_SCALE*1.f);
-            facingRight = false;
-        }
-    }
-
-    movingCounter++;
-
-    if (movingCounter > 7)
-        movingCounter = 0;
-        */
+    GameHero::updateMovement(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW_SELECTOR, KNIGHT_MOV_LAST_COL);
 }
-
 

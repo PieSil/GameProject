@@ -16,8 +16,6 @@ public:
 
     virtual void attack();
 
-    virtual void updateMovement(int width, int height, float scale = 1.) = 0;
-
     virtual void jump();
 
     float getHealth() const {

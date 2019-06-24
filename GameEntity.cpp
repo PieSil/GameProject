@@ -18,7 +18,8 @@ GameEntity::~GameEntity() {}
 void GameEntity::loadTexture(const std::string &path) {
     if(!texture.loadFromFile(path)) {
         //exception
+        return false;
     }
-
     sprite = sf::Sprite(texture);
+    return true;
 }
