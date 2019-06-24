@@ -32,7 +32,7 @@ int main(){
         case 'k' :
             hero.reset(new Knight(window.getSize().x/2,window.getSize().y/2));
         case 'w':
-            hero.reset(new Knight(window.getSize().x/2,window.getSize().y/2));
+            hero.reset(new Wizard(window.getSize().x/2,window.getSize().y/2));
             break;
 
         default:
@@ -67,10 +67,10 @@ int main(){
         //knight.updateMovement();
 
         if (Wizard* w = dynamic_cast<Wizard*>(hero.get())){
-            w->updateMovement();
+            w->updateInput();
         }
         if (Knight* k = dynamic_cast<Knight*>(hero.get())) {
-            k->updateMovement();
+            k->updateInput();
         }
 
 
