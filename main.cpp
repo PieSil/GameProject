@@ -31,6 +31,7 @@ int main(){
     switch(selection) {
         case 'k' :
             hero.reset(new Knight(window.getSize().x/2,window.getSize().y/2));
+            break;
         case 'w':
             hero.reset(new Wizard(window.getSize().x/2,window.getSize().y/2));
             break;
