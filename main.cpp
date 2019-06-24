@@ -9,17 +9,14 @@ int main(){
 
 
     //GameEntity Test
-    /*GameEntity block;
+    /*
+    GameEntity block(window.getSize().x/2, window.getSize().y/2);
     block.setOrigin(block.getTexture().getSize().x/2., block.getTexture().getSize().y/2.);
     block.setPosition(window.getSize().x/2,window.getSize().y/2);
-     */
+     //*/
 
     //Knight test
-    Knight knight(0,0);
-    knight.setOrigin(knight.getSprite().getTextureRect().width/2., knight.getSprite().getTextureRect().height/2.);
-    knight.setPosition(window.getSize().x/2,window.getSize().y/2);
-
-
+    Knight knight(window.getSize().x/2,window.getSize().y/2);
     while(window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){

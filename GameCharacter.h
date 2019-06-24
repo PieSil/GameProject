@@ -11,30 +11,14 @@
 class GameCharacter : public GameEntity {
 public: 
 
-    GameCharacter(int x, int y, bool onf = false, float h = 10, float s = 1., bool facingR = true);
+    GameCharacter(float x, float y, bool onf = false, float h = 10, float s = 1., bool facingR = true);
     ~GameCharacter() {};
 
     virtual void attack();
 
-    virtual void updateMovement();
+    virtual void updateMovement(int width, int height, float scale = 1.) = 0;
 
     virtual void jump();
-
-    int getPosX() const {
-        return posX;
-    }
-
-    void setPosX(int posX) {
-        GameCharacter::posX = posX;
-    }
-
-    int getPosY() const {
-        return posY;
-    }
-
-    void setPosY(int posY) {
-        GameCharacter::posY = posY;
-    }
 
     float getHealth() const {
         return health;
@@ -53,8 +37,6 @@ public:
     }
 
 protected:
-    int posX;
-    int posY;
     bool onFire;
     float health;
 };

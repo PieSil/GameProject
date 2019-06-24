@@ -11,12 +11,12 @@
 
 class Knight: public GameHero {
 public:
-    Knight(int x, int y, bool onf = false, float h = defHealth, bool facingR = true, float s = HERO_SPEED);
+    Knight(float x, float y, bool onf = false, float h = defHealth, bool facingR = true, float s = HERO_SPEED);
     virtual ~Knight() {};
 
     void specialBehaviour() override;
 
-    void updateMovement() override;
+    void updateMovement();
 };
 
 #endif //_KNIGHT_H

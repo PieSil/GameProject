@@ -10,9 +10,9 @@
 
 class GameEntity {
 public:
-    explicit GameEntity(float s = 0., bool facingR = true, sf::Texture t = sf::Texture(),
+    explicit GameEntity(float x, float y, float s = 0., bool facingR = true, sf::Texture t = sf::Texture(),
                         sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
-    virtual ~GameEntity() {};
+    virtual ~GameEntity() = 0;
 
 
     void updateSprite() {
@@ -62,7 +62,34 @@ public:
         sprite.setPosition(x,y);
     }
 
+
+    float getMovementSpeed() const {
+        return movementSpeed;
+    }
+
+    void setMovementSpeed(float movementSpeed) {
+        GameEntity::movementSpeed = movementSpeed;
+    }
+
+    bool isFacingRight() const {
+        return facingRight;
+    }
+
+    void setFacingRight(bool facingRight) {
+        GameEntity::facingRight = facingRight;
+    }
+
+    int getMovingCounter() const {
+        return movingCounter;
+    }
+
+    void setMovingCounter(int movingCounter) {
+        GameEntity::movingCounter = movingCounter;
+    }
+
 protected:
+
+    //SFML classes are not made for inheritance, preferred aggregation instead
     sf::Texture texture;
     sf::RectangleShape collisionRect;
     sf::Text text;
