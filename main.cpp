@@ -2,9 +2,11 @@
 #include <memory.h>
 #include <SFML/Graphics.hpp>
 #include "defaultValues.h"
+#include "GameLevel.h"
 #include "GameEntity.h"
 #include "Knight.h"
 #include "Wizard.h"
+#include "Projectile.h"
 
 int main(){
 
@@ -24,8 +26,9 @@ int main(){
     block.setPosition(window.getSize().x/2,window.getSize().y/2);
      //*/
 
-    //Knight test
 
+
+    //Creates hero based on selection value:
     std::unique_ptr<GameHero> hero = nullptr;
 
     switch(selection) {
@@ -40,6 +43,9 @@ int main(){
             return 1;
     }
 
+    //Creates projectile
+
+    //Creates GameLevel, pushes hero in subject list using constructor
     
     //Knight knight(window.getSize().x/2,window.getSize().y/2);
 
@@ -53,8 +59,11 @@ int main(){
         window.clear(sf::Color::Black);
         // Draw here.
 
-        //window.draw(knight.getSprite());
         window.draw(hero->getSprite());
+
+        //draw projectile
+        //window.draw(projectile.getCollisionRect());
+
 
         /*
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -75,6 +84,7 @@ int main(){
         }
 
 
+
         //hero->updateMovement();
 
 
@@ -82,6 +92,7 @@ int main(){
 
 
         window.display();
+
     }
 }
 

@@ -16,7 +16,7 @@ public:
 
     void specialBehaviour() override;
 
-    void updateMovement();
+    void updateInput();
 };
 
 #endif //_KNIGHT_H

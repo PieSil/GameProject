@@ -15,7 +15,7 @@ public:
 
     void specialBehaviour() override;
 
-    void updateMovement();
+    void updateInput();
 
     float getMana() const {
         return mana;

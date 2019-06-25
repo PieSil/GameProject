@@ -7,7 +7,6 @@
 
 #include <SFML/Graphics.hpp>
 
-
 class GameEntity {
 public:
     explicit GameEntity(float x, float y, float s = 0., bool facingR = true, sf::Texture t = sf::Texture(),
@@ -100,6 +99,5 @@ protected:
     bool facingRight; //boolean value used to determine if the character is facing right or left
     int movingCounter;//counter used to update sprite in order to generate walking/moving animation
 };
-
 
 #endif //GAMEPROJECT_GAMEENTITY_H

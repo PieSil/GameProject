@@ -46,3 +46,6 @@ void GameHero::updateMovement(int width, int height, float scale, int rowSelecto
         }
 }
 
+void GameHero::updateInput(int width, int height, float scale, int rowSelector, int lastColumn) {
+    this->updateMovement(width, height, scale, rowSelector, lastColumn);
+}

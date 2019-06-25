@@ -28,6 +28,6 @@ Wizard::Wizard(float x, float y, bool onf, float m, float h, bool facingR, float
 
 }
 
-void Wizard::updateMovement() {
-    GameHero::updateMovement(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
+void Wizard::updateInput() {
+    GameHero::updateInput(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
 }
