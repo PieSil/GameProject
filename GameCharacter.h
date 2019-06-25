@@ -11,7 +11,7 @@
 class GameCharacter : public GameEntity {
 public: 
 
-    GameCharacter(float x, float y, bool onf = false, float h = 10, float s = 1., bool facingR = true);
+    GameCharacter(float x, float y, float str = 5., bool onf = false, float h = 10, float s = 1., bool facingR = true);
 
     //default constructor
     GameCharacter();
@@ -41,9 +41,18 @@ public:
         GameCharacter::onFire = onFire;
     }
 
+    float getStrength() const {
+        return strength;
+    }
+
+    void setStrength(float strength) {
+        GameCharacter::strength = strength;
+    }
+
 protected:
     bool onFire;
     float health;
+    float strength;
 };
 
 #endif //_GAMECHARACTER_H

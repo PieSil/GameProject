@@ -43,6 +43,9 @@ int main(){
             return 1;
     }
 
+    std::vector<std::unique_ptr<GameEntity>> allEntities;
+    allEntities.push_back(std::move(hero));
+
     //Creates projectile
 
     //Creates GameLevel, pushes hero in subject list using constructor
@@ -59,7 +62,7 @@ int main(){
         window.clear(sf::Color::Black);
         // Draw here.
 
-        window.draw(hero->getSprite());
+       //window.draw(entity->getSprite());
 
         //draw projectile
         //window.draw(projectile.getCollisionRect());
@@ -76,14 +79,18 @@ int main(){
 
         //knight.updateMovement();
 
-        if (Wizard* w = dynamic_cast<Wizard*>(hero.get())){
-            w->updateInput();
-        }
-        if (Knight* k = dynamic_cast<Knight*>(hero.get())) {
-            k->updateInput();
-        }
+        for(const auto& entity : allEntities) {
 
+            window.draw(entity->getSprite());
 
+            if (Wizard *w = dynamic_cast<Wizard *>(entity.get())) {
+                w->updateBehaviour();
+            }
+            if (Knight *k = dynamic_cast<Knight *>(entity.get())) {
+                k->updateBehaviour();
+            }
+
+        }
 
         //hero->updateMovement();
 

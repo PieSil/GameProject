@@ -11,7 +11,7 @@
 
 class Wizard: public GameHero {
 public:
-    Wizard(float x, float y, bool onf = false, float m = 10., float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
+    Wizard(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float m = 10., float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
 
     //default constructor
     Wizard();

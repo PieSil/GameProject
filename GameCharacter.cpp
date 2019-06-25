@@ -5,12 +5,14 @@
 
 #include "GameCharacter.h"
 #include "GameEntity.h"
+#include "math.h"
 
 /**
  * GameCharacter implementation
  */
 
-GameCharacter::GameCharacter(float x, float y, bool onf, float h, float s, bool facingR) :  onFire(onf), health(h),
+GameCharacter::GameCharacter(float x, float y, float str, bool onf, float h, float s, bool facingR) :
+                             onFire(onf), health(abs(h)), strength(abs(str)),
                              GameEntity(x, y, s, facingR, sf::Texture(), sf::RectangleShape(), sf::Text()) {
 
 }
@@ -30,6 +32,6 @@ GameCharacter::GameCharacter() : GameCharacter(0,0) {
 }
 
 GameCharacter::GameCharacter(const GameCharacter &copied) : health(copied.getHealth()), onFire(copied.isOnFire()),
-                             GameEntity(copied) {
+                             strength(copied.getStrength()), GameEntity(copied) {
 
 }

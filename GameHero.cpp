@@ -10,7 +10,7 @@
  * GameHero implementation
  */
 
-GameHero::GameHero(float x, float y, bool onf, float h, bool facingR, float s) : GameCharacter(x, y, onf, h, s, facingR) {
+GameHero::GameHero(float x, float y, float str, bool onf, float h, bool facingR, float s) : GameCharacter(x, y, str, onf, h, s, facingR) {
 
 }
 
