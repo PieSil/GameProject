@@ -14,6 +14,14 @@ void Wizard::specialBehaviour() {
 
 Wizard::Wizard(float x, float y, bool onf, float m, float h, bool facingR, float s)
                : GameHero(x, y, onf, h, facingR, s), mana(m){
+    this->initSprite(x,y);
+}
+
+void Wizard::updateInput() {
+    GameHero::updateInput(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
+}
+
+void Wizard::initSprite(float x, float y) {
     loadTexture("../GameAssets/Sprites/Player/Wizard/Wizard.png");
     sprite.setTextureRect(sf::IntRect(0,WIZARD_HEIGHT*1,WIZARD_WIDTH,WIZARD_HEIGHT*1));
     //sets origin to center of selected texture Rectangle
@@ -28,6 +36,10 @@ Wizard::Wizard(float x, float y, bool onf, float m, float h, bool facingR, float
 
 }
 
-void Wizard::updateInput() {
-    GameHero::updateInput(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
+Wizard::Wizard() : Wizard(0,0) {
+
+}
+
+Wizard::Wizard(const Wizard & copied) : GameHero(copied){
+    initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
 }

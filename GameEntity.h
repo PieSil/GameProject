@@ -11,13 +11,19 @@ class GameEntity {
 public:
     explicit GameEntity(float x, float y, float s = 0., bool facingR = true, sf::Texture t = sf::Texture(),
                         sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
+    //default constructor
+    GameEntity();
+
+    //copy constructor
+    GameEntity(const GameEntity &copied);
+
     virtual ~GameEntity() = 0;
 
-
+/*
     void updateSprite() {
         sprite.setTexture(texture);
     }
-
+*/
     void loadTexture(const std::string &path);
 
     const sf::RectangleShape &getCollisionRect() const {
@@ -25,6 +31,8 @@ public:
     }
 
     virtual void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) = 0;
+
+    virtual void initSprite(float x, float y);
 
     void setCollisionRect(const sf::RectangleShape &collisionRect) {
         GameEntity::collisionRect = collisionRect;
@@ -43,7 +51,7 @@ public:
     }
 
     void setTexture(const sf::Texture &texture) {
-        updateSprite();
+        //updateSprite();
         GameEntity::texture = texture;
     }
 
@@ -87,6 +95,7 @@ public:
     void setMovingCounter(int movingCounter) {
         GameEntity::movingCounter = movingCounter;
     }
+
 
 protected:
 

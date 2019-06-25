@@ -12,7 +12,14 @@ class GameCharacter : public GameEntity {
 public: 
 
     GameCharacter(float x, float y, bool onf = false, float h = 10, float s = 1., bool facingR = true);
-    ~GameCharacter() {};
+
+    //default constructor
+    GameCharacter();
+
+    //copy constructor
+    GameCharacter(const GameCharacter &copied);
+
+    ~GameCharacter() = 0;
 
     virtual void attack();
 

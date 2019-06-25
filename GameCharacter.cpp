@@ -15,10 +15,21 @@ GameCharacter::GameCharacter(float x, float y, bool onf, float h, float s, bool 
 
 }
 
+GameCharacter::~GameCharacter() {};
+
 void GameCharacter::attack() {
 
 }
 
 void GameCharacter::jump() {
+
+}
+
+GameCharacter::GameCharacter() : GameCharacter(0,0) {
+
+}
+
+GameCharacter::GameCharacter(const GameCharacter &copied) : health(copied.getHealth()), onFire(copied.isOnFire()),
+                             GameEntity(copied) {
 
 }

@@ -11,12 +11,23 @@
 
 class Knight: public GameHero {
 public:
-    Knight(float x, float y, bool onf = false, float h = defHealth, bool facingR = true, float s = HERO_SPEED);
+    Knight(float x, float y, bool onf = false, float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
     virtual ~Knight() {};
+
+    //default constructor
+    Knight();
+
+    //copy constructor
+    Knight(const Knight& copied);
+
+    //assignment operator
+    Knight& operator=(const Knight& initializer) = default;
 
     void specialBehaviour() override;
 
     void updateInput();
+
+    void initSprite(float x, float y) override;
 };
 
 #endif //_KNIGHT_H

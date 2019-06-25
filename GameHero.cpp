@@ -10,8 +10,6 @@
  * GameHero implementation
  */
 
-const float GameHero::defHealth = DEF_GAMEHERO_HEALTH;
-
 GameHero::GameHero(float x, float y, bool onf, float h, bool facingR, float s) : GameCharacter(x, y, onf, h, s, facingR) {
 
 }
@@ -48,4 +46,12 @@ void GameHero::updateMovement(int width, int height, float scale, int rowSelecto
 
 void GameHero::updateInput(int width, int height, float scale, int rowSelector, int lastColumn) {
     this->updateMovement(width, height, scale, rowSelector, lastColumn);
+}
+
+GameHero::GameHero() : GameHero(0,0) {
+
+}
+
+GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
+
 }
