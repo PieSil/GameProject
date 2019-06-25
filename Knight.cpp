@@ -17,8 +17,8 @@ void Knight::specialBehaviour() {
 
 }
 
-void Knight::updateInput() {
-    GameHero::updateInput(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW_SELECTOR, KNIGHT_MOV_LAST_COL);
+void Knight::updateBehaviour() {
+    GameHero::updateBehaviour(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW_SELECTOR, KNIGHT_MOV_LAST_COL);
 }
 
 Knight::Knight() : Knight(0,0) {

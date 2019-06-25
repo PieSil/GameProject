@@ -24,7 +24,7 @@ public:
 
     void specialBehaviour() override;
 
-    void updateInput();
+    void updateBehaviour();
 
     void initSprite(float x, float y) override;
 

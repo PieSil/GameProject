@@ -32,13 +32,16 @@ GameEntity::GameEntity() : GameEntity(0,0) {
 }
 
 void GameEntity::initSprite(float x, float y) {
-
     //loads sprite from GameAssets and sets his origin and position
     loadTexture("../GameAssets/Sprites/Default_Sprite.png");
     //set sprite origin to match texture center
     sprite.setOrigin(sprite.getTexture()->getSize().x/2., sprite.getTexture()->getSize().y/2.);
     //initializes sprite position
     sprite.setPosition(x,y);
+}
+
+void GameEntity::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
+    this->updateMovement(width, height, scale, rowSelector, lastColumn);
 }
 
 

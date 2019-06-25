@@ -32,6 +32,8 @@ public:
 
     virtual void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) = 0;
 
+    virtual void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn);
+
     virtual void initSprite(float x, float y);
 
     void setCollisionRect(const sf::RectangleShape &collisionRect) {
