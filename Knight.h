@@ -27,6 +27,7 @@ public:
 
     void updateBehaviour();
 
+protected:
     void initSprite(float x, float y) override;
 };
 

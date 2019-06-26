@@ -26,8 +26,6 @@ public:
 
     void updateBehaviour();
 
-    void initSprite(float x, float y) override;
-
     float getMana() const {
         return mana;
     }
@@ -36,7 +34,9 @@ public:
         Wizard::mana = mana;
     }
 
-protected: 
+protected:
+    void initSprite(float x, float y) override;
+
     float mana;
 };
 

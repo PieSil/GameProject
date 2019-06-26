@@ -24,53 +24,26 @@ public:
         sprite.setTexture(texture);
     }
 */
-    void loadTexture(const std::string &path);
-
-    const sf::RectangleShape &getCollisionRect() const {
-        return collisionRect;
-    }
 
     virtual void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) = 0;
 
     virtual void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn);
 
-    virtual void initSprite(float x, float y);
-
-    void setCollisionRect(const sf::RectangleShape &collisionRect) {
-        GameEntity::collisionRect = collisionRect;
+    const sf::RectangleShape &getCollisionRect() const {
+        return collisionRect;
     }
+
 
     const sf::Text &getText() const {
         return text;
-    }
-
-    void setText(const sf::Text &text) {
-        GameEntity::text = text;
     }
 
     const sf::Texture &getTexture() const {
         return texture;
     }
 
-    void setTexture(const sf::Texture &texture) {
-        //updateSprite();
-        GameEntity::texture = texture;
-    }
-
     const sf::Sprite &getSprite() const {
         return sprite;
-    }
-
-    void setSprite(const sf::Sprite &sprite) {
-        GameEntity::sprite = sprite;
-    }
-
-    void setOrigin(const float &x, const float &y) {
-        sprite.setOrigin(x,y);
-    }
-
-    void setPosition(const float &x, const float &y) {
-        sprite.setPosition(x,y);
     }
 
 
@@ -78,28 +51,19 @@ public:
         return movementSpeed;
     }
 
-    void setMovementSpeed(float movementSpeed) {
-        GameEntity::movementSpeed = movementSpeed;
-    }
-
     bool isFacingRight() const {
         return facingRight;
-    }
-
-    void setFacingRight(bool facingRight) {
-        GameEntity::facingRight = facingRight;
     }
 
     int getMovingCounter() const {
         return movingCounter;
     }
 
-    void setMovingCounter(int movingCounter) {
-        GameEntity::movingCounter = movingCounter;
-    }
-
 
 protected:
+    virtual void initSprite(float x, float y); //associates sprite to texture, sets its origin and position
+
+    void loadTexture(const std::string &path); //load texture from file and associates it to sprite
 
     //SFML classes are not made for inheritance, preferred aggregation instead
     sf::Texture texture;
