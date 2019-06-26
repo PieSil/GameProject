@@ -9,7 +9,8 @@
  * Knight implementation
  */
 
-Knight::Knight(float x, float y, float str, bool onf, float h, bool facingR, float s) : GameHero(x, y, str, onf, h, facingR, s) {
+Knight::Knight(const float &x, const float &y, const float &str, const bool &onf, const float &h, const bool &facingR,
+               const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
     this->initSprite(x,y);
 }
 

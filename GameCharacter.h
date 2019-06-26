@@ -11,7 +11,8 @@
 class GameCharacter : public GameEntity {
 public: 
 
-    GameCharacter(float x, float y, float str = 5., bool onf = false, float h = 10, float s = 1., bool facingR = true);
+    GameCharacter(const float &x, const float &y, const float &str = 5., const bool &onf = false, const float &h = 10,
+                  const float &s = 1., const bool &facingR = true);
 
     //default constructor
     GameCharacter();
