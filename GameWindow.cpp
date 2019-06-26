@@ -45,7 +45,7 @@ void GameWindow::update() {
         if (event.type == sf::Event::Closed) {
             //close window button click
             closed = true; //doesn't close window, simply updates the closed attibute
-        } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F5) { //if F5 is pressed toggle fullscreen
+        } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Tab) { //if Tab is pressed toggle fullscreen
             toggleFullscreen();
         }
     }

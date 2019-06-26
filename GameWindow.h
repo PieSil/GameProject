@@ -30,7 +30,7 @@ public:
 
     void toggleFullscreen();
 
-    void draw(sf::Drawable& drawable) {
+    void draw(const sf::Drawable& drawable) {
         window.draw(drawable);
     }
 
@@ -46,9 +46,6 @@ public:
         return windowSize;
     }
 
-    void setWindowSize(const sf::Vector2u &windowSize) {
-        GameWindow::windowSize = windowSize;
-    }
 
 
 private:
