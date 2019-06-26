@@ -10,25 +10,37 @@
 
 class GameWindow {
 public:
-    GameWindow(const std::string& title, const sf::Vector2u& size);
-
-    //default constructor
-    GameWindow();
+    explicit GameWindow(const std::string& title = "Window", const sf::Vector2u& size = sf::Vector2u(640,480));
 
     ~GameWindow();
 
-    void beginDraw(); //clear the window
-    void EndDraw(); //display the changes
+    void beginDraw() {
+        //clears window, background color is black
+        window.clear(sf::Color::Black);
+    }
+
+    //clear the window
+    void endDraw() {
+        //displays window
+        window.display();
+    }
+    //display the changes
 
     void update();
 
     void toggleFullscreen();
 
-    void draw(sf::Drawable& drawable);
+    void draw(sf::Drawable& drawable) {
+        window.draw(drawable);
+    }
 
-    bool isDone() const;
+    bool isClosed() const {
+        return closed;
+    }
 
-    bool isFullScreen() const;
+    bool isFullScreen() const {
+        return fullScreen;
+    }
 
     const sf::Vector2u &getWindowSize() const {
         return windowSize;
@@ -40,15 +52,17 @@ public:
 
 
 private:
+    //manage the window internally, setup(), create(), destroy() are not part of the interface
     void setup(const std::string& title, const sf::Vector2u& size);
 
     void destroy();
+
     void create();
 
     sf::RenderWindow window;
     sf::Vector2u windowSize;
     std::string windowTitle;
-    bool done;
+    bool closed;
     bool fullScreen;
 
 };
