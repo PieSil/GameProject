@@ -25,7 +25,7 @@ Knight::Knight() : Knight(0,0) {
 
 }
 
-Knight::Knight(const Knight &copied) : GameHero(copied){
+Knight::Knight(Knight &copied) : GameHero(copied){
     this->initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
 }
 

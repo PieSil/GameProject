@@ -31,7 +31,7 @@ GameCharacter::GameCharacter() : GameCharacter(0,0) {
 
 }
 
-GameCharacter::GameCharacter(const GameCharacter &copied) : health(copied.getHealth()), onFire(copied.isOnFire()),
-                             strength(copied.getStrength()), GameEntity(copied) {
+GameCharacter::GameCharacter(GameCharacter &copied) : health(copied.getHealth()), onFire(copied.isOnFire()),
+                                                      strength(copied.getStrength()), GameEntity(copied) {
 
 }

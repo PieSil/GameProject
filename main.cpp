@@ -11,6 +11,8 @@
 
 int main(){
     GameLevel gameLevel;
+
+    //Game Loop
     while(!(gameLevel.getWindow()->isClosed())) {
 
         gameLevel.handleInput();
@@ -18,5 +20,8 @@ int main(){
         gameLevel.updateLevel();
 
         gameLevel.renderLevel();
+
+        gameLevel.restartClock();
+
     }
 }

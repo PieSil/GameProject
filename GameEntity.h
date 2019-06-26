@@ -15,7 +15,7 @@ public:
     GameEntity();
 
     //copy constructor
-    GameEntity(const GameEntity &copied);
+    GameEntity(GameEntity &copied);
 
     virtual ~GameEntity() = 0;
 
@@ -57,7 +57,7 @@ public:
         GameEntity::texture = texture;
     }
 
-    const sf::Sprite &getSprite() const {
+    sf::Sprite & getSprite() {//non const method allows GameLevel to manage sprite attributes (like position)
         return sprite;
     }
 

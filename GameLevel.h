@@ -6,6 +6,7 @@
 #ifndef _GAMELEVEL_H
 #define _GAMELEVEL_H
 
+#include "defaultValues.h"
 #include "GameWindow.h"
 #include "Wizard.h"
 #include "Knight.h"
@@ -27,8 +28,22 @@ public:
         return window;
     }
 
+    const sf::Time &getElapsed() const {
+        return elapsed;
+    }
+
+    void restartClock() {
+        elapsed += clock.restart(); //restarts clock, adds elapsed time since last restart to elapsed attribute
+    };
+
+
+
 private:
     void moveHero();
+
+    sf::Clock clock;
+    sf::Time elapsed;
+    float frameTime; //allows to use a fixed time-step to update the game
 
     std::unique_ptr<GameHero> hero;
     std::unique_ptr<GameWindow> window;

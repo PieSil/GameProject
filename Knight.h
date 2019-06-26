@@ -18,7 +18,7 @@ public:
     Knight();
 
     //copy constructor
-    Knight(const Knight& copied);
+    Knight(Knight &copied);
 
     //assignment operator
     Knight& operator=(const Knight& initializer) = default;

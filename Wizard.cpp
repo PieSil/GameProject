@@ -40,6 +40,6 @@ Wizard::Wizard() : Wizard(0,0) {
 
 }
 
-Wizard::Wizard(const Wizard & copied) : GameHero(copied){
+Wizard::Wizard(Wizard &copied) : GameHero(copied){
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
 }

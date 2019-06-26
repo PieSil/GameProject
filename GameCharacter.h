@@ -17,7 +17,7 @@ public:
     GameCharacter();
 
     //copy constructor
-    GameCharacter(const GameCharacter &copied);
+    GameCharacter(GameCharacter &copied);
 
     ~GameCharacter() = 0;
 

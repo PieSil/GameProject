@@ -5,6 +5,11 @@
 #ifndef GAMEPROJECT_DEFAULTVALUES_H
 #define GAMEPROJECT_DEFAULTVALUES_H
 
+//GAME
+
+//used to set game framerate and updating speed (avoid setting framerate to an excessive value)
+const float FRAMERATE = 30.;
+
 //HERO
 
 //default health value for all game heroes:
@@ -14,7 +19,7 @@ const float DEF_GAMEHERO_HEALTH = 20.;
 const float DEF_GAMEHERO_STRENGTH = 5.;
 
 //default value for hero movementSpeed parameter:
-const float HERO_SPEED = 0.2;
+const float HERO_SPEED = 100; //sets hero speed (measured in pixels/second ?)
 
 //KNIGHT
 

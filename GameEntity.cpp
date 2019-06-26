@@ -19,7 +19,7 @@ void GameEntity::loadTexture(const std::string &path) {
 }
 
 //copy constructor
-GameEntity::GameEntity(const GameEntity &copied) : movingCounter(0), movementSpeed(copied.getMovementSpeed()), facingRight(copied.isFacingRight()) {
+GameEntity::GameEntity(GameEntity &copied) : movingCounter(0), movementSpeed(copied.getMovementSpeed()), facingRight(copied.isFacingRight()) {
     texture = sf::Texture(copied.getTexture());
     sprite = sf::Sprite(copied.getSprite());
     collisionRect = sf::RectangleShape(copied.getCollisionRect());

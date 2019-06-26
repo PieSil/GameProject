@@ -17,7 +17,7 @@ public:
     Wizard();
 
     //copy constructor
-    Wizard(const Wizard& copied);
+    Wizard(Wizard &copied);
 
     //assignment operator
     Wizard& operator =(const Wizard& initializer) = default;
