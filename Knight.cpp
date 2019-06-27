@@ -34,7 +34,8 @@ Knight::Knight(Knight &copied) : GameHero(copied){
 }
 
 void Knight::giveHitbox() {
-    GameEntity::giveHitbox(KNIGHT_HITBOX_X, KNIGHT_HITBOX_Y, KNIGHT_SCALE);
+    GameEntity::giveHitbox(sprite.getPosition(), sprite.getTextureRect().width, sprite.getTextureRect().height, KNIGHT_HITBOX_X, KNIGHT_HITBOX_Y,
+                           KNIGHT_SCALE);
 }
 
 void Knight::move(const Direction& direction, const float& distance) {

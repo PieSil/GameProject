@@ -43,5 +43,6 @@ void Wizard::initSprite(const float& x, const float& y) {
 }
 
 void Wizard::giveHitbox() {
-    GameEntity::giveHitbox(WIZARD_HITBOX_X, WIZARD_HITBOX_Y, WIZARD_SCALE);
+    GameEntity::giveHitbox(sprite.getPosition(), sprite.getTextureRect().width, sprite.getTextureRect().height, WIZARD_HITBOX_X, WIZARD_HITBOX_Y,
+                           WIZARD_SCALE);
 }

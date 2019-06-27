@@ -14,7 +14,7 @@
 GameCharacter::GameCharacter(const float &x, const float &y, const float &str, const bool &onf, const float &h,
                              const float &s, const bool &facingR) :
                              onFire(onf), health(abs(h)), strength(abs(str)),
-                             GameEntity(x, y, s, facingR, sf::Texture(), sf::RectangleShape(), sf::Text()) {
+                             GameEntity(x, y, s, facingR, sf::Texture(), sf::Text()) {
 
 }
 

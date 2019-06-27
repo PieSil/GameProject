@@ -4,11 +4,10 @@
 
 #include "GameEntity.h"
 
-GameEntity::GameEntity(const float &x, const float &y, const float &s, const bool &facingR,sf::Texture t,
-                       sf::RectangleShape collR, sf::Text txt) :
-                       movementSpeed(s), facingRight(facingR), hitbox(std::move(collR)), text(std::move(txt)), movingCounter(0) {
+GameEntity::GameEntity(const float &x, const float &y, const float &s, const bool &facingR, sf::Texture t, sf::Text txt) :
+                       movementSpeed(s), facingRight(facingR), text(std::move(txt)), movingCounter(0) {
     initSprite(x, y, "../GameAssets/Sprites/Default_Sprite.png", 300, 300, 1, 0, 0);
-    giveHitbox(1, 1, 1);
+    giveHitbox(sprite.getPosition(), sprite.getTextureRect().width, sprite.getTextureRect().height, 1, 1, 1);
 }
 
 GameEntity::~GameEntity() {}
@@ -21,15 +20,11 @@ void GameEntity::loadTexture(const std::string &path) {
 }
 
 //copy constructor
-GameEntity::GameEntity(GameEntity &copied) : movingCounter(0), movementSpeed(copied.getMovementSpeed()), facingRight(copied.isFacingRight()) {
-    texture = sf::Texture(copied.getTexture());
-    sprite = sf::Sprite(copied.getSprite());
-    hitbox = sf::RectangleShape(copied.getHitbox());
-    text = sf::Text(copied.getText());
+GameEntity::GameEntity(GameEntity &copied) : texture(copied.getTexture()), text(copied.getText()), sprite(copied.getSprite()), hitbox(copied.getHitbox()), movingCounter(0), movementSpeed(copied.getMovementSpeed()), facingRight(copied.isFacingRight()) {
 }
 
 //default constructor
-GameEntity::GameEntity() : GameEntity(0,0) {
+GameEntity::GameEntity() : GameEntity(0, 0, 100, true, sf::Texture(), sf::Text()) {
 
 }
 
@@ -104,14 +99,10 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
     }
 }
 
-void GameEntity::giveHitbox(const float &widthReduction, const float &heightReduction, const float &scale) {
-    //set origin size and position to match the sprite
-    hitbox.setSize(sf::Vector2f(scale * sprite.getTextureRect().width/widthReduction, scale * sprite.getTextureRect().height/heightReduction));
-    hitbox.setOrigin(hitbox.getSize().x/2, hitbox.getSize().y/2);
-    hitbox.setPosition(sprite.getPosition());
-
-    //set color to white to see hitbox when displayed
-    hitbox.setFillColor(sf::Color::White);
+void
+GameEntity::giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,
+                       const float &heightReduction, const float &scale) {
+    hitbox = Hitbox(position, width,height, widthReduction, heightReduction, scale);
 }
 /*
 void GameEntity::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {

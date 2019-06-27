@@ -7,11 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "gameValues.h"
+#include "Hitbox.h"
 
 class GameEntity {
 public:
-    explicit GameEntity(const float& x, const float& y, const float& s = 0., const bool& facingR = true, sf::Texture t = sf::Texture(),
-                        sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
+    explicit GameEntity(const float &x, const float &y, const float &s = 0., const bool &facingR = true,
+                        sf::Texture t = sf::Texture(), sf::Text txt = sf::Text());
     //default constructor
     GameEntity();
 
@@ -26,7 +27,7 @@ public:
     }
 */
 
-    const sf::RectangleShape &getHitbox() const {
+    const Hitbox &getHitbox() const {
         return hitbox;
     }
 
@@ -70,13 +71,16 @@ protected:
     virtual void
     initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
                const float &scale, const int &row, const int &column);
-    virtual void giveHitbox(const float &widthReduction, const float &heightReduction, const float &scale);
+    virtual void
+    giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,
+               const float &heightReduction, const float &scale);
 
     //SFML classes are not made for inheritance, preferred aggregation instead
     sf::Texture texture;
-    sf::RectangleShape hitbox;
     sf::Text text;
     sf::Sprite sprite;
+
+    Hitbox hitbox;
     float movementSpeed;
     bool facingRight; //boolean value used to determine if the character is facing right or left
     int movingCounter;//counter used to update sprite in order to generate walking/moving animation

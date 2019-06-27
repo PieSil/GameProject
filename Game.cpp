@@ -39,12 +39,16 @@ void Game::moveHero(const Direction &direction) {
 }
 
 
-void Game::renderLevel() {
+void Game::renderLevel() const {
     //clears window:
     window->beginDraw();
 
     //draws hitboxes on window, temporary, needed to see if hitboxes correctly match the sprites
-    window->draw(hero->getHitbox());
+    window->draw(hero->getHitbox().getHitbox());
+    window->draw(hero->getHitbox().getUpperEdge());
+    window->draw(hero->getHitbox().getLowerEdge());
+    window->draw(hero->getHitbox().getRightEdge());
+    window->draw(hero->getHitbox().getLeftEdge());
 
     //draws elements on window:
     window->draw(hero->getSprite());

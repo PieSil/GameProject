@@ -12,6 +12,7 @@
 #include "Knight.h"
 #include <memory>
 #include <iostream>
+#include <list>
 
 class Game {
 public:
@@ -25,7 +26,7 @@ public:
 
     void handleInput();
     void updateLevel();
-    void renderLevel();
+    void renderLevel() const;
 
 
     const std::unique_ptr<GameWindow> &getWindow() const {
