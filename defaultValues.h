@@ -5,11 +5,9 @@
 #ifndef GAMEPROJECT_DEFAULTVALUES_H
 #define GAMEPROJECT_DEFAULTVALUES_H
 
-//GAME
+//Alias definitions
 
-//used to set game framerate and updating speed (avoid setting framerate to an excessive value)
-const float FRAMERATE = 30.;
-
+//use Direction as alias of unsigned short int to simplify readability
 using Direction = unsigned short int;
 
 const Direction RIGHT = 0;
@@ -19,6 +17,19 @@ const Direction LEFT = 1;
 const Direction UP = 2;
 
 const Direction  DOWN = 3;
+
+//use Herotype as alias of unsigned short int to simplify readability
+using Heroytype = char;
+
+const Heroytype KNGT = 'k'; //Knight hero type, not called KNIGHT to avoid confusion with Knight class
+
+const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confusion with Wizard class
+
+
+//GAME
+
+//used to set game framerate and updating speed (avoid setting framerate to an excessive value)
+const float FRAMERATE = 30.;
 
 //HERO
 

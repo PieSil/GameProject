@@ -45,3 +45,7 @@ Wizard::Wizard() : Wizard(0,0) {
 Wizard::Wizard(Wizard &copied) : GameHero(copied){
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
 }
+
+void Wizard::move(const Direction &direction, const float& distance) {
+    GameEntity::move(direction,  distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
+}

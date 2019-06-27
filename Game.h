@@ -11,10 +11,14 @@
 #include "Wizard.h"
 #include "Knight.h"
 #include <memory>
+#include <iostream>
 
 class Game {
 public:
+
+    //TODO: delegate hero selction to other class, not the game constructor
     explicit Game (
+            Heroytype heroT = 0,
             std::unique_ptr<GameWindow> w = std::move(std::unique_ptr<GameWindow>(new GameWindow("Level", sf::Vector2u(800,600))))
                     );
     ~Game() {};

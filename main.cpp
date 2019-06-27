@@ -10,18 +10,27 @@
 
  
 int main(){
-    Game gameLevel;
+
+    Heroytype hero;
+do {
+    std::cout << "\nPress \"k\" to select Knight, press \"w\" to select Wizard" << std::endl;
+
+    std::cin >> hero;
+
+} while (hero != KNGT && hero != WZRD);
+
+    Game game(hero);
 
     //Game Loop
-    while(!(gameLevel.getWindow()->isClosed())) {
+    while(!(game.getWindow()->isClosed())) {
 
-        gameLevel.handleInput();
+        game.handleInput();
 
-        gameLevel.updateLevel();
+        game.updateLevel();
 
-        gameLevel.renderLevel();
+        game.renderLevel();
 
-        gameLevel.restartClock();
+        game.restartClock();
 
     }
 }

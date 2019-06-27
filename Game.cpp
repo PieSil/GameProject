@@ -9,8 +9,16 @@
  * GameLevel implementation
  */
 
-Game::Game(std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(std::move(w)) {
-    hero = std::move(std::unique_ptr<Knight>(new Knight(window->getWindowSize().x / 2., window->getWindowSize().y / 2.)));
+Game::Game(Heroytype  heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(std::move(w)) {
+    if (heroT == KNGT) {
+        hero = std::move(
+                std::unique_ptr<Knight>(new Knight(window->getWindowSize().x / 2., window->getWindowSize().y / 2.)));
+    } else if (heroT == WZRD) {
+        hero = std::move(
+                std::unique_ptr<Wizard>(new Wizard(window->getWindowSize().x / 2., window->getWindowSize().y / 2.)));
+    } else {
+        //TODO: throw exception
+    }
 }
 
 void Game::updateLevel() {
@@ -22,7 +30,11 @@ void Game::moveHero(const Direction &direction) {
 
     if (auto k = dynamic_cast<Knight *>(hero.get())) {
         k->move(direction, k->getMovementSpeed()*elapsed.asSeconds()); //passes speed * elapsed time as distance
-}
+} else if (auto w = dynamic_cast<Wizard *>(hero.get())) {
+        w->move(direction, w->getMovementSpeed()*elapsed.asSeconds()); //passes speed * elapsed time as distance
+    } else {
+        //TODO: throw exception? Constructor should've already checked if hero value is valid
+    }
 
 }
 

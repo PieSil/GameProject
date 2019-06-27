@@ -68,7 +68,7 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
             facingRight = false;
         }
     } else {
-        //throw exception
+        //TODO: throw exception
     }
 
     //update movingCounter

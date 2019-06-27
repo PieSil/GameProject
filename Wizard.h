@@ -24,7 +24,9 @@ public:
 
     void specialBehaviour() override;
 
-    void updateBehaviour();
+    void move(const Direction& direction, const float& distance);
+
+    //void updateBehaviour();
 
     void initSprite(float x, float y) override;
 
