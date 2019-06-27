@@ -39,7 +39,11 @@ public:
     }
 
 protected:
-    void initSprite(float x, float y) override;
+    void
+    initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
+               const float &scale, const int &row, const int &column) override;
+    void initSprite(const float& x, const float& y);
+    void giveHitbox();
 
     float mana;
 };

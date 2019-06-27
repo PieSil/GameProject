@@ -67,7 +67,9 @@ public:
 
 protected:
     void loadTexture(const std::string &path);
-    virtual void initSprite(float x, float y);
+    virtual void
+    initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
+               const float &scale, const int &row, const int &column);
     virtual void giveHitbox(const float &widthReduction, const float &heightReduction, const float &scale);
 
     //SFML classes are not made for inheritance, preferred aggregation instead

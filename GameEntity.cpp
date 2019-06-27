@@ -7,7 +7,7 @@
 GameEntity::GameEntity(const float &x, const float &y, const float &s, const bool &facingR,sf::Texture t,
                        sf::RectangleShape collR, sf::Text txt) :
                        movementSpeed(s), facingRight(facingR), hitbox(std::move(collR)), text(std::move(txt)), movingCounter(0) {
-    initSprite(x,y);
+    initSprite(x, y, "../GameAssets/Sprites/Default_Sprite.png", 300, 300, 1, 0, 0);
     giveHitbox(1, 1, 1);
 }
 
@@ -33,15 +33,24 @@ GameEntity::GameEntity() : GameEntity(0,0) {
 
 }
 
-void GameEntity::initSprite(float x, float y) {
+void
+GameEntity::initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
+                       const float &scale, const int &row, const int &column) {
     //loads sprite from GameAssets and sets his origin and position
-    loadTexture("../GameAssets/Sprites/Default_Sprite.png");
 
-    //set sprite origin to match texture center
-    sprite.setOrigin(sprite.getTexture()->getSize().x/2., sprite.getTexture()->getSize().y/2.);
+    loadTexture(path);
+    sprite.setTextureRect(sf::IntRect(row,column,width,height));
+
+    //sets origin to center of selected texture Rectangle
+    sprite.setOrigin(sprite.getTextureRect().width/2., sprite.getTextureRect().height/2.);
 
     //initializes sprite position
     sprite.setPosition(x,y);
+    if (facingRight) {
+        sprite.setScale(scale*1.f,scale*1.f);
+    } else {
+        sprite.setScale(-scale*1.f,scale*1.f);
+    }
 }
 
 void GameEntity::move(const Direction &direction, const float &distance, const int &width, const int &height,

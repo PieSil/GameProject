@@ -5,6 +5,8 @@
 #ifndef GAMEPROJECT_DEFAULTVALUES_H
 #define GAMEPROJECT_DEFAULTVALUES_H
 
+#include <iostream>
+
 //Alias definitions
 
 //use Direction as alias of unsigned short int to simplify readability
@@ -56,8 +58,16 @@ const float KNIGHT_HITBOX_Y = 1.2;
 //value used to scale up/down or flip knight's sprite:
 const float KNIGHT_SCALE = 4.;
 
+//value used to set path of texture file
+const std::string KNIGHT_PATH = "../GameAssets/Sprites/Player/Knight/Knight.png";
+
+//values used to choose starting sprite
+const int KNIGHT_IDLE_ROW = 0;
+const int KNIGHT_IDLE_COL = 0;
+
+
 //values used to choose row and last column of walking animation in the spritesheet:
-const int KNIGHT_MOV_ROW_SELECTOR =4;
+const int KNIGHT_MOV_ROW =4;
 const int KNIGHT_MOV_LAST_COL = 7;
 
 //WIZARD
@@ -70,6 +80,13 @@ const int WIZARD_HEIGHT = 48;
 //THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
 const float WIZARD_HITBOX_X = 1.8;
 const float WIZARD_HITBOX_Y = 1;
+
+//value used to set path of texture file
+const std::string WIZARD_PATH = "../GameAssets/Sprites/Player/Wizard/Wizard.png";
+
+//values used to choose starting sprite
+const int WIZARD_IDLE_ROW = 0;
+const int WIZARD_IDLE_COL = 0;
 
 //value used to scale up/down or flip wizard's sprite:
 const float WIZARD_SCALE = 2.;
