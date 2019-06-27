@@ -3,7 +3,7 @@
  */
 
 #include "GameHero.h"
-#include "defaultValues.h"
+#include "gameValues.h"
 
 /**
  * GameHero implementation

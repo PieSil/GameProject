@@ -6,7 +6,7 @@
 #define GAMEPROJECT_GAMEENTITY_H
 
 #include <SFML/Graphics.hpp>
-#include "defaultValues.h"
+#include "gameValues.h"
 
 class GameEntity {
 public:

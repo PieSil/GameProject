@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 #include "Knight.h"
-#include "defaultValues.h"
+#include "gameValues.h"
 #include <SFML/Graphics.hpp>
 
 

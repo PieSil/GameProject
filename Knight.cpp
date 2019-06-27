@@ -4,7 +4,7 @@
 
 
 #include "Knight.h"
-#include "defaultValues.h"
+#include "gameValues.h"
 /**
  * Knight implementation
  */

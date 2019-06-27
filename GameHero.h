@@ -7,7 +7,7 @@
 #define _GAMEHERO_H
 
 #include "GameCharacter.h"
-#include "defaultValues.h"
+#include "gameValues.h"
 
 
 class GameHero: public GameCharacter {

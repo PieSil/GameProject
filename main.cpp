@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory.h>
 #include <SFML/Graphics.hpp>
-#include "defaultValues.h"
+#include "gameValues.h"
 #include "Game.h"
 #include "GameEntity.h"
 #include "Knight.h"

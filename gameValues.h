@@ -2,8 +2,8 @@
 // Created by Pietro on 2019-06-22.
 //
 
-#ifndef GAMEPROJECT_DEFAULTVALUES_H
-#define GAMEPROJECT_DEFAULTVALUES_H
+#ifndef GAMEPROJECT_GAMEVALUES_H
+#define GAMEPROJECT_GAMEVALUES_H
 
 #include <iostream>
 
@@ -95,4 +95,4 @@ const float WIZARD_SCALE = 2.;
 const int WIZARD_MOV_ROW_SELECTOR =2;
 const int WIZARD_MOV_LAST_COL = 3;
 
-#endif //GAMEPROJECT_DEFAULTVALUES_H
+#endif //GAMEPROJECT_GAMEVALUES_H

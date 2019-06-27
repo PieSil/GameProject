@@ -6,7 +6,7 @@
 #ifndef _GAMELEVEL_H
 #define _GAMELEVEL_H
 
-#include "defaultValues.h"
+#include "gameValues.h"
 #include "GameWindow.h"
 #include "Wizard.h"
 #include "Knight.h"

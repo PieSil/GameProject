@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 #include "Wizard.h"
-#include "defaultValues.h"
+#include "gameValues.h"
 #include <SFML/Graphics.hpp>
 
 //Wizard(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float m = 10., float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
