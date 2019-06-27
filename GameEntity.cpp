@@ -4,8 +4,9 @@
 
 #include "GameEntity.h"
 
-GameEntity::GameEntity(float x, float y, float s, bool facingR, sf::Texture t, sf::RectangleShape collR, sf::Text txt) :
-                       movementSpeed(s), facingRight(facingR), collisionRect(collR), text(txt), movingCounter(0) {
+GameEntity::GameEntity(const float &x, const float &y, const float &s, const bool &facingR,sf::Texture t,
+                       sf::RectangleShape collR, sf::Text txt) :
+                       movementSpeed(s), facingRight(facingR), collisionRect(std::move(collR)), text(std::move(txt)), movingCounter(0) {
     initSprite(x,y);
 }
 

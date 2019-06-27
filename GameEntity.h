@@ -10,7 +10,7 @@
 
 class GameEntity {
 public:
-    explicit GameEntity(float x, float y, float s = 0., bool facingR = true, sf::Texture t = sf::Texture(),
+    explicit GameEntity(const float& x, const float& y, const float& s = 0., const bool& facingR = true, sf::Texture t = sf::Texture(),
                         sf::RectangleShape collR = sf::RectangleShape(), sf::Text txt = sf::Text());
     //default constructor
     GameEntity();

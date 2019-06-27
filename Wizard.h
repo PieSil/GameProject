@@ -11,7 +11,9 @@
 
 class Wizard: public GameHero {
 public:
-    Wizard(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float m = 10., float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
+    Wizard(const float &x, const float &y, const float &str = DEF_GAMEHERO_STRENGTH, const bool &onf = false,
+           const float &m = 10., const float &h = DEF_GAMEHERO_HEALTH, const bool &facingR = true,
+           const float &s = HERO_SPEED);
 
     //default constructor
     Wizard();
@@ -28,8 +30,6 @@ public:
 
     //void updateBehaviour();
 
-    void initSprite(float x, float y) override;
-
     float getMana() const {
         return mana;
     }
@@ -38,7 +38,9 @@ public:
         Wizard::mana = mana;
     }
 
-protected: 
+protected:
+    void initSprite(float x, float y) override;
+
     float mana;
 };
 
