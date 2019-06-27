@@ -80,7 +80,16 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
             sprite.setScale(-(scale * 1.f), scale * 1.f);
             facingRight = false;
         }
-    } else {
+
+        } else if (direction == UP) {
+
+            sprite.move(0, -distance);
+
+        } else if (direction == DOWN) {
+
+            sprite.move(0, distance);
+
+        } else {
         //TODO: throw exception
     }
 
