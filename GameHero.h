@@ -22,9 +22,7 @@ public:
     
 virtual void specialBehaviour() = 0;
 
-    void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
-
-    void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) override;
+    //void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
 
 };
 

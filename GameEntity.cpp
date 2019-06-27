@@ -40,8 +40,46 @@ void GameEntity::initSprite(float x, float y) {
     sprite.setPosition(x,y);
 }
 
-void GameEntity::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
-    this->updateMovement(width, height, scale, rowSelector, lastColumn);
-}
+void GameEntity::move(const Direction &direction, const float &distance, const int &width, const int &height,
+                      const float &scale, const int &row, const int &lastColumn) {
+    if (direction == RIGHT) {
 
+        sprite.move(distance, 0.); //move right
+
+
+        sprite.setTextureRect(sf::IntRect(width * movingCounter, width * row, width, height)); //update sprite animation
+
+
+        if (!(facingRight)) { //flip horizontally
+            sprite.setScale(scale * 1.f, scale * 1.f);
+            facingRight = true;
+        }
+
+    } else if (direction == LEFT) {
+
+        sprite.move(-distance, 0.); //move left
+
+
+        sprite.setTextureRect(sf::IntRect(width * movingCounter, width * row, width, height)); //update sprite animation
+
+
+        if (facingRight) { //flip horizontally
+            sprite.setScale(-(scale * 1.f), scale * 1.f);
+            facingRight = false;
+        }
+    } else {
+        //throw exception
+    }
+
+    //update movingCounter
+    movingCounter++;
+
+    if (movingCounter > lastColumn) {
+        movingCounter = 0;
+    }
+}
+/*
+void GameEntity::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
+}
+*/
 

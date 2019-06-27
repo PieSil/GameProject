@@ -16,10 +16,11 @@ Knight::Knight(float x, float y, float str, bool onf, float h, bool facingR, flo
 void Knight::specialBehaviour() {
 
 }
-
+/*
 void Knight::updateBehaviour() {
     GameHero::updateBehaviour(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW_SELECTOR, KNIGHT_MOV_LAST_COL);
 }
+ */
 
 Knight::Knight() : Knight(0,0) {
 
@@ -41,6 +42,10 @@ void Knight::initSprite(float x, float y) {
     } else {
         sprite.setScale(-KNIGHT_SCALE*1.f,KNIGHT_SCALE*1.f);
     }
+}
+
+void Knight::move(const Direction& direction, const float& distance) {
+    GameEntity::move(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW_SELECTOR, KNIGHT_MOV_LAST_COL);
 }
 
 

@@ -6,6 +6,7 @@
 #define GAMEPROJECT_GAMEENTITY_H
 
 #include <SFML/Graphics.hpp>
+#include "defaultValues.h"
 
 class GameEntity {
 public:
@@ -30,9 +31,10 @@ public:
         return collisionRect;
     }
 
-    virtual void updateMovement(int width, int height, float scale, int rowSelector, int lastColumn) = 0;
+    virtual void move(const Direction &direction, const float &distance, const int &width, const int &height, const float &scale,
+         const int &row, const int &lastColumn);
 
-    virtual void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn);
+    //virtual void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn);
 
     virtual void initSprite(float x, float y);
 
@@ -57,7 +59,7 @@ public:
         GameEntity::texture = texture;
     }
 
-    sf::Sprite & getSprite() {//non const method allows GameLevel to manage sprite attributes (like position)
+    sf::Sprite & getSprite() {//non const method allows Game to manage sprite attributes (like position)
         return sprite;
     }
 

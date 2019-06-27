@@ -10,6 +10,16 @@
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
 const float FRAMERATE = 30.;
 
+using Direction = unsigned short int;
+
+const Direction RIGHT = 0;
+
+const Direction LEFT = 1;
+
+const Direction UP = 2;
+
+const Direction  DOWN = 3;
+
 //HERO
 
 //default health value for all game heroes:
