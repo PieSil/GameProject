@@ -25,11 +25,6 @@ void Wizard::updateBehaviour() {
 }
  */
 
-void Wizard::initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-                        const float &scale, const int &row, const int &column) {
-    initSprite(x,y);
-}
-
 Wizard::Wizard() : Wizard(0,0) {
 
 }

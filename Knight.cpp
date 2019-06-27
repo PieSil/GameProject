@@ -33,11 +33,6 @@ Knight::Knight(Knight &copied) : GameHero(copied){
     giveHitbox();
 }
 
-void Knight::initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-                        const float &scale, const int &row, const int &column) {
-
-}
-
 void Knight::giveHitbox() {
     GameEntity::giveHitbox(KNIGHT_HITBOX_X, KNIGHT_HITBOX_Y, KNIGHT_SCALE);
 }

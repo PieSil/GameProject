@@ -28,11 +28,7 @@ public:
 
     void move(const Direction& direction, const float& distance);
 
-protected:
-    void
-    initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-               const float &scale, const int &row, const int &column) override;
-
+private:
     void initSprite(const float &x, const float &y);
 
     void giveHitbox();
