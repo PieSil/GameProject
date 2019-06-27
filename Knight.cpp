@@ -12,6 +12,7 @@
 Knight::Knight(const float &x, const float &y, const float &str, const bool &onf, const float &h, const bool &facingR,
                const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
     this->initSprite(x,y);
+    giveHitbox(KNIGHT_HITBOX_X, KNIGHT_HITBOX_Y, KNIGHT_SCALE);
 }
 
 void Knight::specialBehaviour() {
@@ -29,6 +30,7 @@ Knight::Knight() : Knight(0,0) {
 
 Knight::Knight(Knight &copied) : GameHero(copied){
     this->initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
+    giveHitbox(KNIGHT_HITBOX_X, KNIGHT_HITBOX_Y, KNIGHT_SCALE);
 }
 
 void Knight::initSprite(float x, float y) {

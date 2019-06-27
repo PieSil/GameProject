@@ -25,10 +25,9 @@ public:
         sprite.setTexture(texture);
     }
 */
-    void loadTexture(const std::string &path);
 
-    const sf::RectangleShape &getCollisionRect() const {
-        return collisionRect;
+    const sf::RectangleShape &getHitbox() const {
+        return hitbox;
     }
 
     virtual void move(const Direction &direction, const float &distance, const int &width, const int &height, const float &scale,
@@ -36,18 +35,8 @@ public:
 
     //virtual void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn);
 
-    virtual void initSprite(float x, float y);
-
-    void setCollisionRect(const sf::RectangleShape &collisionRect) {
-        GameEntity::collisionRect = collisionRect;
-    }
-
     const sf::Text &getText() const {
         return text;
-    }
-
-    void setText(const sf::Text &text) {
-        GameEntity::text = text;
     }
 
     const sf::Texture &getTexture() const {
@@ -63,49 +52,27 @@ public:
         return sprite;
     }
 
-    void setSprite(const sf::Sprite &sprite) {
-        GameEntity::sprite = sprite;
-    }
-
-    void setOrigin(const float &x, const float &y) {
-        sprite.setOrigin(x,y);
-    }
-
-    void setPosition(const float &x, const float &y) {
-        sprite.setPosition(x,y);
-    }
-
-
     float getMovementSpeed() const {
         return movementSpeed;
-    }
-
-    void setMovementSpeed(float movementSpeed) {
-        GameEntity::movementSpeed = movementSpeed;
     }
 
     bool isFacingRight() const {
         return facingRight;
     }
 
-    void setFacingRight(bool facingRight) {
-        GameEntity::facingRight = facingRight;
-    }
-
     int getMovingCounter() const {
         return movingCounter;
     }
 
-    void setMovingCounter(int movingCounter) {
-        GameEntity::movingCounter = movingCounter;
-    }
-
 
 protected:
+    void loadTexture(const std::string &path);
+    virtual void initSprite(float x, float y);
+    virtual void giveHitbox(const float &widthReduction, const float &heightReduction, const float &scale);
 
     //SFML classes are not made for inheritance, preferred aggregation instead
     sf::Texture texture;
-    sf::RectangleShape collisionRect;
+    sf::RectangleShape hitbox;
     sf::Text text;
     sf::Sprite sprite;
     float movementSpeed;

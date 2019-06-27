@@ -48,6 +48,11 @@ const float HERO_SPEED = 100; //sets hero speed (measured in pixels/second ?)
 const int KNIGHT_WIDTH = 42;
 const int KNIGHT_HEIGHT = 42;
 
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float KNIGHT_HITBOX_X = 4;
+const float KNIGHT_HITBOX_Y = 1.2;
+
 //value used to scale up/down or flip knight's sprite:
 const float KNIGHT_SCALE = 4.;
 
@@ -60,6 +65,11 @@ const int KNIGHT_MOV_LAST_COL = 7;
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
 const int WIZARD_WIDTH = 48;
 const int WIZARD_HEIGHT = 48;
+
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float WIZARD_HITBOX_X = 1.8;
+const float WIZARD_HITBOX_Y = 1;
 
 //value used to scale up/down or flip wizard's sprite:
 const float WIZARD_SCALE = 2.;

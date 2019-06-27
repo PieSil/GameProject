@@ -43,7 +43,10 @@ void Game::renderLevel() {
     //clears window:
     window->beginDraw();
 
-    //drwas elements on window:
+    //draws hitboxes on window, temporary, needed to see if hitboxes correctly match the sprites
+    window->draw(hero->getHitbox());
+
+    //draws elements on window:
     window->draw(hero->getSprite());
 
     //displays window:
