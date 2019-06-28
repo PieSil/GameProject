@@ -56,10 +56,16 @@ protected:
                     const float &scale, const int &row, const int &column) override;
 
     float movementSpeed;
+
+
+    //boolean value used to determine if the character is facing right or left
     bool facingRight;
+
+    //counter used to update sprite in order to generate walking/moving animation
     float movingCounter;
+
     //used for jumping and falling
-        bool onGround;
+    bool onGround;
     float velocityY;
 
 };

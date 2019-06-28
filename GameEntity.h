@@ -45,7 +45,7 @@ public:
         GameEntity::texture = texture;
     }
 
-    const sf::Sprite &getSprite() const {//non const method allows Game to manage sprite attributes (like position) ??
+    const sf::Sprite &getSprite() const {
         return sprite;
     }
 
@@ -62,9 +62,6 @@ protected:
     sf::Text text;
     sf::Sprite sprite;
     Hitbox hitbox;
-
-    //boolean value used to determine if the character is facing right or left
-    //counter used to update sprite in order to generate walking/moving animation
 
     virtual void
     giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,

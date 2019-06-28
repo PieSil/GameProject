@@ -16,7 +16,7 @@ void Wizard::specialBehaviour() {
 
 Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const float &m, const float &h,
                const bool &facingR, const float &s)
-               : GameHero(x, y, str, onf, h, facingR, s), mana(m){
+               : GameCharacter(x, y ,str ,onf ,h ,s ,facingR),  mana(m) {
     initSprite(x, y);
     giveHitbox();
 }
@@ -31,13 +31,13 @@ Wizard::Wizard() : Wizard(0,0) {
 
 }
 
-Wizard::Wizard(const Wizard &copied) : GameHero(copied){
+Wizard::Wizard(const Wizard &copied) : ShootingCharacter(copied), GameHero(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }
 
 void Wizard::move(const Direction &direction, const float& distance) {
-    moveOnX(direction, distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR,
+    MovingEntity::moveOnX(direction, distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR,
                         WIZARD_MOV_LAST_COL);
 }
 

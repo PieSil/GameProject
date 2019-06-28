@@ -10,7 +10,7 @@
 #include "gameValues.h"
 
 
-class GameHero: public GameCharacter {
+class GameHero: public virtual GameCharacter {
 public:
     GameHero(const float &x, const float &y, const float &str = DEF_GAMEHERO_STRENGTH, const bool &onf = false,
              const float &h = DEF_GAMEHERO_HEALTH, const bool &facingR = true, const float &s = HERO_SPEED);

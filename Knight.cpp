@@ -13,7 +13,7 @@
  */
 
 Knight::Knight(const float &x, const float &y, const float &str, const bool &onf, const float &h, const bool &facingR,
-               const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
+               const float &s) : GameCharacter(x, y ,str ,onf ,h ,s ,facingR) {
     initSprite(x, y);
     giveHitbox();
 }
@@ -42,7 +42,7 @@ void Knight::giveHitbox() {
 }
 
 void Knight::move(const Direction& direction, const float& distance) {
-    moveOnX(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW,
+    MovingEntity::moveOnX(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW,
                         KNIGHT_MOV_LAST_COL);
 }
 
