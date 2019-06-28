@@ -31,7 +31,7 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 //GAME
 
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
-const float FRAMERATE = 30.;
+const float FRAMERATE = 60.;
 
 //HITBOXES
 
@@ -48,7 +48,7 @@ const float DEF_GAMEHERO_HEALTH = 20.;
 const float DEF_GAMEHERO_STRENGTH = 5.;
 
 //default value for hero movementSpeed parameter:
-const float HERO_SPEED = 100; //sets hero speed (measured in pixels/second ?)
+const float HERO_SPEED = 300; //sets hero speed (measured in pixels/second ?)
 
 //KNIGHT
 

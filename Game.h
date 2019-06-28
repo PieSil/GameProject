@@ -46,6 +46,10 @@ public:
 
 
 private:
+    void updatePhysics(GameCharacter* character);
+
+    void checkOnGround(GameCharacter* character);
+
     void moveHero(const Direction &direction);
 
     sf::Clock clock;

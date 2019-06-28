@@ -24,7 +24,7 @@ public:
 
     virtual void attack();
 
-    virtual void jump();
+    virtual void jump(const float &height);
 
     float getHealth() const {
         return health;
@@ -50,10 +50,30 @@ public:
         GameCharacter::strength = strength;
     }
 
+    bool isOnGround() const {
+        return onGround;
+    }
+
+    void setOnGround(bool onGround) {
+        GameCharacter::onGround = onGround;
+    }
+
+    float getVelocityY() const {
+        return velocityY;
+    }
+
+    void setVelocityY(float velocityY) {
+        GameCharacter::velocityY = velocityY;
+    }
+
 protected:
     bool onFire;
     float health;
     float strength;
+
+    //used for jumping
+    bool onGround;
+    float velocityY;
 };
 
 #endif //_GAMECHARACTER_H

@@ -24,8 +24,9 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
 }
 
 void Game::updateLevel() {
-    handleInput();
-    window->update();
+        handleInput();
+        //updatePhysics(hero.get());
+        window->update();
 }
 
 void Game::moveHero(const Direction &direction) {
@@ -58,6 +59,7 @@ void Game::renderLevel() const {
 }
 
 void Game::handleInput() {
+
     //game updates ony if elapsed time is >= than fixed time-step chosen
     if (elapsed.asSeconds() >= frameTime) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -68,6 +70,13 @@ void Game::handleInput() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             moveHero(LEFT);
         }
+
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && hero->isOnGround()) {
+            hero->setOnGround(false);
+            hero->setVelocityY(30);
+        }
+
+        updatePhysics(hero.get());
 
         //game updated, subtract fixed time-step and "reset" elapsed time
         //game will update again when elapsed equals the fixed time-step chosen
@@ -82,4 +91,33 @@ void Game::drawHitbox(const Hitbox *hitbox) const {
     window->draw(hitbox->getRightEdge());
     window->draw(hitbox->getLeftEdge());
 
+}
+
+void Game::updatePhysics(GameCharacter *character) {
+
+    //game updates ony if elapsed time is >= than fixed time-step chosen
+    if (elapsed.asSeconds() >= frameTime) {
+
+    character->jump(character->getVelocityY());
+
+    float gravity = -2;
+    if (!character->isOnGround()) {  //If you are not on ground//Add gravity
+        character->setVelocityY(character->getVelocityY() + gravity);
+        checkOnGround(character);
+    }
+    if (character->isOnGround()) {
+        character->setVelocityY(0);
+    }
+        //game updated, subtract fixed time-step and "reset" elapsed time
+        //game will update again when elapsed equals the fixed time-step chosen
+        elapsed -= sf::seconds(frameTime);
+    }
+}
+
+void Game::checkOnGround(GameCharacter *character) {
+    if (character->getHitbox().checkLowerEdge().intersects(ground.checkUpperEdge())) {
+        character->setOnGround(true);
+    } else {
+        character->setOnGround(false);
+    }
 }
