@@ -33,6 +33,15 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
 const float FRAMERATE = 60.;
 
+//GRAVITY modyfing this values may break game physics
+
+//controls gravity intensity, with current physics system value should be -2 or higher (meaning between -2 and 0)
+const float GRAVITY = -2;
+
+
+//controls starting jump velocity
+const float JUMP_VELOCITY = 30;
+
 //HITBOXES
 
 //set thickness of hitboxes' edges, the bigger the value the easier is to detect collisions
@@ -49,6 +58,10 @@ const float DEF_GAMEHERO_STRENGTH = 5.;
 
 //default value for hero movementSpeed parameter:
 const float HERO_SPEED = 300; //sets hero speed (measured in pixels/second ?)
+
+//animation counter increment, helps controlling the speed of character animations -> higher value = lower speed
+//a good value is 30/FRAMERATE
+const float ANIM_COUNT_INCR = 0.5;
 
 //KNIGHT
 

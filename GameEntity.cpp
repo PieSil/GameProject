@@ -92,7 +92,7 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
     hitbox.setPosition(sprite.getPosition());
 
     //update movingCounter
-    movingCounter += 0.5;
+    movingCounter += ANIM_COUNT_INCR;
 
     if (movingCounter > lastColumn) {
         movingCounter = 0;

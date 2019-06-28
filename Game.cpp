@@ -37,6 +37,7 @@ void Game::updateGame() {
 
     checkOnGround(hero.get());
 
+
     window->update();
 
 }
@@ -83,41 +84,39 @@ void Game::handleInput() {
         if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
             hero->isOnGround()) {
             hero->setOnGround(false);
-            hero->setVelocityY(30);
+            hero->setVelocityY(JUMP_VELOCITY);
         }
 
 }
 
 void Game::drawHitbox(const Hitbox *hitbox) const {
     window->draw(hitbox->getHitbox());
-    /*
     window->draw(hitbox->getUpperEdge());
     window->draw(hitbox->getLowerEdge());
     window->draw(hitbox->getRightEdge());
     window->draw(hitbox->getLeftEdge());
-     */
-
 }
 
 void Game::updatePhysics(GameCharacter *character) {
 
-    //game updates ony if elapsed time is >= than fixed time-step chosen
-
+    //moves character on Y axis based on its velocity
     character->jump(character->getVelocityY());
 
-    float gravity = -2;
+    //checks if the character is on ground or not
+    checkOnGround(character);
+
     if (!character->isOnGround()) {  //If you are not on ground//Add gravity
-        character->setVelocityY(character->getVelocityY() + gravity);
-        checkOnGround(character);
+        character->setVelocityY(character->getVelocityY() + GRAVITY);
     }
+
     if (character->isOnGround()) {
         character->setVelocityY(0);
-        checkOnGround(character);
     }
+
 }
 
 void Game::checkOnGround(GameCharacter *character) {
-    if (character->getHitbox().checkLowerEdge().intersects(ground.checkUpperEdge())) {
+    if (character->getHitbox().checkLowerEdge().intersects(ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edg)) {
         character->setOnGround(true);
     } else {
         character->setOnGround(false);
