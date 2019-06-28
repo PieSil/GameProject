@@ -6,9 +6,9 @@
 #ifndef _GAMECHARACTER_H
 #define _GAMECHARACTER_H
 
-#include "GameEntity.h"
+#include "MovingEntity.h"
 
-class GameCharacter : public GameEntity {
+class GameCharacter : public MovingEntity {
 public: 
 
     GameCharacter(const float &x, const float &y, const float &str = 5., const bool &onf = false, const float &h = 10,
@@ -18,7 +18,7 @@ public:
     GameCharacter();
 
     //copy constructor
-    GameCharacter(GameCharacter &copied);
+    GameCharacter(const GameCharacter &copied);
 
     ~GameCharacter() = 0;
 

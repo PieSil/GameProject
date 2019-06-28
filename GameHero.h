@@ -19,7 +19,7 @@ public:
     GameHero();
 
     //copy constructor
-    GameHero(GameHero &copied);
+    GameHero(const GameHero &copied);
     
 virtual void specialBehaviour() = 0;
 

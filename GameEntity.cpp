@@ -5,10 +5,9 @@
 #include "math.h"
 #include "GameCharacter.h"
 #include "GameEntity.h"
+#include "MovingEntity.h"
 
-GameEntity::GameEntity(const float &x, const float &y, const float &s, const bool &facingR, sf::Texture t, sf::Text txt)
-       : movementSpeed(s), facingRight(facingR), text(std::move(txt)), movingCounter(0), onGround(false), velocityY(0) {
-
+GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())) {
 
     initSprite(x, y, "../GameAssets/Sprites/Default_Sprite.png", 300, 300, 1, 0, 0);
     giveHitbox(sprite.getPosition(), sprite.getTextureRect().width, sprite.getTextureRect().height, 1, 1, 1);
@@ -30,14 +29,12 @@ void GameEntity::loadTexture(const std::string &path) {
 }
 
 //copy constructor
-GameEntity::GameEntity(GameEntity &copied) : texture(copied.getTexture()), text(copied.getText()),
-                                             sprite(copied.getSprite()), hitbox(copied.getHitbox()), movingCounter(0),
-                                             movementSpeed(copied.getMovementSpeed()),
-                                             facingRight(copied.isFacingRight()) {
+GameEntity::GameEntity(const GameEntity &copied) : texture(copied.getTexture()), text(copied.getText()),
+                                                   sprite(copied.getSprite()), hitbox(copied.getHitbox()) {
 }
 
 //default constructor
-GameEntity::GameEntity() : GameEntity(0, 0, 100, true, sf::Texture(), sf::Text()) {
+GameEntity::GameEntity() : GameEntity(0, 0) {
 
 }
 
@@ -55,82 +52,14 @@ GameEntity::initSprite(const float &x, const float &y, const std::string &path, 
 
     //initializes sprite position
     sprite.setPosition(x, y);
-    if (facingRight) {
-        sprite.setScale(scale * 1.f, scale * 1.f);
-    } else {
-        sprite.setScale(-scale * 1.f, scale * 1.f);
-    }
-}
 
-void GameEntity::moveOnX(const Direction &direction, const float &distance, const int &width, const int &height,
-                         const float &scale, const int &row, const int &lastColumn) {
-
-    //MOVE ON X AXIS
-
-    if (direction == RIGHT) {
-
-        sprite.move(distance, 0.); //move right
-
-
-        sprite.setTextureRect(sf::IntRect(width * static_cast<int>(movingCounter), width * row, width,
-                                          height)); //update sprite animation
-
-
-        if (!(facingRight)) { //flip horizontally
-            sprite.setScale(scale * 1.f, scale * 1.f);
-            facingRight = true;
-        }
-
-    } else if (direction == LEFT) {
-
-        sprite.move(-distance, 0.); //move left
-
-
-        sprite.setTextureRect(sf::IntRect(width * static_cast<int>(movingCounter), width * row, width,
-                                          height)); //update sprite animation
-
-
-        if (facingRight) { //flip horizontally
-            sprite.setScale(-(scale * 1.f), scale * 1.f);
-            facingRight = false;
-
-        } else {
-            //TODO: throw exception
-
-        }
-
-    }
-
-        //moves hitbox with sprite
-        hitbox.setPosition(sprite.getPosition());
-
-        //update movingCounter
-        movingCounter += ANIM_COUNT_INCR;
-
-        if (movingCounter > lastColumn) {
-            movingCounter = 0;
-        }
 }
 
 
-void GameEntity::moveOnY(const float &height, const Direction &direction) {
-
-    //MOVE ON Y AXIS
-
-    if (direction == UP) { //move upwards
-        sprite.move(0, -height);
-
-    } else if (direction == DOWN) {
-        sprite.move(0, height); //move downwards
-
-
-    } else {
-
-        //TODO: throw exception
-    }
-
-    hitbox.setPosition(sprite.getPosition());
+/*
+void GameEntity::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
 }
+*/
 
 void
 GameEntity::giveHitbox(const sf::Vector2f &position, const int &width, const int &height,
@@ -138,9 +67,3 @@ GameEntity::giveHitbox(const sf::Vector2f &position, const int &width, const int
                        const float &heightReduction, const float &scale) {
     hitbox = Hitbox(position, width, height, widthReduction, heightReduction, scale);
 }
-
-/*
-void GameEntity::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
-}
-*/
-

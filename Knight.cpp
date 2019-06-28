@@ -5,6 +5,9 @@
 
 #include "Knight.h"
 #include "gameValues.h"
+#include "MovingEntity.h"
+#include "GameEntity.h"
+
 /**
  * Knight implementation
  */
@@ -28,7 +31,7 @@ Knight::Knight() : Knight(0,0) {
 
 }
 
-Knight::Knight(Knight &copied) : GameHero(copied){
+Knight::Knight(const Knight &copied) : GameHero(copied){
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }
@@ -39,12 +42,12 @@ void Knight::giveHitbox() {
 }
 
 void Knight::move(const Direction& direction, const float& distance) {
-    GameEntity::moveOnX(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW,
+    moveOnX(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW,
                         KNIGHT_MOV_LAST_COL);
 }
 
 void Knight::initSprite(const float &x, const float &y) {
-    GameEntity::initSprite(x,y, KNIGHT_PATH, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_IDLE_ROW, KNIGHT_IDLE_COL);
+    MovingEntity::initSprite(x,y, KNIGHT_PATH, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_IDLE_ROW, KNIGHT_IDLE_COL);
 }
 
 

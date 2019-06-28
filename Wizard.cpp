@@ -4,6 +4,8 @@
 
 
 #include "Wizard.h"
+#include "MovingEntity.h"
+#include "GameEntity.h"
 
 /**
  * Wizard implementation
@@ -29,18 +31,18 @@ Wizard::Wizard() : Wizard(0,0) {
 
 }
 
-Wizard::Wizard(Wizard &copied) : GameHero(copied){
+Wizard::Wizard(const Wizard &copied) : GameHero(copied){
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }
 
 void Wizard::move(const Direction &direction, const float& distance) {
-    GameEntity::moveOnX(direction, distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR,
+    moveOnX(direction, distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR,
                         WIZARD_MOV_LAST_COL);
 }
 
 void Wizard::initSprite(const float& x, const float& y) {
-    GameEntity::initSprite(x,y, WIZARD_PATH, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_IDLE_ROW, WIZARD_IDLE_COL);
+    MovingEntity::initSprite(x,y, WIZARD_PATH, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_IDLE_ROW, WIZARD_IDLE_COL);
 }
 
 void Wizard::giveHitbox() {

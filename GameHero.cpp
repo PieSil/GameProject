@@ -18,7 +18,7 @@ GameHero::GameHero() : GameHero(0,0) {
 
 }
 
-GameHero::GameHero(GameHero &copied) : GameCharacter(copied) {
+GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
 
 }
 

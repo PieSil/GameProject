@@ -5,6 +5,7 @@
 
 #include "Game.h"
 #include "GameEntity.h"
+#include "MovingEntity.h"
 
 /**
  * Game implementation
