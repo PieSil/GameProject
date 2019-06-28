@@ -31,7 +31,7 @@ Knight::Knight() : Knight(0,0) {
 
 }
 
-Knight::Knight(const Knight &copied) : GameHero(copied){
+Knight::Knight(const Knight &copied) : GameCharacter(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }

@@ -31,7 +31,7 @@ Wizard::Wizard() : Wizard(0,0) {
 
 }
 
-Wizard::Wizard(const Wizard &copied) : ShootingCharacter(copied), GameHero(copied) {
+Wizard::Wizard(const Wizard &copied) : GameCharacter(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }
