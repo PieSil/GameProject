@@ -19,6 +19,8 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
     } else {
         //TODO: throw exception
     }
+
+    ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 10, 1, 1, 1);
 }
 
 void Game::updateLevel() {
@@ -43,12 +45,10 @@ void Game::renderLevel() const {
     //clears window:
     window->beginDraw();
 
-    //draws hitboxes on window, temporary, needed to see if hitboxes correctly match the sprites
-    window->draw(hero->getHitbox().getHitbox());
-    window->draw(hero->getHitbox().getUpperEdge());
-    window->draw(hero->getHitbox().getLowerEdge());
-    window->draw(hero->getHitbox().getRightEdge());
-    window->draw(hero->getHitbox().getLeftEdge());
+    //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
+    drawHitbox(&(hero->getHitbox()));
+    drawHitbox(&ground);
+
 
     //draws elements on window:
     window->draw(hero->getSprite());
@@ -73,4 +73,13 @@ void Game::handleInput() {
         //game will update again when elapsed equals the fixed time-step chosen
         elapsed -= sf::seconds(frameTime);
     }
+}
+
+void Game::drawHitbox(const Hitbox *hitbox) const {
+    window->draw(hitbox->getHitbox());
+    window->draw(hitbox->getUpperEdge());
+    window->draw(hitbox->getLowerEdge());
+    window->draw(hitbox->getRightEdge());
+    window->draw(hitbox->getLeftEdge());
+
 }

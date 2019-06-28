@@ -28,6 +28,8 @@ public:
     void updateLevel();
     void renderLevel() const;
 
+    void drawHitbox(const Hitbox *hitbox) const;
+
 
     const std::unique_ptr<GameWindow> &getWindow() const {
         return window;
@@ -52,6 +54,8 @@ private:
 
     std::unique_ptr<GameHero> hero;
     std::unique_ptr<GameWindow> window;
+
+    Hitbox ground;
 
 };
 
