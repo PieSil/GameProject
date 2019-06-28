@@ -27,22 +27,22 @@ Hitbox::createHitbox(const sf::Vector2f &spritePos, const int &width, const floa
 void Hitbox::createEdges(const sf::RectangleShape& hitbox) {
     //create upper edge
     upperEdge.setOrigin(hitbox.getOrigin()); //sets origin to match hitbox's origin
-    upperEdge.setSize(sf::Vector2f(hitbox.getSize().x, 1)); //same width as hitbox, heght = 1 pixel
+    upperEdge.setSize(sf::Vector2f(hitbox.getSize().x, EDGE_THICKNESS)); //same width as hitbox, heght = 1 pixel
     upperEdge.setFillColor(sf::Color::Magenta); //gives color to edge so that it can be seen when drawn
 
     //create lower edge
     lowerEdge.setOrigin(hitbox.getOrigin()); //sets origin to match hitbox's origin
-    lowerEdge.setSize(sf::Vector2f(hitbox.getSize().x, 1)); //same width as hitbox, heght = 1 pixel
+    lowerEdge.setSize(sf::Vector2f(hitbox.getSize().x, EDGE_THICKNESS)); //same width as hitbox, heght = 1 pixel
     lowerEdge.setFillColor(sf::Color::Magenta); //gives color to edge so that it can be seen when drawn
 
     //create right edge
     rightEdge.setOrigin(hitbox.getOrigin()); //sets origin to match hitbox's origin
-    rightEdge.setSize(sf::Vector2f(1, hitbox.getSize().y)); //same height as hitbox, width = 1 pixel
+    rightEdge.setSize(sf::Vector2f(EDGE_THICKNESS, hitbox.getSize().y)); //same height as hitbox, width = 1 pixel
     rightEdge.setFillColor(sf::Color::Magenta); //gives color to edge so that it can be seen when drawn
 
     //create left edge
     leftEdge.setOrigin(hitbox.getOrigin()); //sets origin to match hitbox's origin
-    leftEdge.setSize(sf::Vector2f(1, hitbox.getSize().y)); //same height as hitbox, width = 1 pixel
+    leftEdge.setSize(sf::Vector2f(EDGE_THICKNESS, hitbox.getSize().y)); //same height as hitbox, width = 1 pixel
     leftEdge.setFillColor(sf::Color::Magenta); //gives color to edge so that it can be seen when drawn
 }
 

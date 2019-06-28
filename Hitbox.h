@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 #include <memory>
+#include "gameValues.h"
 
 class Hitbox {
 public:
@@ -22,8 +23,8 @@ public:
     void setPosition(const sf::Vector2f& position) {
         hitbox.setPosition(position);
         upperEdge.setPosition(sf::Vector2f(hitbox.getPosition())); //sets upper edge to match with hitbox's upper edge
-        lowerEdge.setPosition(sf::Vector2f(hitbox.getPosition().x, (hitbox.getPosition().y + hitbox.getSize().y))); //sets lower edge to match with hitbox's lower edge
-        rightEdge.setPosition(sf::Vector2f((hitbox.getPosition().x + hitbox.getSize().x), hitbox.getPosition().y)); //sets right edge to match with hitbox's right edge
+        lowerEdge.setPosition(sf::Vector2f(hitbox.getPosition().x, (hitbox.getPosition().y + hitbox.getSize().y - EDGE_THICKNESS))); //sets lower edge to match with hitbox's lower edge
+        rightEdge.setPosition(sf::Vector2f((hitbox.getPosition().x + hitbox.getSize().x - EDGE_THICKNESS), hitbox.getPosition().y)); //sets right edge to match with hitbox's right edge
         leftEdge.setPosition(sf::Vector2f(hitbox.getPosition())); //sets left edge to match with hitbox's left edge
     }
 

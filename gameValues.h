@@ -33,6 +33,12 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
 const float FRAMERATE = 30.;
 
+//HITBOXES
+
+//set thickness of hitboxes' edges, the bigger the value the easier is to detect collisions
+//excessive value may cause problems with collision
+const int EDGE_THICKNESS = 5;
+
 //HERO
 
 //default health value for all game heroes:
