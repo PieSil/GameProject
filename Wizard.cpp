@@ -35,7 +35,8 @@ Wizard::Wizard(Wizard &copied) : GameHero(copied){
 }
 
 void Wizard::move(const Direction &direction, const float& distance) {
-    GameEntity::move(direction,  distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
+    GameEntity::moveOnX(direction, distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR,
+                        WIZARD_MOV_LAST_COL);
 }
 
 void Wizard::initSprite(const float& x, const float& y) {

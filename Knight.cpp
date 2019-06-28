@@ -39,7 +39,8 @@ void Knight::giveHitbox() {
 }
 
 void Knight::move(const Direction& direction, const float& distance) {
-    GameEntity::move(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW, KNIGHT_MOV_LAST_COL);
+    GameEntity::moveOnX(direction, distance, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_SCALE, KNIGHT_MOV_ROW,
+                        KNIGHT_MOV_LAST_COL);
 }
 
 void Knight::initSprite(const float &x, const float &y) {

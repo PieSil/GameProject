@@ -4,6 +4,7 @@
 
 
 #include "Game.h"
+#include "GameEntity.h"
 
 /**
  * Game implementation
@@ -100,12 +101,12 @@ void Game::drawHitbox(const Hitbox *hitbox) const {
 void Game::updatePhysics(GameCharacter *character) {
 
     //moves character on Y axis based on its velocity
-    character->jump(character->getVelocityY());
+    character->moveOnY(character->getVelocityY(), UP);
 
     //checks if the character is on ground or not
     checkOnGround(character);
 
-    if (!character->isOnGround()) {  //If you are not on ground//Add gravity
+    if (!character->isOnGround()) {  //if character not on ground add gravity
         character->setVelocityY(character->getVelocityY() + GRAVITY);
     }
 

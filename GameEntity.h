@@ -13,6 +13,7 @@ class GameEntity {
 public:
     explicit GameEntity(const float &x, const float &y, const float &s = 0., const bool &facingR = true,
                         sf::Texture t = sf::Texture(), sf::Text txt = sf::Text());
+
     //default constructor
     GameEntity();
 
@@ -31,10 +32,13 @@ public:
         return hitbox;
     }
 
-    virtual void move(const Direction &direction, const float &distance, const int &width, const int &height, const float &scale,
-         const int &row, const int &lastColumn);
+    virtual void
+    moveOnX(const Direction &direction, const float &distance, const int &width, const int &height, const float &scale,
+            const int &row, const int &lastColumn);
 
-    //virtual void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn);
+
+    virtual void moveOnY(const float &height, const Direction &direction);
+
 
     const sf::Text &getText() const {
         return text;
@@ -49,7 +53,7 @@ public:
         GameEntity::texture = texture;
     }
 
-    sf::Sprite & getSprite() {//non const method allows Game to manage sprite attributes (like position)
+    sf::Sprite &getSprite() {//non const method allows Game to manage sprite attributes (like position)
         return sprite;
     }
 
@@ -66,11 +70,29 @@ public:
     }
 
 
+    bool isOnGround() const {
+        return onGround;
+    }
+
+    void setOnGround(bool onGround) {
+        GameEntity::onGround = onGround;
+    }
+
+    float getVelocityY() const {
+        return velocityY;
+    }
+
+    void setVelocityY(float velocityY) {
+        GameEntity::velocityY = velocityY;
+    }
+
 protected:
     void loadTexture(const std::string &path);
+
     virtual void
     initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
                const float &scale, const int &row, const int &column);
+
     virtual void
     giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,
                const float &heightReduction, const float &scale);
@@ -84,6 +106,10 @@ protected:
     float movementSpeed;
     bool facingRight; //boolean value used to determine if the character is facing right or left
     float movingCounter;//counter used to update sprite in order to generate walking/moving animation
+
+//used for jumping and falling
+    bool onGround;
+    float velocityY;
 };
 
 #endif //GAMEPROJECT_GAMEENTITY_H
