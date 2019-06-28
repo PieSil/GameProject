@@ -24,9 +24,7 @@ do {
     //Game Loop
     while(!(game.getWindow()->isClosed())) {
 
-        game.handleInput();
-
-        game.updateLevel();
+        game.updateGame();
 
         game.renderLevel();
 

@@ -25,7 +25,7 @@ public:
     ~Game() {};
 
     void handleInput();
-    void updateLevel();
+    void updateGame();
     void renderLevel() const;
 
     void drawHitbox(const Hitbox *hitbox) const;

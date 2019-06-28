@@ -23,10 +23,22 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
     ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 10, 1, 1, 1);
 }
 
-void Game::updateLevel() {
-        handleInput();
-        //updatePhysics(hero.get());
-        window->update();
+void Game::updateGame() {
+
+    if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
+
+        handleInput(); //polls events from keyboard
+        updatePhysics(hero.get()); //updates jump physics
+
+        //game updated, subtract fixed time-step and "reset" elapsed time
+        //game will update again when elapsed equals the fixed time-step chosen
+        elapsed -= sf::seconds(frameTime);
+        }
+
+    checkOnGround(hero.get());
+
+    window->update();
+
 }
 
 void Game::moveHero(const Direction &direction) {
@@ -59,9 +71,6 @@ void Game::renderLevel() const {
 }
 
 void Game::handleInput() {
-
-    //game updates ony if elapsed time is >= than fixed time-step chosen
-    if (elapsed.asSeconds() >= frameTime) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             moveHero(RIGHT);
         }
@@ -71,32 +80,28 @@ void Game::handleInput() {
             moveHero(LEFT);
         }
 
-        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && hero->isOnGround()) {
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
+            hero->isOnGround()) {
             hero->setOnGround(false);
             hero->setVelocityY(30);
         }
 
-        updatePhysics(hero.get());
-
-        //game updated, subtract fixed time-step and "reset" elapsed time
-        //game will update again when elapsed equals the fixed time-step chosen
-        elapsed -= sf::seconds(frameTime);
-    }
 }
 
 void Game::drawHitbox(const Hitbox *hitbox) const {
     window->draw(hitbox->getHitbox());
+    /*
     window->draw(hitbox->getUpperEdge());
     window->draw(hitbox->getLowerEdge());
     window->draw(hitbox->getRightEdge());
     window->draw(hitbox->getLeftEdge());
+     */
 
 }
 
 void Game::updatePhysics(GameCharacter *character) {
 
     //game updates ony if elapsed time is >= than fixed time-step chosen
-    if (elapsed.asSeconds() >= frameTime) {
 
     character->jump(character->getVelocityY());
 
@@ -107,10 +112,7 @@ void Game::updatePhysics(GameCharacter *character) {
     }
     if (character->isOnGround()) {
         character->setVelocityY(0);
-    }
-        //game updated, subtract fixed time-step and "reset" elapsed time
-        //game will update again when elapsed equals the fixed time-step chosen
-        elapsed -= sf::seconds(frameTime);
+        checkOnGround(character);
     }
 }
 

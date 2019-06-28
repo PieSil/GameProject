@@ -55,7 +55,7 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
         sprite.move(distance, 0.); //move right
 
 
-        sprite.setTextureRect(sf::IntRect(width * movingCounter, width * row, width, height)); //update sprite animation
+        sprite.setTextureRect(sf::IntRect(width * static_cast<int>(movingCounter), width * row, width, height)); //update sprite animation
 
 
         if (!(facingRight)) { //flip horizontally
@@ -68,7 +68,7 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
         sprite.move(-distance, 0.); //move left
 
 
-        sprite.setTextureRect(sf::IntRect(width * movingCounter, width * row, width, height)); //update sprite animation
+        sprite.setTextureRect(sf::IntRect(width * static_cast<int>(movingCounter), width * row, width, height)); //update sprite animation
 
 
         if (facingRight) { //flip horizontally
@@ -92,7 +92,7 @@ void GameEntity::move(const Direction &direction, const float &distance, const i
     hitbox.setPosition(sprite.getPosition());
 
     //update movingCounter
-    movingCounter++;
+    movingCounter += 0.5;
 
     if (movingCounter > lastColumn) {
         movingCounter = 0;
