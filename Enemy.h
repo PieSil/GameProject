@@ -23,7 +23,7 @@ public:
     //copy constructor
     Enemy(const Enemy& copied);
 
-    ~Enemy() = 0;
+    virtual ~Enemy() = 0;
 
     //override attack and move methods to check if enemy is paralyzed
 
