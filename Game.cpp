@@ -38,9 +38,13 @@ void Game::updateGame() {
         updatePhysics(hero.get());
         for (const auto &enemy : enemies) {
             updatePhysics(enemy.get());
+            /*
+
+            //check if physics works
             if (enemy->isOnGround()) {
                 enemy->setVelocityY(JUMP_VELOCITY);
             }
+             */
         }
 
         //game updated, subtract fixed time-step and "reset" elapsed time
@@ -73,15 +77,16 @@ void Game::renderLevel() const {
     window->beginDraw();
 
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
-    drawHitbox(hero->getHitbox());
+    //drawHitbox(hero->getHitbox());
     drawHitbox(ground);
 
     //draws sprites on window:
     window->draw(hero->getSprite());
 
     //draws enemies and their sprites
+
     for (const auto &enemy : enemies) {
-        drawHitbox(enemy->getHitbox());
+        //drawHitbox(enemy->getHitbox());
         window->draw(enemy->getSprite());
     }
 
@@ -111,12 +116,10 @@ void Game::handleInput() {
 void Game::drawHitbox(const Hitbox &hitbox) const {
     window->draw(hitbox.getHitbox());
 
-    /*
     window->draw(hitbox.getUpperEdge());
     window->draw(hitbox.getLowerEdge());
     window->draw(hitbox.getRightEdge());
     window->draw(hitbox.getLeftEdge());
-     */
 }
 
 void Game::updatePhysics(GameCharacter *character) {

@@ -56,8 +56,6 @@ public:
     virtual void
     move(const Direction &direction, const float &distance);
 
-    virtual void moveOnY(const float &height, const Direction &direction);
-
 protected:
 
     void initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,

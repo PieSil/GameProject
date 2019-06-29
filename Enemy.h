@@ -29,10 +29,7 @@ public:
 
     void attack() override;
 
-    void moveOnX(const Direction &direction, const float &distance, const int &width, const int &height, const float &scale,
-                 const int &row, const int &lastColumn) override;
-
-    void moveOnY(const float &height, const Direction &direction) override;
+    void move(const Direction &direction, const float &distance) override;
 
     bool isParalyzed() const {
         return paralyzed;

@@ -37,7 +37,9 @@ void MeleeEnemy::initSprite(const float &x, const float &y) {
 }
 
 void MeleeEnemy::move(const Direction& direction, const float& distance) {
-    Enemy::moveOnX(direction, distance, MELEE_WIDTH, MELEE_HEIGHT, MELEE_SCALE, MELEE_MOV_ROW, MELEE_MOV_LAST_COL);
+    Enemy::move(direction, distance);
+    if (direction == RIGHT || direction == LEFT)
+        animate(movingCounter, MELEE_WIDTH, MELEE_HEIGHT, MELEE_SCALE, MELEE_MOV_ROW, MELEE_MOV_LAST_COL);
 }
 
 MeleeEnemy &MeleeEnemy::operator=(const MeleeEnemy &meleeEnemy) {

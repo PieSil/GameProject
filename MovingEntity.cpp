@@ -65,12 +65,6 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
 }
 
-void MovingEntity::moveOnY(const float &height, const Direction &direction) {
-
-
-    hitbox.setPosition(sprite.getPosition());
-}
-
 void
 MovingEntity::initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
                          const float &scale, const int &row, const int &column) {
