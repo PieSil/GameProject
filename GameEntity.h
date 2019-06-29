@@ -21,11 +21,7 @@ public:
 
     virtual ~GameEntity() = 0;
 
-/*
-    void updateSprite() {
-        sprite.setTexture(texture);
-    }
-*/
+    virtual void animate(float& animCounter, const int &width, const int &height, const float &scale, const int &row, const int &lastColumn);
 
     const Hitbox &getHitbox() const {
         return hitbox;

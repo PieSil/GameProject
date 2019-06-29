@@ -35,7 +35,7 @@ void Game::updateGame() {
         //game updated, subtract fixed time-step and "reset" elapsed time
         //game will update again when elapsed equals the fixed time-step chosen
         elapsed -= sf::seconds(frameTime);
-        }
+    }
 
     checkOnGround(hero.get());
 
@@ -74,20 +74,20 @@ void Game::renderLevel() const {
 }
 
 void Game::handleInput() {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            moveHero(RIGHT);
-        }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        moveHero(RIGHT);
+    }
 
-        //move left
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            moveHero(LEFT);
-        }
+    //move left
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        moveHero(LEFT);
+    }
 
-        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
-            hero->isOnGround()) {
-            hero->setOnGround(false);
-            hero->setVelocityY(JUMP_VELOCITY);
-        }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
+        hero->isOnGround()) {
+        hero->setOnGround(false);
+        hero->setVelocityY(JUMP_VELOCITY);
+    }
 
 }
 
@@ -102,7 +102,7 @@ void Game::drawHitbox(const Hitbox *hitbox) const {
 void Game::updatePhysics(GameCharacter *character) {
 
     //moves character on Y axis based on its velocity
-    character->moveOnY(character->getVelocityY(), UP);
+    character->move(UP, character->getVelocityY());
 
     //checks if the character is on ground or not
     checkOnGround(character);
@@ -118,7 +118,8 @@ void Game::updatePhysics(GameCharacter *character) {
 }
 
 void Game::checkOnGround(GameCharacter *character) {
-    if (character->getHitbox().checkLowerEdge().intersects(ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edg)) {
+    if (character->getHitbox().checkLowerEdge().intersects(
+            ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edg)) {
         character->setOnGround(true);
     } else {
         character->setOnGround(false);

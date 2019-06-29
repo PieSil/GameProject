@@ -26,7 +26,7 @@ public:
 
     void specialBehaviour() override;
 
-    void move(const Direction& direction, const float& distance);
+    void move(const Direction& direction, const float& distance) override;
 
 private:
     void initSprite(const float &x, const float &y);

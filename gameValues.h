@@ -111,7 +111,7 @@ const int WIZARD_IDLE_COL = 0;
 const float WIZARD_SCALE = 2.;
 
 //values used to choose row and last column of walking animation in the spritesheet:
-const int WIZARD_MOV_ROW_SELECTOR =2;
+const int WIZARD_MOV_ROW =2;
 const int WIZARD_MOV_LAST_COL = 3;
 
 #endif //GAMEPROJECT_GAMEVALUES_H

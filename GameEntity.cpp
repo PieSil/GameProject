@@ -67,3 +67,18 @@ GameEntity::giveHitbox(const sf::Vector2f &position, const int &width, const int
                        const float &heightReduction, const float &scale) {
     hitbox = Hitbox(position, width, height, widthReduction, heightReduction, scale);
 }
+
+void
+GameEntity::animate(float& animCounter, const int &width, const int &height, const float &scale, const int &row, const int &lastColumn) {
+
+
+        sprite.setTextureRect(sf::IntRect(width * static_cast<int>(animCounter), width * row, width,
+                                          height)); //update sprite animation
+
+        //update animation counter
+        animCounter += ANIM_COUNT_INCR;
+
+        if (animCounter > lastColumn) {
+            animCounter = 0;
+        }
+}
