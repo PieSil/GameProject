@@ -20,6 +20,8 @@ public:
     //default constructor
     MovingEntity();
 
+    virtual ~MovingEntity() {};
+
     void animate(float &animCounter, const int &width, const int &height, const float &scale, const int &row,
                  const int &lastColumn) override;
 
