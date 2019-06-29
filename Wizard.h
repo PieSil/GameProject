@@ -27,7 +27,7 @@ public:
 
     void specialBehaviour() override;
 
-    void move(const Direction& direction, const float& distance);
+    void move(const Direction& direction, const float& distance) override;
 
     //void updateBehaviour();
 

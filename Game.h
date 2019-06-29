@@ -47,6 +47,9 @@ public:
     };
 
 
+    //disable copy and assignment
+    Game(const Game&) = delete;
+    Game&operator=(const Game&) = delete;
 
 private:
     void updatePhysics(GameCharacter* character);

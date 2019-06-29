@@ -14,7 +14,16 @@ class MovingEntity : public GameEntity {
 public:
     MovingEntity(const float& x, const float&y, const float& movSpeed = 100, const bool& facingR = true);
 
+    //copy constructor
     MovingEntity(const MovingEntity &copied);
+
+    //default constructor
+    MovingEntity();
+
+    virtual ~MovingEntity() {};
+
+    void animate(float &animCounter, const int &width, const int &height, const float &scale, const int &row,
+                 const int &lastColumn) override;
 
     float getMovementSpeed() const {
         return movementSpeed;
@@ -45,8 +54,7 @@ public:
     }
 
     virtual void
-    moveOnX(const Direction &direction, const float &distance, const int &width, const int &height, const float &scale,
-            const int &row, const int &lastColumn);
+    move(const Direction &direction, const float &distance);
 
     virtual void moveOnY(const float &height, const Direction &direction);
 

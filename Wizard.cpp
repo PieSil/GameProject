@@ -23,7 +23,7 @@ Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf
 
 /*
 void Wizard::updateBehaviour() {
-    GameHero::updateBehaviour(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR, WIZARD_MOV_LAST_COL);
+    GameHero::updateBehaviour(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW, WIZARD_MOV_LAST_COL);
 }
  */
 
@@ -37,8 +37,11 @@ Wizard::Wizard(const Wizard &copied) : GameCharacter(copied) {
 }
 
 void Wizard::move(const Direction &direction, const float& distance) {
-    MovingEntity::moveOnX(direction, distance, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW_SELECTOR,
-                        WIZARD_MOV_LAST_COL);
+    MovingEntity::move(direction, distance);
+
+    if (direction == RIGHT || direction == LEFT) {
+        animate(movingCounter, WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_SCALE, WIZARD_MOV_ROW, WIZARD_MOV_LAST_COL);
+    }
 }
 
 void Wizard::initSprite(const float& x, const float& y) {

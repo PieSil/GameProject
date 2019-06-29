@@ -122,7 +122,7 @@ void Game::drawHitbox(const Hitbox &hitbox) const {
 void Game::updatePhysics(GameCharacter *character) {
 
     //moves character on Y axis based on its velocity
-    character->moveOnY(character->getVelocityY(), UP);
+    character->move(UP, character->getVelocityY());
 
 //checks if the character is on ground or not
     checkOnGround(character);
@@ -138,7 +138,8 @@ void Game::updatePhysics(GameCharacter *character) {
 }
 
 void Game::checkOnGround(GameCharacter *character) {
-    if (character->getHitbox().checkLowerEdge().intersects(ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edg)) {
+    if (character->getHitbox().checkLowerEdge().intersects(
+            ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edg)) {
         character->setOnGround(true);
     } else {
         character->setOnGround(false);

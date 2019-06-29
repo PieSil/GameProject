@@ -18,6 +18,8 @@ public:
     //copy constructor
     ShootingCharacter(const ShootingCharacter& copied);
 
+    virtual ~ShootingCharacter() {};
+
     //overides attack method to shoot projectiles
     void attack() override;
 
