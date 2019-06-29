@@ -22,7 +22,7 @@ public:
     Knight(const Knight &copied);
 
     //assignment operator
-    Knight& operator=(const Knight& initializer) = default;
+    Knight& operator=(const Knight& knight) = default;
 
     void specialBehaviour() override;
 

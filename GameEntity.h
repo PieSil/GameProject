@@ -57,15 +57,16 @@ protected:
     initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
                const float &scale, const int &row, const int &column);
 
+    virtual void
+    giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,
+               const float &heightReduction, const float &scale);
+
     //SFML classes are not made for inheritance, preferred aggregation instead
     sf::Texture texture;
     sf::Text text;
     sf::Sprite sprite;
     Hitbox hitbox;
 
-    virtual void
-    giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,
-               const float &heightReduction, const float &scale);
 };
 
 #endif //GAMEPROJECT_GAMEENTITY_H

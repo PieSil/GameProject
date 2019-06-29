@@ -23,7 +23,7 @@ public:
     Wizard(const Wizard &copied);
 
     //assignment operator
-    Wizard& operator =(const Wizard& initializer) = default;
+    Wizard& operator =(const Wizard& wizard) = default;
 
     void specialBehaviour() override;
 

@@ -22,7 +22,10 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
         //TODO: throw exception
     }
 
-    ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 10, 1, 1, 1);
+    enemies.push_back(std::unique_ptr<MeleeEnemy>(
+            new MeleeEnemy(window->getWindowSize().x / 2., window->getWindowSize().y / 2.)));
+
+    ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 50, 1, 1, 1);
 }
 
 void Game::updateGame() {
@@ -30,12 +33,20 @@ void Game::updateGame() {
     if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
         handleInput(); //polls events from keyboard
-        updatePhysics(hero.get()); //updates jump physics
+
+        //updates physics
+        updatePhysics(hero.get());
+        for (const auto &enemy : enemies) {
+            updatePhysics(enemy.get());
+            if (enemy->isOnGround()) {
+                enemy->setVelocityY(JUMP_VELOCITY);
+            }
+        }
 
         //game updated, subtract fixed time-step and "reset" elapsed time
         //game will update again when elapsed equals the fixed time-step chosen
         elapsed -= sf::seconds(frameTime);
-        }
+    }
 
     checkOnGround(hero.get());
 
@@ -62,41 +73,50 @@ void Game::renderLevel() const {
     window->beginDraw();
 
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
-    drawHitbox(&(hero->getHitbox()));
-    drawHitbox(&ground);
+    drawHitbox(hero->getHitbox());
+    drawHitbox(ground);
 
-
-    //draws elements on window:
+    //draws sprites on window:
     window->draw(hero->getSprite());
+
+    //draws enemies and their sprites
+    for (const auto &enemy : enemies) {
+        drawHitbox(enemy->getHitbox());
+        window->draw(enemy->getSprite());
+    }
+
 
     //displays window:
     window->endDraw();
 }
 
 void Game::handleInput() {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            moveHero(RIGHT);
-        }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        moveHero(RIGHT);
+    }
 
-        //move left
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            moveHero(LEFT);
-        }
+    //move left
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        moveHero(LEFT);
+    }
 
-        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
-            hero->isOnGround()) {
-            hero->setOnGround(false);
-            hero->setVelocityY(JUMP_VELOCITY);
-        }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
+        hero->isOnGround()) {
+        hero->setOnGround(false);
+        hero->setVelocityY(JUMP_VELOCITY);
+    }
 
 }
 
-void Game::drawHitbox(const Hitbox *hitbox) const {
-    window->draw(hitbox->getHitbox());
-    window->draw(hitbox->getUpperEdge());
-    window->draw(hitbox->getLowerEdge());
-    window->draw(hitbox->getRightEdge());
-    window->draw(hitbox->getLeftEdge());
+void Game::drawHitbox(const Hitbox &hitbox) const {
+    window->draw(hitbox.getHitbox());
+
+    /*
+    window->draw(hitbox.getUpperEdge());
+    window->draw(hitbox.getLowerEdge());
+    window->draw(hitbox.getRightEdge());
+    window->draw(hitbox.getLeftEdge());
+     */
 }
 
 void Game::updatePhysics(GameCharacter *character) {
@@ -104,7 +124,7 @@ void Game::updatePhysics(GameCharacter *character) {
     //moves character on Y axis based on its velocity
     character->moveOnY(character->getVelocityY(), UP);
 
-    //checks if the character is on ground or not
+//checks if the character is on ground or not
     checkOnGround(character);
 
     if (!character->isOnGround()) {  //if character not on ground add gravity

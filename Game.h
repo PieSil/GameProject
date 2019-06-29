@@ -10,6 +10,9 @@
 #include "GameWindow.h"
 #include "Wizard.h"
 #include "Knight.h"
+#include "MeleeEnemy.h"
+#include "RangedEnemy.h"
+#include "BossEnemy.h"
 #include <memory>
 #include <iostream>
 #include <list>
@@ -28,7 +31,7 @@ public:
     void updateGame();
     void renderLevel() const;
 
-    void drawHitbox(const Hitbox *hitbox) const;
+    void drawHitbox(const Hitbox &hitbox) const;
 
 
     const std::unique_ptr<GameWindow> &getWindow() const {
@@ -57,6 +60,7 @@ private:
     float frameTime; //allows to use a fixed time-step to update the game
 
     std::unique_ptr<GameHero> hero;
+    std::list<std::unique_ptr<Enemy>> enemies;
     std::unique_ptr<GameWindow> window;
 
     Hitbox ground;

@@ -33,6 +33,11 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
 const float FRAMERATE = 60.;
 
+
+//animation counter increment, helps controlling the speed of character animations -> higher value = lower speed
+//a good value is 30/FRAMERATE
+const float ANIM_COUNT_INCR = 0.5;
+
 //GRAVITY modyfing this values may break game physics
 
 //controls gravity intensity, with current physics system value should be -2 or higher (meaning between -2 and 0)
@@ -58,10 +63,6 @@ const float DEF_GAMEHERO_STRENGTH = 5.;
 
 //default value for hero movementSpeed parameter:
 const float HERO_SPEED = 300; //sets hero speed (measured in pixels/second ?)
-
-//animation counter increment, helps controlling the speed of character animations -> higher value = lower speed
-//a good value is 30/FRAMERATE
-const float ANIM_COUNT_INCR = 0.5;
 
 //KNIGHT
 
@@ -113,5 +114,42 @@ const float WIZARD_SCALE = 2.;
 //values used to choose row and last column of walking animation in the spritesheet:
 const int WIZARD_MOV_ROW_SELECTOR =2;
 const int WIZARD_MOV_LAST_COL = 3;
+
+//ENEMY
+
+//default health value for all enemies:
+const float DEF_ENEMY_HEALTH = 35.;
+
+//default strength value for all enemies:
+const float DEF_ENEMY_STRENGTH = 3.;
+
+//default value for enemy movementSpeed parameter:
+const float ENEMY_SPEED = 400; //sets hero speed (measured in pixels/second ?)
+
+//MELEE
+
+//values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
+const int MELEE_WIDTH = 48;
+const int MELEE_HEIGHT = 48;
+
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float MELEE_HITBOX_X = 2.8;
+const float MELEE_HITBOX_Y = 1.2;
+
+//value used to scale up/down or flip sprite:
+const float MELEE_SCALE = 3.5;
+
+//value used to set path of texture file
+const std::string MELEE_PATH = "../GameAssets/Sprites/Enemies/Bandit/Bandit.png";
+
+//values used to choose starting sprite
+const int MELEE_IDLE_ROW = 0;
+const int MELEE_IDLE_COL = 0;
+
+
+//values used to choose row and last column of walking animation in the spritesheet:
+const int MELEE_MOV_ROW =1;
+const int MELEE_MOV_LAST_COL = 7;
 
 #endif //GAMEPROJECT_GAMEVALUES_H

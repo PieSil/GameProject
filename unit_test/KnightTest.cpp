@@ -5,7 +5,6 @@
 #include "gtest/gtest.h"
 #include "Knight.h"
 #include "gameValues.h"
-#include "MovingEntity.h"
 #include <SFML/Graphics.hpp>
 
 

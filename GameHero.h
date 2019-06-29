@@ -20,7 +20,9 @@ public:
 
     //copy constructor
     GameHero(const GameHero &copied);
-    
+
+
+
 virtual void specialBehaviour() = 0;
 
     //void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
