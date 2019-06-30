@@ -36,6 +36,7 @@ void Game::updateGame() {
 
         //updates physics
         updatePhysics(hero.get());
+        updateEnemies();
 
             /*
 
@@ -75,7 +76,7 @@ void Game::renderLevel() const {
     window->beginDraw();
 
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
-    drawHitbox(hero->getHitbox());
+    //drawHitbox(hero->getHitbox());
 
     drawHitbox(ground);
 
