@@ -16,9 +16,6 @@ public:
                const bool &onf = false,
                const float &h = DEF_ENEMY_HEALTH, const bool &facingR = true, const float &s = ENEMY_SPEED);
 
-    //default constructor
-    MeleeEnemy();
-
     //copy constructor
     MeleeEnemy(const MeleeEnemy& copied);
 

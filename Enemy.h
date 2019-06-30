@@ -17,9 +17,6 @@ public:
           const bool &onf = false,
           const float &h = DEF_ENEMY_HEALTH, const bool &facingR = true, const float &s = ENEMY_SPEED);
 
-    //defaut constructor
-    Enemy();
-
     //copy constructor
     Enemy(const Enemy& copied);
 
@@ -47,9 +44,15 @@ public:
         Enemy::aggro = aggro;
     }
 
+    float getAggroRange() const {
+        return aggroRange;
+    }
+
 protected: 
     bool paralyzed;
     bool aggro;
+    float aggroRange;
+
 };
 
 #endif //_ENEMY_H

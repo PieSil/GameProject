@@ -10,11 +10,7 @@
  */
 Enemy::Enemy(const float &x, const float &y, const float &str, const bool &par, const bool &onf, const float &h,
              const bool &facingR,
-             const float &s) : paralyzed(par), aggro(false), GameCharacter(x, y, str, onf, h, s, facingR) {
-
-}
-
-Enemy::Enemy() : Enemy(0, 0) {
+             const float &s) : paralyzed(par), aggro(false), aggroRange(100), GameCharacter(x, y, str, onf, h, s, facingR) {
 
 }
 
