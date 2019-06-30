@@ -7,6 +7,7 @@
 #define _ENEMY_H
 
 #include "GameCharacter.h"
+#include "SpriteObserver.h"
 
 
 class Enemy: public virtual GameCharacter {

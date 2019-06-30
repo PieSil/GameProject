@@ -7,6 +7,7 @@
 #define _GAMEHERO_H
 
 #include "GameCharacter.h"
+#include "SpriteSubject.h"
 #include "gameValues.h"
 
 
