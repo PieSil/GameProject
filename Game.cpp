@@ -23,7 +23,7 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
     }
 
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
-            new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120 + 10 * i, window->getWindowSize().y / 2.)));
+            new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120 + 10, window->getWindowSize().y / 2.)));
 
     ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 50, 1, 1, 1);
 }
