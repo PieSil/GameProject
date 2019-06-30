@@ -11,7 +11,7 @@
 
 //Knight(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
 
-Knight knight;
+Knight knight(110, 0);
 
 TEST(MeleeTest, Constructor) {
     MeleeEnemy m(&knight, 5, 0);
@@ -151,4 +151,18 @@ TEST(MeleeTest, Copy) {
     EXPECT_EQ(copy.getMovementSpeed(), m.getMovementSpeed());
     EXPECT_EQ(false, copy.isAggro());
 
+}
+
+TEST (MeleeTest, MovementTest) {
+    MeleeEnemy m(&knight, 0, 0);
+    EXPECT_EQ(false, m.isAggro());
+    knight.move(LEFT, 30);
+    EXPECT_EQ(true, m.isAggro());
+    m.move(1);
+    EXPECT_EQ(1, m.getSprite().getPosition().x);
+    m.move(1);
+    EXPECT_EQ(2, m.getSprite().getPosition().x);
+    knight.move(LEFT, 110);
+    m.move(3);
+    EXPECT_EQ(-1, m.getSprite().getPosition().x);
 }
