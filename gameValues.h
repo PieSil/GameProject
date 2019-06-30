@@ -124,7 +124,7 @@ const float DEF_ENEMY_HEALTH = 35.;
 const float DEF_ENEMY_STRENGTH = 3.;
 
 //default value for enemy movementSpeed parameter:
-const float ENEMY_SPEED = 400; //sets hero speed (measured in pixels/second ?)
+const float ENEMY_SPEED = 150; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
 

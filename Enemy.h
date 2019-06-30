@@ -9,6 +9,7 @@
 #include "GameCharacter.h"
 #include "GameHero.h"
 #include "SpriteObserver.h"
+#include <math.h>
 
 
 class Enemy: public virtual GameCharacter, public SpriteObserver {
@@ -30,7 +31,9 @@ public:
 
     void attack() override;
 
-    void move(const Direction &direction, const float &distance) override;
+    void move(const float &distance);
+
+    void updateAggro();
 
     //SpriteObserver methods:
     void update(const sf::Sprite &sprite) override;

@@ -58,6 +58,8 @@ private:
 
     void moveHero(const Direction &direction);
 
+    void updateEnemies();
+
     sf::Clock clock;
     sf::Time elapsed;
     float frameTime; //allows to use a fixed time-step to update the game

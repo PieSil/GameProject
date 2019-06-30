@@ -36,8 +36,7 @@ void Game::updateGame() {
 
         //updates physics
         updatePhysics(hero.get());
-        for (const auto &enemy : enemies) {
-            updatePhysics(enemy.get());
+
             /*
 
             //check if physics works
@@ -45,7 +44,6 @@ void Game::updateGame() {
                 enemy->setVelocityY(JUMP_VELOCITY);
             }
              */
-        }
 
         //game updated, subtract fixed time-step and "reset" elapsed time
         //game will update again when elapsed equals the fixed time-step chosen
@@ -147,5 +145,18 @@ void Game::checkOnGround(GameCharacter *character) {
         character->setOnGround(true);
     } else {
         character->setOnGround(false);
+    }
+}
+
+void Game::updateEnemies() {
+    for (const auto &enemy : enemies) {
+
+        updatePhysics(enemy.get()); //update enemy physics
+
+        if (!(enemy->getHitbox().checkHitbox().intersects(hero->getHitbox().checkHitbox()))) { //if enemy hitbox is not touching hero hitbox
+
+            enemy->move(elapsed.asSeconds() * enemy->getMovementSpeed()); //use move method to move towards hero (if aggro is active)
+
+        }
     }
 }
