@@ -31,7 +31,7 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(distance, 0.); //move right
 
-        animate(movingCounter, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
+        animate(movingCounter, WALK_COUNT_INCR, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
 
         if (!(facingRight)) {
             facingRight = true; //change facing direction
@@ -42,7 +42,7 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(-distance, 0.); //move left
 
-        animate(movingCounter, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
+        animate(movingCounter, WALK_COUNT_INCR, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
 
 
         if (facingRight) {
@@ -82,9 +82,9 @@ MovingEntity::MovingEntity() : MovingEntity(0, 0) {
 
 }
 
-void MovingEntity::animate(float &animCounter, const int &row, const int &lastColumn) {
+void MovingEntity::animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn) {
 
-    GameEntity::animate(animCounter, row, lastColumn);
+    GameEntity::animate(animCounter, counterIncrement, row, lastColumn);
 
     //flip horizontally based on facing direction
     if (facingRight)

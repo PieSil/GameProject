@@ -23,7 +23,7 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
     }
 
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
-            new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120, window->getWindowSize().y / 2.)));
+            new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120 + 10 * i, window->getWindowSize().y / 2.)));
 
     ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 50, 1, 1, 1);
 }
@@ -32,19 +32,21 @@ void Game::updateGame() {
 
     if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
+        hero->playIdle();
+
         handleInput(); //polls events from keyboard
 
         //updates physics
         updatePhysics(hero.get());
         updateEnemies();
 
-            /*
+        /*
 
-            //check if physics works
-            if (enemy->isOnGround()) {
-                enemy->setVelocityY(JUMP_VELOCITY);
-            }
-             */
+        //check if physics works
+        if (enemy->isOnGround()) {
+            enemy->setVelocityY(JUMP_VELOCITY);
+        }
+         */
 
         //game updated, subtract fixed time-step and "reset" elapsed time
         //game will update again when elapsed equals the fixed time-step chosen
@@ -96,6 +98,7 @@ void Game::renderLevel() const {
 }
 
 void Game::handleInput() {
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         moveHero(RIGHT);
     }
@@ -110,7 +113,6 @@ void Game::handleInput() {
         hero->setOnGround(false);
         hero->setVelocityY(JUMP_VELOCITY);
     }
-
 }
 
 void Game::drawHitbox(const Hitbox &hitbox) const {
@@ -142,7 +144,7 @@ void Game::updatePhysics(GameCharacter *character) {
 
 void Game::checkOnGround(GameCharacter *character) {
     if (character->getHitbox().checkLowerEdge().intersects(
-            ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edg)) {
+            ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edge
         character->setOnGround(true);
     } else {
         character->setOnGround(false);
@@ -152,11 +154,15 @@ void Game::checkOnGround(GameCharacter *character) {
 void Game::updateEnemies() {
     for (const auto &enemy : enemies) {
 
+        enemy->playIdle();
+
         updatePhysics(enemy.get()); //update enemy physics
 
-        if (!(enemy->getHitbox().checkHitbox().intersects(hero->getHitbox().checkHitbox()))) { //if enemy hitbox is not touching hero hitbox
+        if (!(enemy->getHitbox().checkHitbox().intersects(
+                hero->getHitbox().checkHitbox()))) { //if enemy hitbox is not touching hero hitbox
 
-            enemy->move(elapsed.asSeconds() * enemy->getMovementSpeed()); //use move method to move towards hero (if aggro is active)
+            enemy->move(elapsed.asSeconds() *
+                        enemy->getMovementSpeed()); //use move method to move towards hero (if aggro is active)
 
         }
     }

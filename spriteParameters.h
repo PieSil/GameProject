@@ -14,7 +14,7 @@ public:
                  const unsigned short &idleRow, const unsigned short idleCol, const unsigned short movRow,
                  const unsigned short movLastCol) : width(width), height(height), widthRed(widthRed),
                                                     heightRed(heightRed), scale(scale),
-                                                    path(path), idleRow(idleRow), idleCol(idleCol), movRow(movRow),
+                                                    path(path), idleRow(idleRow), idleLastCol(idleCol), movRow(movRow),
                                                     movLastCol(movLastCol) {};
 
     //values used to determine sprite width and heigth to correctly select it when cutting sprite sheet:
@@ -33,7 +33,7 @@ public:
 
 //values used to choose starting sprite
     const unsigned short idleRow;
-    const unsigned short idleCol;
+    const unsigned short idleLastCol;
 
 
 //values used to choose row and last column of walking animation in the spritesheet:

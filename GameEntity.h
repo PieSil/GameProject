@@ -22,7 +22,9 @@ public:
 
     virtual ~GameEntity() = 0;
 
-    virtual void animate(float &animCounter, const int &row, const int &lastColumn);
+    void playIdle();
+
+    virtual void animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn);
 
     virtual const SpriteParams* getParameters() const {
         return &entityParams;
@@ -65,6 +67,8 @@ protected:
     sf::Text text;
     sf::Sprite sprite;
     Hitbox hitbox;
+
+    float idleCounter;
 
     static const SpriteParams entityParams;
 
