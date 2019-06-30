@@ -2,6 +2,7 @@
 // Created by Pietro on 2019-06-29.
 //
 
+#include "Knight.h"
 #include "gtest/gtest.h"
 #include "MeleeEnemy.h"
 #include "gameValues.h"
@@ -10,8 +11,10 @@
 
 //Knight(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
 
+Knight knight;
+
 TEST(MeleeTest, Constructor) {
-    MeleeEnemy m(5, 0);
+    MeleeEnemy m(&knight, 5, 0);
     EXPECT_EQ(5, m.getSprite().getPosition().x);
     EXPECT_EQ(0, m.getSprite().getPosition().y);
     EXPECT_EQ(DEF_ENEMY_STRENGTH, m.getStrength());
@@ -24,7 +27,7 @@ TEST(MeleeTest, Constructor) {
 }
 
 TEST(MeleeTest, NotDefStrength) {
-    MeleeEnemy m(5, 0, 25.);
+    MeleeEnemy m(&knight, 5, 0, 25.);
     EXPECT_EQ(5, m.getSprite().getPosition().x);
     EXPECT_EQ(0, m.getSprite().getPosition().y);
     EXPECT_EQ(25., m.getStrength());
@@ -37,7 +40,7 @@ TEST(MeleeTest, NotDefStrength) {
 }
 
 TEST(MeleeTest, NegativeStrength) {
-    MeleeEnemy m(5, 0, -25.);
+    MeleeEnemy m(&knight, 5, 0, -25.);
     EXPECT_EQ(5, m.getSprite().getPosition().x);
     EXPECT_EQ(0, m.getSprite().getPosition().y);
     EXPECT_EQ(25., m.getStrength());
@@ -51,7 +54,7 @@ TEST(MeleeTest, NegativeStrength) {
 
 
 TEST(MeleeTest, IsOnFire) {
-    MeleeEnemy m(-5, 0, 25., false, true);
+    MeleeEnemy m(&knight, -5, 0, 25., false, true);
     EXPECT_EQ(-5, m.getSprite().getPosition().x);
     EXPECT_EQ(0, m.getSprite().getPosition().y);
     EXPECT_EQ(25., m.getStrength());
@@ -66,7 +69,7 @@ TEST(MeleeTest, IsOnFire) {
 
 
 TEST(MeleeTest, NotDefHealth) {
-    MeleeEnemy m(0, -5, 2., false, false, 540.);
+    MeleeEnemy m(&knight, 0, -5, 2., false, false, 540.);
     EXPECT_EQ(0, m.getSprite().getPosition().x);
     EXPECT_EQ(-5, m.getSprite().getPosition().y);
     EXPECT_EQ(2., m.getStrength());
@@ -79,7 +82,7 @@ TEST(MeleeTest, NotDefHealth) {
 }
 
 TEST(MeleeTest, NegativeHealth) {
-    MeleeEnemy m(0, -5, 2., false, false, -540.);
+    MeleeEnemy m(&knight, 0, -5, 2., false, false, -540.);
     EXPECT_EQ(0, m.getSprite().getPosition().x);
     EXPECT_EQ(-5, m.getSprite().getPosition().y);
     EXPECT_EQ(2., m.getStrength());
@@ -93,7 +96,7 @@ TEST(MeleeTest, NegativeHealth) {
 
 
 TEST(MeleeTest, IsFacingLeft) {
-    MeleeEnemy m(0, -5, 5.,false, false, DEF_ENEMY_HEALTH, false);
+    MeleeEnemy m(&knight, 0, -5, 5., false, false, DEF_ENEMY_HEALTH, false);
     EXPECT_EQ(0, m.getSprite().getPosition().x);
     EXPECT_EQ(-5, m.getSprite().getPosition().y);
     EXPECT_EQ(5., m.getStrength());
@@ -106,7 +109,7 @@ TEST(MeleeTest, IsFacingLeft) {
 }
 
 TEST(MeleeTest, MovementSpeed) {
-    MeleeEnemy m(0, -5, DEF_ENEMY_STRENGTH, false, false, DEF_ENEMY_HEALTH, false, 10.);
+    MeleeEnemy m(&knight, 0, -5, DEF_ENEMY_STRENGTH, false, false, DEF_ENEMY_HEALTH, false, 10.);
     EXPECT_EQ(0, m.getSprite().getPosition().x);
     EXPECT_EQ(-5, m.getSprite().getPosition().y);
     EXPECT_EQ(DEF_ENEMY_STRENGTH, m.getStrength());
@@ -119,7 +122,7 @@ TEST(MeleeTest, MovementSpeed) {
 }
 
 TEST(MeleeTest, Assigment) {
-    MeleeEnemy m(-5, 3, DEF_ENEMY_STRENGTH, true, true, 32.15, true, 5.);
+    MeleeEnemy m(&knight, -5, 3, DEF_ENEMY_STRENGTH, true, true, 32.15, true, 5.);
     m.setAggro(true);
     MeleeEnemy newM = m;
     EXPECT_EQ(newM.getSprite().getPosition().x, m.getSprite().getPosition().x);
@@ -135,7 +138,7 @@ TEST(MeleeTest, Assigment) {
 }
 
 TEST(MeleeTest, Copy) {
-    MeleeEnemy m(5, 0, DEF_ENEMY_STRENGTH, true, true, 25., false, 0.);
+    MeleeEnemy m(&knight, 5, 0, DEF_ENEMY_STRENGTH, true, true, 25., false, 0.);
     m.setAggro(true);
     MeleeEnemy copy(m);
     EXPECT_EQ(copy.getSprite().getPosition().x, m.getSprite().getPosition().x);

@@ -14,7 +14,7 @@ public:
 
     virtual void removeObserver(SpriteObserver* observer) = 0;
 
-    virtual void notifyObservers();
+    virtual void notifyObservers() = 0;
 
 protected:
 

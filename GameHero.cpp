@@ -22,6 +22,11 @@ GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
 
 }
 
+void GameHero::move(const Direction &direction, const float &distance) {
+    MovingEntity::move(direction, distance);
+    notifyObservers();
+}
+
 /*
 void GameHero::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
 }

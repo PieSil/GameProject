@@ -8,17 +8,17 @@
 /**
  * Enemy implementation
  */
-Enemy::Enemy(const float &x, const float &y, const float &str, const bool &par, const bool &onf, const float &h,
-             const bool &facingR,
-             const float &s) : paralyzed(par), aggro(false), aggroRange(100), GameCharacter(x, y, str, onf, h, s, facingR) {
+Enemy::Enemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par, const bool &onf,
+             const float &h, const bool &facingR, const float &s)
+             : hero (hero), paralyzed(par), aggro(false), aggroRange(100), GameCharacter(x, y, str, onf, h, s, facingR) {
+
+    hero->registerObserver(this);
 
 }
 
-Enemy::Enemy(const Enemy &copied) : paralyzed(false), aggro(false), GameCharacter(copied) {
-
+Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), aggro(false), GameCharacter(copied) {
+    hero->registerObserver(this);
 }
-
-Enemy::~Enemy() {}
 
 void Enemy::attack() {
     if (!paralyzed)
@@ -28,4 +28,8 @@ void Enemy::attack() {
 void Enemy::move(const Direction &direction, const float &distance) {
     if (!paralyzed)
         MovingEntity::move(direction, distance);
+}
+
+void Enemy::update(const sf::Sprite &sprite) {
+    this->heroSprite = sprite;
 }
