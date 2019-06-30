@@ -26,11 +26,13 @@ public:
 
     MeleeEnemy& operator = (const MeleeEnemy& meleeEnemy);
 
-    void move(const Direction& direction, const float& distance);
+    const SpriteParams *getParameters() const override {
+        return &meleeParams; //overrides getParameters to return a pointer to meleeParams instead of entityParams
+    }
 
 protected:
-    void initSprite(const float &x, const float &y);
-    void giveHitbox();
+
+    static const SpriteParams meleeParams;
 };
 
 #endif //_MELEEENEMY_H

@@ -7,10 +7,12 @@
 #include "GameEntity.h"
 #include "MovingEntity.h"
 
+const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0);
+
 GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())) {
 
-    initSprite(x, y, "../GameAssets/Sprites/Default_Sprite.png", 300, 300, 1, 0, 0);
-    giveHitbox(sprite.getPosition(), sprite.getTextureRect().width, sprite.getTextureRect().height, 1, 1, 1);
+    initSprite(x, y);
+    giveHitbox();
 
 
 }
@@ -21,7 +23,7 @@ void GameEntity::loadTexture(const std::string &path) {
 
 
     if (!texture.loadFromFile(path)) {
-        //exceptiond
+        //TODO: exception?
     }
 
     sprite = sf::Sprite(texture);
@@ -39,13 +41,13 @@ GameEntity::GameEntity() : GameEntity(0, 0) {
 }
 
 void
-GameEntity::initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-                       const float &scale, const int &row, const int &column) {
+GameEntity::initSprite(const float &x, const float &y) {
 
-    //loads sprite from GameAssets and sets his origin and position
+    //loads sprite from GameAssets and sets its origin and position
 
-    loadTexture(path);
-    sprite.setTextureRect(sf::IntRect(row, column, width, height));
+    loadTexture(getParameters()->path);
+    sprite.setTextureRect(sf::IntRect(getParameters()->idleCol, getParameters()->idleCol, getParameters()->width,
+                                      getParameters()->height));
 
     //sets origin to center of selected texture Rectangle
     sprite.setOrigin(sprite.getTextureRect().width / 2., sprite.getTextureRect().height / 2.);
@@ -62,23 +64,23 @@ void GameEntity::updateBehaviour(int width, int height, float scale, int rowSele
 */
 
 void
-GameEntity::giveHitbox(const sf::Vector2f &position, const int &width, const int &height,
-                       const float &widthReduction,
-                       const float &heightReduction, const float &scale) {
-    hitbox = Hitbox(position, width, height, widthReduction, heightReduction, scale);
+GameEntity::giveHitbox() {
+    hitbox = Hitbox(sprite.getPosition(), sprite.getTextureRect().width, sprite.getTextureRect().height,
+                    getParameters()->widthRed, getParameters()->heightRed, getParameters()->scale);
 }
 
 void
-GameEntity::animate(float& animCounter, const int &width, const int &height, const float &scale, const int &row, const int &lastColumn) {
+GameEntity::animate(float &animCounter, const int &row, const int &lastColumn) {
 
+    sprite.setTextureRect(
+            sf::IntRect(getParameters()->width * static_cast<int>(animCounter), getParameters()->height * row,
+                        getParameters()->width,
+                        getParameters()->height)); //update sprite animation
 
-        sprite.setTextureRect(sf::IntRect(width * static_cast<int>(animCounter), width * row, width,
-                                          height)); //update sprite animation
+    //update animation counter
+    animCounter += ANIM_COUNT_INCR;
 
-        //update animation counter
-        animCounter += ANIM_COUNT_INCR;
-
-        if (animCounter > lastColumn) {
-            animCounter = 0;
-        }
+    if (animCounter > lastColumn) {
+        animCounter = 0;
+    }
 }

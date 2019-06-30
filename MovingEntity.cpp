@@ -31,6 +31,8 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(distance, 0.); //move right
 
+        animate(movingCounter, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
+
         if (!(facingRight)) {
             facingRight = true; //change facing direction
         }
@@ -40,6 +42,8 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(-distance, 0.); //move left
 
+        animate(movingCounter, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
+
 
         if (facingRight) {
             facingRight = false; //change facing direction
@@ -47,33 +51,30 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         //MOVE ON Y AXIS
 
-        } else if (direction == UP) { //move upwards
-            sprite.move(0, -distance);
+    } else if (direction == UP) { //move upwards
+        sprite.move(0, -distance);
 
-        } else if (direction == DOWN) {
-            sprite.move(0, distance); //move downwards
+    } else if (direction == DOWN) {
+        sprite.move(0, distance); //move downwards
 
-        } else {
+    } else {
 
-            //TODO: throw exception
-        }
-
+        //TODO: throw exception
+    }
 
     //moves hitbox with sprite
     hitbox.setPosition(sprite.getPosition());
 
-
 }
 
 void
-MovingEntity::initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-                         const float &scale, const int &row, const int &column) {
-    GameEntity::initSprite(x, y, path, width, height, scale, row, column);
+MovingEntity::initSprite(const float &x, const float &y) {
+    GameEntity::initSprite(x, y);
 
     if (MovingEntity::facingRight) {
-        sprite.setScale(scale, scale);
+        sprite.setScale(getParameters()->scale, getParameters()->scale);
     } else {
-        sprite.setScale(-scale, scale);
+        sprite.setScale(-getParameters()->scale, getParameters()->scale);
     }
 }
 
@@ -81,15 +82,14 @@ MovingEntity::MovingEntity() : MovingEntity(0, 0) {
 
 }
 
-void MovingEntity::animate(float &animCounter, const int &width, const int &height, const float &scale, const int &row,
-                           const int &lastColumn) {
+void MovingEntity::animate(float &animCounter, const int &row, const int &lastColumn) {
 
-    GameEntity::animate(animCounter, width, height, scale, row, lastColumn);
+    GameEntity::animate(animCounter, row, lastColumn);
 
     //flip horizontally based on facing direction
     if (facingRight)
-        sprite.setScale(scale, scale);
+        sprite.setScale(getParameters()->scale, getParameters()->scale);
     else
-        sprite.setScale(-scale, scale);
+        sprite.setScale(-getParameters()->scale, getParameters()->scale);
 
 }

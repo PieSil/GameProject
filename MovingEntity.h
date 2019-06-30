@@ -22,8 +22,7 @@ public:
 
     virtual ~MovingEntity() {};
 
-    void animate(float &animCounter, const int &width, const int &height, const float &scale, const int &row,
-                 const int &lastColumn) override;
+    void animate(float &animCounter, const int &row, const int &lastColumn) override;
 
     float getMovementSpeed() const {
         return movementSpeed;
@@ -58,8 +57,7 @@ public:
 
 protected:
 
-    void initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-                    const float &scale, const int &row, const int &column) override;
+    void initSprite(const float &x, const float &y) override;
 
     float movementSpeed;
 

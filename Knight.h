@@ -26,12 +26,14 @@ public:
 
     void specialBehaviour() override;
 
-    void move(const Direction& direction, const float& distance) override;
+    const SpriteParams *getParameters() const override {
+        return &knightParams; //overrides getParameters to return a pointer to knightParams instead of entityParams
+    }
 
-private:
-    void initSprite(const float &x, const float &y);
+protected:
 
-    void giveHitbox();
+    static const SpriteParams knightParams;
+
 };
 
 #endif //_KNIGHT_H

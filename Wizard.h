@@ -27,8 +27,6 @@ public:
 
     void specialBehaviour() override;
 
-    void move(const Direction& direction, const float& distance) override;
-
     //void updateBehaviour();
 
     float getMana() const {
@@ -39,11 +37,14 @@ public:
         Wizard::mana = mana;
     }
 
-private:
-    void initSprite(const float& x, const float& y);
-    void giveHitbox();
+    const SpriteParams *getParameters() const override {
+        return &wizardParams; //overrides getParameters to return a pointer to wizardParams instead of entityParams
+    }
 
+private:
     float mana;
+
+    static const SpriteParams wizardParams;
 };
 
 #endif //_WIZARD_H

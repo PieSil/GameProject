@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "gameValues.h"
 #include "Hitbox.h"
+#include "spriteParameters.h"
 
 class GameEntity {
 public:
@@ -21,7 +22,11 @@ public:
 
     virtual ~GameEntity() = 0;
 
-    virtual void animate(float& animCounter, const int &width, const int &height, const float &scale, const int &row, const int &lastColumn);
+    virtual void animate(float &animCounter, const int &row, const int &lastColumn);
+
+    virtual const SpriteParams* getParameters() const {
+        return &entityParams;
+    }
 
     const Hitbox &getHitbox() const {
         return hitbox;
@@ -50,18 +55,18 @@ protected:
     void loadTexture(const std::string &path);
 
     virtual void
-    initSprite(const float &x, const float &y, const std::string &path, const int &width, const int &height,
-               const float &scale, const int &row, const int &column);
+    initSprite(const float &x, const float &y);
 
     virtual void
-    giveHitbox(const sf::Vector2f &position, const int &width, const int &height, const float &widthReduction,
-               const float &heightReduction, const float &scale);
+    giveHitbox();
 
     //SFML classes are not made for inheritance, preferred aggregation instead
     sf::Texture texture;
     sf::Text text;
     sf::Sprite sprite;
     Hitbox hitbox;
+
+    static const SpriteParams entityParams;
 
 };
 
