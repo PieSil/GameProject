@@ -9,7 +9,7 @@
 
 const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0);
 
-GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())) {
+GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0) {
 
     initSprite(x, y);
     giveHitbox();
@@ -32,7 +32,7 @@ void GameEntity::loadTexture(const std::string &path) {
 
 //copy constructor
 GameEntity::GameEntity(const GameEntity &copied) : texture(copied.getTexture()), text(copied.getText()),
-                                                   sprite(copied.getSprite()), hitbox(copied.getHitbox()) {
+                                                   sprite(copied.getSprite()), hitbox(copied.getHitbox()), idleCounter(0) {
 }
 
 //default constructor
@@ -46,8 +46,7 @@ GameEntity::initSprite(const float &x, const float &y) {
     //loads sprite from GameAssets and sets its origin and position
 
     loadTexture(getParameters()->path);
-    sprite.setTextureRect(sf::IntRect(getParameters()->idleCol, getParameters()->idleCol, getParameters()->width,
-                                      getParameters()->height));
+    sprite.setTextureRect(sf::IntRect(0, getParameters()->idleRow, getParameters()->width, getParameters()->height));
 
     //sets origin to center of selected texture Rectangle
     sprite.setOrigin(sprite.getTextureRect().width / 2., sprite.getTextureRect().height / 2.);
@@ -70,7 +69,7 @@ GameEntity::giveHitbox() {
 }
 
 void
-GameEntity::animate(float &animCounter, const int &row, const int &lastColumn) {
+GameEntity::animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn) {
 
     sprite.setTextureRect(
             sf::IntRect(getParameters()->width * static_cast<int>(animCounter), getParameters()->height * row,
@@ -78,9 +77,14 @@ GameEntity::animate(float &animCounter, const int &row, const int &lastColumn) {
                         getParameters()->height)); //update sprite animation
 
     //update animation counter
-    animCounter += ANIM_COUNT_INCR;
+
+    animCounter += counterIncrement;
 
     if (animCounter > lastColumn) {
         animCounter = 0;
     }
+}
+
+void GameEntity::playIdle() {
+    animate(idleCounter, IDLE_COUNT_INCR, getParameters()->idleRow, getParameters()->idleLastCol);
 }

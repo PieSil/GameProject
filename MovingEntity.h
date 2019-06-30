@@ -22,7 +22,7 @@ public:
 
     virtual ~MovingEntity() {};
 
-    void animate(float &animCounter, const int &row, const int &lastColumn) override;
+    void animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn) override;
 
     float getMovementSpeed() const {
         return movementSpeed;

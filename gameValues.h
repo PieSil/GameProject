@@ -34,11 +34,14 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 const float FRAMERATE = 60.;
 
 
-//animation counter increment, helps controlling the speed of character animations -> higher value = lower speed
+//walking animation counter increment, helps controlling the speed of character  walking animation -> higher value = lower speed
 //a good value is 30/FRAMERATE
-const float ANIM_COUNT_INCR = 0.5;
+const float WALK_COUNT_INCR = 0.5;
 
-//GRAVITY modyfing this values may break game physics
+//idle animation counter increment, helps controlling the speed of character  idle animation
+const float IDLE_COUNT_INCR = 0.075;
+
+//GRAVITY modifying this values may break game physics
 
 //controls gravity intensity, with current physics system value should be -2 or higher (meaning between -2 and 0)
 const float GRAVITY = -2;
@@ -83,7 +86,7 @@ const std::string KNIGHT_PATH = "../GameAssets/Sprites/Player/Knight/Knight.png"
 
 //values used to choose starting sprite
 const int KNIGHT_IDLE_ROW = 0;
-const int KNIGHT_IDLE_COL = 0;
+const int KNIGHT_IDLE_LAST_COL = 3;
 
 
 //values used to choose row and last column of walking animation in the spritesheet:
@@ -106,7 +109,7 @@ const std::string WIZARD_PATH = "../GameAssets/Sprites/Player/Wizard/Wizard.png"
 
 //values used to choose starting sprite
 const int WIZARD_IDLE_ROW = 0;
-const int WIZARD_IDLE_COL = 0;
+const int WIZARD_IDLE_LAST_COL = 2;
 
 //value used to scale up/down or flip wizard's sprite:
 const float WIZARD_SCALE = 2.;
@@ -145,7 +148,7 @@ const std::string MELEE_PATH = "../GameAssets/Sprites/Enemies/Bandit/Bandit.png"
 
 //values used to choose starting sprite
 const int MELEE_IDLE_ROW = 0;
-const int MELEE_IDLE_COL = 0;
+const int MELEE_IDLE_LAST_COL = 7;
 
 
 //values used to choose row and last column of walking animation in the spritesheet:
