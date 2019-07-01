@@ -30,7 +30,7 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(distance, 0.); //move right
 
-        animManager.play("walking", facingRight); //animate sprite
+        state = WALKING;
 
         if (!(facingRight)) {
             facingRight = true; //change facing direction
@@ -41,8 +41,7 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(-distance, 0.); //move left
 
-        animManager.play("walking", facingRight); //animate sprite
-
+        state = WALKING;
 
         if (facingRight) {
             facingRight = false; //change facing direction
@@ -82,12 +81,12 @@ MovingEntity::MovingEntity() : MovingEntity(0, 0) {
 }
 
 void MovingEntity::setupAnimations(const SpriteParams *parameters) {
-    GameEntity::setupAnimations(parameters);
-    animManager.createAnimation("walking");
+    GameEntity::setupAnimations(parameters); //create animation manager and IDLE animation (see GameEntity method)
+    animManager.createAnimation(WALKING); //create walking animation
 }
 
-void MovingEntity::playIdle() {
-    animManager.play("idle", facingRight);
+void MovingEntity::animate() {
+    animManager.play(state, facingRight); //play animation based on current state and facing direction
 }
 
 

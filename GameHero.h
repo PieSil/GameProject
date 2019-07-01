@@ -9,7 +9,6 @@
 #include "GameCharacter.h"
 #include "SpriteSubject.h"
 #include <list>
-#include "gameValues.h"
 
 
 class GameHero: public virtual GameCharacter, public SpriteSubject {

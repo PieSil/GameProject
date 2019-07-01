@@ -24,6 +24,10 @@ public:
 
     void play(const bool &right);
 
+    void restartClock() {
+        elapsed += clock.restart();
+    }
+
     const std::vector<sf::IntRect> &getFrames() const {
         return frames;
     }

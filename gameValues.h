@@ -27,6 +27,10 @@ const Heroytype KNGT = 'k'; //Knight hero type, not called KNIGHT to avoid confu
 
 const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confusion with Wizard class
 
+using State = unsigned short;
+
+const State IDLE = 0;
+const State WALKING = 1;
 
 //GAME
 

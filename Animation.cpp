@@ -8,39 +8,41 @@ Animation::Animation(const std::vector<sf::IntRect> &frames, sf::Sprite *sprite,
                      const float &animationTime)
         : frames(frames), sprite(sprite), parameters(parameters), currentFrame(0) {
 
-    frameNumber = -1;
+    frameNumber = -1; //set frame number to -1, this way first frame index is 0
 
     for (const auto &frame : frames) {
-        frameNumber++;
+        frameNumber++; //count number of frames
     }
 
-    frameTime = animationTime / frameNumber;
+    frameTime = animationTime / frameNumber; //set frameTime based on given animationTime (length in seconds)
 
 }
 
 void Animation::play(const bool &right) {
 
+
+    //scale sprite to match facing direction:
     if (right) {
         sprite->setScale(parameters->scale, parameters->scale);
     } else {
         sprite->setScale(-parameters->scale, parameters->scale);
     }
 
-    if (elapsed.asSeconds() >= frameTime) {
 
-        sprite->setTextureRect(frames[currentFrame]);
+    if (elapsed.asSeconds() >= frameTime) {   //if enough time has passed
 
-        currentFrame++;
+        sprite->setTextureRect(frames[currentFrame]); //update animation frame
+
+        currentFrame++; //increase currentFrame counter by 1
         if (currentFrame > frameNumber) {
-            currentFrame = 0;
+            currentFrame = 0; //reset currentFrame to first frame of frames vector
         }
 
-        elapsed -= sf::seconds(frameTime);
+        elapsed -= sf::seconds(frameTime); //"reset" elapsed time
 
     }
 
-    elapsed += clock.restart();
-
+    restartClock(); //restart clock
 }
 
 Animation::Animation(const Animation &copied) : Animation(copied.getFrames(), copied.getSprite(),

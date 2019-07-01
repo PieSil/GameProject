@@ -21,11 +21,11 @@ public:
 
     ~AnimationManager() {};
 
-    void play(const std::string &animationType, const bool &right);
+    void play(const State &state, const bool &right);
 
-    void createAnimation(const std::string& animationType);
+    void createAnimation(const State &state);
 
-    const std::map<std::string, Animation> &getAnimations() const {
+    const std::map<State, Animation> &getAnimations() const {
         return animations;
     }
 
@@ -38,7 +38,7 @@ public:
     }
 
 protected:
-    std::map<std::string, Animation> animations;
+    std::map<State, Animation> animations;
     const SpriteParams* parameters;
     sf::Sprite* sprite;
 };

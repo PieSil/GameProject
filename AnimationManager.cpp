@@ -4,45 +4,65 @@
 
 #include "AnimationManager.h"
 
-AnimationManager::AnimationManager(sf::Sprite *sprite, const SpriteParams *parameters) : parameters(parameters), sprite(sprite) {
-
+AnimationManager::AnimationManager(sf::Sprite *sprite, const SpriteParams *parameters) : parameters(parameters),
+                                                                                         sprite(sprite) {
 
 
 }
 
-void AnimationManager::createAnimation(const std::string& animationType) {
+void AnimationManager::createAnimation(const State &state) {
 
-    if (animationType == "idle") {
-        std::vector<sf::IntRect> idle;
+    std::vector<sf::IntRect> framesVector;
 
-        for (auto col = 0; col <= parameters->idleLastCol; col++) {
-            idle.emplace_back(sf::IntRect(col * parameters->width, parameters->idleRow * parameters->height, parameters->width, parameters->height));
-        }
+    switch (state) {
+        case IDLE:
 
-        animations.emplace("idle", Animation(idle, sprite, parameters, IDLE_ANIM_TIME));
 
-    } else if (animationType == "walking") {
-        std::vector<sf::IntRect> walking;
+            for (auto col = 0; col <= parameters->idleLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->idleRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
 
-        for (auto col = 0; col <= parameters->movLastCol; col++) {
-            walking.emplace_back(sf::IntRect(col * parameters->width, parameters->movRow * parameters->height, parameters->width, parameters->height));
-        }
+            animations.emplace(IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
+            break;
 
-        animations.emplace("walking", Animation(walking, sprite, parameters, WALK_ANIM_TIME));
+        case WALKING:
+
+            for (auto col = 0; col <= parameters->movLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->movRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(WALKING, Animation(framesVector, sprite, parameters, WALK_ANIM_TIME));
+            break;
+
+
+        default:
+            //TODO throw exception? just add another idle animation for now
+            for (auto col = 0; col <= parameters->idleLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->idleRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
+            break;
     }
 
 }
 
-void AnimationManager::play(const std::string &animationType, const bool &right) {
-    auto itr = animations.find(animationType);
-    itr->second.play(right);
+void AnimationManager::play(const State &state, const bool &right) {
+    animations.find(state)->second.play(right); //find selected animation and play it
 }
 
-AnimationManager::AnimationManager(const AnimationManager &copied) : AnimationManager(copied.getSprite(), copied.getParameters()) {
+AnimationManager::AnimationManager(const AnimationManager &copied) : AnimationManager(copied.getSprite(),
+                                                                                      copied.getParameters()) {
     animations = copied.getAnimations();
 }
 
-AnimationManager& AnimationManager::operator=(const AnimationManager& assigned) {
+AnimationManager &AnimationManager::operator=(const AnimationManager &assigned) {
     animations = assigned.getAnimations();
     parameters = assigned.getParameters();
     sprite = assigned.getSprite();

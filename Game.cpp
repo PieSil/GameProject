@@ -30,9 +30,13 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
 
 void Game::updateGame() {
 
-    if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
+    hero->animate();
 
-        hero->playIdle();
+    for (const auto& enemy : enemies) {
+        enemy->animate();
+    }
+
+    if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
         handleInput(); //polls events from keyboard
 
@@ -99,19 +103,28 @@ void Game::renderLevel() const {
 
 void Game::handleInput() {
 
+    bool keyPressed = false;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         moveHero(RIGHT);
+        keyPressed = true;
     }
 
     //move left
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         moveHero(LEFT);
+        keyPressed = true;
     }
 
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
         hero->isOnGround()) {
         hero->setOnGround(false);
         hero->setVelocityY(JUMP_VELOCITY);
+        keyPressed = true;
+    }
+
+    if (!keyPressed) {
+        hero->setState(IDLE);
     }
 }
 
@@ -154,8 +167,6 @@ void Game::checkOnGround(GameCharacter *character) {
 void Game::updateEnemies() {
     for (const auto &enemy : enemies) {
 
-        enemy->playIdle();
-
         updatePhysics(enemy.get()); //update enemy physics
 
         if (!(enemy->getHitbox().checkHitbox().intersects(
@@ -164,6 +175,8 @@ void Game::updateEnemies() {
             enemy->move(elapsed.asSeconds() *
                         enemy->getMovementSpeed()); //use move method to move towards hero (if aggro is active)
 
+        } else {
+            enemy->setState(IDLE);
         }
     }
 }

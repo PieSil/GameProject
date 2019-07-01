@@ -22,7 +22,7 @@ public:
 
     virtual ~MovingEntity() {};
 
-    void playIdle() override;
+    void animate() override;
 
     void setupAnimations(const SpriteParams *parameters) override;
 

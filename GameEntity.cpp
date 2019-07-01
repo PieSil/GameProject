@@ -9,7 +9,7 @@
 
 const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0);
 
-GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0), animManager(&sprite, getParameters()) {
+GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0), animManager(&sprite, getParameters()), state(IDLE) {
 
     initSprite(x, y);
     giveHitbox();
@@ -44,7 +44,6 @@ void
 GameEntity::initSprite(const float &x, const float &y) {
 
     //loads sprite from GameAssets and sets its origin and position
-
     loadTexture(getParameters()->path);
     sprite.setTextureRect(sf::IntRect(0, getParameters()->idleRow, getParameters()->width, getParameters()->height));
 
@@ -68,11 +67,11 @@ GameEntity::giveHitbox() {
                     getParameters()->widthRed, getParameters()->heightRed, getParameters()->scale);
 }
 
-void GameEntity::playIdle() {
-    animManager.play("idle", true);
+void GameEntity::setupAnimations(const SpriteParams *parameters) {
+    animManager = AnimationManager(&sprite, parameters); //create animation sprite
+    animManager.createAnimation(IDLE); //create idle animation
 }
 
-void GameEntity::setupAnimations(const SpriteParams *parameters) {
-    animManager = AnimationManager(&sprite, parameters);
-    animManager.createAnimation("idle");
+void GameEntity::animate() {
+    animManager.play(state, true); //play animation based on entity state
 }

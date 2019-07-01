@@ -6,7 +6,6 @@
 #define GAMEPROJECT_GAMEENTITY_H
 
 #include <SFML/Graphics.hpp>
-#include "gameValues.h"
 #include "Hitbox.h"
 #include "spriteParameters.h"
 #include "AnimationManager.h"
@@ -23,9 +22,9 @@ public:
 
     virtual ~GameEntity() = 0;
 
-    virtual void playIdle();
-
     virtual void setupAnimations(const SpriteParams *parameters);
+
+    virtual void animate();
 
     virtual const SpriteParams* getParameters() const {
         return &entityParams;
@@ -57,6 +56,14 @@ public:
         return animManager;
     }
 
+    State getState() const {
+        return state;
+    }
+
+    void setState(State state) {
+        GameEntity::state = state;
+    }
+
 protected:
     void loadTexture(const std::string &path);
 
@@ -71,6 +78,8 @@ protected:
     sf::Text text;
     sf::Sprite sprite;
     Hitbox hitbox;
+
+    State state;
 
     float idleCounter;
 
