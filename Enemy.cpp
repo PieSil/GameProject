@@ -20,9 +20,11 @@ Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), ag
     hero->registerObserver(this);
 }
 
-void Enemy::attack() {
+const float & Enemy::attack() {
     if (!paralyzed)
-        GameCharacter::attack();
+        return GameCharacter::attack();
+    else
+        return strength;
 }
 
 void Enemy::move(const float &distance) {

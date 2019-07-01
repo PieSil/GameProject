@@ -14,7 +14,8 @@
 
 const SpriteParams Wizard::wizardParams(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_HITBOX_X, WIZARD_HITBOX_Y, WIZARD_SCALE,
                                         WIZARD_PATH, WIZARD_IDLE_ROW,
-                                        WIZARD_IDLE_LAST_COL, WIZARD_MOV_ROW, WIZARD_MOV_LAST_COL);
+                                        WIZARD_IDLE_LAST_COL, WIZARD_MOV_ROW, WIZARD_MOV_LAST_COL, WIZARD_ATT_ROW,
+                                        WIZARD_ATT_LAST_COL, WIZARD_ATT_OFFSET);
 
 void Wizard::specialBehaviour() {
 
@@ -25,7 +26,7 @@ Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf
         : GameCharacter(x, y, str, onf, h, s, facingR), mana(m) {
     initSprite(x, y);
     giveHitbox();
-    setupAnimations(getParameters());
+    GameCharacter::setupAnimations(getParameters());
 }
 
 /*

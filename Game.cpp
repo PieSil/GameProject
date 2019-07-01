@@ -30,12 +30,6 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
 
 void Game::updateGame() {
 
-    hero->animate();
-
-    for (const auto& enemy : enemies) {
-        enemy->animate();
-    }
-
     if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
         handleInput(); //polls events from keyboard
@@ -55,6 +49,12 @@ void Game::updateGame() {
         //game updated, subtract fixed time-step and "reset" elapsed time
         //game will update again when elapsed equals the fixed time-step chosen
         elapsed -= sf::seconds(frameTime);
+    }
+
+    hero->animate();
+
+    for (const auto& enemy : enemies) {
+        enemy->animate();
     }
 
     checkOnGround(hero.get());
@@ -123,7 +123,12 @@ void Game::handleInput() {
         keyPressed = true;
     }
 
-    if (!keyPressed) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+        hero->attack();
+        keyPressed = true;
+    }
+
+    if (!keyPressed && hero->getState() != ATTACKING) {
         hero->setState(IDLE);
     }
 }

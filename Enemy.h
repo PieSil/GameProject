@@ -29,7 +29,7 @@ public:
 
     //override attack and move methods to check if enemy is paralyzed
 
-    void attack() override;
+    const float & attack() override;
 
     void move(const float &distance);
 

@@ -38,6 +38,15 @@ void AnimationManager::createAnimation(const State &state) {
             animations.emplace(WALKING, Animation(framesVector, sprite, parameters, WALK_ANIM_TIME));
             break;
 
+        case ATTACKING:
+            for (auto col = 0; col <= parameters->attLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * (parameters->width + parameters->attOffset), parameters->attRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(ATTACKING, Animation(framesVector, sprite, parameters, ATT_ANIM_TIME));
+            break;
 
         default:
             //TODO throw exception? just add another idle animation for now

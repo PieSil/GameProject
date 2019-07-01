@@ -7,7 +7,7 @@
 #include "GameEntity.h"
 #include "MovingEntity.h"
 
-const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0);
+const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0, 0, 0, 0);
 
 GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0), animManager(&sprite, getParameters()), state(IDLE) {
 

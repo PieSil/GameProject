@@ -18,6 +18,7 @@ ShootingCharacter::ShootingCharacter() :GameCharacter(0,0) {
 
 }
 
-void ShootingCharacter::attack() {
-
+const float & ShootingCharacter::attack() {
+    GameCharacter::attack();
+    return strength;
 }

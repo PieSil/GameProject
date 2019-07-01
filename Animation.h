@@ -36,16 +36,25 @@ public:
         return sprite;
     }
 
-    float getFrameTime() const {
-        return frameTime;
-    }
-
     const SpriteParams *getParameters() const {
         return parameters;
     }
 
+    int getCurrentFrame() const {
+        return currentFrame;
+    }
+
+    void setCurrentFrame(int currentFrame) {
+        Animation::currentFrame = currentFrame;
+    }
+
     int getFrameNumber() const {
         return frameNumber;
+    }
+
+
+    float getFrameTime() const {
+        return frameTime;
     }
 
 protected:

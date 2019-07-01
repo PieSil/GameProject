@@ -23,7 +23,15 @@ public:
 
     void play(const State &state, const bool &right);
 
+    void resetAnimation(const State& state) {
+        animations.find(state)->second.setCurrentFrame(0);
+    };
+
     void createAnimation(const State &state);
+
+    int getCurrentFrame(const State& state) const {
+        return animations.find(state)->second.getCurrentFrame();
+    }
 
     const std::map<State, Animation> &getAnimations() const {
         return animations;

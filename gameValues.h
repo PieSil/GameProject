@@ -30,7 +30,10 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 using State = unsigned short;
 
 const State IDLE = 0;
+
 const State WALKING = 1;
+
+const State ATTACKING = 2;
 
 //GAME
 
@@ -43,6 +46,8 @@ const float WALK_ANIM_TIME = 0.5;
 
 //sets idle animation duration
 const float IDLE_ANIM_TIME = 1;
+
+const float ATT_ANIM_TIME = 1;
 
 //GRAVITY modifying this values may break game physics
 
@@ -96,6 +101,11 @@ const int KNIGHT_IDLE_LAST_COL = 3;
 const int KNIGHT_MOV_ROW =4;
 const int KNIGHT_MOV_LAST_COL = 7;
 
+const int KNIGHT_ATT_ROW =2;
+const int KNIGHT_ATT_LAST_COL = 9;
+
+const int KNIGHT_ATT_OFFSET = 38;
+
 //WIZARD
 
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
@@ -120,6 +130,11 @@ const float WIZARD_SCALE = 2.;
 //values used to choose row and last column of walking animation in the spritesheet:
 const int WIZARD_MOV_ROW =2;
 const int WIZARD_MOV_LAST_COL = 3;
+
+const int WIZARD_ATT_ROW =1;
+const int WIZARD_ATT_LAST_COL = 6;
+
+const int WIZARD_ATT_OFFSET = 0;
 
 //ENEMY
 
@@ -157,5 +172,10 @@ const int MELEE_IDLE_LAST_COL = 7;
 //values used to choose row and last column of walking animation in the spritesheet:
 const int MELEE_MOV_ROW =1;
 const int MELEE_MOV_LAST_COL = 7;
+
+const int MELEE_ATT_ROW =2;
+const int MELEE_ATT_LAST_COL = 7;
+
+const int MELEE_ATT_OFFSET = 0;
 
 #endif //GAMEPROJECT_GAMEVALUES_H

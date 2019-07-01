@@ -21,7 +21,7 @@ public:
     virtual ~ShootingCharacter() {};
 
     //overides attack method to shoot projectiles
-    void attack() override;
+    const float & attack() override;
 
 };
 

@@ -22,7 +22,9 @@ public:
 
     ~GameCharacter() = 0;
 
-    virtual void attack();
+    virtual const float & attack();
+
+    void setupAnimations(const SpriteParams *parameters) override;
 
     float getHealth() const {
         return health;
@@ -47,6 +49,8 @@ public:
     void setStrength(float strength) {
         GameCharacter::strength = strength;
     }
+
+    void animate() override;
 
 protected:
     bool onFire;
