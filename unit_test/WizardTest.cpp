@@ -1,7 +1,8 @@
 //
 // Created by Pietro on 2019-06-22.
 //
-
+#include "Animation.h"
+#include "AnimationManager.h"
 #include "gtest/gtest.h"
 #include "Wizard.h"
 #include "gameValues.h"

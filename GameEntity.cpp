@@ -9,11 +9,11 @@
 
 const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0);
 
-GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0) {
+GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0), animManager(&sprite, getParameters()) {
 
     initSprite(x, y);
     giveHitbox();
-
+    setupAnimations(getParameters());
 
 }
 
@@ -32,7 +32,7 @@ void GameEntity::loadTexture(const std::string &path) {
 
 //copy constructor
 GameEntity::GameEntity(const GameEntity &copied) : texture(copied.getTexture()), text(copied.getText()),
-                                                   sprite(copied.getSprite()), hitbox(copied.getHitbox()), idleCounter(0) {
+                                                   sprite(copied.getSprite()), hitbox(copied.getHitbox()), idleCounter(0), animManager(copied.getAnimManager()) {
 }
 
 //default constructor
@@ -68,23 +68,11 @@ GameEntity::giveHitbox() {
                     getParameters()->widthRed, getParameters()->heightRed, getParameters()->scale);
 }
 
-void
-GameEntity::animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn) {
-
-    sprite.setTextureRect(
-            sf::IntRect(getParameters()->width * static_cast<int>(animCounter), getParameters()->height * row,
-                        getParameters()->width,
-                        getParameters()->height)); //update sprite animation
-
-    //update animation counter
-
-    animCounter += counterIncrement;
-
-    if (animCounter > lastColumn) {
-        animCounter = 0;
-    }
+void GameEntity::playIdle() {
+    animManager.play("idle", true);
 }
 
-void GameEntity::playIdle() {
-    animate(idleCounter, IDLE_COUNT_INCR, getParameters()->idleRow, getParameters()->idleLastCol);
+void GameEntity::setupAnimations(const SpriteParams *parameters) {
+    animManager = AnimationManager(&sprite, parameters);
+    animManager.createAnimation("idle");
 }

@@ -11,7 +11,6 @@
 MovingEntity::MovingEntity(const float &x, const float &y, const float &movSpeed, const bool &facingR)
         : GameEntity(x, y),
           movementSpeed(movSpeed), facingRight(facingR), movingCounter(0), onGround(false), velocityY(0) {
-
 }
 
 
@@ -31,7 +30,7 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(distance, 0.); //move right
 
-        animate(movingCounter, WALK_COUNT_INCR, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
+        animManager.play("walking", facingRight); //animate sprite
 
         if (!(facingRight)) {
             facingRight = true; //change facing direction
@@ -42,7 +41,7 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
         sprite.move(-distance, 0.); //move left
 
-        animate(movingCounter, WALK_COUNT_INCR, getParameters()->movRow, getParameters()->movLastCol); //animate sprite
+        animManager.play("walking", facingRight); //animate sprite
 
 
         if (facingRight) {
@@ -82,14 +81,13 @@ MovingEntity::MovingEntity() : MovingEntity(0, 0) {
 
 }
 
-void MovingEntity::animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn) {
-
-    GameEntity::animate(animCounter, counterIncrement, row, lastColumn);
-
-    //flip horizontally based on facing direction
-    if (facingRight)
-        sprite.setScale(getParameters()->scale, getParameters()->scale);
-    else
-        sprite.setScale(-getParameters()->scale, getParameters()->scale);
-
+void MovingEntity::setupAnimations(const SpriteParams *parameters) {
+    GameEntity::setupAnimations(parameters);
+    animManager.createAnimation("walking");
 }
+
+void MovingEntity::playIdle() {
+    animManager.play("idle", facingRight);
+}
+
+

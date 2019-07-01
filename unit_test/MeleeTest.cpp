@@ -1,7 +1,8 @@
 //
 // Created by Pietro on 2019-06-29.
 //
-
+#include "Animation.h"
+#include "AnimationManager.h"
 #include "Knight.h"
 #include "gtest/gtest.h"
 #include "MeleeEnemy.h"

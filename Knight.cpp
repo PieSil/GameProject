@@ -20,6 +20,8 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
                const float &s) : GameCharacter(x, y, str, onf, h, s, facingR) {
     initSprite(x, y);
     giveHitbox();
+    MovingEntity::setupAnimations(getParameters());
+    
 }
 
 void Knight::specialBehaviour() {

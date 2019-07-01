@@ -9,6 +9,7 @@
 #include "gameValues.h"
 #include "Hitbox.h"
 #include "spriteParameters.h"
+#include "AnimationManager.h"
 
 class GameEntity {
 public:
@@ -22,9 +23,9 @@ public:
 
     virtual ~GameEntity() = 0;
 
-    void playIdle();
+    virtual void playIdle();
 
-    virtual void animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn);
+    virtual void setupAnimations(const SpriteParams *parameters);
 
     virtual const SpriteParams* getParameters() const {
         return &entityParams;
@@ -52,6 +53,9 @@ public:
         return sprite;
     }
 
+    const AnimationManager &getAnimManager() const {
+        return animManager;
+    }
 
 protected:
     void loadTexture(const std::string &path);
@@ -71,6 +75,8 @@ protected:
     float idleCounter;
 
     static const SpriteParams entityParams;
+
+    AnimationManager animManager;
 
 };
 

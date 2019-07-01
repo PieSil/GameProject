@@ -19,6 +19,7 @@ MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const flo
 
     initSprite(x, y);
     giveHitbox();
+    MovingEntity::setupAnimations(getParameters());
 
 }
 

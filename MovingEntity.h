@@ -22,7 +22,9 @@ public:
 
     virtual ~MovingEntity() {};
 
-    void animate(float &animCounter, const float &counterIncrement, const int &row, const int &lastColumn) override;
+    void playIdle() override;
+
+    void setupAnimations(const SpriteParams *parameters) override;
 
     float getMovementSpeed() const {
         return movementSpeed;

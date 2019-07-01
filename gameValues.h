@@ -34,12 +34,11 @@ const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confus
 const float FRAMERATE = 60.;
 
 
-//walking animation counter increment, helps controlling the speed of character  walking animation -> higher value = lower speed
-//a good value is 30/FRAMERATE
-const float WALK_COUNT_INCR = 0.5;
+//sets walking animation duration
+const float WALK_ANIM_TIME = 0.5;
 
-//idle animation counter increment, helps controlling the speed of character  idle animation
-const float IDLE_COUNT_INCR = 0.075;
+//sets idle animation duration
+const float IDLE_ANIM_TIME = 1;
 
 //GRAVITY modifying this values may break game physics
 
@@ -85,7 +84,7 @@ const float KNIGHT_SCALE = 4.;
 const std::string KNIGHT_PATH = "../GameAssets/Sprites/Player/Knight/Knight.png";
 
 //values used to choose starting sprite
-const int KNIGHT_IDLE_ROW = 0;
+const int KNIGHT_IDLE_ROW = 1;
 const int KNIGHT_IDLE_LAST_COL = 3;
 
 
