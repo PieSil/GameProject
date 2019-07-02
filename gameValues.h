@@ -47,7 +47,7 @@ const float WALK_ANIM_TIME = 0.5;
 //sets idle animation duration
 const float IDLE_ANIM_TIME = 1;
 
-const float ATT_ANIM_TIME = 1;
+const float ATT_ANIM_TIME = 0.5;
 
 //GRAVITY modifying this values may break game physics
 
@@ -102,7 +102,7 @@ const int KNIGHT_MOV_ROW =4;
 const int KNIGHT_MOV_LAST_COL = 7;
 
 const int KNIGHT_ATT_ROW =2;
-const int KNIGHT_ATT_LAST_COL = 9;
+const int KNIGHT_ATT_LAST_COL = 8;
 
 const int KNIGHT_ATT_OFFSET = 38;
 
