@@ -145,7 +145,8 @@ void Game::drawHitbox(const Hitbox &hitbox) const {
 void Game::updatePhysics(GameCharacter *character) {
 
     //moves character on Y axis based on its velocity
-    character->move(UP, character->getVelocityY());
+    //call moving entity method to bypass check on character state
+    character->MovingEntity::move(UP, character->getVelocityY());
 
 //checks if the character is on ground or not
     checkOnGround(character);

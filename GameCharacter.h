@@ -22,6 +22,8 @@ public:
 
     ~GameCharacter() = 0;
 
+    void move(const Direction &direction, const float &distance) override;
+
     virtual const float & attack();
 
     void setupAnimations(const SpriteParams *parameters) override;
