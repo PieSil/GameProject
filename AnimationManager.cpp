@@ -64,6 +64,10 @@ void AnimationManager::createAnimation(const State &state) {
 
 void AnimationManager::play(const State &state, const bool &right) {
     animations.find(state)->second.play(right); //find selected animation and play it
+
+    for (auto& animation : animations) {
+        animation.second.checkTime(); //check weather elapsed attribute should be reset or not and restart the clock, do this for every animation
+    }
 }
 
 AnimationManager::AnimationManager(const AnimationManager &copied) : AnimationManager(copied.getSprite(),

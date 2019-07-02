@@ -24,6 +24,8 @@ public:
 
     void play(const bool &right);
 
+    void checkTime();
+
     void restartClock() {
         elapsed += clock.restart();
     }

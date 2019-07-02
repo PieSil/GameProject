@@ -18,33 +18,6 @@ Animation::Animation(const std::vector<sf::IntRect> &frames, sf::Sprite *sprite,
 
 }
 
-void Animation::play(const bool &right) {
-
-
-    //scale sprite to match facing direction:
-    if (right) {
-        sprite->setScale(parameters->scale, parameters->scale);
-    } else {
-        sprite->setScale(-parameters->scale, parameters->scale);
-    }
-
-
-    if (elapsed.asSeconds() >= frameTime) {   //if enough time has passed
-
-        sprite->setTextureRect(frames[currentFrame]); //update animation frame
-
-        currentFrame++; //increase currentFrame counter by 1
-        if (currentFrame > frameNumber) {
-            currentFrame = 0; //reset currentFrame to first frame of frames vector
-        }
-
-        elapsed -= sf::seconds(frameTime); //"reset" elapsed time
-
-    }
-
-    restartClock(); //restart clock
-}
-
 Animation::Animation(const Animation &copied) : Animation(copied.getFrames(), copied.getSprite(),
                                                           copied.getParameters()) {
     frameTime = copied.getFrameTime();
@@ -62,4 +35,46 @@ Animation &Animation::operator=(const Animation &assigned) {
 
 
     return *this;
+}
+
+void Animation::play(const bool &right) {
+
+
+    //scale sprite to match facing direction:
+    if (right) {
+        sprite->setScale(parameters->scale, parameters->scale);
+    } else {
+        sprite->setScale(-parameters->scale, parameters->scale);
+    }
+
+
+    if (elapsed.asSeconds() >= frameTime) {
+
+        sprite->setTextureRect(frames[currentFrame]); //update animation frame
+
+        currentFrame++; //increase currentFrame counter by 1
+        if (currentFrame > frameNumber) {
+            currentFrame = 0; //reset currentFrame to first frame of frames vector
+        }
+
+        elapsed -= sf::seconds(frameTime); //"reset" elapsed time
+
+    }
+
+
+}
+
+
+
+void Animation::checkTime() {
+
+    //this method is made to be called every loop
+    //it allows the Animation class to keep track of time even when stored animation is not in use
+
+    if (elapsed.asSeconds() >= frameTime) { //if enough time has passed
+
+        elapsed -= sf::seconds(frameTime); //"reset" elapsed time
+    }
+
+    restartClock(); //restart clock
 }
