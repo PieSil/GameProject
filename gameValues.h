@@ -52,11 +52,11 @@ const float ATT_ANIM_TIME = 0.5;
 //GRAVITY modifying this values may break game physics
 
 //controls gravity intensity, with current physics system value should be -2 or higher (meaning between -2 and 0)
-const float GRAVITY = -2;
+const float GRAVITY = -0.5;
 
 
 //controls starting jump velocity
-const float JUMP_VELOCITY = 30;
+const float JUMP_VELOCITY = 7;
 
 //HITBOXES
 
@@ -73,7 +73,7 @@ const float DEF_GAMEHERO_HEALTH = 20.;
 const float DEF_GAMEHERO_STRENGTH = 5.;
 
 //default value for hero movementSpeed parameter:
-const float HERO_SPEED = 300; //sets hero speed (measured in pixels/second ?)
+const float HERO_SPEED = 60; //sets hero speed (measured in pixels/second ?)
 
 //KNIGHT
 
@@ -87,7 +87,7 @@ const float KNIGHT_HITBOX_X = 4;
 const float KNIGHT_HITBOX_Y = 1.2;
 
 //value used to scale up/down or flip knight's sprite:
-const float KNIGHT_SCALE = 4.;
+const float KNIGHT_SCALE = 0.7619047619;
 
 //value used to set path of texture file
 const std::string KNIGHT_PATH = "../GameAssets/Sprites/Player/Knight/Knight.png";
@@ -125,7 +125,7 @@ const int WIZARD_IDLE_ROW = 0;
 const int WIZARD_IDLE_LAST_COL = 2;
 
 //value used to scale up/down or flip wizard's sprite:
-const float WIZARD_SCALE = 2.;
+const float WIZARD_SCALE = 0.6666666667;
 
 //values used to choose row and last column of walking animation in the spritesheet:
 const int WIZARD_MOV_ROW =2;
@@ -145,7 +145,7 @@ const float DEF_ENEMY_HEALTH = 35.;
 const float DEF_ENEMY_STRENGTH = 3.;
 
 //default value for enemy movementSpeed parameter:
-const float ENEMY_SPEED = 150; //sets hero speed (measured in pixels/second ?)
+const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
 
@@ -159,7 +159,7 @@ const float MELEE_HITBOX_X = 2.8;
 const float MELEE_HITBOX_Y = 1.2;
 
 //value used to scale up/down or flip sprite:
-const float MELEE_SCALE = 3.5;
+const float MELEE_SCALE = 0.6666666667;
 
 //value used to set path of texture file
 const std::string MELEE_PATH = "../GameAssets/Sprites/Enemies/Bandit/Bandit.png";

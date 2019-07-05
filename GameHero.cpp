@@ -24,6 +24,7 @@ GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
 
 void GameHero::move(const Direction &direction, const float &distance) {
     GameCharacter::move(direction, distance);
+    centerView();
     notifyObservers();
 }
 

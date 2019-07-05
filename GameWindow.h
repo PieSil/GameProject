@@ -10,7 +10,7 @@
 
 class GameWindow {
 public:
-    explicit GameWindow(const std::string& title = "Window", const sf::Vector2u& size = sf::Vector2u(640,480));
+    explicit GameWindow(const std::string& title = "Window", const sf::Vector2u& size = sf::Vector2u(1140,640));
 
     ~GameWindow();
 
@@ -25,6 +25,10 @@ public:
         window.display();
     }
     //display the changes
+
+    void setView(const sf::View& view) {
+        window.setView(view);
+    }
 
     void update();
 

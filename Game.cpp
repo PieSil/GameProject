@@ -22,6 +22,9 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
         //TODO: throw exception
     }
 
+    createView();
+
+
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120 + 10, window->getWindowSize().y / 2.)));
 
@@ -33,6 +36,7 @@ void Game::updateGame() {
     if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
         handleInput(); //polls events from keyboard
+        updateView();
 
         //updates physics
         updatePhysics(hero.get());
@@ -53,7 +57,7 @@ void Game::updateGame() {
 
     hero->animate();
 
-    for (const auto& enemy : enemies) {
+    for (const auto &enemy : enemies) {
         enemy->animate();
     }
 
@@ -72,6 +76,10 @@ void Game::moveHero(const Direction &direction) {
         w->move(direction, w->getMovementSpeed() * elapsed.asSeconds()); //passes speed * elapsed time as distance
     } else {
         //TODO: throw exception? Constructor should've already checked if hero value is valid
+    }
+
+    if (hero->isOnGround()) {
+        updateView();
     }
 
 }
@@ -146,7 +154,14 @@ void Game::updatePhysics(GameCharacter *character) {
 
     //moves character on Y axis based on its velocity
     //call moving entity method to bypass check on character state
-    character->MovingEntity::move(UP, character->getVelocityY());
+
+    if (auto h = dynamic_cast<GameHero *>(character)) {
+        h->move(UP, h->getVelocityY());
+    } else {
+        character->MovingEntity::move(UP, character->getVelocityY());
+    }
+
+
 
 //checks if the character is on ground or not
     checkOnGround(character);
@@ -185,4 +200,15 @@ void Game::updateEnemies() {
             enemy->setState(IDLE);
         }
     }
+}
+
+void Game::createView() {
+    view = std::make_shared<sf::View>(sf::View(sf::Vector2f(hero->getSprite().getPosition()), sf::Vector2f(228, 128)));
+    hero->setView(view.get());
+    hero->centerView();
+    updateView();
+}
+
+void Game::updateView() {
+    window->setView(*view);
 }

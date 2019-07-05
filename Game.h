@@ -23,7 +23,7 @@ public:
     //TODO: delegate hero selction to other class, not the game constructor
     explicit Game (
             Heroytype heroT = 0,
-            std::unique_ptr<GameWindow> w = std::move(std::unique_ptr<GameWindow>(new GameWindow("Level", sf::Vector2u(800,600))))
+            std::unique_ptr<GameWindow> w = std::move(std::unique_ptr<GameWindow>(new GameWindow("Level", sf::Vector2u(1140,640))))
                     );
     ~Game() {};
 
@@ -60,6 +60,10 @@ private:
 
     void updateEnemies();
 
+    void createView();
+
+    void updateView();
+
     sf::Clock clock;
     sf::Time elapsed;
     float frameTime; //allows to use a fixed time-step to update the game
@@ -67,6 +71,7 @@ private:
     std::unique_ptr<GameHero> hero;
     std::list<std::unique_ptr<Enemy>> enemies;
     std::unique_ptr<GameWindow> window;
+    std::shared_ptr<sf::View> view;
 
     Hitbox ground;
 
