@@ -6,6 +6,7 @@
 #define GAMEPROJECT_GAMEVALUES_H
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 //Alias definitions
 
@@ -57,6 +58,11 @@ const float GRAVITY = -0.5;
 
 //controls starting jump velocity
 const float JUMP_VELOCITY = 7;
+
+//MAP
+
+const std::string MAP_PATH = "../GameAssets/Tileset/Tileset.png";
+const sf::Vector2u TILE_SIZE(32,32);
 
 //HITBOXES
 
