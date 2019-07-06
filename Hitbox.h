@@ -22,10 +22,10 @@ public:
 
     void setPosition(const sf::Vector2f& position) {
         hitbox.setPosition(position);
-        upperEdge.setPosition(sf::Vector2f(hitbox.getPosition())); //sets upper edge to match with hitbox's upper edge
-        lowerEdge.setPosition(sf::Vector2f(hitbox.getPosition().x, (hitbox.getPosition().y + hitbox.getSize().y - EDGE_THICKNESS))); //sets lower edge to match with hitbox's lower edge
-        rightEdge.setPosition(sf::Vector2f((hitbox.getPosition().x + hitbox.getSize().x - EDGE_THICKNESS), hitbox.getPosition().y)); //sets right edge to match with hitbox's right edge
-        leftEdge.setPosition(sf::Vector2f(hitbox.getPosition())); //sets left edge to match with hitbox's left edge
+        upperEdge.setPosition(sf::Vector2f(hitbox.getPosition().x, (hitbox.getPosition().y - hitbox.getSize().y/2.))); //sets upper edge to match with hitbox's upper edge
+        lowerEdge.setPosition(sf::Vector2f(hitbox.getPosition().x, (hitbox.getPosition().y + hitbox.getSize().y/2.))); //sets lower edge to match with hitbox's lower edge
+        rightEdge.setPosition(sf::Vector2f((hitbox.getPosition().x + hitbox.getSize().x/2.), hitbox.getPosition().y)); //sets right edge to match with hitbox's right edge
+        leftEdge.setPosition(sf::Vector2f((hitbox.getPosition().x - hitbox.getSize().x/2.), hitbox.getPosition().y)); //sets left edge to match with hitbox's left edge
     }
 
     void setPosition(const float& x, const float& y) {
