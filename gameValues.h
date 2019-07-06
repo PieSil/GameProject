@@ -63,6 +63,8 @@ const float JUMP_VELOCITY = 7;
 
 const std::string MAP_PATH = "../GameAssets/Tileset/Tileset.png";
 const sf::Vector2u TILE_SIZE(32,32);
+const int MAP_COLUMNS = 4;
+const int MAP_ROWS = 4;
 
 //HITBOXES
 

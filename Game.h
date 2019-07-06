@@ -13,6 +13,7 @@
 #include "MeleeEnemy.h"
 #include "RangedEnemy.h"
 #include "BossEnemy.h"
+#include "Map.h"
 #include <memory>
 #include <iostream>
 #include <list>
@@ -64,6 +65,8 @@ private:
 
     void updateView();
 
+    void createMap();
+
     sf::Clock clock;
     sf::Time elapsed;
     float frameTime; //allows to use a fixed time-step to update the game
@@ -74,6 +77,7 @@ private:
     std::shared_ptr<sf::View> view;
 
     Hitbox ground;
+    Map gameMap;
 
 };
 

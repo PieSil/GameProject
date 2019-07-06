@@ -22,6 +22,7 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
         //TODO: throw exception
     }
 
+    createMap();
     createView();
 
 
@@ -39,7 +40,7 @@ void Game::updateGame() {
         updateView();
 
         //updates physics
-        updatePhysics(hero.get());
+        //updatePhysics(hero.get());
         updateEnemies();
 
         /*
@@ -93,6 +94,12 @@ void Game::renderLevel() const {
     //drawHitbox(hero->getHitbox());
 
     drawHitbox(ground);
+
+    window->draw(gameMap);
+
+    for (auto tile : gameMap.getTiles()) {
+        window->draw(tile.getHitbox());
+    }
 
     //draws sprites on window:
     window->draw(hero->getSprite());
@@ -210,5 +217,18 @@ void Game::createView() {
 }
 
 void Game::updateView() {
-    window->setView(*view);
+   //window->setView(*view);
+}
+
+void Game::createMap() {
+
+    const int level[] = {
+            0,0,0,0,
+            7,0,0,5,
+            6,0,0,4,
+            3,1,1,3
+    };
+
+    gameMap = Map(level,MAP_COLUMNS, MAP_ROWS);
+    gameMap.load();
 }
