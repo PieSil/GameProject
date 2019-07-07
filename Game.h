@@ -25,7 +25,7 @@ public:
     //TODO: delegate hero selction to other class, not the game constructor
     explicit Game (
             Heroytype heroT = 0,
-            std::unique_ptr<GameWindow> w = std::move(std::unique_ptr<GameWindow>(new GameWindow("Level", sf::Vector2u(1140,640))))
+            std::unique_ptr<GameWindow> w = std::move(std::unique_ptr<GameWindow>(new GameWindow("Level", sf::Vector2u(8*TILE_SIZE.x * 5,8*TILE_SIZE.y * 5))))
                     );
     ~Game() {};
 

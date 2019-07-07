@@ -63,8 +63,8 @@ const float JUMP_VELOCITY = 8;
 
 const std::string MAP_PATH = "../GameAssets/Tileset/Tileset.png";
 const sf::Vector2u TILE_SIZE(32,32);
-const int MAP_COLUMNS = 4;
-const int MAP_ROWS = 4;
+const int MAP_COLUMNS = 71;
+const int MAP_ROWS = 10;
 
 //HITBOXES
 
@@ -133,7 +133,7 @@ const int WIZARD_IDLE_ROW = 0;
 const int WIZARD_IDLE_LAST_COL = 2;
 
 //value used to scale up/down or flip wizard's sprite:
-const float WIZARD_SCALE = 0.6666666667;
+const float WIZARD_SCALE = 0.5;
 
 //values used to choose row and last column of walking animation in the spritesheet:
 const int WIZARD_MOV_ROW =2;
