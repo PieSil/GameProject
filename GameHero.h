@@ -24,11 +24,7 @@ public:
     //copy constructor
     GameHero(const GameHero &copied);
 
-    void move(const Direction &direction, const float &distance) override;
-
-    void centerView() {
-        view->setCenter(sprite.getPosition());
-    };
+    const entityPositions move(const Direction &direction, const float &distance) override;
 
     //SpriteSubject methods:
     void registerObserver(SpriteObserver *observer) override {
@@ -46,18 +42,12 @@ public:
         }
     }
 
-    void setView(sf::View *view) {
-        GameHero::view = view;
-    }
-
     virtual void specialBehaviour() = 0;
 
     //void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
 
 protected:
     std::list<SpriteObserver*> enemies;
-
-    sf::View* view;
 
 };
 

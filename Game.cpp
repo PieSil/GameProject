@@ -14,10 +14,10 @@
 Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(std::move(w)) {
     if (heroT == KNGT) {
         hero = std::move(
-                std::unique_ptr<Knight>(new Knight(window->getWindowSize().x / 2., window->getWindowSize().y / 2.)));
+                std::unique_ptr<Knight>(new Knight(0, 0)));
     } else if (heroT == WZRD) {
         hero = std::move(
-                std::unique_ptr<Wizard>(new Wizard(window->getWindowSize().x / 2., window->getWindowSize().y / 2.)));
+                std::unique_ptr<Wizard>(new Wizard(0, 0)));
     } else {
         //TODO: throw exception
     }
@@ -28,8 +28,6 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
 
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120 + 10, window->getWindowSize().y / 2.)));
-
-    ground = Hitbox(sf::Vector2f(window->getWindowSize().x / 2., 500), 600, 50, 1, 1, 1);
 }
 
 void Game::updateGame() {
@@ -40,7 +38,7 @@ void Game::updateGame() {
         updateView();
 
         //updates physics
-        //updatePhysics(hero.get());
+        updatePhysics(hero.get());
         updateEnemies();
 
         /*
@@ -62,7 +60,7 @@ void Game::updateGame() {
         enemy->animate();
     }
 
-    checkOnGround(hero.get());
+    //checkOnGround(hero.get());
 
 
     window->update();
@@ -71,13 +69,7 @@ void Game::updateGame() {
 
 void Game::moveHero(const Direction &direction) {
 
-    if (auto k = dynamic_cast<Knight *>(hero.get())) {
-        k->move(direction, k->getMovementSpeed() * elapsed.asSeconds()); //passes speed * elapsed time as distance
-    } else if (auto w = dynamic_cast<Wizard *>(hero.get())) {
-        w->move(direction, w->getMovementSpeed() * elapsed.asSeconds()); //passes speed * elapsed time as distance
-    } else {
-        //TODO: throw exception? Constructor should've already checked if hero value is valid
-    }
+    detectCollisions(hero->move(direction, hero->getMovementSpeed() * elapsed.asSeconds()), hero.get());
 
     if (hero->isOnGround()) {
         updateView();
@@ -93,13 +85,13 @@ void Game::renderLevel() const {
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
     //drawHitbox(hero->getHitbox());
 
-    drawHitbox(ground);
-
     window->draw(gameMap);
 
+    /*
     for (auto tile : gameMap.getTiles()) {
-        window->draw(tile.getHitbox());
+        drawHitbox(tile.getHitbox());
     }
+    */
 
     //draws sprites on window:
     window->draw(hero->getSprite());
@@ -163,34 +155,33 @@ void Game::updatePhysics(GameCharacter *character) {
     //call moving entity method to bypass check on character state
 
     if (auto h = dynamic_cast<GameHero *>(character)) {
-        h->move(UP, h->getVelocityY());
+        detectCollisions(h->move(UP, h->getVelocityY()), h);
     } else {
-        character->MovingEntity::move(UP, character->getVelocityY());
+        detectCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
     }
+
+        character->setVelocityY(character->getVelocityY() + GRAVITY);
 
 
 
 //checks if the character is on ground or not
-    checkOnGround(character);
-
-    if (!character->isOnGround()) {  //if character not on ground add gravity
-        character->setVelocityY(character->getVelocityY() + GRAVITY);
-    }
-
-    if (character->isOnGround()) {
-        character->setVelocityY(0);
-    }
+    //checkOnGround(character);
 
 }
 
+/*
 void Game::checkOnGround(GameCharacter *character) {
-    if (character->getHitbox().checkLowerEdge().intersects(
+
+    auto lowerEdge = character->getHitbox().checkLowerEdge();
+
+    if (lowerEdge.intersects(
             ground.checkUpperEdge())) { //check if character's lowerEdge is touching ground's upper edge
         character->setOnGround(true);
     } else {
         character->setOnGround(false);
     }
 }
+*/
 
 void Game::updateEnemies() {
     for (const auto &enemy : enemies) {
@@ -200,8 +191,8 @@ void Game::updateEnemies() {
         if (!(enemy->getHitbox().checkHitbox().intersects(
                 hero->getHitbox().checkHitbox()))) { //if enemy hitbox is not touching hero hitbox
 
-            enemy->move(elapsed.asSeconds() *
-                        enemy->getMovementSpeed()); //use move method to move towards hero (if aggro is active)
+            detectCollisions(enemy->move(elapsed.asSeconds() *
+                        enemy->getMovementSpeed()), enemy.get()); //use move method to move towards hero (if aggro is active)
 
         } else {
             enemy->setState(IDLE);
@@ -211,8 +202,6 @@ void Game::updateEnemies() {
 
 void Game::createView() {
     view = std::make_shared<sf::View>(sf::View(sf::Vector2f(hero->getSprite().getPosition()), sf::Vector2f(228, 128)));
-    hero->setView(view.get());
-    hero->centerView();
     updateView();
 }
 
@@ -223,12 +212,56 @@ void Game::updateView() {
 void Game::createMap() {
 
     const int level[] = {
-            0,0,0,0,
-            7,0,0,5,
+            0,0,4,0,
+            7,0,0,0,
             6,0,0,4,
             3,1,1,3
     };
 
     gameMap = Map(level,MAP_COLUMNS, MAP_ROWS);
     gameMap.load();
+}
+
+void Game::detectCollisions(const entityPositions prevPosition, GameCharacter *character) {
+
+    sf::FloatRect intersection;
+
+    if (!character->getHitbox().checkHitbox().intersects(gameMap.getVertices().getBounds())) {
+        character->setPosition(prevPosition.spritePosition);
+    }
+
+    for (const auto& tile : gameMap.getTiles()) {
+
+
+        if (character->getHitbox().checkHitbox().intersects(tile.getHitbox().checkHitbox(), intersection)) {
+
+
+            if (prevPosition.rightEdgePosition.x <= tile.getHitbox().getLeftEdge().getPosition().x &&
+                character->getAllPositions().rightEdgePosition.x > tile.getHitbox().getLeftEdge().getPosition().x) {
+                character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
+
+            }
+
+            if (prevPosition.leftEdgePosition.x >= tile.getHitbox().getRightEdge().getPosition().x &&
+                character->getAllPositions().leftEdgePosition.x < tile.getHitbox().getRightEdge().getPosition().x) {
+                character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
+
+            }
+
+            if (prevPosition.upperEdgePosition.y >= tile.getHitbox().getLowerEdge().getPosition().y &&
+                character->getAllPositions().upperEdgePosition.y < tile.getHitbox().getLowerEdge().getPosition().y) {
+                character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
+                character->setVelocityY(0);
+
+            }
+
+            if (prevPosition.lowerEdgePosition.y <= tile.getHitbox().getUpperEdge().getPosition().y &&
+                character->getAllPositions().lowerEdgePosition.y > tile.getHitbox().getUpperEdge().getPosition().y) {
+                character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
+                character->setVelocityY(0);
+                character->setOnGround(true);
+
+            }
+        }
+    }
 }

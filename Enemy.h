@@ -12,7 +12,7 @@
 #include <math.h>
 
 
-class Enemy: public virtual GameCharacter, public SpriteObserver {
+class Enemy: public virtual GameCharacter {
 
 public:
 
@@ -24,19 +24,16 @@ public:
     Enemy(const Enemy& copied);
 
     virtual ~Enemy() {
-        hero->removeObserver(this);
+
     };
 
     //override attack and move methods to check if enemy is paralyzed
 
     const float & attack() override;
 
-    void move(const float &distance);
+    const entityPositions move(const float &distance);
 
     void updateAggro();
-
-    //SpriteObserver methods:
-    void update(const sf::Sprite &sprite) override;
 
     bool isParalyzed() const {
         return paralyzed;
@@ -62,13 +59,12 @@ public:
         return hero;
     }
 
-protected: 
+protected:
     bool paralyzed;
     bool aggro;
     float aggroRange;
 
     GameHero* hero;
-    sf::Sprite heroSprite;
 
 };
 

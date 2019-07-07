@@ -22,7 +22,9 @@ MovingEntity::MovingEntity(const MovingEntity &copied) : GameEntity(copied), mov
 }
 
 
-void MovingEntity::move(const Direction &direction, const float &distance) {
+const entityPositions MovingEntity::move(const Direction &direction, const float &distance) {
+
+    entityPositions prevPosition = allPositions;
 
     //MOVE ON X AXIS
 
@@ -62,6 +64,9 @@ void MovingEntity::move(const Direction &direction, const float &distance) {
 
     //moves hitbox with sprite
     hitbox.setPosition(sprite.getPosition());
+    updatePositions();
+
+    return prevPosition;
 
 }
 
@@ -87,6 +92,17 @@ void MovingEntity::setupAnimations(const SpriteParams *parameters) {
 
 void MovingEntity::animate() {
     animManager.play(state, facingRight); //play animation based on current state and facing direction
+}
+
+void MovingEntity::updatePositions() {
+    allPositions.spritePosition = sprite.getPosition();
+
+    allPositions.hitboxPosition = hitbox.getHitbox().getPosition();
+    allPositions.upperEdgePosition = hitbox.getUpperEdge().getPosition();
+    allPositions.lowerEdgePosition = hitbox.getLowerEdge().getPosition();
+    allPositions.leftEdgePosition = hitbox.getLeftEdge().getPosition();
+    allPositions.rightEdgePosition = hitbox.getRightEdge().getPosition();
+
 }
 
 

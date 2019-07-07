@@ -57,7 +57,7 @@ const float GRAVITY = -0.5;
 
 
 //controls starting jump velocity
-const float JUMP_VELOCITY = 7;
+const float JUMP_VELOCITY = 8;
 
 //MAP
 
@@ -70,7 +70,7 @@ const int MAP_ROWS = 4;
 
 //set thickness of hitboxes' edges, the bigger the value the easier is to detect collisions
 //excessive value may cause problems with collision
-const int EDGE_THICKNESS = 5;
+const int EDGE_THICKNESS = 1;
 
 //HERO
 

@@ -22,10 +22,13 @@ GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
 
 }
 
-void GameHero::move(const Direction &direction, const float &distance) {
-    GameCharacter::move(direction, distance);
-    centerView();
+const entityPositions GameHero::move(const Direction &direction, const float &distance) {
+    entityPositions prevPosition;
+    prevPosition = GameCharacter::move(direction, distance);
+
     notifyObservers();
+
+    return  prevPosition;
 }
 
 /*

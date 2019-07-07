@@ -60,7 +60,11 @@ void GameCharacter::animate() {
     MovingEntity::animate();
 }
 
-void GameCharacter::move(const Direction &direction, const float &distance) {
+const entityPositions GameCharacter::move(const Direction &direction, const float &distance) {
+
     if (state != ATTACKING) //enable movement only if not attacking
-        MovingEntity::move(direction, distance);
+       return(MovingEntity::move(direction, distance));
+
+    else
+        return allPositions;
 }

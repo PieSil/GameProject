@@ -12,8 +12,8 @@
 
 class Hitbox {
 public:
-    Hitbox(const sf::Vector2f &spritePos, const int &width, const float &height, const float &widthReduction,
-           const float &heightReduction, const float &scale);
+    Hitbox(const sf::Vector2f &spritePos, const int &width, const float &height, const float &widthReduction = 1,
+           const float &heightReduction = 1, const float &scale = 1);
 
     Hitbox();
 

@@ -20,6 +20,10 @@ public:
 
     const std::vector<Tile> &getTiles() const;
 
+    const sf::VertexArray &getVertices() const {
+        return vertices;
+    }
+
 private:
 
     //overrides sf::Drawable draw() method to make Map a drawable entity

@@ -22,7 +22,7 @@ public:
 
     ~GameCharacter() = 0;
 
-    void move(const Direction &direction, const float &distance) override;
+    const entityPositions move(const Direction &direction, const float &distance) override;
 
     virtual const float & attack();
 

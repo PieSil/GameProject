@@ -7,6 +7,7 @@
 #define _GAMELEVEL_H
 
 #include "gameValues.h"
+#include "positionsStruct.h"
 #include "GameWindow.h"
 #include "Wizard.h"
 #include "Knight.h"
@@ -59,6 +60,10 @@ private:
 
     void moveHero(const Direction &direction);
 
+    void detectCollisions(const entityPositions prevPosition, GameCharacter *character);
+
+    void resolveCollisions();
+
     void updateEnemies();
 
     void createView();
@@ -76,8 +81,9 @@ private:
     std::unique_ptr<GameWindow> window;
     std::shared_ptr<sf::View> view;
 
-    Hitbox ground;
     Map gameMap;
+
+    entityPositions positions;
 
 };
 
