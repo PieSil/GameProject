@@ -12,8 +12,12 @@
 
 class Tile {
 public:
-    Tile(const sf::Vector2f &position) {
-        hitbox = Hitbox(position,TILE_SIZE.x,TILE_SIZE.y);
+    Tile(const sf::Vector2f &position, bool walkable = false) : walkable(walkable) {
+        if (!walkable) {
+            hitbox = Hitbox(position, TILE_SIZE.x, TILE_SIZE.y);
+        } else {
+            hitbox = Hitbox(position, 0, 0);
+        }
     };
 
     void setPosition(const sf::Vector2f& position) {

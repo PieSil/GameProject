@@ -14,6 +14,8 @@ struct entityPositions {
     sf::Vector2f lowerEdgePosition;
     sf::Vector2f leftEdgePosition;
     sf::Vector2f rightEdgePosition;
+    int gridPositionX;
+    int gridPositionY;
 };
 
 #endif //GAMEPROJECT_POSITIONSSTRUCT_H

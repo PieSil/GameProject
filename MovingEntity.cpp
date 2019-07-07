@@ -11,6 +11,7 @@
 MovingEntity::MovingEntity(const float &x, const float &y, const float &movSpeed, const bool &facingR)
         : GameEntity(x, y),
           movementSpeed(movSpeed), facingRight(facingR), movingCounter(0), onGround(false), velocityY(0) {
+    updatePositions();
 }
 
 
@@ -102,6 +103,10 @@ void MovingEntity::updatePositions() {
     allPositions.lowerEdgePosition = hitbox.getLowerEdge().getPosition();
     allPositions.leftEdgePosition = hitbox.getLeftEdge().getPosition();
     allPositions.rightEdgePosition = hitbox.getRightEdge().getPosition();
+
+    allPositions.gridPositionX = static_cast<int>(sprite.getPosition().x/TILE_SIZE.x);
+    allPositions.gridPositionY = static_cast<int>(sprite.getPosition().y/TILE_SIZE.y);
+
 
 }
 

@@ -14,10 +14,10 @@
 Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(std::move(w)) {
     if (heroT == KNGT) {
         hero = std::move(
-                std::unique_ptr<Knight>(new Knight(4*TILE_SIZE.x, 6*TILE_SIZE.y)));
+                std::unique_ptr<Knight>(new Knight(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
     } else if (heroT == WZRD) {
         hero = std::move(
-                std::unique_ptr<Wizard>(new Wizard(4*TILE_SIZE.x, 6*TILE_SIZE.y)));
+                std::unique_ptr<Wizard>(new Wizard(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
     } else {
         //TODO: throw exception
     }
@@ -25,9 +25,8 @@ Game::Game(Heroytype heroT, std::unique_ptr<GameWindow> w) : frameTime(1. / FRAM
     createMap();
     createView();
 
-
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
-            new MeleeEnemy(hero.get(), window->getWindowSize().x / 2. - 120 + 10, window->getWindowSize().y / 2.)));
+            new MeleeEnemy(hero.get(), 14 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
 }
 
 void Game::updateGame() {
@@ -160,7 +159,7 @@ void Game::updatePhysics(GameCharacter *character) {
         detectCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
     }
 
-        character->setVelocityY(character->getVelocityY() + GRAVITY);
+    character->setVelocityY(character->getVelocityY() + GRAVITY);
 
 
 
@@ -192,7 +191,8 @@ void Game::updateEnemies() {
                 hero->getHitbox().checkHitbox()))) { //if enemy hitbox is not touching hero hitbox
 
             detectCollisions(enemy->move(elapsed.asSeconds() *
-                        enemy->getMovementSpeed()), enemy.get()); //use move method to move towards hero (if aggro is active)
+                                         enemy->getMovementSpeed()),
+                             enemy.get()); //use move method to move towards hero (if aggro is active)
 
         } else {
             enemy->setState(IDLE);
@@ -201,13 +201,15 @@ void Game::updateEnemies() {
 }
 
 void Game::createView() {
-    view = std::make_shared<sf::View>(sf::View(sf::Vector2f(hero->getSprite().getPosition()), sf::Vector2f(8*TILE_SIZE.x, 8*TILE_SIZE.y)));
+    view = std::make_shared<sf::View>(
+            sf::View(sf::Vector2f(hero->getSprite().getPosition()), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y)));
     updateView();
 }
 
 void Game::updateView() {
 
-    if (!(hero->getSprite().getPosition().x - view->getSize().x/2.< 0 || hero->getSprite().getPosition().x + view->getSize().x/2. > MAP_COLUMNS*TILE_SIZE.x)) {
+    if (!(hero->getSprite().getPosition().x - view->getSize().x / 2. < 0 ||
+          hero->getSprite().getPosition().x + view->getSize().x / 2. > MAP_COLUMNS * TILE_SIZE.x)) {
         view->setCenter(hero->getSprite().getPosition().x, view->getCenter().y);
         window->setView(*view);
     }
@@ -216,20 +218,30 @@ void Game::updateView() {
 void Game::createMap() {
 
     const int level[] = {
-            3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,9,9,9,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-            3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,6,0,0,0,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-            3,3,3,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,0,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,3,3,3,
-            3,3,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,3,
-            3,3,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,0,0,0,0,0,5,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,3,
-            3,3,6,0,0,0,0,0,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,4,6,0,0,0,0,5,3,6,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,5,1,1,7,0,0,0,0,0,0,5,7,0,0,0,0,0,0,0,0,4,3,3,
-            3,3,6,0,0,0,0,0,0,0,0,0,5,1,1,3,3,1,7,0,0,5,1,3,6,0,0,1,0,2,3,6,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,4,3,3,6,0,0,1,1,1,0,4,6,0,0,0,0,0,0,0,0,4,3,3,
-            3,3,6,0,0,0,0,0,0,0,0,0,4,3,3,3,3,3,6,0,0,4,3,3,6,0,0,0,0,0,4,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,3,3,3,6,0,0,0,0,0,0,4,6,0,0,0,0,0,0,0,0,4,3,3,
-            3,3,3,1,1,1,1,7,0,5,1,1,3,3,3,3,3,3,3,1,1,3,3,3,3,1,1,1,1,1,3,6,0,5,1,1,1,1,1,1,1,1,7,0,0,0,0,4,3,3,3,3,1,1,7,0,5,1,3,3,1,1,1,1,1,1,1,1,3,3,3,
-            3,3,3,3,3,3,3,3,8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,8,3,3,3,3,3,3,3,3,3,3,8,8,8,8,4,3,3,3,3,3,3,3,8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 0, 0, 0, 4, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 0, 2, 9, 9, 9, 9, 9, 9, 9, 9,
+            9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 5, 3, 6, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 5, 1, 1, 7, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 3, 3, 1, 7, 0, 0, 5, 1, 3, 6, 0, 0, 1, 0, 2, 3, 6, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 3, 3, 6, 0, 0, 1, 1, 1, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3, 3, 3, 3, 6, 0, 0, 4, 3, 3, 6, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, 3, 3, 6, 0, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 3, 1, 1, 1, 1, 7, 0, 5, 1, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 3, 6, 0, 5, 1, 1,
+            1, 1, 1, 1, 1, 1, 7, 0, 0, 0, 0, 4, 3, 3, 3, 3, 1, 1, 7, 0, 5, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 4, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 
     };
 
-    gameMap = Map(level,MAP_COLUMNS, MAP_ROWS);
+    gameMap = Map(level, MAP_COLUMNS, MAP_ROWS);
     gameMap.load();
 }
 
@@ -241,36 +253,55 @@ void Game::detectCollisions(const entityPositions prevPosition, GameCharacter *c
         character->setPosition(prevPosition.spritePosition);
     }
 
-    for (const auto& tile : gameMap.getTiles()) {
+    //[i][j] == [i*col + j]
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -1; j <= 1; j++) {
+            int tileColumn = (character->getAllPositions().gridPositionX + i);
+            int tileRow = (character->getAllPositions().gridPositionY + j);
+            int tilePosition = (tileRow * MAP_COLUMNS + tileColumn);
 
-
-        if (character->getHitbox().checkHitbox().intersects(tile.getHitbox().checkHitbox(), intersection)) {
-
-
-            if (prevPosition.rightEdgePosition.x <= tile.getHitbox().getLeftEdge().getPosition().x &&
-                character->getAllPositions().rightEdgePosition.x > tile.getHitbox().getLeftEdge().getPosition().x) {
-                character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
-
+            //check out of bound
+            if (tilePosition < 0) {
+                tilePosition = 0;
+            } else if (tilePosition >= (MAP_COLUMNS * MAP_ROWS)) {
+                tilePosition = MAP_ROWS * MAP_COLUMNS;
             }
 
-            if (prevPosition.leftEdgePosition.x >= tile.getHitbox().getRightEdge().getPosition().x &&
-                character->getAllPositions().leftEdgePosition.x < tile.getHitbox().getRightEdge().getPosition().x) {
-                character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
+            Tile currentTile = gameMap.getTiles()[tilePosition];
 
-            }
+            if (character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox(), intersection)) {
 
-            if (prevPosition.upperEdgePosition.y >= tile.getHitbox().getLowerEdge().getPosition().y &&
-                character->getAllPositions().upperEdgePosition.y < tile.getHitbox().getLowerEdge().getPosition().y) {
-                character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
-                character->setVelocityY(0);
 
-            }
+                if (prevPosition.rightEdgePosition.x <= currentTile.getHitbox().getLeftEdge().getPosition().x &&
+                    character->getAllPositions().rightEdgePosition.x >
+                    currentTile.getHitbox().getLeftEdge().getPosition().x) {
+                    character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
 
-            if (prevPosition.lowerEdgePosition.y <= tile.getHitbox().getUpperEdge().getPosition().y &&
-                character->getAllPositions().lowerEdgePosition.y > tile.getHitbox().getUpperEdge().getPosition().y) {
-                character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
-                character->setVelocityY(0);
-                character->setOnGround(true);
+                }
+
+                if (prevPosition.leftEdgePosition.x >= currentTile.getHitbox().getRightEdge().getPosition().x &&
+                    character->getAllPositions().leftEdgePosition.x <
+                    currentTile.getHitbox().getRightEdge().getPosition().x) {
+                    character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
+
+                }
+
+                if (prevPosition.upperEdgePosition.y >= currentTile.getHitbox().getLowerEdge().getPosition().y &&
+                    character->getAllPositions().upperEdgePosition.y <
+                    currentTile.getHitbox().getLowerEdge().getPosition().y) {
+                    character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
+                    character->setVelocityY(0);
+
+                }
+
+                if (prevPosition.lowerEdgePosition.y <= currentTile.getHitbox().getUpperEdge().getPosition().y &&
+                    character->getAllPositions().lowerEdgePosition.y >
+                    currentTile.getHitbox().getUpperEdge().getPosition().y) {
+                    character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
+                    character->setVelocityY(0);
+                    character->setOnGround(true);
+
+                }
 
             }
         }
