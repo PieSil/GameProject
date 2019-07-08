@@ -9,6 +9,9 @@
 
 class ShootingBehaviour : public AttackBehaviour {
 public:
+
+    ShootingBehaviour() = default;
+
     ~ShootingBehaviour() {};
     void attack(State &state) override;
 

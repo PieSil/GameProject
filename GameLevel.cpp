@@ -18,6 +18,9 @@ GameLevel::GameLevel(Herotype heroT) {
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), 14 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
 
+    enemies.push_back(std::unique_ptr<BossEnemy>(
+            new BossEnemy(hero.get(), 7 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
+
     createMap();
 
 }
@@ -170,7 +173,15 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
         updatePhysics(enemy.get()); //update enemy physics
         //if enemy hitbox is not touching hero hitbox
 
-        detectCollisions(enemy->updateBehaviour(elapsedTime * enemy->getMovementSpeed()), enemy.get());
+        detectCollisions(enemy->updateBehaviour(enemy->getMovementSpeed() * elapsedTime), enemy.get());
+
+        /*
+        enemy->updateAggro();
+
+        enemy->attack();
+
+        moveCharacter(enemy.get(), enemy->getMovementSpeed() * elapsedTime);
+         */
 
     }
 }

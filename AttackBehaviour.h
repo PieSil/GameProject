@@ -15,9 +15,6 @@ public:
     virtual ~AttackBehaviour() {};
 
     virtual void attack(State &state) = 0;
-
-protected:
-    sf::Clock clock;
 };
 
 

@@ -198,4 +198,40 @@ const int MELEE_ATT_OFFSET = 0;
 const int MELEE_SHOOT_ROW =2;
 const int MELEE_SHOOT_LAST_COL = 7;
 
+//BOSS
+
+const float BOSS_SPEED = 15;
+
+const int BOSS_WIDTH = 96;
+const int BOSS_HEIGHT = 96;
+
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float BOSS_HITBOX_X = 3.4;
+const float BOSS_HITBOX_Y = 3;
+
+//value used to scale up/down or flip sprite:
+const float BOSS_SCALE = 1;
+
+//value used to set path of texture file
+const std::string BOSS_PATH = "../GameAssets/Sprites/Enemies/Boss/Boss.png";
+
+//values used to choose starting sprite
+const int BOSS_IDLE_ROW = 0;
+const int BOSS_IDLE_LAST_COL = 4;
+
+
+//values used to choose row and last column of walking animation in the spritesheet:
+const int BOSS_MOV_ROW =1;
+const int BOSS_MOV_LAST_COL = 7;
+
+const int BOSS_ATT_ROW =3;
+const int BOSS_ATT_LAST_COL = 8;
+
+const int BOSS_ATT_OFFSET = 0;
+
+const int BOSS_SHOOT_ROW =4;
+const int BOSS_SHOOT_LAST_COL = 4;
+
+
 #endif //GAMEPROJECT_GAMEVALUES_H

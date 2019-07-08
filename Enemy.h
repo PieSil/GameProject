@@ -31,7 +31,7 @@ public:
 
     void attack() override;
 
-    const entityPositions updateBehaviour(const float& distance);
+    virtual const entityPositions updateBehaviour(const float& distance);
 
     const entityPositions move(const float &distance);
 

@@ -6,8 +6,10 @@
 
 void MeleeBehaviour::attack(State &state) {
 
-    if (state != ATTACKING && state != SHOOTING && clock.getElapsedTime().asSeconds() > 1) {
-        clock.restart();
+    if (state != ATTACKING && state != SHOOTING) {
         state = ATTACKING;
     }
+
+    std::cout << "MELEE" << std::endl;
+
 }

@@ -9,6 +9,7 @@
 #include "Knight.h"
 #include "Wizard.h"
 #include "MeleeEnemy.h"
+#include "BossEnemy.h"
 #include "Map.h"
 
 class GameLevel {

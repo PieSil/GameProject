@@ -5,8 +5,11 @@
 #include "ShootingBehaviour.h"
 
 void ShootingBehaviour::attack(State &state) {
-    if (state != ATTACKING && state != SHOOTING && clock.getElapsedTime().asSeconds() > 1) {
-        clock.restart();
+
+    if (state != ATTACKING && state != SHOOTING) {
         state = SHOOTING;
     }
+
+    std::cout << "SHOOTING" << std::endl;
+
 }

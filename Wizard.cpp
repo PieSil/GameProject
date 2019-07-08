@@ -27,7 +27,7 @@ Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf
     initSprite(x, y);
     giveHitbox();
     GameCharacter::setupAnimations(getParameters());
-    setAttackBehaviour(new ShootingBehaviour);
+    setAttackBehaviour(std::make_shared<ShootingBehaviour>());
 }
 
 /*

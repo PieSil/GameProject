@@ -8,6 +8,8 @@
 
 #include "MovingEntity.h"
 #include "AttackBehaviour.h"
+#include "MeleeBehaviour.h"
+#include "ShootingBehaviour.h"
 
 class GameCharacter : public MovingEntity {
 public: 
@@ -53,8 +55,8 @@ public:
         GameCharacter::strength = strength;
     }
 
-    void setAttackBehaviour(AttackBehaviour* attackBehaviour) {
-        GameCharacter::attackBehaviour.reset(attackBehaviour);
+    virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
+        this->attackBehaviour = std::move(attackBehaviourPtr);
     }
 
     void animate() override;
@@ -63,7 +65,10 @@ protected:
     bool onFire;
     float health;
     float strength;
-    std::unique_ptr<AttackBehaviour> attackBehaviour;
+
+    sf::Clock attackClock;
+
+    std::shared_ptr<AttackBehaviour> attackBehaviour;
 
 };
 

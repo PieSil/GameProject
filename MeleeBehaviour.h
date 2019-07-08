@@ -9,6 +9,9 @@
 
 class MeleeBehaviour : public AttackBehaviour {
 public:
+
+    MeleeBehaviour() = default;
+
     ~MeleeBehaviour() {};
 
     void attack(State &state) override;

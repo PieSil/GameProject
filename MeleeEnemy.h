@@ -22,6 +22,8 @@ public:
 
     ~MeleeEnemy() {};
 
+    void attack() override;
+
     MeleeEnemy& operator = (const MeleeEnemy& meleeEnemy);
 
     const SpriteParams *getParameters() const override {

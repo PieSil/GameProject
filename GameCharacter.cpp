@@ -11,6 +11,7 @@
  * GameCharacter implementation
  */
 
+
 GameCharacter::GameCharacter(const float &x, const float &y, const float &str, const bool &onf, const float &h,
                              const float &s, const bool &facingR) :
         onFire(onf), health(abs(h)), strength(abs(str)),
@@ -23,7 +24,10 @@ GameCharacter::~GameCharacter() {};
 
 void GameCharacter::attack() {
 
-    attackBehaviour->attack(state);
+    if (attackClock.getElapsedTime().asSeconds() >= 1) {
+        attackClock.restart();
+        this->attackBehaviour->attack(this->state);
+    }
 
 }
 
@@ -39,6 +43,7 @@ GameCharacter::GameCharacter(const GameCharacter &copied) : health(copied.getHea
 void GameCharacter::setupAnimations(const SpriteParams *parameters) {
     MovingEntity::setupAnimations(parameters);
     animManager.createAnimation(ATTACKING); //create attack animation
+    animManager.createAnimation(SHOOTING); //create shoot animation
 }
 
 void GameCharacter::animate() {

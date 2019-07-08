@@ -104,7 +104,7 @@ void Game::handleInput() {
         keyPressed = true;
     }
 
-    if (!keyPressed && level.getHero()->getState() != ATTACKING) {
+    if (!keyPressed && level.getHero()->getState() != ATTACKING && level.getHero()->getState() != SHOOTING) {
         level.getHero()->setState(IDLE);
     }
 }

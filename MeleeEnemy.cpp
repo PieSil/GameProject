@@ -17,12 +17,13 @@ const SpriteParams MeleeEnemy::meleeParams(MELEE_WIDTH, MELEE_HEIGHT, MELEE_HITB
 
 MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par,
                        const bool &onf,
-                       const float &h, const bool &facingR, const float &s) : Enemy(hero, x, y, str, par, onf, h, facingR, s) {
+                       const float &h, const bool &facingR, const float &s) : Enemy(hero, x, y, str, par, onf, h,
+                                                                                    facingR, s) {
 
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
-    setAttackBehaviour(new MeleeBehaviour);
+    setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
 
 MeleeEnemy::MeleeEnemy(const MeleeEnemy &copied) : Enemy(copied) {
@@ -35,4 +36,9 @@ MeleeEnemy &MeleeEnemy::operator=(const MeleeEnemy &meleeEnemy) {
     this->aggro = false;
     this->paralyzed = false;
     return *this;
+}
+
+void MeleeEnemy::attack() {
+    if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) <= 16)
+        Enemy::attack();
 }

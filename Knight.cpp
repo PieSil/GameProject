@@ -22,7 +22,7 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
-    setAttackBehaviour(new MeleeBehaviour);
+    setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
 
 void Knight::specialBehaviour() {
