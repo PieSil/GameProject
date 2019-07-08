@@ -26,8 +26,6 @@ const entityPositions GameHero::move(const Direction &direction, const float &di
     entityPositions prevPosition;
     prevPosition = GameCharacter::move(direction, distance);
 
-    notifyObservers();
-
     return  prevPosition;
 }
 

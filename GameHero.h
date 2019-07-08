@@ -11,7 +11,7 @@
 #include <list>
 
 
-class GameHero: public virtual GameCharacter, public SpriteSubject {
+class GameHero: public virtual GameCharacter {
 public:
     GameHero(const float &x, const float &y, const float &str = DEF_GAMEHERO_STRENGTH, const bool &onf = false,
              const float &h = DEF_GAMEHERO_HEALTH, const bool &facingR = true, const float &s = HERO_SPEED);
@@ -26,28 +26,9 @@ public:
 
     const entityPositions move(const Direction &direction, const float &distance) override;
 
-    //SpriteSubject methods:
-    void registerObserver(SpriteObserver *observer) override {
-        enemies.push_back(observer);
-    }
-
-    void removeObserver(SpriteObserver *observer) override {
-        enemies.remove(observer);
-    }
-
-    void notifyObservers() override {
-        for (auto enemy : enemies) {
-
-            enemy->update(this->sprite); //update enemies giving info on hero sprite
-        }
-    }
-
     virtual void specialBehaviour() = 0;
 
     //void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
-
-protected:
-    std::list<SpriteObserver*> enemies;
 
 };
 
