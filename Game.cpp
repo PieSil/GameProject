@@ -155,6 +155,7 @@ void Game::updatePhysics(GameCharacter *character) {
 
     if (auto h = dynamic_cast<GameHero *>(character)) {
         detectCollisions(h->move(UP, h->getVelocityY()), h);
+
     } else {
         detectCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
     }
@@ -247,11 +248,12 @@ void Game::createMap() {
 
 void Game::detectCollisions(const entityPositions prevPosition, GameCharacter *character) {
 
-    sf::FloatRect intersection;
-
+    //if character is out of map put it back
     if (!character->getHitbox().checkHitbox().intersects(gameMap.getVertices().getBounds())) {
         character->setPosition(prevPosition.spritePosition);
     }
+
+    //get the 8 tiles around the character and the tile it's standing in and check collsisions with those:
 
     //[i][j] == [i*col + j]
     for (int i = -1; i <= 1; i++) {
@@ -267,43 +269,63 @@ void Game::detectCollisions(const entityPositions prevPosition, GameCharacter *c
                 tilePosition = MAP_ROWS * MAP_COLUMNS;
             }
 
+
             Tile currentTile = gameMap.getTiles()[tilePosition];
 
-            if (character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox(), intersection)) {
+            //only perform collision check if character's hitbox intersects current tile
+            if (character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+
 
 
                 if (prevPosition.rightEdgePosition.x <= currentTile.getHitbox().getLeftEdge().getPosition().x &&
                     character->getAllPositions().rightEdgePosition.x >
                     currentTile.getHitbox().getLeftEdge().getPosition().x) {
+                    //if before movement character's right edge was left of tile's left edge and after movement
+                    //it's right of tile's left edge then there's been a collision
+
+                    //move the character back on the x axis
                     character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
 
                 }
 
+                //same reasoning as previous if statement
                 if (prevPosition.leftEdgePosition.x >= currentTile.getHitbox().getRightEdge().getPosition().x &&
                     character->getAllPositions().leftEdgePosition.x <
                     currentTile.getHitbox().getRightEdge().getPosition().x) {
+
+                    //move the character back
                     character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
 
                 }
 
+                //same reasoning as previous if statement on the x axis
                 if (prevPosition.upperEdgePosition.y >= currentTile.getHitbox().getLowerEdge().getPosition().y &&
                     character->getAllPositions().upperEdgePosition.y <
                     currentTile.getHitbox().getLowerEdge().getPosition().y) {
+
+                    //move the character back on the y axis and set its velocityY to 0
                     character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
                     character->setVelocityY(0);
 
                 }
 
+                //same reasoning as previous if statement
                 if (prevPosition.lowerEdgePosition.y <= currentTile.getHitbox().getUpperEdge().getPosition().y &&
                     character->getAllPositions().lowerEdgePosition.y >
                     currentTile.getHitbox().getUpperEdge().getPosition().y) {
+
+                    //move the character back on the y axis, set its velocityY to 0 and set it on ground
                     character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
                     character->setVelocityY(0);
                     character->setOnGround(true);
-
                 }
 
             }
         }
+    }
+
+    //if character moved on the y axis then it's not on ground
+    if (prevPosition.spritePosition.y != character->getSprite().getPosition().y) {
+        character->setOnGround(false);
     }
 }
