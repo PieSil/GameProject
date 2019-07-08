@@ -25,17 +25,6 @@ GameLevel::GameLevel(Herotype heroT) {
 
 }
 
-void GameLevel::updatePhysics(GameCharacter *character) {
-
-    //moves character on Y axis based on its velocity
-    //call moving entity method to bypass check on character state
-
-    moveCharacter(character, UP, character->getVelocityY());
-
-    character->setVelocityY(character->getVelocityY() + GRAVITY);
-
-}
-
 void GameLevel::createMap() {
 
     const int level[] = {
@@ -159,6 +148,20 @@ void GameLevel::moveCharacter(Enemy *enemy, const float &distance) {
 
 void GameLevel::moveCharacter(GameCharacter *character, const Direction &direction, const float &distance) {
     detectCollisions(character->move(direction, distance), character);
+}
+
+
+
+void GameLevel::updatePhysics(GameCharacter *character) {
+
+    //moves character on Y axis based on its velocity
+    //call moving entity method to bypass check on character state
+    //TODO: find a better way to bypass check on character state
+
+    detectCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
+
+    character->setVelocityY(character->getVelocityY() + GRAVITY);
+
 }
 
 void GameLevel::updateLevel(const float &elapsedTime) {
