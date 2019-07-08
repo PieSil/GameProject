@@ -17,7 +17,7 @@ const SpriteParams MeleeEnemy::meleeParams(MELEE_WIDTH, MELEE_HEIGHT, MELEE_HITB
 
 MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par,
                        const bool &onf,
-                       const float &h, const bool &facingR, const float &s) : GameCharacter(x, y, str, onf, h, s, facingR), Enemy(hero,x,y) {
+                       const float &h, const bool &facingR, const float &s) : Enemy(hero, x, y, str, par, onf, h, facingR, s) {
 
     initSprite(x, y);
     giveHitbox();
@@ -25,7 +25,7 @@ MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const flo
 
 }
 
-MeleeEnemy::MeleeEnemy(const MeleeEnemy &copied) : GameCharacter(copied), Enemy(copied) {
+MeleeEnemy::MeleeEnemy(const MeleeEnemy &copied) : Enemy(copied) {
     this->aggro = false;
     this->paralyzed = false;
 }

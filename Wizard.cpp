@@ -23,7 +23,7 @@ void Wizard::specialBehaviour() {
 
 Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const float &m, const float &h,
                const bool &facingR, const float &s)
-        : GameCharacter(x, y, str, onf, h, s, facingR), mana(m) {
+        : GameHero(x, y, str, onf, h, facingR, s), mana(m) {
     initSprite(x, y);
     giveHitbox();
     GameCharacter::setupAnimations(getParameters());
@@ -39,7 +39,7 @@ Wizard::Wizard() : Wizard(0, 0) {
 
 }
 
-Wizard::Wizard(const Wizard &copied) : GameCharacter(copied) {
+Wizard::Wizard(const Wizard &copied) : mana(copied.getMana()), GameHero(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }

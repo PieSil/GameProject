@@ -7,10 +7,8 @@
 #define _WIZARD_H
 
 #include "GameHero.h"
-#include "ShootingCharacter.h"
 
-
-class Wizard: public GameHero, public ShootingCharacter {
+class Wizard: public GameHero {
 public:
     Wizard(const float &x, const float &y, const float &str = DEF_GAMEHERO_STRENGTH, const bool &onf = false,
            const float &m = 10., const float &h = DEF_GAMEHERO_HEALTH, const bool &facingR = true,

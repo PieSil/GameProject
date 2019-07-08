@@ -12,7 +12,7 @@
 #include <math.h>
 
 
-class Enemy: public virtual GameCharacter {
+class Enemy: public GameCharacter {
 
 public:
 

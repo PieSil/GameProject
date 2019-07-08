@@ -14,7 +14,7 @@ Enemy::Enemy(GameHero *hero, const float &x, const float &y, const float &str, c
 
 }
 
-Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), aggro(false), GameCharacter(copied) {
+Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), aggro(false), aggroRange(copied.getAggroRange()), GameCharacter(copied) {
 
 }
 

@@ -18,7 +18,7 @@ const SpriteParams Knight::knightParams(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_HITB
                                         KNIGHT_ATT_LAST_COL, KNIGHT_ATT_OFFSET);
 
 Knight::Knight(const float &x, const float &y, const float &str, const bool &onf, const float &h, const bool &facingR,
-               const float &s) : GameCharacter(x, y, str, onf, h, s, facingR) {
+               const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
@@ -33,7 +33,7 @@ Knight::Knight() : Knight(0, 0) {
 
 }
 
-Knight::Knight(const Knight &copied) : GameCharacter(copied) {
+Knight::Knight(const Knight &copied) : GameHero(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
 }
