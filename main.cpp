@@ -11,7 +11,7 @@
  
 int main(){
 
-    Heroytype hero;
+    Herotype hero;
 do {
     std::cout << "\nPress \"k\" to select Knight, press \"w\" to select Wizard" << std::endl;
 

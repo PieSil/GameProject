@@ -5,8 +5,55 @@
 #ifndef GAMEPROJECT_GAMELEVEL_H
 #define GAMEPROJECT_GAMELEVEL_H
 
+#include "gameValues.h"
+#include "Knight.h"
+#include "Wizard.h"
+#include "MeleeEnemy.h"
+#include "Map.h"
 
 class GameLevel {
+public:
+    GameLevel(Herotype heroT);
+
+    GameLevel() = default;
+
+    void moveCharacter(GameHero *hero, const Direction &direction, const float &distance);
+
+    void moveCharacter(Enemy *enemy, const float &distance);
+
+    void moveCharacter(GameCharacter* character, const Direction &direction, const float &distance);
+
+    void updatePhysics(GameCharacter *character);
+
+    void createMap();
+
+    void detectCollisions(const entityPositions &prevPosition, GameCharacter *character);
+
+    void animateCharacters();
+
+    void updateHero();
+
+    void updateEnemies(const float &elapsedTime);
+
+    void updateLevel(const float &elapsedTime);
+
+    const std::unique_ptr<GameHero> &getHero() const {
+        return hero;
+    }
+
+    const std::list<std::unique_ptr<Enemy>> &getEnemies() const {
+        return enemies;
+    }
+
+    const Map &getGameMap() const {
+        return gameMap;
+    }
+
+private:
+    std::unique_ptr<GameHero> hero;
+    std::list<std::unique_ptr<Enemy>> enemies;
+    Map gameMap;
+
 
 };
 

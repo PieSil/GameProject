@@ -22,11 +22,11 @@ const Direction UP = 2;
 const Direction  DOWN = 3;
 
 //use Herotype as alias of unsigned short int to simplify readability
-using Heroytype = char;
+using Herotype = char;
 
-const Heroytype KNGT = 'k'; //Knight hero type, not called KNIGHT to avoid confusion with Knight class
+const Herotype KNGT = 'k'; //Knight hero type, not called KNIGHT to avoid confusion with Knight class
 
-const Heroytype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confusion with Wizard class
+const Herotype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confusion with Wizard class
 
 using State = unsigned short;
 
