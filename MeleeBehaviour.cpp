@@ -10,6 +10,4 @@ void MeleeBehaviour::attack(State &state) {
         state = ATTACKING;
     }
 
-    std::cout << "MELEE" << std::endl;
-
 }

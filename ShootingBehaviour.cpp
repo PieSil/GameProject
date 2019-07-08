@@ -10,6 +10,4 @@ void ShootingBehaviour::attack(State &state) {
         state = SHOOTING;
     }
 
-    std::cout << "SHOOTING" << std::endl;
-
 }
