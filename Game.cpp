@@ -276,7 +276,6 @@ void Game::detectCollisions(const entityPositions prevPosition, GameCharacter *c
             if (character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
 
 
-
                 if (prevPosition.rightEdgePosition.x <= currentTile.getHitbox().getLeftEdge().getPosition().x &&
                     character->getAllPositions().rightEdgePosition.x >
                     currentTile.getHitbox().getLeftEdge().getPosition().x) {
