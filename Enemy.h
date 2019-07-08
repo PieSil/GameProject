@@ -29,7 +29,9 @@ public:
 
     //override attack and move methods to check if enemy is paralyzed
 
-    const float & attack() override;
+    void attack() override;
+
+    const entityPositions updateBehaviour(const float& distance);
 
     const entityPositions move(const float &distance);
 

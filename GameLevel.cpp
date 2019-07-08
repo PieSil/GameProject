@@ -168,17 +168,10 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
     for (const auto &enemy : enemies) {
 
         updatePhysics(enemy.get()); //update enemy physics
+        //if enemy hitbox is not touching hero hitbox
 
-        if (!(enemy->getHitbox().checkHitbox().intersects(
-                hero->getHitbox().checkHitbox()))) { //if enemy hitbox is not touching hero hitbox
+        detectCollisions(enemy->updateBehaviour(elapsedTime * enemy->getMovementSpeed()), enemy.get());
 
-            moveCharacter(enemy.get(), elapsedTime *
-                                 enemy->getMovementSpeed()); //use move method to move towards hero (if aggro is active)
-
-        } else {
-
-            enemy->setState(IDLE);
-        }
     }
 }
 
@@ -188,7 +181,7 @@ void GameLevel::updateHero() {
 
 void GameLevel::animateCharacters() {
     hero->animate();
-    for (auto& enemy : enemies) {
+    for (auto &enemy : enemies) {
         enemy->animate();
     }
 }

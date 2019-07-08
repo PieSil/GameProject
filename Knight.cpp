@@ -15,14 +15,14 @@
 const SpriteParams Knight::knightParams(KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT_HITBOX_X, KNIGHT_HITBOX_Y, KNIGHT_SCALE,
                                         KNIGHT_PATH, KNIGHT_IDLE_ROW,
                                         KNIGHT_IDLE_LAST_COL, KNIGHT_MOV_ROW, KNIGHT_MOV_LAST_COL, KNIGHT_ATT_ROW,
-                                        KNIGHT_ATT_LAST_COL, KNIGHT_ATT_OFFSET);
+                                        KNIGHT_ATT_LAST_COL, KNIGHT_ATT_OFFSET, KNIGHT_SHOOT_ROW, KNIGHT_SHOOT_LAST_COL);
 
 Knight::Knight(const float &x, const float &y, const float &str, const bool &onf, const float &h, const bool &facingR,
                const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
-
+    setAttackBehaviour(new MeleeBehaviour);
 }
 
 void Knight::specialBehaviour() {

@@ -21,15 +21,9 @@ GameCharacter::GameCharacter(const float &x, const float &y, const float &str, c
 GameCharacter::~GameCharacter() {};
 
 
-const float &GameCharacter::attack() {
+void GameCharacter::attack() {
 
-    if (state != ATTACKING) {//if character is not attacking
-
-
-        state = ATTACKING; //enter attacking state
-    }
-
-    return strength;
+    attackBehaviour->attack(state);
 
 }
 
@@ -55,14 +49,18 @@ void GameCharacter::animate() {
             state = IDLE; //reset state to idle to avoid looping the animation
         }
 
+    } else if (state == SHOOTING) {
+        if (animManager.getCurrentFrame(SHOOTING) == getParameters()->shootLastCol) { //if animation is on last frame
+            animManager.resetAnimation(SHOOTING); //reset animation to the beginning
+            state = IDLE; //reset state to idle to avoid looping the animation
+        }
     }
 
     MovingEntity::animate();
 }
 
 const entityPositions GameCharacter::move(const Direction &direction, const float &distance) {
-
-    if (state != ATTACKING) //enable movement only if not attacking
+    if (state != ATTACKING && state != SHOOTING) //enable movement only if not attacking
        return(MovingEntity::move(direction, distance));
 
     else

@@ -8,6 +8,7 @@
 
 #include "GameCharacter.h"
 #include "Enemy.h"
+#include "MeleeBehaviour.h"
 
 
 class MeleeEnemy: public Enemy {

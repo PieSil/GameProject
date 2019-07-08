@@ -7,6 +7,7 @@
 #define _WIZARD_H
 
 #include "GameHero.h"
+#include "ShootingBehaviour.h"
 
 class Wizard: public GameHero {
 public:

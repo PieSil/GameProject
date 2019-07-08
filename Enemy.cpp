@@ -14,15 +14,14 @@ Enemy::Enemy(GameHero *hero, const float &x, const float &y, const float &str, c
 
 }
 
-Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), aggro(false), aggroRange(copied.getAggroRange()), GameCharacter(copied) {
+Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), aggro(false),
+                                    aggroRange(copied.getAggroRange()), GameCharacter(copied) {
 
 }
 
-const float & Enemy::attack() {
-    if (!paralyzed)
-        return GameCharacter::attack();
-    else
-        return strength;
+void Enemy::attack() {
+    if (!paralyzed && abs(hero->getSprite().getPosition().x - sprite.getPosition().x) <= 16)
+        GameCharacter::attack();
 }
 
 const entityPositions Enemy::move(const float &distance) {
@@ -33,7 +32,8 @@ const entityPositions Enemy::move(const float &distance) {
 
     prevPosition = allPositions;
 
-    if (!paralyzed && aggro) { //if enemy is not paralyzed and aggro is active
+    if (!paralyzed && aggro && abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >=
+                               16) { //if enemy is not paralyzed and aggro is active
 
         if (facingRight) { //if enemy is facing right
             prevPosition = GameCharacter::move(RIGHT, distance); //move right
@@ -41,9 +41,10 @@ const entityPositions Enemy::move(const float &distance) {
         } else {
             prevPosition = GameCharacter::move(LEFT, distance); //else move left
         }
+
+        return prevPosition;
     }
 
-    return  prevPosition;
 }
 
 void Enemy::updateAggro() {
@@ -54,10 +55,19 @@ void Enemy::updateAggro() {
         aggro = true; //activate aggro
     }
 
-    if(hero->getSprite().getPosition().x <= this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
+    if (hero->getSprite().getPosition().x <=
+        this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
         facingRight = false; //turn left
 
     } else {
         facingRight = true; //else turn right
     }
+}
+
+const entityPositions Enemy::updateBehaviour(const float& distance) {
+    updateAggro();
+    auto prevPosition = move(distance);
+    attack();
+    return  prevPosition;
+
 }

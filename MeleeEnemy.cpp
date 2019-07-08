@@ -12,7 +12,7 @@
 const SpriteParams MeleeEnemy::meleeParams(MELEE_WIDTH, MELEE_HEIGHT, MELEE_HITBOX_X, MELEE_HITBOX_Y, MELEE_SCALE,
                                            MELEE_PATH, MELEE_IDLE_ROW,
                                            MELEE_IDLE_LAST_COL, MELEE_MOV_ROW, MELEE_MOV_LAST_COL, MELEE_ATT_ROW,
-                                           MELEE_ATT_LAST_COL, MELEE_ATT_OFFSET);
+                                           MELEE_ATT_LAST_COL, MELEE_ATT_OFFSET, MELEE_SHOOT_ROW, MELEE_SHOOT_LAST_COL);
 
 
 MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par,
@@ -22,7 +22,7 @@ MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const flo
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
-
+    setAttackBehaviour(new MeleeBehaviour);
 }
 
 MeleeEnemy::MeleeEnemy(const MeleeEnemy &copied) : Enemy(copied) {

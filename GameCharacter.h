@@ -7,6 +7,7 @@
 #define _GAMECHARACTER_H
 
 #include "MovingEntity.h"
+#include "AttackBehaviour.h"
 
 class GameCharacter : public MovingEntity {
 public: 
@@ -24,7 +25,7 @@ public:
 
     const entityPositions move(const Direction &direction, const float &distance) override;
 
-    virtual const float & attack();
+    virtual void attack();
 
     void setupAnimations(const SpriteParams *parameters) override;
 
@@ -52,12 +53,17 @@ public:
         GameCharacter::strength = strength;
     }
 
+    void setAttackBehaviour(AttackBehaviour* attackBehaviour) {
+        GameCharacter::attackBehaviour.reset(attackBehaviour);
+    }
+
     void animate() override;
 
 protected:
     bool onFire;
     float health;
     float strength;
+    std::unique_ptr<AttackBehaviour> attackBehaviour;
 
 };
 

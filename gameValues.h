@@ -36,6 +36,8 @@ const State WALKING = 1;
 
 const State ATTACKING = 2;
 
+const State SHOOTING = 3;
+
 //GAME
 
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
@@ -49,6 +51,7 @@ const float WALK_ANIM_TIME = 0.5;
 const float IDLE_ANIM_TIME = 1;
 
 const float ATT_ANIM_TIME = 0.5;
+const float SHOOT_ANIM_TIME = 0.5;
 
 //GRAVITY modifying this values may break game physics
 
@@ -114,6 +117,9 @@ const int KNIGHT_ATT_LAST_COL = 8;
 
 const int KNIGHT_ATT_OFFSET = 38;
 
+const int KNIGHT_SHOOT_ROW =2;
+const int KNIGHT_SHOOT_LAST_COL = 8;
+
 //WIZARD
 
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
@@ -143,6 +149,9 @@ const int WIZARD_ATT_ROW =1;
 const int WIZARD_ATT_LAST_COL = 6;
 
 const int WIZARD_ATT_OFFSET = 0;
+
+const int WIZARD_SHOOT_ROW =1;
+const int WIZARD_SHOOT_LAST_COL = 6;
 
 //ENEMY
 
@@ -185,5 +194,8 @@ const int MELEE_ATT_ROW =2;
 const int MELEE_ATT_LAST_COL = 7;
 
 const int MELEE_ATT_OFFSET = 0;
+
+const int MELEE_SHOOT_ROW =2;
+const int MELEE_SHOOT_LAST_COL = 7;
 
 #endif //GAMEPROJECT_GAMEVALUES_H

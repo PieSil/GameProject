@@ -7,6 +7,7 @@
 #define _KNIGHT_H
 
 #include "GameHero.h"
+#include "MeleeBehaviour.h"
 
 
 class Knight: public GameHero {

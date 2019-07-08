@@ -48,6 +48,17 @@ void AnimationManager::createAnimation(const State &state) {
             animations.emplace(ATTACKING, Animation(framesVector, sprite, parameters, ATT_ANIM_TIME));
             break;
 
+        case SHOOTING:
+            for (auto col = 0; col <= parameters->shootLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->shootRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(SHOOTING, Animation(framesVector, sprite, parameters, SHOOT_ANIM_TIME));
+            break;
+
+
         default:
             //TODO throw exception? just add another idle animation for now
             for (auto col = 0; col <= parameters->idleLastCol; col++) {
