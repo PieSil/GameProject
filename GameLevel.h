@@ -16,7 +16,7 @@ class GameLevel {
 public:
     GameLevel(Herotype heroT);
 
-    GameLevel() = default;
+    GameLevel(); //DEFAULT CONSTRUCTOR ONLY USED FOR UNIT TESTING
 
     void moveCharacter(GameHero *hero, const Direction &direction, const float &distance);
 
@@ -54,6 +54,10 @@ public:
 
     const Map &getGameMap() const {
         return gameMap;
+    }
+
+    void setGameMap(const Map &gameMap) {
+        GameLevel::gameMap = gameMap;
     }
 
 private:

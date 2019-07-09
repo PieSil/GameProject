@@ -24,6 +24,8 @@ public:
         return vertices;
     }
 
+    
+
 private:
 
     //overrides sf::Drawable draw() method to make Map a drawable entity

@@ -25,6 +25,8 @@ GameLevel::GameLevel(Herotype heroT) {
 
 }
 
+
+
 void GameLevel::createMap() {
 
     const int level[] = {
@@ -253,19 +255,29 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
 
         //x position of the hitbox is set so that attackHitbox's left edge overlaps with chracter's hitbox right edge
         attackHitbox = Hitbox(
-                sf::Vector2f(character->getAllPositions().leftEdgePosition.x + character->getAttackRange() / 2.,
+                sf::Vector2f(character->getAllPositions().rightEdgePosition.x + character->getAttackRange() / 2.,
                              character->getAllPositions().spritePosition.y), character->getAttackRange(),
-                character->getSprite().getTextureRect().height);
+                abs(character->getAllPositions().upperEdgePosition.y - character->getAllPositions().lowerEdgePosition.y));
 
     else //else create hitbox to its left
 
         //x position of the hitbox is set so that attackHitbox's right edge overlaps with chracter's hitbox left edge
         attackHitbox = Hitbox(
-                sf::Vector2f(character->getAllPositions().rightEdgePosition.x - character->getAttackRange() / 2.,
+                sf::Vector2f(character->getAllPositions().leftEdgePosition.x - character->getAttackRange() / 2.,
                              character->getAllPositions().spritePosition.y), character->getAttackRange(),
-                character->getSprite().getTextureRect().height);
+                (abs(character->getAllPositions().upperEdgePosition.y - character->getAllPositions().lowerEdgePosition.y)));
 
 
     return attackHitbox;
+}
+
+//ONLY USED FOR UNIT TESTING
+GameLevel::GameLevel() : gameMap(Map()) {
+    hero = std::move(
+            std::unique_ptr<Knight>(new Knight(0, 0)));
+
+    enemies.push_back(std::unique_ptr<MeleeEnemy>(
+            new MeleeEnemy(hero.get(), 0, 0)));
+
 }
 
