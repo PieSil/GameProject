@@ -15,7 +15,7 @@ class GameCharacter : public MovingEntity {
 public: 
 
     GameCharacter(const float &x, const float &y, const float &str = 5., const bool &onf = false, const float &h = 10,
-                  const float &s = 1., const bool &facingR = true);
+                  const float &s = 1., const bool &facingR = true, const float& attackRange = 16);
 
     //default constructor
     GameCharacter();
@@ -27,7 +27,7 @@ public:
 
     const entityPositions move(const Direction &direction, const float &distance) override;
 
-    virtual void attack();
+    virtual const bool & attack();
 
     void setupAnimations(const SpriteParams *parameters) override;
 
@@ -55,6 +55,10 @@ public:
         GameCharacter::strength = strength;
     }
 
+    float getAttackRange() const {
+        return attackRange;
+    }
+
     virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
         this->attackBehaviour = std::move(attackBehaviourPtr);
     }
@@ -65,6 +69,7 @@ protected:
     bool onFire;
     float health;
     float strength;
+    float attackRange;
 
     sf::Clock attackClock;
 

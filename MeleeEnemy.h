@@ -22,7 +22,7 @@ public:
 
     ~MeleeEnemy() {};
 
-    void attack() override;
+    const bool & attack() override;
 
     MeleeEnemy& operator = (const MeleeEnemy& meleeEnemy);
 

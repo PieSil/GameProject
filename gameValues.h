@@ -78,10 +78,14 @@ const int EDGE_THICKNESS = 1;
 //HERO
 
 //default health value for all game heroes:
-const float DEF_GAMEHERO_HEALTH = 20.;
+const float DEF_HERO_HEALTH = 20.;
 
 //default strength value for all game heroes:
-const float DEF_GAMEHERO_STRENGTH = 5.;
+const float DEF_HERO_STRENGTH = 5.;
+
+//default attack range for all game heroes:
+const float HERO_ATTACK_RANGE = 16;
+
 
 //default value for hero movementSpeed parameter:
 const float HERO_SPEED = 60; //sets hero speed (measured in pixels/second ?)
@@ -89,6 +93,9 @@ const float HERO_SPEED = 60; //sets hero speed (measured in pixels/second ?)
 //KNIGHT
 
 //values used to determine knight's sprite width and heigth to correctly select it when cutting sprite sheet:
+
+const float KNIGHT_ATTACK_RANGE = 16;
+
 const int KNIGHT_WIDTH = 42;
 const int KNIGHT_HEIGHT = 42;
 
@@ -121,6 +128,8 @@ const int KNIGHT_SHOOT_ROW =2;
 const int KNIGHT_SHOOT_LAST_COL = 8;
 
 //WIZARD
+
+const float WIZARD_ATTACK_RANGE = 0;
 
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
 const int WIZARD_WIDTH = 48;
@@ -166,6 +175,8 @@ const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
 
+const float MELEE_ATTACK_RANGE = 16;
+
 //values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
 const int MELEE_WIDTH = 48;
 const int MELEE_HEIGHT = 48;
@@ -199,6 +210,9 @@ const int MELEE_SHOOT_ROW =2;
 const int MELEE_SHOOT_LAST_COL = 7;
 
 //BOSS
+
+const float BOSS_ATTACK_RANGE =32;
+const float BOSS_SHOOT_RANGE = 64;
 
 const float BOSS_SPEED = 15;
 

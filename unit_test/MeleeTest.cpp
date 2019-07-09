@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 
 
-//Knight(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
+//Knight(float x, float y, float str = DEF_HERO_STRENGTH, bool onf = false, float h = DEF_HERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
 
 Knight knight(110, 0);
 

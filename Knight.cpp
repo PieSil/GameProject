@@ -21,6 +21,9 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
                const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
     initSprite(x, y);
     giveHitbox();
+
+    attackRange = KNIGHT_ATTACK_RANGE;
+
     setupAnimations(getParameters());
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }

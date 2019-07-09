@@ -11,8 +11,8 @@
 
 class Wizard: public GameHero {
 public:
-    Wizard(const float &x, const float &y, const float &str = DEF_GAMEHERO_STRENGTH, const bool &onf = false,
-           const float &m = 10., const float &h = DEF_GAMEHERO_HEALTH, const bool &facingR = true,
+    Wizard(const float &x, const float &y, const float &str = DEF_HERO_STRENGTH, const bool &onf = false,
+           const float &m = 10., const float &h = DEF_HERO_HEALTH, const bool &facingR = true,
            const float &s = HERO_SPEED);
 
     //default constructor

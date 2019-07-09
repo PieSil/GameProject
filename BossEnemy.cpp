@@ -20,23 +20,27 @@ BossEnemy::BossEnemy(GameHero *hero, const float &x, const float &y, const float
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    attackRange = BOSS_SHOOT_RANGE;
     shootingBehaviour = std::make_shared<ShootingBehaviour>();
     meleeBehaviour = std::make_shared<MeleeBehaviour>();
+    setAttackBehaviour(shootingBehaviour);
 
 }
 
 
-const entityPositions BossEnemy::updateBehaviour(const float &distance) {
+const bool BossEnemy::updateCombat() {
 
     if (abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= 32 && typeid(attackBehaviour.get()) != typeid(MeleeBehaviour*)) {
         setAttackBehaviour(this->meleeBehaviour);
+        attackRange = BOSS_ATTACK_RANGE;
     }
 
     else if (typeid(attackBehaviour.get()) != typeid(ShootingBehaviour*)) {
                 setAttackBehaviour(this->shootingBehaviour);
+        attackRange = BOSS_SHOOT_RANGE;
     }
 
-    return Enemy::updateBehaviour(distance);
+    return Enemy::updateCombat();
 }
 
 

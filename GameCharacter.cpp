@@ -13,22 +13,25 @@
 
 
 GameCharacter::GameCharacter(const float &x, const float &y, const float &str, const bool &onf, const float &h,
-                             const float &s, const bool &facingR) :
-        onFire(onf), health(abs(h)), strength(abs(str)),
+                             const float &s, const bool &facingR, const float& attackRange) :
+        onFire(onf), health(abs(h)), strength(abs(str)), attackRange(attackRange),
         MovingEntity(x, y, s, facingR) {
-
 }
 
 GameCharacter::~GameCharacter() {};
 
 
-void GameCharacter::attack() {
+const bool & GameCharacter::attack() {
+
+    bool hasAttacked = false;
 
     if (attackClock.getElapsedTime().asSeconds() >= 1) {
         attackClock.restart();
-        this->attackBehaviour->attack(this->state);
+        attackBehaviour->attack(state);
+        hasAttacked = true;
     }
 
+    return hasAttacked;
 }
 
 GameCharacter::GameCharacter() : GameCharacter(0, 0) {

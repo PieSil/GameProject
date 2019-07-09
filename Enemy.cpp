@@ -19,9 +19,14 @@ Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), ag
 
 }
 
-void Enemy::attack() {
+const bool & Enemy::attack() {
+
+    bool hasAttacked = false;
+
     if (!paralyzed)
-        GameCharacter::attack();
+        hasAttacked = GameCharacter::attack();
+
+    return  hasAttacked;
 }
 
 const entityPositions Enemy::move(const float &distance) {
@@ -32,7 +37,7 @@ const entityPositions Enemy::move(const float &distance) {
 
     prevPosition = allPositions;
 
-    if (!paralyzed && aggro && abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >= 16) { //if enemy is not paralyzed and aggro is active
+    if (!paralyzed && aggro && abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >= attackRange) { //if enemy is not paralyzed and aggro is active
 
         if (facingRight) { //if enemy is facing right
             prevPosition = GameCharacter::move(RIGHT, distance); //move right
@@ -64,10 +69,7 @@ void Enemy::updateAggro() {
     }
 }
 
-const entityPositions Enemy::updateBehaviour(const float& distance) {
+const bool Enemy::updateCombat() {
     updateAggro();
-    attack();
-    auto prevPosition = move(distance);
-    return prevPosition;
-
+    return attack();
 }

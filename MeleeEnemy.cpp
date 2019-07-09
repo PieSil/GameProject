@@ -23,6 +23,7 @@ MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const flo
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    attackRange = MELEE_ATTACK_RANGE;
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
 
@@ -38,7 +39,12 @@ MeleeEnemy &MeleeEnemy::operator=(const MeleeEnemy &meleeEnemy) {
     return *this;
 }
 
-void MeleeEnemy::attack() {
+const bool & MeleeEnemy::attack() {
+
+    bool hasAttacked = false;
+
     if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) <= 16)
-        Enemy::attack();
+        hasAttacked = Enemy::attack();
+
+    return  hasAttacked;
 }

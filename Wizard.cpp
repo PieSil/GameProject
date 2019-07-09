@@ -26,7 +26,8 @@ Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf
         : GameHero(x, y, str, onf, h, facingR, s), mana(m) {
     initSprite(x, y);
     giveHitbox();
-    GameCharacter::setupAnimations(getParameters());
+    setupAnimations(getParameters());
+    attackRange = WIZARD_ATTACK_RANGE;
     setAttackBehaviour(std::make_shared<ShootingBehaviour>());
 }
 

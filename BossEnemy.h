@@ -23,7 +23,7 @@ public:
         return &bossParams;
     }
 
-    const entityPositions updateBehaviour(const float &distance) override;
+    const bool updateCombat() override;
 
 protected:
     static const SpriteParams bossParams;

@@ -9,15 +9,15 @@
 #include <SFML/Graphics.hpp>
 
 
-//Knight(float x, float y, float str = DEF_GAMEHERO_STRENGTH, bool onf = false, float h = DEF_GAMEHERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
+//Knight(float x, float y, float str = DEF_HERO_STRENGTH, bool onf = false, float h = DEF_HERO_HEALTH, bool facingR = true, float s = HERO_SPEED);
 
 TEST(KnightTest, Constructor) {
     Knight k(5, 0);
     EXPECT_EQ(5, k.getSprite().getPosition().x);
     EXPECT_EQ(0, k.getSprite().getPosition().y);
-    EXPECT_EQ(DEF_GAMEHERO_STRENGTH, k.getStrength());
+    EXPECT_EQ(DEF_HERO_STRENGTH, k.getStrength());
     EXPECT_EQ(false, k.isOnFire());
-    EXPECT_EQ(DEF_GAMEHERO_HEALTH, k.getHealth());
+    EXPECT_EQ(DEF_HERO_HEALTH, k.getHealth());
     EXPECT_EQ(true, k.isFacingRight());
     EXPECT_EQ(HERO_SPEED, k.getMovementSpeed());
 }
@@ -28,7 +28,7 @@ TEST(KnightTest, NotDefStrength) {
     EXPECT_EQ(0, k.getSprite().getPosition().y);
     EXPECT_EQ(25., k.getStrength());
     EXPECT_EQ(false, k.isOnFire());
-    EXPECT_EQ(DEF_GAMEHERO_HEALTH, k.getHealth());
+    EXPECT_EQ(DEF_HERO_HEALTH, k.getHealth());
     EXPECT_EQ(true, k.isFacingRight());
     EXPECT_EQ(HERO_SPEED, k.getMovementSpeed());
 }
@@ -39,7 +39,7 @@ TEST(KnightTest, NegativeStrength) {
     EXPECT_EQ(0, k.getSprite().getPosition().y);
     EXPECT_EQ(25., k.getStrength());
     EXPECT_EQ(false, k.isOnFire());
-    EXPECT_EQ(DEF_GAMEHERO_HEALTH, k.getHealth());
+    EXPECT_EQ(DEF_HERO_HEALTH, k.getHealth());
     EXPECT_EQ(true, k.isFacingRight());
     EXPECT_EQ(HERO_SPEED, k.getMovementSpeed());
 }
@@ -51,7 +51,7 @@ TEST(KnightTest, IsOnFire) {
     EXPECT_EQ(0, k.getSprite().getPosition().y);
     EXPECT_EQ(25., k.getStrength());
     EXPECT_EQ(true, k.isOnFire());
-    EXPECT_EQ(DEF_GAMEHERO_HEALTH, k.getHealth());
+    EXPECT_EQ(DEF_HERO_HEALTH, k.getHealth());
     EXPECT_EQ(true, k.isFacingRight());
     EXPECT_EQ(HERO_SPEED, k.getMovementSpeed());
 
@@ -82,29 +82,29 @@ TEST(KnightTest, NegativeHealth) {
 
 
 TEST(KnightTest, IsFacingLeft) {
-    Knight k(0, -5, 5.,false, DEF_GAMEHERO_HEALTH, false);
+    Knight k(0, -5, 5.,false, DEF_HERO_HEALTH, false);
     EXPECT_EQ(0, k.getSprite().getPosition().x);
     EXPECT_EQ(-5, k.getSprite().getPosition().y);
     EXPECT_EQ(5., k.getStrength());
     EXPECT_EQ(false, k.isOnFire());
-    EXPECT_EQ(DEF_GAMEHERO_HEALTH, k.getHealth());
+    EXPECT_EQ(DEF_HERO_HEALTH, k.getHealth());
     EXPECT_EQ(false, k.isFacingRight());
     EXPECT_EQ(HERO_SPEED, k.getMovementSpeed());
 }
 
 TEST(KnightTest, MovementSpeed) {
-    Knight k(0, -5, DEF_GAMEHERO_STRENGTH, false, DEF_GAMEHERO_HEALTH, false, 10.);
+    Knight k(0, -5, DEF_HERO_STRENGTH, false, DEF_HERO_HEALTH, false, 10.);
     EXPECT_EQ(0, k.getSprite().getPosition().x);
     EXPECT_EQ(-5, k.getSprite().getPosition().y);
-    EXPECT_EQ(DEF_GAMEHERO_STRENGTH, k.getStrength());
+    EXPECT_EQ(DEF_HERO_STRENGTH, k.getStrength());
     EXPECT_EQ(false, k.isOnFire());
-    EXPECT_EQ(DEF_GAMEHERO_HEALTH, k.getHealth());
+    EXPECT_EQ(DEF_HERO_HEALTH, k.getHealth());
     EXPECT_EQ(false, k.isFacingRight());
     EXPECT_EQ(10., k.getMovementSpeed());
 }
 
 TEST(KnightTest, Assigment) {
-    Knight k(-5, 3, DEF_GAMEHERO_STRENGTH, true, 32.15, true, 5.);
+    Knight k(-5, 3, DEF_HERO_STRENGTH, true, 32.15, true, 5.);
     Knight newK = k;
     EXPECT_EQ(newK.getSprite().getPosition().x, k.getSprite().getPosition().x);
     EXPECT_EQ(newK.getSprite().getPosition().y, k.getSprite().getPosition().y);
@@ -117,7 +117,7 @@ TEST(KnightTest, Assigment) {
 }
 
 TEST(KnightTest, Copy) {
-    Knight k(5, 0, DEF_GAMEHERO_STRENGTH, true, 25., false, 0.);
+    Knight k(5, 0, DEF_HERO_STRENGTH, true, 25., false, 0.);
     Knight copy(k);
     EXPECT_EQ(copy.getSprite().getPosition().x, k.getSprite().getPosition().x);
     EXPECT_EQ(copy.getSprite().getPosition().y, k.getSprite().getPosition().y);

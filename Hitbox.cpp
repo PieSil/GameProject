@@ -67,4 +67,14 @@ Hitbox::Hitbox() : Hitbox(sf::Vector2f(0,0), 10, 10, 1, 1, 1) {
 
 }
 
+Hitbox &Hitbox::operator=(const Hitbox& assigned){
+    this->hitbox = assigned.getHitbox();
+    this->rightEdge = assigned.getRightEdge();
+    this->leftEdge = assigned.getLeftEdge();
+    this->upperEdge = assigned.getUpperEdge();
+    this->lowerEdge = assigned.getLowerEdge();
+
+    return *this;
+}
+
 

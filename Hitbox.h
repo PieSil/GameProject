@@ -20,6 +20,9 @@ public:
     //copy constructor
     Hitbox(const Hitbox& copied);
 
+    //
+    Hitbox& operator=(const Hitbox& assigned);
+
     void setPosition(const sf::Vector2f& position) {
         hitbox.setPosition(position);
         upperEdge.setPosition(sf::Vector2f(hitbox.getPosition().x, (hitbox.getPosition().y - hitbox.getSize().y/2.))); //sets upper edge to match with hitbox's upper edge

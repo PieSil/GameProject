@@ -29,9 +29,9 @@ public:
 
     //override attack and move methods to check if enemy is paralyzed
 
-    void attack() override;
+    const bool & attack() override;
 
-    virtual const entityPositions updateBehaviour(const float& distance);
+    virtual const bool updateCombat();
 
     const entityPositions move(const float &distance);
 

@@ -176,7 +176,8 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
         updatePhysics(enemy.get()); //update enemy physics
         //if enemy hitbox is not touching hero hitbox
 
-        detectCollisions(enemy->updateBehaviour(enemy->getMovementSpeed() * elapsedTime), enemy.get());
+        moveCharacter(enemy.get(), enemy->getMovementSpeed() * elapsedTime);
+        updateCombat(enemy.get());
 
         /*
         enemy->updateAggro();
@@ -198,5 +199,73 @@ void GameLevel::animateCharacters() {
     for (auto &enemy : enemies) {
         enemy->animate();
     }
+}
+
+void GameLevel::updateCombat(GameHero *hero) {
+
+    if (hero->attack()) { //if hero has started an attack
+
+        if (hero->getState() == ATTACKING) {
+
+
+
+            Hitbox attackHitbox = createAttackHitbox(hero);
+
+            for (const auto &enemy :enemies) {
+                if (enemy->getHitbox().checkHitbox().intersects(attackHitbox.checkHitbox())) {
+                    //TODO: do damage to enemy
+                }
+            }
+
+        } else {
+
+            //TODO: shoot projectile;
+        }
+    }
+}
+
+
+
+void GameLevel::updateCombat(Enemy *enemy) {
+
+    if (enemy->updateCombat()) {
+
+        if (enemy->getState() == ATTACKING) {
+
+            Hitbox attackHitbox = createAttackHitbox(enemy);
+
+            if (attackHitbox.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
+                //TODO: damage the hero
+            }
+
+        } else {
+            //TODO: shoot projectile
+        }
+    }
+}
+
+
+
+const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
+    Hitbox attackHitbox;
+
+    if (character->isFacingRight()) //if character is facing right create hitbox to its right
+
+        //x position of the hitbox is set so that attackHitbox's left edge overlaps with chracter's hitbox right edge
+        attackHitbox = Hitbox(
+                sf::Vector2f(character->getAllPositions().leftEdgePosition.x + character->getAttackRange() / 2.,
+                             character->getAllPositions().spritePosition.y), character->getAttackRange(),
+                character->getSprite().getTextureRect().height);
+
+    else //else create hitbox to its left
+
+        //x position of the hitbox is set so that attackHitbox's right edge overlaps with chracter's hitbox left edge
+        attackHitbox = Hitbox(
+                sf::Vector2f(character->getAllPositions().rightEdgePosition.x - character->getAttackRange() / 2.,
+                             character->getAllPositions().spritePosition.y), character->getAttackRange(),
+                character->getSprite().getTextureRect().height);
+
+
+    return attackHitbox;
 }
 

@@ -100,7 +100,7 @@ void Game::handleInput() {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-        level.getHero()->attack();
+        level.updateCombat(level.getHero().get());
         keyPressed = true;
     }
 

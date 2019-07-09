@@ -38,6 +38,12 @@ public:
 
     void updateLevel(const float &elapsedTime);
 
+    const Hitbox createAttackHitbox(GameCharacter *character);
+
+    void updateCombat(GameHero* hero);
+
+    void updateCombat(Enemy* enemy);
+
     const std::unique_ptr<GameHero> &getHero() const {
         return hero;
     }
