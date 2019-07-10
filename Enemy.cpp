@@ -29,9 +29,9 @@ const bool & Enemy::attack() {
     return  hasAttacked;
 }
 
-const entityPositions Enemy::move(const float &distance) {
+const EntityPositions Enemy::move(const float &distance) {
 
-    entityPositions prevPosition;
+    EntityPositions prevPosition;
 
     updateAggro();
 

@@ -15,16 +15,15 @@ GameLevel::GameLevel(Herotype heroT) {
         //TODO: throw exception
     }
 
-    enemies.push_back(std::unique_ptr<MeleeEnemy>(
+    enemies.emplace_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), 14 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
 
-    enemies.push_back(std::unique_ptr<BossEnemy>(
+    enemies.emplace_back(std::unique_ptr<BossEnemy>(
             new BossEnemy(hero.get(), 7 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
 
     createMap();
 
 }
-
 
 
 void GameLevel::createMap() {
@@ -57,7 +56,7 @@ void GameLevel::createMap() {
     gameMap.load();
 }
 
-void GameLevel::detectCollisions(const entityPositions &prevPosition, GameCharacter *character) {
+void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character) {
 
     //if character is out of map put it back
     if (!character->getHitbox().checkHitbox().intersects(gameMap.getVertices().getBounds())) {
@@ -140,19 +139,21 @@ void GameLevel::detectCollisions(const entityPositions &prevPosition, GameCharac
     }
 }
 
+
+void GameLevel::updateLevel(const float &elapsedTime) {
+    updateHero();
+    updateEnemies(elapsedTime);
+    updateProjectiles(elapsedTime);
+
+}
+
 void GameLevel::moveCharacter(GameHero *hero, const Direction &direction, const float &distance) {
-    detectCollisions(hero->move(direction, distance), hero);
+    detectMapCollisions(hero->move(direction, distance), hero);
 }
 
 void GameLevel::moveCharacter(Enemy *enemy, const float &distance) {
-    detectCollisions(enemy->move(distance), enemy);
+    detectMapCollisions(enemy->move(distance), enemy);
 }
-
-void GameLevel::moveCharacter(GameCharacter *character, const Direction &direction, const float &distance) {
-    detectCollisions(character->move(direction, distance), character);
-}
-
-
 
 void GameLevel::updatePhysics(GameCharacter *character) {
 
@@ -160,15 +161,9 @@ void GameLevel::updatePhysics(GameCharacter *character) {
     //call moving entity method to bypass check on character state
     //TODO: find a better way to bypass check on character state
 
-    detectCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
+    detectMapCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
 
     character->setVelocityY(character->getVelocityY() + GRAVITY);
-
-}
-
-void GameLevel::updateLevel(const float &elapsedTime) {
-    updateHero();
-    updateEnemies(elapsedTime);
 
 }
 
@@ -210,22 +205,22 @@ void GameLevel::updateCombat(GameHero *hero) {
         if (hero->getState() == ATTACKING) {
 
 
-
             Hitbox attackHitbox = createAttackHitbox(hero);
 
             for (const auto &enemy :enemies) {
                 if (enemy->getHitbox().checkHitbox().intersects(attackHitbox.checkHitbox())) {
                     //TODO: do damage to enemy
+                    enemy->getDamaged(hero->getStrength());
                 }
             }
 
         } else {
 
             //TODO: shoot projectile;
+            createProjectile(hero);
         }
     }
 }
-
 
 
 void GameLevel::updateCombat(Enemy *enemy) {
@@ -238,14 +233,15 @@ void GameLevel::updateCombat(Enemy *enemy) {
 
             if (attackHitbox.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
                 //TODO: damage the hero
+                hero->getDamaged(enemy->getStrength());
             }
 
         } else {
             //TODO: shoot projectile
+            createProjectile(enemy);
         }
     }
 }
-
 
 
 const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
@@ -257,7 +253,8 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
         attackHitbox = Hitbox(
                 sf::Vector2f(character->getAllPositions().rightEdgePosition.x + character->getAttackRange() / 2.,
                              character->getAllPositions().spritePosition.y), character->getAttackRange(),
-                abs(character->getAllPositions().upperEdgePosition.y - character->getAllPositions().lowerEdgePosition.y));
+                abs(character->getAllPositions().upperEdgePosition.y -
+                    character->getAllPositions().lowerEdgePosition.y));
 
     else //else create hitbox to its left
 
@@ -271,6 +268,76 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
     return attackHitbox;
 }
 
+
+
+void GameLevel::createProjectile(GameHero *hero, const bool &isFireball) {
+
+    if (isFireball) {
+        projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(hero->getAllPositions().spritePosition.x,
+                                                                     hero->getAllPositions().spritePosition.y,
+                                                                     hero->isFacingRight())));
+    }
+
+}
+
+void GameLevel::createProjectile(Enemy *enemy, const bool &isFireball) {
+
+    if (isFireball) {
+        projectiles.emplace_back(std::unique_ptr<Fireball>(new Fireball(enemy->getAllPositions().spritePosition.x,
+                                                                        enemy->getAllPositions().spritePosition.y,
+                                                                        enemy->isFacingRight(), false)));
+    }
+
+}
+
+void GameLevel::updateProjectiles(const float &elapsedTime) {
+
+    auto projectile = projectiles.begin();
+    auto end = projectiles.end();
+
+
+    while (!projectiles.empty() && projectile != projectiles.end()) {
+
+        bool toDelete = false;
+
+        (*projectile)->move((*projectile)->getMovementSpeed() * elapsedTime);
+
+        (*projectile)->animate();
+
+        if ((*projectile)->isFriendly()) {
+            for (const auto &enemy : enemies) {
+                if ((*projectile)->getHitbox().checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
+                    (*projectile)->characterCollision(enemy.get());
+                    //destroyProjectile(*projectile);
+                    toDelete = true;
+                }
+            }
+
+        } else {
+            if ((*projectile)->getHitbox().checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
+                (*projectile)->characterCollision(hero.get());
+                //destroyProjectile(*projectile);
+                toDelete = true;
+            }
+        }
+
+        if (!toDelete) {
+            toDelete = detectMapCollisions(*projectile);
+        }
+
+        if (toDelete) {
+            destroyProjectile(*projectile);
+            //projectiles.erase(projectile);
+
+        } else
+            projectile++;
+
+    }
+
+
+}
+
+
 //ONLY USED FOR UNIT TESTING
 GameLevel::GameLevel() : gameMap(Map()) {
     hero = std::move(
@@ -280,4 +347,42 @@ GameLevel::GameLevel() : gameMap(Map()) {
             new MeleeEnemy(hero.get(), 0, 0)));
 
 }
+
+const bool &GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
+
+    bool toDelete = false;
+
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -1; j <= 1; j++) {
+            int tileColumn = (projectile->getAllPositions().gridPositionX + i);
+            int tileRow = (projectile->getAllPositions().gridPositionY + j);
+            int tilePosition = (tileRow * MAP_COLUMNS + tileColumn);
+
+            //check out of bound
+            if (tilePosition < 0) {
+                tilePosition = 0;
+            } else if (tilePosition >= (MAP_COLUMNS * MAP_ROWS)) {
+                tilePosition = MAP_ROWS * MAP_COLUMNS;
+            }
+
+
+            Tile currentTile = gameMap.getTiles()[tilePosition];
+
+            if (projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+                toDelete = true;
+            }
+        }
+    }
+    return toDelete;
+}
+
+
+void GameLevel::destroyProjectile(std::unique_ptr<Projectile> &projectile) {
+
+    auto itr = std::find(projectiles.begin(), projectiles.end(), projectile);
+
+    projectiles.erase(itr);
+
+}
+
 

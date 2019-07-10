@@ -10,7 +10,11 @@
 #include "Wizard.h"
 #include "MeleeEnemy.h"
 #include "BossEnemy.h"
+#include "Projectile.h"
+#include "Fireball.h"
+#include "Paralyzing.h"
 #include "Map.h"
+#include <algorithm>
 
 class GameLevel {
 public:
@@ -22,19 +26,23 @@ public:
 
     void moveCharacter(Enemy *enemy, const float &distance);
 
-    void moveCharacter(GameCharacter* character, const Direction &direction, const float &distance);
+    void updateProjectiles(const float &elapsedTime);
 
-    void updatePhysics(GameCharacter *character);
+    void createProjectile(Enemy *enemy, const bool &isFireball = true);
+    void createProjectile(GameHero *hero, const bool &isFireball = true);
 
     void createMap();
 
-    void detectCollisions(const entityPositions &prevPosition, GameCharacter *character);
+    void detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
+    const bool & detectMapCollisions(std::unique_ptr<Projectile> &projectile);
 
     void animateCharacters();
 
     void updateHero();
 
     void updateEnemies(const float &elapsedTime);
+
+    void updatePhysics(GameCharacter *character);
 
     void updateLevel(const float &elapsedTime);
 
@@ -44,11 +52,13 @@ public:
 
     void updateCombat(Enemy* enemy);
 
+    void destroyProjectile(std::unique_ptr<Projectile> &projectile);
+
     const std::unique_ptr<GameHero> &getHero() const {
         return hero;
     }
 
-    const std::list<std::unique_ptr<Enemy>> &getEnemies() const {
+    const std::vector<std::unique_ptr<Enemy>> &getEnemies() const {
         return enemies;
     }
 
@@ -60,9 +70,14 @@ public:
         GameLevel::gameMap = gameMap;
     }
 
+    const std::vector<std::unique_ptr<Projectile>> &getProjectiles() const {
+        return projectiles;
+    }
+
 private:
     std::unique_ptr<GameHero> hero;
-    std::list<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<Projectile>> projectiles;
     Map gameMap;
 
 

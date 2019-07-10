@@ -247,5 +247,40 @@ const int BOSS_ATT_OFFSET = 0;
 const int BOSS_SHOOT_ROW =4;
 const int BOSS_SHOOT_LAST_COL = 4;
 
+//PROJECTILE
+
+const float PROJ_SPEED = 60;
+
+//FIREBALL
+
+const int FIREB_WIDTH = 100;
+const int FIREB_HEIGHT = 100;
+
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float FIREB_HITBOX_X = 1;
+const float FIREB_HITBOX_Y = 1;
+
+//value used to scale up/down or flip sprite:
+const float FIREB_SCALE = 0.15;
+
+//value used to set path of texture file
+const std::string FIREB_PATH = "../GameAssets/Sprites/Projectiles/Fireball/Fireball.png";
+
+//values used to choose starting sprite
+const int FIREB_IDLE_ROW = 0;
+const int FIREB_IDLE_LAST_COL = 7;
+
+
+//values used to choose row and last column of walking animation in the spritesheet:
+const int FIREB_MOV_ROW =0;
+const int FIREB_MOV_LAST_COL = 7;
+
+const int FIREB_ATT_ROW =0;
+const int FIREB_ATT_LAST_COL = 7;
+
+const int FIREB_SHOOT_ROW =0;
+const int FIREB_SHOOT_LAST_COL = 7;
+
 
 #endif //GAMEPROJECT_GAMEVALUES_H

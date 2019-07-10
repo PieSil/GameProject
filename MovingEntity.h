@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "GameEntity.h"
-#include "positionsStruct.h"
+#include "entityPositions.h"
 #include "gameValues.h"
 #include "Hitbox.h"
 
@@ -65,11 +65,11 @@ public:
         setPosition(sf::Vector2f(x,y));
     }
 
-    const entityPositions &getAllPositions() const {
+    const EntityPositions &getAllPositions() const {
         return allPositions;
     }
 
-    virtual const entityPositions
+    virtual const EntityPositions
     move(const Direction &direction, const float &distance);
 
 protected:
@@ -91,7 +91,7 @@ protected:
     bool onGround;
     float velocityY;
 
-    entityPositions allPositions;
+    EntityPositions allPositions;
 };
 
 

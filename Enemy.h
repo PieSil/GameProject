@@ -33,7 +33,7 @@ public:
 
     virtual const bool updateCombat();
 
-    const entityPositions move(const float &distance);
+    const EntityPositions move(const float &distance);
 
     void updateAggro();
 

@@ -6,8 +6,7 @@
 #define GAMEPROJECT_ATTACKBEHAVIOUR_H
 
 #include "gameValues.h"
-#include "positionsStruct.h"
-#include "Projectile.h"
+#include "entityPositions.h"
 #include "Hitbox.h"
 
 class AttackBehaviour {

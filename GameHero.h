@@ -24,7 +24,7 @@ public:
     //copy constructor
     GameHero(const GameHero &copied);
 
-    const entityPositions move(const Direction &direction, const float &distance) override;
+    const EntityPositions move(const Direction &direction, const float &distance) override;
 
     virtual void specialBehaviour() = 0;
 

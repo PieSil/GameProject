@@ -25,9 +25,11 @@ public:
 
     ~GameCharacter() = 0;
 
-    const entityPositions move(const Direction &direction, const float &distance) override;
+    const EntityPositions move(const Direction &direction, const float &distance) override;
 
     virtual const bool & attack();
+
+    void getDamaged(const float &damage);
 
     void setupAnimations(const SpriteParams *parameters) override;
 

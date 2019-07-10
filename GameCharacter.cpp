@@ -67,10 +67,19 @@ void GameCharacter::animate() {
     MovingEntity::animate();
 }
 
-const entityPositions GameCharacter::move(const Direction &direction, const float &distance) {
+const EntityPositions GameCharacter::move(const Direction &direction, const float &distance) {
     if (state != ATTACKING && state != SHOOTING) //enable movement only if not attacking
        return(MovingEntity::move(direction, distance));
 
     else
         return allPositions;
+}
+
+void GameCharacter::getDamaged(const float &damage) {
+    health -= damage;
+
+    if (health <= 0) {
+        //TODO: set state to dying
+        std::cout << "DEAD" << std::endl;
+    }
 }

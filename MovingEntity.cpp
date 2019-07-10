@@ -23,9 +23,9 @@ MovingEntity::MovingEntity(const MovingEntity &copied) : GameEntity(copied), mov
 }
 
 
-const entityPositions MovingEntity::move(const Direction &direction, const float &distance) {
+const EntityPositions MovingEntity::move(const Direction &direction, const float &distance) {
 
-    entityPositions prevPosition = allPositions;
+    EntityPositions prevPosition = allPositions;
 
     //MOVE ON X AXIS
 

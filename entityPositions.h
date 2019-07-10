@@ -2,12 +2,12 @@
 // Created by Pietro on 2019-07-07.
 //
 
-#ifndef GAMEPROJECT_POSITIONSSTRUCT_H
-#define GAMEPROJECT_POSITIONSSTRUCT_H
+#ifndef GAMEPROJECT_ENTITYPOSITIONS_H
+#define GAMEPROJECT_ENTITYPOSITIONS_H
 
 #include <SFML/Graphics.hpp>
 
-struct entityPositions {
+struct EntityPositions {
     sf::Vector2f spritePosition;
     sf::Vector2f hitboxPosition;
     sf::Vector2f upperEdgePosition;
@@ -18,4 +18,4 @@ struct entityPositions {
     int gridPositionY;
 };
 
-#endif //GAMEPROJECT_POSITIONSSTRUCT_H
+#endif //GAMEPROJECT_ENTITYPOSITIONS_H

@@ -70,6 +70,10 @@ void Game::renderLevel() const {
         window->draw(enemy->getSprite());
     }
 
+    for (const auto& projectile : level.getProjectiles()) {
+        window->draw(projectile->getSprite());
+    }
+
 
 
 

@@ -22,8 +22,8 @@ GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
 
 }
 
-const entityPositions GameHero::move(const Direction &direction, const float &distance) {
-    entityPositions prevPosition;
+const EntityPositions GameHero::move(const Direction &direction, const float &distance) {
+    EntityPositions prevPosition;
     prevPosition = GameCharacter::move(direction, distance);
 
     return  prevPosition;

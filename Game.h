@@ -7,7 +7,7 @@
 #define _GAMELEVEL_H
 
 #include "gameValues.h"
-#include "positionsStruct.h"
+#include "entityPositions.h"
 #include "GameWindow.h"
 #include "Wizard.h"
 #include "Knight.h"
@@ -74,7 +74,7 @@ private:
     Map gameMap;
     GameLevel level;
 
-    entityPositions positions;
+    EntityPositions positions;
 
 };
 
