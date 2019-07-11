@@ -16,6 +16,7 @@ struct EntityPositions {
     sf::Vector2f rightEdgePosition;
     int gridPositionX;
     int gridPositionY;
+    bool facingRight;
 };
 
 #endif //GAMEPROJECT_ENTITYPOSITIONS_H

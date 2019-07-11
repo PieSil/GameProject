@@ -13,7 +13,7 @@ public:
     ShootingBehaviour() = default;
 
     ~ShootingBehaviour() {};
-    void attack(State &state) override;
+    const std::pair<bool, Hitbox> attack(State &state, const EntityPositions &allPositions, const float &attackRange) override;
 
 };
 

@@ -19,14 +19,16 @@ Enemy::Enemy(const Enemy &copied) : hero(copied.getHero()), paralyzed(false), ag
 
 }
 
-const bool & Enemy::attack() {
+const std::pair<bool, Hitbox> Enemy::attack(const bool &bypassClock) {
 
-    bool hasAttacked = false;
+    std::pair<bool, Hitbox> result;
+
+    result.first = false;
 
     if (!paralyzed)
-        hasAttacked = GameCharacter::attack();
+        result = GameCharacter::attack();
 
-    return  hasAttacked;
+    return  result;
 }
 
 const EntityPositions Enemy::move(const float &distance) {
@@ -69,7 +71,7 @@ void Enemy::updateAggro() {
     }
 }
 
-const bool Enemy::updateCombat() {
+const std::pair<bool, Hitbox> Enemy::updateCombat() {
     updateAggro();
     return attack();
 }

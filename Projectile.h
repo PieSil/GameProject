@@ -7,11 +7,17 @@
 #define _PROJECTILE_H
 
 #include "GameCharacter.h"
+#include "GameHero.h"
+#include "Enemy.h"
 
 class Projectile : public MovingEntity {
 public:
     Projectile(const float &x, const float &y, const bool &facingR = true, const bool &friendly = true,
                const float &movSpeed = PROJ_SPEED);
+
+    Projectile(const Hitbox &hitbox, GameHero *hero, const float &movSpeed);
+    Projectile(const Hitbox &hitbox, Enemy *enemy, const float &movSpeed);
+
     ~Projectile() {};
 
     const EntityPositions move(const float &distance);

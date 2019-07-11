@@ -28,7 +28,7 @@ BossEnemy::BossEnemy(GameHero *hero, const float &x, const float &y, const float
 }
 
 
-const bool BossEnemy::updateCombat() {
+const std::pair<bool, Hitbox> BossEnemy::updateCombat() {
 
     if (abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= 32 && typeid(attackBehaviour.get()) != typeid(MeleeBehaviour*)) {
         setAttackBehaviour(this->meleeBehaviour);

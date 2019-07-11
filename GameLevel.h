@@ -15,6 +15,7 @@
 #include "Paralyzing.h"
 #include "Map.h"
 #include <algorithm>
+#include <fstream>
 
 class GameLevel {
 public:

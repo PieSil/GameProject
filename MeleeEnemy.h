@@ -22,7 +22,7 @@ public:
 
     ~MeleeEnemy() {};
 
-    const bool & attack() override;
+    const std::pair<bool, Hitbox> attack(const bool &bypassClock) override;
 
     MeleeEnemy& operator = (const MeleeEnemy& meleeEnemy);
 

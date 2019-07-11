@@ -29,9 +29,9 @@ public:
 
     //override attack and move methods to check if enemy is paralyzed
 
-    const bool & attack() override;
+    const std::pair<bool, Hitbox> attack(const bool &bypassClock = false) override; //BYPASS CLOCK USED FOR UNIT TESTING
 
-    virtual const bool updateCombat();
+    virtual const std::pair<bool, Hitbox> updateCombat();
 
     const EntityPositions move(const float &distance);
 

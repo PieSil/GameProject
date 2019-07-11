@@ -28,32 +28,49 @@ GameLevel::GameLevel(Herotype heroT) {
 
 void GameLevel::createMap() {
 
+    std::ifstream mapMatrix("../GameAssets/Tileset/MapMatrix.txt");
+
+    if(mapMatrix.is_open()) {
+        unsigned short i;
+        unsigned short j;
+
+        int level[MAP_ROWS * MAP_COLUMNS];
+
+        for (i = 0; i < MAP_ROWS; i++) {
+            for (j = 0; j < MAP_COLUMNS; j++) {
+
+                //create map matrix from file
+                mapMatrix >> level[i*MAP_COLUMNS + j];
+
+            }
+        }
+
+        //load map
+        gameMap = Map(level, MAP_COLUMNS, MAP_ROWS);
+        gameMap.load();
+
+    } else {
+        std::cout << "\nCouldn't open map matrix file, map not loaded.\nTerminating the program." << std::endl;
+
+        exit(EXIT_FAILURE);
+
+    }
+
+    /*
     const int level[] = {
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 0, 0, 0, 4, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 0, 2, 9, 9, 9, 9, 9, 9, 9, 9,
-            9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3,
-            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
-            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
-            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 5, 3, 6, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 5, 1, 1, 7, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
-            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 3, 3, 1, 7, 0, 0, 5, 1, 3, 6, 0, 0, 1, 0, 2, 3, 6, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 3, 3, 6, 0, 0, 1, 1, 1, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
-            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3, 3, 3, 3, 6, 0, 0, 4, 3, 3, 6, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, 3, 3, 6, 0, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
-            3, 3, 3, 1, 1, 1, 1, 7, 0, 5, 1, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 3, 6, 0, 5, 1, 1,
-            1, 1, 1, 1, 1, 1, 7, 0, 0, 0, 0, 4, 3, 3, 3, 3, 1, 1, 7, 0, 5, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 4, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 0, 0, 0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+            3, 3, 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 0, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 5, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 5, 1, 1, 7, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 3, 3, 1, 7, 0, 0, 5, 1, 3, 6, 0, 0, 1, 0, 2, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 3, 3, 6, 0, 0, 1, 1, 1, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3, 3, 3, 3, 6, 0, 0, 4, 3, 3, 6, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, 3, 3, 6, 0, 0, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3,
+            3, 3, 3, 1, 1, 1, 1, 7, 0, 5, 1, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 3, 6, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 7, 0, 0, 0, 0, 4, 3, 3, 3, 3, 1, 1, 7, 0, 5, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3,
+            3, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 4, 3, 3, 3, 3, 3, 3, 3, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 
     };
-
-    gameMap = Map(level, MAP_COLUMNS, MAP_ROWS);
-    gameMap.load();
+     */
 }
 
 void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character) {
@@ -200,7 +217,9 @@ void GameLevel::animateCharacters() {
 
 void GameLevel::updateCombat(GameHero *hero) {
 
-    if (hero->attack()) { //if hero has started an attack
+    std::pair<bool, Hitbox> attackPair = hero->attack();
+
+    if (attackPair.first) { //if hero has started an attack
 
         if (hero->getState() == ATTACKING) {
 
@@ -208,7 +227,7 @@ void GameLevel::updateCombat(GameHero *hero) {
             Hitbox attackHitbox = createAttackHitbox(hero);
 
             for (const auto &enemy :enemies) {
-                if (enemy->getHitbox().checkHitbox().intersects(attackHitbox.checkHitbox())) {
+                if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
                     //TODO: do damage to enemy
                     enemy->getDamaged(hero->getStrength());
                 }
@@ -217,7 +236,7 @@ void GameLevel::updateCombat(GameHero *hero) {
         } else {
 
             //TODO: shoot projectile;
-            createProjectile(hero);
+            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, hero)));
         }
     }
 }
@@ -225,20 +244,21 @@ void GameLevel::updateCombat(GameHero *hero) {
 
 void GameLevel::updateCombat(Enemy *enemy) {
 
-    if (enemy->updateCombat()) {
+    std::pair<bool, Hitbox> attackPair = enemy->updateCombat();
+
+    if (attackPair.first) {
 
         if (enemy->getState() == ATTACKING) {
 
-            Hitbox attackHitbox = createAttackHitbox(enemy);
 
-            if (attackHitbox.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
+            if (attackPair.second.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
                 //TODO: damage the hero
                 hero->getDamaged(enemy->getStrength());
             }
 
         } else {
             //TODO: shoot projectile
-            createProjectile(enemy);
+            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, enemy)));
         }
     }
 }
@@ -269,7 +289,7 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
 }
 
 
-
+/*
 void GameLevel::createProjectile(GameHero *hero, const bool &isFireball) {
 
     if (isFireball) {
@@ -279,6 +299,7 @@ void GameLevel::createProjectile(GameHero *hero, const bool &isFireball) {
     }
 
 }
+ */
 
 void GameLevel::createProjectile(Enemy *enemy, const bool &isFireball) {
 
@@ -338,16 +359,6 @@ void GameLevel::updateProjectiles(const float &elapsedTime) {
 }
 
 
-//ONLY USED FOR UNIT TESTING
-GameLevel::GameLevel() : gameMap(Map()) {
-    hero = std::move(
-            std::unique_ptr<Knight>(new Knight(0, 0)));
-
-    enemies.push_back(std::unique_ptr<MeleeEnemy>(
-            new MeleeEnemy(hero.get(), 0, 0)));
-
-}
-
 const bool &GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
 
     bool toDelete = false;
@@ -382,6 +393,18 @@ void GameLevel::destroyProjectile(std::unique_ptr<Projectile> &projectile) {
     auto itr = std::find(projectiles.begin(), projectiles.end(), projectile);
 
     projectiles.erase(itr);
+
+}
+
+
+
+//ONLY USED FOR UNIT TESTING
+GameLevel::GameLevel() : gameMap(Map()) {
+    hero = std::move(
+            std::unique_ptr<Knight>(new Knight(0, 0)));
+
+    enemies.push_back(std::unique_ptr<MeleeEnemy>(
+            new MeleeEnemy(hero.get(), 0, 0)));
 
 }
 

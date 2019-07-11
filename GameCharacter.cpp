@@ -21,17 +21,16 @@ GameCharacter::GameCharacter(const float &x, const float &y, const float &str, c
 GameCharacter::~GameCharacter() {};
 
 
-const bool & GameCharacter::attack() {
+const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
 
-    bool hasAttacked = false;
+    std::pair<bool, Hitbox> result;
 
-    if (attackClock.getElapsedTime().asSeconds() >= 1) {
+    if ((attackClock.getElapsedTime().asSeconds() >= 1) || bypassClock) {
         attackClock.restart();
-        attackBehaviour->attack(state);
-        hasAttacked = true;
+        result = attackBehaviour->attack(state, allPositions, attackRange);
     }
 
-    return hasAttacked;
+    return result;
 }
 
 GameCharacter::GameCharacter() : GameCharacter(0, 0) {
