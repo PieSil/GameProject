@@ -258,8 +258,8 @@ const int FIREB_HEIGHT = 100;
 
 //values that allow to reduce hitbox size when giving it to the sprite
 //THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
-const float FIREB_HITBOX_X = 1;
-const float FIREB_HITBOX_Y = 1;
+const float FIREB_HITBOX_X = 3;
+const float FIREB_HITBOX_Y = 3;
 
 //value used to scale up/down or flip sprite:
 const float FIREB_SCALE = 0.15;

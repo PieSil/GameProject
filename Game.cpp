@@ -57,6 +57,12 @@ void Game::renderLevel() const {
     window->draw(level.getGameMap());
 
     /*
+    for (auto& projectile : level.getProjectiles()) {
+        drawHitbox(projectile->getHitbox());
+    }
+    */
+
+    /*
     for (auto tile : gameMap.getTiles()) {
         drawHitbox(tile.getHitbox());
     }
