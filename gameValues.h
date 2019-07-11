@@ -249,7 +249,7 @@ const int BOSS_SHOOT_LAST_COL = 4;
 
 //PROJECTILE
 
-const float PROJ_SPEED = 60;
+const float PROJ_SPEED = 100;
 
 //FIREBALL
 
