@@ -28,9 +28,9 @@ GameLevel::GameLevel(Herotype heroT) {
 
 void GameLevel::createMap() {
 
-    std::ifstream mapMatrix("../GameAssets/Tileset/MapMatrix.txt");
+    std::ifstream file("../GameAssets/Tileset/MapMatrix.txt");
 
-    if(mapMatrix.is_open()) {
+    if(file.is_open()) {
         unsigned short i;
         unsigned short j;
 
@@ -39,13 +39,10 @@ void GameLevel::createMap() {
         for (i = 0; i < MAP_ROWS; i++) {
             for (j = 0; j < MAP_COLUMNS; j++) {
 
-                //create map matrix from file
-                mapMatrix >> level[i*MAP_COLUMNS + j];
-
+                file >> level[i*MAP_COLUMNS + j];
             }
         }
 
-        //load map
         gameMap = Map(level, MAP_COLUMNS, MAP_ROWS);
         gameMap.load();
 
