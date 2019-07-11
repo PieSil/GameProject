@@ -23,7 +23,7 @@ public:
         return &bossParams;
     }
 
-    const bool updateCombat() override;
+    const std::pair<bool, Hitbox> updateCombat() override;
 
 protected:
     static const SpriteParams bossParams;

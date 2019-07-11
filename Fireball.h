@@ -14,6 +14,10 @@ public:
     Fireball(const float& x, const float&y, const bool& facingR = true, const bool& friendly = true, const float& movSpeed = PROJ_SPEED);
     ~Fireball() {};
 
+    Fireball(const Hitbox &hitbox, GameHero *hero, const float &movSpeed = PROJ_SPEED);
+
+    Fireball(const Hitbox &hitbox, Enemy *enemy, const float &movSpeed = PROJ_SPEED);
+
     void characterCollision(GameCharacter *character) override;
 
     void destroy() override;

@@ -27,7 +27,7 @@ public:
 
     const EntityPositions move(const Direction &direction, const float &distance) override;
 
-    virtual const bool & attack();
+    virtual const std::pair<bool, Hitbox> attack(const bool &bypassClock = false); //BYPASS CLOCK USED FOR UNIT TESTING
 
     void getDamaged(const float &damage);
 

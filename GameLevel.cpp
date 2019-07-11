@@ -200,7 +200,9 @@ void GameLevel::animateCharacters() {
 
 void GameLevel::updateCombat(GameHero *hero) {
 
-    if (hero->attack()) { //if hero has started an attack
+    std::pair<bool, Hitbox> attackPair = hero->attack();
+
+    if (attackPair.first) { //if hero has started an attack
 
         if (hero->getState() == ATTACKING) {
 
@@ -208,7 +210,7 @@ void GameLevel::updateCombat(GameHero *hero) {
             Hitbox attackHitbox = createAttackHitbox(hero);
 
             for (const auto &enemy :enemies) {
-                if (enemy->getHitbox().checkHitbox().intersects(attackHitbox.checkHitbox())) {
+                if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
                     //TODO: do damage to enemy
                     enemy->getDamaged(hero->getStrength());
                 }
@@ -217,7 +219,7 @@ void GameLevel::updateCombat(GameHero *hero) {
         } else {
 
             //TODO: shoot projectile;
-            createProjectile(hero);
+            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, hero)));
         }
     }
 }
@@ -225,20 +227,21 @@ void GameLevel::updateCombat(GameHero *hero) {
 
 void GameLevel::updateCombat(Enemy *enemy) {
 
-    if (enemy->updateCombat()) {
+    std::pair<bool, Hitbox> attackPair = enemy->updateCombat();
+
+    if (attackPair.first) {
 
         if (enemy->getState() == ATTACKING) {
 
-            Hitbox attackHitbox = createAttackHitbox(enemy);
 
-            if (attackHitbox.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
+            if (attackPair.second.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
                 //TODO: damage the hero
                 hero->getDamaged(enemy->getStrength());
             }
 
         } else {
             //TODO: shoot projectile
-            createProjectile(enemy);
+            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, enemy)));
         }
     }
 }
@@ -269,7 +272,7 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
 }
 
 
-
+/*
 void GameLevel::createProjectile(GameHero *hero, const bool &isFireball) {
 
     if (isFireball) {
@@ -279,6 +282,7 @@ void GameLevel::createProjectile(GameHero *hero, const bool &isFireball) {
     }
 
 }
+ */
 
 void GameLevel::createProjectile(Enemy *enemy, const bool &isFireball) {
 

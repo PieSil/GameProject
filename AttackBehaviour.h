@@ -13,7 +13,9 @@ class AttackBehaviour {
 public:
     virtual ~AttackBehaviour() {};
 
-    virtual void attack(State &state) = 0;
+    virtual const std::pair<bool, Hitbox>
+    attack(State &state, const EntityPositions &allPositions, const float &attackRange) = 0;
+
 };
 
 

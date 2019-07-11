@@ -39,12 +39,14 @@ MeleeEnemy &MeleeEnemy::operator=(const MeleeEnemy &meleeEnemy) {
     return *this;
 }
 
-const bool & MeleeEnemy::attack() {
+const std::pair<bool, Hitbox> MeleeEnemy::attack(const bool &bypassClock) {
 
-    bool hasAttacked = false;
+    std::pair<bool, Hitbox> result;
+
+    result.first = false;
 
     if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) <= 16)
-        hasAttacked = Enemy::attack();
+        result = Enemy::attack();
 
-    return  hasAttacked;
+    return  result;
 }

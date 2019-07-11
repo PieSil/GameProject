@@ -21,6 +21,18 @@ Fireball::Fireball(const float &x, const float &y, const bool &facingR, const bo
 
 }
 
+Fireball::Fireball(const Hitbox &hitbox, Enemy *enemy, const float &movSpeed) : Projectile(hitbox, enemy, movSpeed) {
+    initSprite(hitbox.getHitbox().getPosition().x, hitbox.getHitbox().getPosition().y);
+    giveHitbox();
+    setupAnimations(getParameters());
+}
+
+Fireball::Fireball(const Hitbox &hitbox, GameHero *hero, const float &movSpeed) : Projectile(hitbox, hero, movSpeed) {
+    initSprite(hitbox.getHitbox().getPosition().x, hitbox.getHitbox().getPosition().y);
+    giveHitbox();
+    setupAnimations(getParameters());
+}
+
 const SpriteParams Fireball::fireballParams(FIREB_WIDTH, FIREB_HEIGHT, FIREB_HITBOX_X, FIREB_HITBOX_Y, FIREB_SCALE,
                                             FIREB_PATH, FIREB_IDLE_ROW,
                                             FIREB_IDLE_LAST_COL, FIREB_MOV_ROW, FIREB_MOV_LAST_COL, FIREB_ATT_ROW,

@@ -6,6 +6,7 @@
 #define GAMEPROJECT_MELEEBEHAVIOUR_H
 
 #include "AttackBehaviour.h"
+#include "math.h"
 
 class MeleeBehaviour : public AttackBehaviour {
 public:
@@ -14,7 +15,8 @@ public:
 
     ~MeleeBehaviour() {};
 
-    void attack(State &state) override;
+    const std::pair<bool, Hitbox> attack(State &state, const EntityPositions &allPositions, const float &attackRange) override;
+
 };
 
 

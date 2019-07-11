@@ -107,6 +107,7 @@ void MovingEntity::updatePositions() {
     allPositions.gridPositionX = static_cast<int>(sprite.getPosition().x/TILE_SIZE.x);
     allPositions.gridPositionY = static_cast<int>(sprite.getPosition().y/TILE_SIZE.y);
 
+    allPositions.facingRight = this->facingRight;
 
 }
 
