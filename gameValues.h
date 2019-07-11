@@ -132,12 +132,12 @@ const int KNIGHT_SHOOT_LAST_COL = 8;
 const float WIZARD_ATTACK_RANGE = 0;
 
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
-const int WIZARD_WIDTH = 48;
-const int WIZARD_HEIGHT = 48;
+const int WIZARD_WIDTH = 32;
+const int WIZARD_HEIGHT = 32;
 
 //values that allow to reduce hitbox size when giving it to the sprite
 //THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
-const float WIZARD_HITBOX_X = 1.8;
+const float WIZARD_HITBOX_X = 2.4;
 const float WIZARD_HITBOX_Y = 1;
 
 //value used to set path of texture file
@@ -145,22 +145,22 @@ const std::string WIZARD_PATH = "../GameAssets/Sprites/Player/Wizard/Wizard.png"
 
 //values used to choose starting sprite
 const int WIZARD_IDLE_ROW = 0;
-const int WIZARD_IDLE_LAST_COL = 2;
+const int WIZARD_IDLE_LAST_COL = 9;
 
 //value used to scale up/down or flip wizard's sprite:
-const float WIZARD_SCALE = 0.5;
+const float WIZARD_SCALE = 0.8;
 
 //values used to choose row and last column of walking animation in the spritesheet:
 const int WIZARD_MOV_ROW =2;
-const int WIZARD_MOV_LAST_COL = 3;
+const int WIZARD_MOV_LAST_COL = 9;
 
-const int WIZARD_ATT_ROW =1;
-const int WIZARD_ATT_LAST_COL = 6;
+const int WIZARD_ATT_ROW =3;
+const int WIZARD_ATT_LAST_COL = 9;
 
 const int WIZARD_ATT_OFFSET = 0;
 
-const int WIZARD_SHOOT_ROW =1;
-const int WIZARD_SHOOT_LAST_COL = 6;
+const int WIZARD_SHOOT_ROW =3;
+const int WIZARD_SHOOT_LAST_COL = 9;
 
 //ENEMY
 

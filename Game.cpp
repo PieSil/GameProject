@@ -52,7 +52,7 @@ void Game::renderLevel() const {
     window->beginDraw();
 
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
-    //drawHitbox(hero->getHitbox());
+    //drawHitbox(level.getHero()->getHitbox());
 
     window->draw(level.getGameMap());
 
