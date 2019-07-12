@@ -14,13 +14,12 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
     createLevel(heroT);
     update();
     initView();
+
 }
 
 void PlayingState::update() {
 
     sf::Time elapsed = game->getElapsed();
-
-    if (elapsed.asSeconds() >= game->getFrameTime()) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
         handleInput(); //polls events from keyboard
 
@@ -28,13 +27,7 @@ void PlayingState::update() {
 
         PlayingState::updateView();
 
-        //game updated, subtract fixed time-step and "reset" elapsed time
-        //game will update again when elapsed equals the fixed time-step chosen
-        elapsed -= sf::seconds(game->getFrameTime());
-        game->setElapsed(elapsed);
-    }
-
-    level.animateCharacters();
+        level.animateCharacters();
 }
 
 void PlayingState::draw() {

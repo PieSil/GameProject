@@ -40,8 +40,14 @@ Game::Game(std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(st
 }
 
 void Game::updateGame() {
+    if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
 
     getCurrentState()->update();
+
+    //game updated, subtract fixed time-step and "reset" elapsed time
+    //game will update again when elapsed equals the fixed time-step chosen
+    elapsed -= sf::seconds(frameTime);
+}
 
     window->update();
 }

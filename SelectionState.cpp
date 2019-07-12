@@ -42,33 +42,6 @@ void SelectionState::update() {
     if (heroT != Herotype::NOHERO)
         game->setState(State::PLAYING, heroT);
 
-    /*
-
-   Herotype hero;
-
-   char selection;
-
-   do {
-       std::cout << "\nPress \"k\" to select Knight, press \"w\" to select Wizard" << std::endl;
-
-       std::cin >> selection;
-
-       switch (selection) {
-           case 'k':
-               hero = Herotype::KNGT;
-               break;
-           case 'w' :
-               hero = Herotype::WZRD;
-               break;
-           default:
-               hero = Herotype::NOHERO;
-               break;
-       }
-
-   } while (hero == Herotype::NOHERO);
-
-   game->setState(State::PLAYING, hero);
-    */
 }
 
 
@@ -89,6 +62,12 @@ void SelectionState::handleInput() {
 
         // convert it to world coordinates
         sf::Vector2f mousePosition = game->getWindow()->getRenderWindow().mapPixelToCoords(position);
+
+        if(mousePosition.x < hero.first->getSprite().getPosition().x) {
+            hero.first->move(Direction::LEFT, 0);
+        } else {
+            hero.first->move(Direction::RIGHT, 0);
+        }
 
         if (hero.second.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
             hero.first->setState(EntityState::WALKING);
