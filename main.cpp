@@ -11,39 +11,17 @@
  
 int main(){
 
-    Herotype hero;
+    if (Game::createGame()) {
 
-    char selection;
+        //Game Loop
+        while (!(Game::getGame()->getWindow()->isClosed())) {
 
-do {
-    std::cout << "\nPress \"k\" to select Knight, press \"w\" to select Wizard" << std::endl;
+            Game::getGame()->updateGame();
 
-    std::cin >> selection;
+            Game::getGame()->renderLevel();
 
-    switch (selection) {
-        case 'k':
-            hero = Herotype::KNGT;
-            break;
-        case 'w' :
-            hero = Herotype::WZRD;
-            break;
-        default:
-            hero = Herotype::NOHERO;
-            break;
-    }
+            Game::getGame()->restartClock();
 
-} while (hero == Herotype::NOHERO);
-
-    Game game(hero);
-
-    //Game Loop
-    while(!(game.getWindow()->isClosed())) {
-
-        game.updateGame();
-
-        game.renderLevel();
-
-        game.restartClock();
-
+        }
     }
 }

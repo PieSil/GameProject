@@ -32,7 +32,6 @@ enum class EntityState {
 };
 
 
-
 //GAME
 
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)

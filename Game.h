@@ -16,25 +16,43 @@
 #include "BossEnemy.h"
 #include "Map.h"
 #include "GameLevel.h"
+#include <stack>
 #include <memory>
 #include <iostream>
 #include <list>
 
+class GameState;
+
+enum class State {
+    SELECTION, PLAYING
+};
+
 class Game {
 public:
 
-    //TODO: delegate hero selction to other class, not the game constructor
-    explicit Game (
-            Herotype heroT, std::unique_ptr<GameWindow> w = std::move(std::unique_ptr<GameWindow>(new GameWindow("Level", sf::Vector2u(8*TILE_SIZE.x * 5,8*TILE_SIZE.y * 5)))));
-
     ~Game() {};
 
-    void handleInput();
+    //TODO: delegate hero selction to other class, not the game constructor
+
     void updateGame();
     void renderLevel() const;
 
-    void drawHitbox(const Hitbox &hitbox) const;
+    void restartClock() {
+        elapsed += clock.restart(); //restarts clock, adds elapsed time since last restart to elapsed attribute
+    };
 
+
+    static const bool createGame();
+
+    static Game* getGame();
+
+    void pushState(State state, Herotype heroT = Herotype::KNGT);
+
+    void popState();
+
+    void setState(State state, Herotype heroT = Herotype::KNGT);
+
+    GameState* getCurrentState() const;
 
     const std::unique_ptr<GameWindow> &getWindow() const {
         return window;
@@ -44,10 +62,13 @@ public:
         return elapsed;
     }
 
-    void restartClock() {
-        elapsed += clock.restart(); //restarts clock, adds elapsed time since last restart to elapsed attribute
-    };
+    void setElapsed(const sf::Time &elapsed) {
+        Game::elapsed = elapsed;
+    }
 
+    float getFrameTime() const {
+        return frameTime;
+    }
 
     //disable copy and assignment
     Game(const Game&) = delete;
@@ -55,25 +76,21 @@ public:
 
 private:
 
-    void moveHero(const Direction &direction);
+    explicit Game(std::unique_ptr<GameWindow> w);
 
-    void createLevel(Herotype heroT);
-
-    void createView();
-
-    void updateView();
+    std::stack<GameState*> states;
 
     sf::Clock clock;
     sf::Time elapsed;
     float frameTime; //allows to use a fixed time-step to update the game
 
     std::unique_ptr<GameWindow> window;
-    std::shared_ptr<sf::View> view;
 
-    Map gameMap;
     GameLevel level;
 
     EntityPositions positions;
+
+    static std::unique_ptr<Game> gameInstance;
 
 };
 
