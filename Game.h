@@ -28,6 +28,7 @@ enum class State {
 };
 
 class Game {
+
 public:
 
     ~Game() {};
@@ -46,6 +47,8 @@ public:
 
     static Game* getGame();
 
+    void createView();
+
     void pushState(State state, Herotype heroT = Herotype::KNGT);
 
     void popState();
@@ -56,6 +59,10 @@ public:
 
     const std::unique_ptr<GameWindow> &getWindow() const {
         return window;
+    }
+
+    const std::unique_ptr<sf::View> &getView() const {
+        return view;
     }
 
     const sf::Time &getElapsed() const {
@@ -85,10 +92,7 @@ private:
     float frameTime; //allows to use a fixed time-step to update the game
 
     std::unique_ptr<GameWindow> window;
-
-    GameLevel level;
-
-    EntityPositions positions;
+    std::unique_ptr<sf::View> view;
 
     static std::unique_ptr<Game> gameInstance;
 

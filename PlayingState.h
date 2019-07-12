@@ -8,6 +8,7 @@
 #include <memory>
 #include <iostream>
 #include <list>
+#include <stack>
 #include "GameState.h"
 #include "GameLevel.h"
 #include "gameValues.h"
@@ -21,6 +22,7 @@
 #include "Map.h"
 
 class PlayingState : public  GameState {
+
 public:
 
     explicit PlayingState(Game *game, const Herotype &heroT = Herotype::KNGT);
@@ -38,9 +40,9 @@ private:
 
     void createLevel(const Herotype& heroT);
 
-    void createView();
-
     void updateView();
+
+    void initView();
 
     void moveHero(const Direction &direction, const float &distance);
 
@@ -48,7 +50,6 @@ private:
 
     GameLevel level;
 
-    sf::View view;
 };
 
 

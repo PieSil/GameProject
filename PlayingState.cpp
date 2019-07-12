@@ -2,6 +2,7 @@
 // Created by Pietro on 2019-07-12.
 //
 
+#include "SelectionState.h"
 #include "GameState.h"
 #include "MovingEntity.h"
 #include "GameEntity.h"
@@ -11,7 +12,8 @@
 PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) {
 
     createLevel(heroT);
-    createView();
+    update();
+    initView();
 }
 
 void PlayingState::update() {
@@ -33,11 +35,11 @@ void PlayingState::update() {
     }
 
     level.animateCharacters();
-
-    game->getWindow()->update();
 }
 
 void PlayingState::draw() {
+
+   //game->getWindow()->clear(sf::Color::Red);
 
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
     //drawHitbox(level.getHero()->getHitbox());
@@ -104,21 +106,16 @@ void PlayingState::createLevel(const Herotype &heroT) {
     level = GameLevel(heroT);
 }
 
-void PlayingState::createView() {
-    view = sf::View(
-            sf::View(sf::Vector2f(level.getHero()->getSprite().getPosition()), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y)));
-    updateView();
-}
-
 void PlayingState::updateView() {
 
     auto hero = level.getHero().get();
 
-    if (!(hero->getSprite().getPosition().x - view.getSize().x / 2. < 0 ||
-          hero->getSprite().getPosition().x + view.getSize().x / 2. > MAP_COLUMNS * TILE_SIZE.x)) {
-        view.setCenter(hero->getSprite().getPosition().x, view.getCenter().y);
-        game->getWindow()->setView(view);
+    if (!(hero->getSprite().getPosition().x - game->getView()->getSize().x / 2. < 0 ||
+          hero->getSprite().getPosition().x + game->getView()->getSize().x / 2. > MAP_COLUMNS * TILE_SIZE.x)) {
+        game->getView()->setCenter(hero->getSprite().getPosition().x, game->getView()->getCenter().y);
+        game->getWindow()->setView(*game->getView());
     }
+
 }
 
 void PlayingState::moveHero(const Direction &direction, const float &distance) {
@@ -136,4 +133,9 @@ void PlayingState::drawHitbox(const Hitbox &hitbox) const {
     game->getWindow()->draw(hitbox.getLowerEdge());
     game->getWindow()->draw(hitbox.getRightEdge());
     game->getWindow()->draw(hitbox.getLeftEdge());
+}
+
+void PlayingState::initView() {
+    game->getView()->setCenter(level.getHero()->getSprite().getPosition());
+    updateView();
 }

@@ -34,17 +34,16 @@ Game *Game::getGame() {
 
 Game::Game(std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(std::move(w)) {
 
+    createView();
     setState(State::SELECTION);
 
 }
 
 void Game::updateGame() {
 
-    if (elapsed.asSeconds() >= frameTime) { //game updates ony if elapsed time is >= than fixed time-step chosen
+    getCurrentState()->update();
 
-        getCurrentState()->update();
-
-    }
+    window->update();
 }
 
     void Game::renderLevel() const {
@@ -60,6 +59,7 @@ void Game::updateGame() {
 
     void Game::pushState(State state, Herotype heroT) {
         switch (state) {
+
             case State::PLAYING:
                 states.emplace(new PlayingState(this, heroT));
                 break;
@@ -94,6 +94,11 @@ GameState *Game::getCurrentState() const {
 
     else
         return nullptr;
+}
+
+void Game::createView() {
+    view.reset(new sf::View(sf::View(sf::Vector2f(window->getWindowSize().x, window->getWindowSize().y), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y))));
+    window->setView(*view);
 }
 
 

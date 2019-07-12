@@ -50,6 +50,13 @@ public:
         return windowSize;
     }
 
+    const sf::RenderWindow &getRenderWindow() const {
+        return window;
+    }
+
+    void clear(sf::Color color) {
+        window.clear(color);
+    }
 
 
 private:
