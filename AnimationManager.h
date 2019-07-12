@@ -21,19 +21,19 @@ public:
 
     ~AnimationManager() {};
 
-    void play(const State &state, const bool &right);
+    void play(const EntityState &state, const bool &right);
 
-    void resetAnimation(const State& state) {
+    void resetAnimation(const EntityState& state) {
         animations.find(state)->second.setCurrentFrame(0);
     };
 
-    void createAnimation(const State &state);
+    void createAnimation(const EntityState &state);
 
-    int getCurrentFrame(const State& state) const {
+    int getCurrentFrame(const EntityState& state) const {
         return animations.find(state)->second.getCurrentFrame();
     }
 
-    const std::map<State, Animation> &getAnimations() const {
+    const std::map<EntityState, Animation> &getAnimations() const {
         return animations;
     }
 
@@ -46,7 +46,7 @@ public:
     }
 
 protected:
-    std::map<State, Animation> animations;
+    std::map<EntityState, Animation> animations;
     const SpriteParams* parameters;
     sf::Sprite* sprite;
 };

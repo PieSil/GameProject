@@ -5,10 +5,11 @@
 #include "GameLevel.h"
 
 GameLevel::GameLevel(Herotype heroT) {
-    if (heroT == KNGT) {
+    if (heroT == Herotype::KNGT) {
         hero = std::move(
                 std::unique_ptr<Knight>(new Knight(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
-    } else if (heroT == WZRD) {
+
+    } else if (heroT == Herotype::WZRD) {
         hero = std::move(
                 std::unique_ptr<Wizard>(new Wizard(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
     } else {
@@ -175,7 +176,7 @@ void GameLevel::updatePhysics(GameCharacter *character) {
     //call moving entity method to bypass check on character state
     //TODO: find a better way to bypass check on character state
 
-    detectMapCollisions(character->MovingEntity::move(UP, character->getVelocityY()), character);
+    detectMapCollisions(character->MovingEntity::move(Direction::UP, character->getVelocityY()), character);
 
     character->setVelocityY(character->getVelocityY() + GRAVITY);
 
@@ -218,7 +219,7 @@ void GameLevel::updateCombat(GameHero *hero) {
 
     if (attackPair.first) { //if hero has started an attack
 
-        if (hero->getState() == ATTACKING) {
+        if (hero->getState() == EntityState::MELEE) {
 
 
             Hitbox attackHitbox = createAttackHitbox(hero);
@@ -245,7 +246,7 @@ void GameLevel::updateCombat(Enemy *enemy) {
 
     if (attackPair.first) {
 
-        if (enemy->getState() == ATTACKING) {
+        if (enemy->getState() == EntityState::MELEE) {
 
 
             if (attackPair.second.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
@@ -356,7 +357,7 @@ void GameLevel::updateProjectiles(const float &elapsedTime) {
 }
 
 
-const bool &GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
+const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
 
     bool toDelete = false;
 

@@ -10,12 +10,12 @@ AnimationManager::AnimationManager(sf::Sprite *sprite, const SpriteParams *param
 
 }
 
-void AnimationManager::createAnimation(const State &state) {
+void AnimationManager::createAnimation(const EntityState &state) {
 
     std::vector<sf::IntRect> framesVector;
 
     switch (state) {
-        case IDLE:
+        case EntityState::IDLE:
 
 
             for (auto col = 0; col <= parameters->idleLastCol; col++) {
@@ -24,10 +24,10 @@ void AnimationManager::createAnimation(const State &state) {
                                     parameters->width, parameters->height));
             }
 
-            animations.emplace(IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
+            animations.emplace(EntityState::IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
             break;
 
-        case WALKING:
+        case EntityState::WALKING:
 
             for (auto col = 0; col <= parameters->movLastCol; col++) {
                 framesVector.emplace_back(
@@ -35,27 +35,27 @@ void AnimationManager::createAnimation(const State &state) {
                                     parameters->width, parameters->height));
             }
 
-            animations.emplace(WALKING, Animation(framesVector, sprite, parameters, WALK_ANIM_TIME));
+            animations.emplace(EntityState::WALKING, Animation(framesVector, sprite, parameters, WALK_ANIM_TIME));
             break;
 
-        case ATTACKING:
+        case EntityState::MELEE :
             for (auto col = 0; col <= parameters->attLastCol; col++) {
                 framesVector.emplace_back(
                         sf::IntRect(col * (parameters->width + parameters->attOffset), parameters->attRow * parameters->height,
                                     parameters->width, parameters->height));
             }
 
-            animations.emplace(ATTACKING, Animation(framesVector, sprite, parameters, ATT_ANIM_TIME));
+            animations.emplace(EntityState::MELEE, Animation(framesVector, sprite, parameters, ATT_ANIM_TIME));
             break;
 
-        case SHOOTING:
+        case EntityState::SHOOTING:
             for (auto col = 0; col <= parameters->shootLastCol; col++) {
                 framesVector.emplace_back(
                         sf::IntRect(col * parameters->width, parameters->shootRow * parameters->height,
                                     parameters->width, parameters->height));
             }
 
-            animations.emplace(SHOOTING, Animation(framesVector, sprite, parameters, SHOOT_ANIM_TIME));
+            animations.emplace(EntityState::SHOOTING, Animation(framesVector, sprite, parameters, SHOOT_ANIM_TIME));
             break;
 
 
@@ -67,13 +67,13 @@ void AnimationManager::createAnimation(const State &state) {
                                     parameters->width, parameters->height));
             }
 
-            animations.emplace(IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
+            animations.emplace(EntityState::IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
             break;
     }
 
 }
 
-void AnimationManager::play(const State &state, const bool &right) {
+void AnimationManager::play(const EntityState &state, const bool &right) {
     animations.find(state)->second.play(right); //find selected animation and play it
 
     for (auto& animation : animations) {

@@ -35,7 +35,7 @@ public:
     void createMap();
 
     void detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
-    const bool & detectMapCollisions(std::unique_ptr<Projectile> &projectile);
+    const bool detectMapCollisions(std::unique_ptr<Projectile> &projectile);
 
     void animateCharacters();
 

@@ -92,13 +92,13 @@ void Game::handleInput() {
     bool keyPressed = false;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        moveHero(RIGHT);
+        moveHero(Direction::RIGHT);
         keyPressed = true;
     }
 
     //move left
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        moveHero(LEFT);
+        moveHero(Direction::LEFT);
         keyPressed = true;
     }
 
@@ -114,8 +114,8 @@ void Game::handleInput() {
         keyPressed = true;
     }
 
-    if (!keyPressed && level.getHero()->getState() != ATTACKING && level.getHero()->getState() != SHOOTING) {
-        level.getHero()->setState(IDLE);
+    if (!keyPressed && level.getHero()->getState() != EntityState::MELEE && level.getHero()->getState() != EntityState::SHOOTING) {
+        level.getHero()->setState(EntityState::IDLE);
     }
 }
 

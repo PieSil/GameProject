@@ -44,22 +44,22 @@ GameCharacter::GameCharacter(const GameCharacter &copied) : health(copied.getHea
 
 void GameCharacter::setupAnimations(const SpriteParams *parameters) {
     MovingEntity::setupAnimations(parameters);
-    animManager.createAnimation(ATTACKING); //create attack animation
-    animManager.createAnimation(SHOOTING); //create shoot animation
+    animManager.createAnimation(EntityState::MELEE); //create attack animation
+    animManager.createAnimation(EntityState::SHOOTING); //create shoot animation
 }
 
 void GameCharacter::animate() {
 
-    if (state == ATTACKING) {
-        if (animManager.getCurrentFrame(ATTACKING) == getParameters()->attLastCol) { //if animation is on last frame
-            animManager.resetAnimation(ATTACKING); //reset animation to the beginning
-            state = IDLE; //reset state to idle to avoid looping the animation
+    if (state == EntityState::MELEE) {
+        if (animManager.getCurrentFrame(EntityState::MELEE) == getParameters()->attLastCol) { //if animation is on last frame
+            animManager.resetAnimation(EntityState::MELEE); //reset animation to the beginning
+            state = EntityState::IDLE; //reset state to idle to avoid looping the animation
         }
 
-    } else if (state == SHOOTING) {
-        if (animManager.getCurrentFrame(SHOOTING) == getParameters()->shootLastCol) { //if animation is on last frame
-            animManager.resetAnimation(SHOOTING); //reset animation to the beginning
-            state = IDLE; //reset state to idle to avoid looping the animation
+    } else if (state == EntityState::SHOOTING) {
+        if (animManager.getCurrentFrame(EntityState::SHOOTING) == getParameters()->shootLastCol) { //if animation is on last frame
+            animManager.resetAnimation(EntityState::SHOOTING); //reset animation to the beginning
+            state = EntityState::IDLE; //reset state to idle to avoid looping the animation
         }
     }
 
@@ -67,7 +67,7 @@ void GameCharacter::animate() {
 }
 
 const EntityPositions GameCharacter::move(const Direction &direction, const float &distance) {
-    if (state != ATTACKING && state != SHOOTING) //enable movement only if not attacking
+    if (state != EntityState::MELEE && state != EntityState::SHOOTING) //enable movement only if not attacking
        return(MovingEntity::move(direction, distance));
 
     else

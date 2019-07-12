@@ -29,22 +29,22 @@ const EntityPositions MovingEntity::move(const Direction &direction, const float
 
     //MOVE ON X AXIS
 
-    if (direction == RIGHT) {
+    if (direction == Direction::RIGHT) {
 
         sprite.move(distance, 0.); //move right
 
-        state = WALKING;
+        state = EntityState::WALKING;
 
         if (!(facingRight)) {
             facingRight = true; //change facing direction
         }
 
 
-    } else if (direction == LEFT) {
+    } else if (direction == Direction::LEFT) {
 
         sprite.move(-distance, 0.); //move left
 
-        state = WALKING;
+        state = EntityState::WALKING;
 
         if (facingRight) {
             facingRight = false; //change facing direction
@@ -52,10 +52,10 @@ const EntityPositions MovingEntity::move(const Direction &direction, const float
 
         //MOVE ON Y AXIS
 
-    } else if (direction == UP) { //move upwards
+    } else if (direction == Direction::UP) { //move upwards
         sprite.move(0, -distance);
 
-    } else if (direction == DOWN) {
+    } else if (direction == Direction::DOWN) {
         sprite.move(0, distance); //move downwards
 
     } else {
@@ -88,7 +88,7 @@ MovingEntity::MovingEntity() : MovingEntity(0, 0) {
 
 void MovingEntity::setupAnimations(const SpriteParams *parameters) {
     GameEntity::setupAnimations(parameters); //create animation manager and IDLE animation (see GameEntity method)
-    animManager.createAnimation(WALKING); //create walking animation
+    animManager.createAnimation(EntityState::WALKING); //create walking animation
 }
 
 void MovingEntity::animate() {

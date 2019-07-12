@@ -4,13 +4,13 @@
 
 #include "ShootingBehaviour.h"
 
-const std::pair<bool, Hitbox> ShootingBehaviour::attack(State &state, const EntityPositions &allPositions,
+const std::pair<bool, Hitbox> ShootingBehaviour::attack(EntityState &state, const EntityPositions &allPositions,
                                                         const float &attackRange) {
 
     std::pair<bool, Hitbox> result;
 
-    if (state != ATTACKING && state != SHOOTING) {
-        state = SHOOTING;
+    if (state != EntityState::MELEE && state != EntityState::SHOOTING) {
+        state = EntityState::SHOOTING;
         result.first = true;
         result.second = Hitbox(allPositions.spritePosition, 0, 0);
 

@@ -8,35 +8,30 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-//Alias definitions
+//Enum classes definitions
 
-//use Direction as alias of unsigned short int to simplify readability
-using Direction = unsigned short int;
+enum class Direction {
 
-const Direction RIGHT = 0;
+    RIGHT, LEFT, UP, DOWN
 
-const Direction LEFT = 1;
-
-const Direction UP = 2;
-
-const Direction  DOWN = 3;
+};
 
 //use Herotype as alias of unsigned short int to simplify readability
-using Herotype = char;
 
-const Herotype KNGT = 'k'; //Knight hero type, not called KNIGHT to avoid confusion with Knight class
+enum class Herotype {
+    KNGT, //Knight hero type, not called KNIGHT to avoid confusion with Knight class
+    WZRD, //Wizard hero type, not called WIZARD to avoid confusion with Wizard class
+    NOHERO
 
-const Herotype WZRD = 'w';//Wizard hero type, not called WIZARD to avoid confusion with Wizard class
+};
 
-using State = unsigned short;
+enum class EntityState {
 
-const State IDLE = 0;
+    IDLE, WALKING, MELEE, SHOOTING
 
-const State WALKING = 1;
+};
 
-const State ATTACKING = 2;
 
-const State SHOOTING = 3;
 
 //GAME
 

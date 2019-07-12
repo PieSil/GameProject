@@ -9,7 +9,7 @@
 
 const SpriteParams GameEntity::entityParams(300, 300, 1, 1, 0.75, "../GameAssets/Sprites/Default_Sprite.png", 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0), animManager(&sprite, getParameters()), state(IDLE) {
+GameEntity::GameEntity(const float &x, const float &y) : text(std::move(sf::Text())), idleCounter(0), animManager(&sprite, getParameters()), state(EntityState::IDLE) {
 
     initSprite(x, y);
     giveHitbox();
@@ -69,7 +69,7 @@ GameEntity::giveHitbox() {
 
 void GameEntity::setupAnimations(const SpriteParams *parameters) {
     animManager = AnimationManager(&sprite, parameters); //create animation sprite
-    animManager.createAnimation(IDLE); //create idle animation
+    animManager.createAnimation(EntityState::IDLE); //create idle animation
 }
 
 void GameEntity::animate() {

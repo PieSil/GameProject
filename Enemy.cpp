@@ -42,10 +42,10 @@ const EntityPositions Enemy::move(const float &distance) {
     if (!paralyzed && aggro && abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >= attackRange) { //if enemy is not paralyzed and aggro is active
 
         if (facingRight) { //if enemy is facing right
-            prevPosition = GameCharacter::move(RIGHT, distance); //move right
+            prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
 
         } else {
-            prevPosition = GameCharacter::move(LEFT, distance); //else move left
+            prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
         }
 
     }

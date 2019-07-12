@@ -5,7 +5,7 @@
 #include "MeleeBehaviour.h"
 
 
-const std::pair<bool, Hitbox> MeleeBehaviour::attack(State &state, const EntityPositions &allPositions,
+const std::pair<bool, Hitbox> MeleeBehaviour::attack(EntityState &state, const EntityPositions &allPositions,
                                                      const float &attackRange) {
 
     /*
@@ -29,8 +29,8 @@ const std::pair<bool, Hitbox> MeleeBehaviour::attack(State &state, const EntityP
 
     std::pair<bool, Hitbox> result;
 
-    if (state != ATTACKING && state != SHOOTING) {
-        state = ATTACKING;
+    if (state != EntityState::MELEE && state != EntityState::SHOOTING) {
+        state = EntityState::MELEE;
         result.first = true;
 
         if (allPositions.facingRight) //if character is facing right create hitbox to its right

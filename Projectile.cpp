@@ -23,9 +23,9 @@ const EntityPositions Projectile::move(const float &distance) {
     EntityPositions prevPosition;
 
     if (this->facingRight)
-        prevPosition = MovingEntity::move(RIGHT, distance);
+        prevPosition = MovingEntity::move(Direction::RIGHT, distance);
     else
-        prevPosition = MovingEntity::move(LEFT, distance);
+        prevPosition = MovingEntity::move(Direction::LEFT, distance);
 
     updatePositions();
 

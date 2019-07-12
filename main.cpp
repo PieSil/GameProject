@@ -12,12 +12,27 @@
 int main(){
 
     Herotype hero;
+
+    char selection;
+
 do {
     std::cout << "\nPress \"k\" to select Knight, press \"w\" to select Wizard" << std::endl;
 
-    std::cin >> hero;
+    std::cin >> selection;
 
-} while (hero != KNGT && hero != WZRD);
+    switch (selection) {
+        case 'k':
+            hero = Herotype::KNGT;
+            break;
+        case 'w' :
+            hero = Herotype::WZRD;
+            break;
+        default:
+            hero = Herotype::NOHERO;
+            break;
+    }
+
+} while (hero == Herotype::NOHERO);
 
     Game game(hero);
 

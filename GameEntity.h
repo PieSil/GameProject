@@ -44,7 +44,6 @@ public:
     }
 
     void setTexture(const sf::Texture &texture) {
-        //updateSprite();
         GameEntity::texture = texture;
     }
 
@@ -56,11 +55,11 @@ public:
         return animManager;
     }
 
-    State getState() const {
+    EntityState getState() const {
         return state;
     }
 
-    void setState(State state) {
+    void setState(EntityState state) {
         GameEntity::state = state;
     }
 
@@ -79,7 +78,7 @@ protected:
     sf::Sprite sprite;
     Hitbox hitbox;
 
-    State state;
+    EntityState state;
 
     float idleCounter;
 
