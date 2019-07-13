@@ -13,8 +13,8 @@
 
 class MeleeEnemy: public Enemy {
 public:
-    MeleeEnemy(GameHero *hero, const float &x, const float &y, const float &str = DEF_ENEMY_STRENGTH,
-               const bool &par = false, const bool &onf = false, const float &h = DEF_ENEMY_HEALTH,
+    MeleeEnemy(GameHero *hero, const float &x, const float &y, const float &str = DEF_MELEE_STRENGTH,
+               const bool &par = false, const bool &onf = false, const float &h = DEF_MELEE_HEALTH,
                const bool &facingR = true, const float &s = ENEMY_SPEED);
 
     //copy constructor

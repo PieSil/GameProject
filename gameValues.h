@@ -73,10 +73,10 @@ const int EDGE_THICKNESS = 1;
 //HERO
 
 //default health value for all game heroes:
-const float DEF_HERO_HEALTH = 20.;
+const float DEF_HERO_HEALTH = 80.;
 
 //default strength value for all game heroes:
-const float DEF_HERO_STRENGTH = 5.;
+const float DEF_HERO_STRENGTH = 10.;
 
 //default attack range for all game heroes:
 const float HERO_ATTACK_RANGE = 16;
@@ -165,12 +165,19 @@ const int WIZARD_SHOOT_LAST_COL = 9;
 const float DEF_ENEMY_HEALTH = 35.;
 
 //default strength value for all enemies:
-const float DEF_ENEMY_STRENGTH = 3.;
+const float DEF_ENEMY_STRENGTH = 5.;
 
 //default value for enemy movementSpeed parameter:
 const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
+
+//default health value for all enemies:
+const float DEF_MELEE_HEALTH = 35.;
+
+//default strength value for all enemies:
+const float DEF_MELEE_STRENGTH = 5.;
+
 
 const float MELEE_ATTACK_RANGE = 16;
 
@@ -210,6 +217,9 @@ const int MELEE_SHOOT_LAST_COL = 7;
 
 
 //BOSS
+
+const float DEF_BOSS_HEALTH = 80.;
+const float DEF_BOSS_STRENGTH = 10.;
 
 const float BOSS_ATTACK_RANGE =32;
 const float BOSS_SHOOT_RANGE = 64;

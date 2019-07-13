@@ -14,8 +14,8 @@
 
 class BossEnemy: public Enemy {
 public:
-    BossEnemy(GameHero *hero, const float &x, const float &y, const float &str = DEF_ENEMY_STRENGTH,
-              const bool &par = false, const bool &onf = false, const float &h = DEF_ENEMY_HEALTH,
+    BossEnemy(GameHero *hero, const float &x, const float &y, const float &str = DEF_BOSS_STRENGTH,
+              const bool &par = false, const bool &onf = false, const float &h = DEF_BOSS_HEALTH,
               const bool &facingR = true, const float &s = BOSS_SPEED);
     ~BossEnemy() {};
 
