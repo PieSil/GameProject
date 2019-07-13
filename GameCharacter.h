@@ -31,6 +31,8 @@ public:
 
     void getDamaged(const float &damage);
 
+    void jump();
+
     void setupAnimations(const SpriteParams *parameters) override;
 
     float getHealth() const {

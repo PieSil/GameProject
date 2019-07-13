@@ -58,6 +58,28 @@ void AnimationManager::createAnimation(const EntityState &state) {
             animations.emplace(EntityState::SHOOTING, Animation(framesVector, sprite, parameters, SHOOT_ANIM_TIME));
             break;
 
+        case EntityState::DYING :
+            for (auto col = 0; col <= parameters->deathLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->deathRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(EntityState::DYING, Animation(framesVector, sprite, parameters, DEATH_ANIM_TIME));
+            break;
+
+        case EntityState::DEAD :
+
+            //keep character on last frame of death animation
+            for (auto col = parameters->deathLastCol; col <= parameters->deathLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->deathRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(EntityState::DEAD, Animation(framesVector, sprite, parameters, DEATH_ANIM_TIME));
+            break;
+
 
         default:
             //TODO throw exception? just add another idle animation for now

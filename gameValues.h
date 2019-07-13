@@ -27,7 +27,7 @@ enum class Herotype {
 
 enum class EntityState {
 
-    IDLE, WALKING, MELEE, SHOOTING
+    IDLE, WALKING, MELEE, SHOOTING, DYING, DEAD
 
 };
 
@@ -46,6 +46,8 @@ const float IDLE_ANIM_TIME = 1;
 
 const float ATT_ANIM_TIME = 0.5;
 const float SHOOT_ANIM_TIME = 0.5;
+
+const float DEATH_ANIM_TIME = 1;
 
 //GRAVITY modifying this values may break game physics
 
@@ -121,6 +123,9 @@ const int KNIGHT_ATT_OFFSET = 38;
 const int KNIGHT_SHOOT_ROW =2;
 const int KNIGHT_SHOOT_LAST_COL = 8;
 
+const int KNIGHT_DEATH_ROW = 3;
+const int KNIGHT_DEATH_LAST_COL = 8;
+
 //WIZARD
 
 const float WIZARD_ATTACK_RANGE = 0;
@@ -155,6 +160,9 @@ const int WIZARD_ATT_OFFSET = 0;
 
 const int WIZARD_SHOOT_ROW =3;
 const int WIZARD_SHOOT_LAST_COL = 9;
+
+const int WIZARD_DEATH_ROW = 4;
+const int WIZARD_DEATH_LAST_COL = 9;
 
 //ENEMY
 
@@ -203,6 +211,9 @@ const int MELEE_ATT_OFFSET = 0;
 const int MELEE_SHOOT_ROW =2;
 const int MELEE_SHOOT_LAST_COL = 7;
 
+const int MELEE_DEATH_ROW = 3;
+const int MELEE_DEATH_LAST_COL = 7;
+
 //BOSS
 
 const float BOSS_ATTACK_RANGE =32;
@@ -240,6 +251,9 @@ const int BOSS_ATT_OFFSET = 0;
 
 const int BOSS_SHOOT_ROW =4;
 const int BOSS_SHOOT_LAST_COL = 4;
+
+const int BOSS_DEATH_ROW = 9;
+const int BOSS_DEATH_LAST_COL = 5;
 
 //PROJECTILE
 

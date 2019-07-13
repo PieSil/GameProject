@@ -56,18 +56,21 @@ const EntityPositions Enemy::move(const float &distance) {
 
 void Enemy::updateAggro() {
 
-    //if aggro is not activated and hero sprite is in aggro range
-    // (if absolute value of hero x coordinate - enemy x coordinate is < aggro range then hero is in aggro range)
-    if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange) {
-        aggro = true; //activate aggro
-    }
+    if (state != EntityState::DYING && state != EntityState::DEAD) {
 
-    if (hero->getSprite().getPosition().x <=
-        this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
-        facingRight = false; //turn left
+        //if aggro is not activated and hero sprite is in aggro range
+        // (if absolute value of hero x coordinate - enemy x coordinate is < aggro range then hero is in aggro range)
+        if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange) {
+            aggro = true; //activate aggro
+        }
 
-    } else {
-        facingRight = true; //else turn right
+        if (hero->getSprite().getPosition().x <=
+            this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
+            facingRight = false; //turn left
+
+        } else {
+            facingRight = true; //else turn right
+        }
     }
 }
 

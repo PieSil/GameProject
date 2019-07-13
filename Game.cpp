@@ -9,6 +9,7 @@
 #include "GameState.h"
 #include "PlayingState.h"
 #include "SelectionState.h"
+#include "GameOver.h"
 
 /**
  * Game implementation
@@ -73,6 +74,9 @@ void Game::updateGame() {
             case State::SELECTION:
                 states.emplace(new SelectionState(this));
                 break;
+
+            case State::GAMEOVER:
+                //states.emplace(new GameOver(this));
 
             default:
                 states.emplace(new SelectionState(this));

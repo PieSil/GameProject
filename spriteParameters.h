@@ -12,10 +12,10 @@ public:
     SpriteParams(const int &width, const int &height, const float &widthRed, const float &heightRed, const float scale,
                  const std::string &path,
                  const unsigned short &idleRow, const unsigned short idleCol, const unsigned short movRow,
-                 const unsigned short movLastCol, const int &attRow, const int attLastCol, const int attOffset, const int shootRow, const int shootLastCol)
+                 const unsigned short movLastCol, const int &attRow, const int &attLastCol, const int &attOffset, const int &shootRow, const int &shootLastCol, const int &deathRow, const int &deathLastCol)
             : width(width), height(height), widthRed(widthRed), heightRed(heightRed), scale(scale), path(path),
               idleRow(idleRow), idleLastCol(idleCol), movRow(movRow), movLastCol(movLastCol), attRow(attRow),
-              attLastCol(attLastCol), attOffset(attOffset), shootRow(shootRow), shootLastCol(shootLastCol) {};
+              attLastCol(attLastCol), attOffset(attOffset), shootRow(shootRow), shootLastCol(shootLastCol), deathRow(deathRow), deathLastCol(deathLastCol) {};
 
     //values used to determine sprite width and heigth to correctly select it when cutting sprite sheet:
     const int width;
@@ -47,6 +47,9 @@ public:
 
     const int shootRow;
     const int shootLastCol;
+
+    const int deathRow;
+    const int deathLastCol;
 };
 
 #endif //GAMEPROJECT_SPRITEPARAMETERS_H

@@ -24,10 +24,14 @@ GameCharacter::~GameCharacter() {};
 const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
 
     std::pair<bool, Hitbox> result;
+    result.first = false;
 
-    if ((attackClock.getElapsedTime().asSeconds() >= 1) || bypassClock) {
-        attackClock.restart();
-        result = attackBehaviour->attack(state, allPositions, attackRange);
+    if (state != EntityState::DYING && state != EntityState::DEAD) {
+
+        if ((attackClock.getElapsedTime().asSeconds() >= 1) || bypassClock) {
+            attackClock.restart();
+            result = attackBehaviour->attack(state, allPositions, attackRange);
+        }
     }
 
     return result;
@@ -46,6 +50,8 @@ void GameCharacter::setupAnimations(const SpriteParams *parameters) {
     MovingEntity::setupAnimations(parameters);
     animManager.createAnimation(EntityState::MELEE); //create attack animation
     animManager.createAnimation(EntityState::SHOOTING); //create shoot animation
+    animManager.createAnimation(EntityState::DYING); //create death animation
+    animManager.createAnimation(EntityState::DEAD);
 }
 
 void GameCharacter::animate() {
@@ -61,13 +67,18 @@ void GameCharacter::animate() {
             animManager.resetAnimation(EntityState::SHOOTING); //reset animation to the beginning
             state = EntityState::IDLE; //reset state to idle to avoid looping the animation
         }
+
+    } else if (state == EntityState::DYING) {
+        if (animManager.getCurrentFrame(EntityState::DYING) == getParameters()->deathLastCol) { //if animation is on last frame
+            state = EntityState::DEAD;
+        }
     }
 
     MovingEntity::animate();
 }
 
 const EntityPositions GameCharacter::move(const Direction &direction, const float &distance) {
-    if (state != EntityState::MELEE && state != EntityState::SHOOTING) //enable movement only if not attacking
+    if (state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) //enable movement only if not attacking
        return(MovingEntity::move(direction, distance));
 
     else
@@ -75,10 +86,21 @@ const EntityPositions GameCharacter::move(const Direction &direction, const floa
 }
 
 void GameCharacter::getDamaged(const float &damage) {
-    health -= damage;
 
-    if (health <= 0) {
-        //TODO: set state to dying
-        std::cout << "DEAD" << std::endl;
+    if (health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
+
+        health -= damage;
+
+        if (health <= 0) {
+            //TODO: set state to dying
+            state = EntityState::DYING;
+        }
+    }
+}
+
+void GameCharacter::jump() {
+    if(state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) {
+        onGround = false;
+        velocityY = JUMP_VELOCITY;
     }
 }

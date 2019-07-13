@@ -15,7 +15,7 @@
 const SpriteParams Wizard::wizardParams(WIZARD_WIDTH, WIZARD_HEIGHT, WIZARD_HITBOX_X, WIZARD_HITBOX_Y, WIZARD_SCALE,
                                         WIZARD_PATH, WIZARD_IDLE_ROW,
                                         WIZARD_IDLE_LAST_COL, WIZARD_MOV_ROW, WIZARD_MOV_LAST_COL, WIZARD_ATT_ROW,
-                                        WIZARD_ATT_LAST_COL, WIZARD_ATT_OFFSET, WIZARD_SHOOT_ROW, WIZARD_SHOOT_LAST_COL);
+                                        WIZARD_ATT_LAST_COL, WIZARD_ATT_OFFSET, WIZARD_SHOOT_ROW, WIZARD_SHOOT_LAST_COL, WIZARD_DEATH_ROW, WIZARD_DEATH_LAST_COL);
 
 void Wizard::specialBehaviour() {
 
