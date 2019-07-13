@@ -28,6 +28,9 @@ void PlayingState::update() {
         PlayingState::updateView();
 
         level.animateCharacters();
+
+        if (level.getHero()->getState() == EntityState::DEAD)
+            game->setState(State::GAMEOVER);
 }
 
 void PlayingState::draw() {
@@ -88,7 +91,7 @@ void PlayingState::handleInput() {
         keyPressed = true;
     }
 
-    if (!keyPressed && level.getHero()->getState() != EntityState::MELEE && level.getHero()->getState() != EntityState::SHOOTING) {
+    if (!keyPressed && level.getHero()->getState() != EntityState::MELEE && level.getHero()->getState() != EntityState::SHOOTING && level.getHero()->getState() != EntityState::DYING  && level.getHero()->getState() != EntityState::DEAD) {
         level.getHero()->setState(EntityState::IDLE);
     }
 }

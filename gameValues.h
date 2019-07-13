@@ -74,7 +74,7 @@ const int EDGE_THICKNESS = 1;
 //HERO
 
 //default health value for all game heroes:
-const float DEF_HERO_HEALTH = 20.;
+const float DEF_HERO_HEALTH = 1.;
 
 //default strength value for all game heroes:
 const float DEF_HERO_STRENGTH = 5.;
