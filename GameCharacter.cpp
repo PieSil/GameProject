@@ -14,7 +14,7 @@
 
 GameCharacter::GameCharacter(const float &x, const float &y, const float &str, const bool &onf, const float &h,
                              const float &s, const bool &facingR, const float& attackRange) :
-        onFire(onf), health(abs(h)), strength(abs(str)), attackRange(attackRange),
+        onFire(onf), health(abs(h)), strength(abs(str)), attackRange(attackRange), attackTimeStep(HERO_ATT_TIMESTEP),
         MovingEntity(x, y, s, facingR) {
 }
 
@@ -25,7 +25,7 @@ const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
 
     std::pair<bool, Hitbox> result;
 
-    if ((attackClock.getElapsedTime().asSeconds() >= 1) || bypassClock) {
+    if ((attackClock.getElapsedTime().asSeconds() >= attackTimeStep) || bypassClock) {
         attackClock.restart();
         result = attackBehaviour->attack(state, allPositions, attackRange);
     }

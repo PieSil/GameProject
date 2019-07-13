@@ -81,6 +81,8 @@ const float DEF_HERO_STRENGTH = 5.;
 //default attack range for all game heroes:
 const float HERO_ATTACK_RANGE = 16;
 
+const float HERO_ATT_TIMESTEP = 0.5;
+
 
 //default value for hero movementSpeed parameter:
 const float HERO_SPEED = 60; //sets hero speed (measured in pixels/second ?)
@@ -172,6 +174,8 @@ const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
 
 const float MELEE_ATTACK_RANGE = 16;
 
+const float MELEE_ATT_TIMESTEP = 3;
+
 //values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
 const int MELEE_WIDTH = 48;
 const int MELEE_HEIGHT = 48;
@@ -204,10 +208,13 @@ const int MELEE_ATT_OFFSET = 0;
 const int MELEE_SHOOT_ROW =2;
 const int MELEE_SHOOT_LAST_COL = 7;
 
+
 //BOSS
 
 const float BOSS_ATTACK_RANGE =32;
 const float BOSS_SHOOT_RANGE = 64;
+
+const float BOSS_ATT_TIMESTEP = 3;
 
 const float BOSS_SPEED = 15;
 
