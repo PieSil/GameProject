@@ -39,7 +39,10 @@ const SpriteParams Fireball::fireballParams(FIREB_WIDTH, FIREB_HEIGHT, FIREB_HIT
                                             FIREB_ATT_LAST_COL, 0, FIREB_SHOOT_ROW, FIREB_SHOOT_LAST_COL, 0, 0);
 
 void Fireball::characterCollision(GameCharacter *character) {
-    character->setOnFire(true);
+    if (!character->isOnFire()) {
+        character->getClocks().burnClock.restart();
+        character->setOnFire(true);
+    }
 }
 
 void Fireball::destroy() {

@@ -28,13 +28,13 @@ const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
 
     if (state != EntityState::DYING && state != EntityState::DEAD) {
 
-        if ((attackClock.getElapsedTime().asSeconds() >= attackTimeStep) || bypassClock) {
-            attackClock.restart();
+        if ((clocks.attackClock.getElapsedTime().asSeconds() >= attackTimeStep) || bypassClock) {
+            clocks.attackClock.restart();
             result = attackBehaviour->attack(state, allPositions, attackRange);
         }
 
-        return result;
     }
+    return result;
 }
 
 GameCharacter::GameCharacter() : GameCharacter(0, 0) {
@@ -90,6 +90,7 @@ void GameCharacter::getDamaged(const float &damage) {
     if (health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
 
         health -= damage;
+        sprite.setColor(sf::Color::Red);
 
         if (health <= 0) {
             //TODO: set state to dying
@@ -103,4 +104,20 @@ void GameCharacter::jump() {
         onGround = false;
         velocityY = JUMP_VELOCITY;
     }
+}
+
+void GameCharacter::updateStatus() {
+
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.5) {
+        clocks.damagedClock.restart();
+        sprite.setColor(sf::Color::White); //reset sprite color
+    }
+    if (onFire) { //if character is on fire
+        getDamaged(0.01);  //take damage
+
+        if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
+            onFire = false; //set on fire to off
+        }
+    }
+
 }

@@ -11,6 +11,14 @@
 #include "MeleeBehaviour.h"
 #include "ShootingBehaviour.h"
 
+struct Clocks {
+    sf::Clock attackClock;
+    sf::Clock burnClock;
+    sf::Clock paralyzedClock;
+    sf::Clock abilityClock;
+    sf::Clock damagedClock;
+};
+
 class GameCharacter : public MovingEntity {
 public: 
 
@@ -35,12 +43,13 @@ public:
 
     void animate() override;
 
+    virtual void updateStatus();
+
     void setupAnimations(const SpriteParams *parameters) override;
 
     virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
         this->attackBehaviour = std::move(attackBehaviourPtr);
     }
-
 
     //HELPER METHODS
     float getHealth() const {
@@ -71,6 +80,10 @@ public:
         return attackRange;
     }
 
+    Clocks &getClocks() { //not const to allow projectiles to modify clocks
+        return clocks;
+    }
+
 protected:
     bool onFire;
     float health;
@@ -78,7 +91,7 @@ protected:
     float attackRange;
     float attackTimeStep;
 
-    sf::Clock attackClock;
+    Clocks clocks;
 
     std::shared_ptr<AttackBehaviour> attackBehaviour;
 

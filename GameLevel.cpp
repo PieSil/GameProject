@@ -188,6 +188,7 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
         updatePhysics(enemy.get()); //update enemy physics
         //if enemy hitbox is not touching hero hitbox
 
+        enemy->updateStatus();
         moveCharacter(enemy.get(), enemy->getMovementSpeed() * elapsedTime);
         updateCombat(enemy.get());
 
@@ -204,6 +205,7 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
 
 void GameLevel::updateHero() {
     updatePhysics(hero.get());
+    hero->updateStatus();
 }
 
 void GameLevel::animateCharacters() {

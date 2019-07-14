@@ -37,6 +37,8 @@ public:
 
     void updateAggro();
 
+    void updateStatus() override;
+
     bool isParalyzed() const {
         return paralyzed;
     }

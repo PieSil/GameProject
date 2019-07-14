@@ -78,3 +78,11 @@ const std::pair<bool, Hitbox> Enemy::updateCombat() {
     updateAggro();
     return attack();
 }
+
+void Enemy::updateStatus() {
+    GameCharacter::updateStatus();
+
+    if (paralyzed)
+        if (clocks.paralyzedClock.getElapsedTime().asSeconds() >= 4)
+            paralyzed = false;
+}
