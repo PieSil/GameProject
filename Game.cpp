@@ -67,6 +67,9 @@ void Game::updateGame() {
     void Game::pushState(State state, Herotype heroT) {
         switch (state) {
 
+
+            //emplace new state on top of the stack based on function parameters
+
             case State::PLAYING:
                 states.emplace(new PlayingState(this, heroT));
                 break;
@@ -86,7 +89,7 @@ void Game::updateGame() {
     }
 
 void Game::popState() {
-    delete(states.top());
+    delete(states.top()); //delete top state to avoid memory leak after pop
     states.pop();
 }
 
@@ -95,12 +98,12 @@ void Game::setState(State state, Herotype heroT) {
     if (!states.empty())
         popState();
 
-    pushState(state, heroT);
+    pushState(state, heroT); //push new state on top of stack
 }
 
 GameState *Game::getCurrentState() const {
     if (!states.empty())
-        return states.top();
+        return states.top(); //get the state on top of the stack
 
     else
         return nullptr;

@@ -6,12 +6,15 @@
 
 SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NOHERO) {
 
+    //create a wizard and a knight to display their sprites, create them into a pair to associate them with a RectangleShape
+
     std::pair<Knight*, sf::RectangleShape> knight;
     knight.first = new Knight(0,0);
 
     std::pair<Wizard*, sf::RectangleShape> wizard;
     wizard.first = new Wizard(0,0);
 
+    //emplace the created pairs in the heroes vector
     heroes.emplace_back(knight);
     heroes.emplace_back(wizard);
 
@@ -19,15 +22,24 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
 
     for (auto& hero : heroes) {
 
-        hero.second = sf::RectangleShape(sf::Vector2f(50,100));
+        //create the rectangles
+        hero.second = sf::RectangleShape(sf::Vector2f(100./heroes.size(),200./heroes.size()));
         hero.second.setFillColor(sf::Color::Transparent);
         hero.second.setOutlineColor(sf::Color::White);
         hero.second.setOutlineThickness(1);
 
+        //set rectangles position:
         hero.second.setOrigin(hero.second.getSize().x/2., hero.second.getSize().y/2.);
-        hero.second.setPosition(game->getView()->getCenter().x - game->getView()->getSize().x/(2*heroes.size()) + index * game->getView()->getSize().x/heroes.size() , game->getView()->getCenter().y);// + index * game->getView()->getCenter().x/heroes.size(), game->getView()->getCenter().y/2.);
+
+        //set their position so that the rectangles are placed nicely in the window no matter the number of heroes
+        //position on X axis = view center - (view size)/4 + (index of current hero) * (view size)/(2*(number of heroes-1))
+        //position on Y axis = view center
+        hero.second.setPosition(game->getView()->getCenter().x - game->getView()->getSize().x/4 + index * (game->getView()->getSize().x/(2*(heroes.size()-1))), game->getView()->getCenter().y);
+
+        //set the heroes' position to match rectangles' position
         hero.first->setPosition(hero.second.getPosition());
 
+        //increase index
         index++;
     }
 }
@@ -39,7 +51,7 @@ void SelectionState::update() {
 
     handleInput();
 
-    if (heroT != Herotype::NOHERO)
+    if (heroT != Herotype::NOHERO) //if hero has been selected set state to playing with current hero
         game->setState(State::PLAYING, heroT);
 
 }
@@ -69,11 +81,13 @@ void SelectionState::handleInput() {
             hero.first->move(Direction::RIGHT, 0);
         }
 
-        if (hero.second.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+        if (hero.second.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) { //if mouse is contained in rectangle
             hero.first->setState(EntityState::WALKING);
 
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) { //and left mouse is clicked
 
+
+                //check type of the hero associated with rectangle and modify the heroType attribute accordingly
                 if (typeid(Wizard) == typeid(*hero.first))
                     heroT = Herotype::WZRD;
 

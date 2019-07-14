@@ -27,14 +27,22 @@ public:
 
     const EntityPositions move(const Direction &direction, const float &distance) override;
 
+    void jump();
+
     virtual const std::pair<bool, Hitbox> attack(const bool &bypassClock = false); //BYPASS CLOCK USED FOR UNIT TESTING
 
     void getDamaged(const float &damage);
 
-    void jump();
+    void animate() override;
 
     void setupAnimations(const SpriteParams *parameters) override;
 
+    virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
+        this->attackBehaviour = std::move(attackBehaviourPtr);
+    }
+
+
+    //HELPER METHODS
     float getHealth() const {
         return health;
     }
@@ -62,12 +70,6 @@ public:
     float getAttackRange() const {
         return attackRange;
     }
-
-    virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
-        this->attackBehaviour = std::move(attackBehaviourPtr);
-    }
-
-    void animate() override;
 
 protected:
     bool onFire;
