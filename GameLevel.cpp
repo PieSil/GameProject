@@ -193,14 +193,17 @@ void GameLevel::updatePhysics(GameCharacter *character) {
 }
 
 void GameLevel::updateEnemies(const float &elapsedTime) {
-    for (const auto &enemy : enemies) {
+    auto enemy = enemies.begin();
 
-        updatePhysics(enemy.get()); //update enemy physics
+
+    while (!enemies.empty() && enemy != enemies.end()) {
+
+        updatePhysics(enemy->get()); //update enemy physics
         //if enemy hitbox is not touching hero hitbox
 
-        enemy->updateStatus();
-        moveCharacter(enemy.get(), enemy->getMovementSpeed() * elapsedTime);
-        updateCombat(enemy.get());
+        (*enemy)->updateStatus();
+        moveCharacter(enemy->get(), (*enemy)->getMovementSpeed() * elapsedTime);
+        updateCombat(enemy->get());
 
         /*
         enemy->updateAggro();
@@ -209,6 +212,13 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
 
         moveCharacter(enemy.get(), enemy->getMovementSpeed() * elapsedTime);
          */
+
+        if ((*enemy)->getState() == EntityState::DEAD) {
+            destroy(*enemy);
+            //projectiles.erase(projectile);
+
+        } else
+            enemy++;
 
     }
 }
@@ -357,7 +367,7 @@ void GameLevel::updateProjectiles(const float &elapsedTime) {
         }
 
         if (toDelete) {
-            destroyProjectile(*projectile);
+            destroy(*projectile);
             //projectiles.erase(projectile);
 
         } else
@@ -398,13 +408,14 @@ const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectil
 }
 
 
-void GameLevel::destroyProjectile(std::unique_ptr<Projectile> &projectile) {
+void GameLevel::destroy(std::unique_ptr<Projectile> &projectile) {
 
     auto itr = std::find(projectiles.begin(), projectiles.end(), projectile);
 
     projectiles.erase(itr);
 
 }
+
 
 
 
@@ -416,6 +427,11 @@ GameLevel::GameLevel() : gameMap(Map()) {
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), 0, 0)));
 
+}
+
+void GameLevel::destroy(std::unique_ptr<Enemy> &enemy) {
+    auto itr = std::find(enemies.begin(), enemies.end(), enemy);
+    enemies.erase(itr);
 }
 
 

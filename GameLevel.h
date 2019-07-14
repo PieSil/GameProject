@@ -55,7 +55,8 @@ public:
 
     void updateCombat(Enemy* enemy);
 
-    void destroyProjectile(std::unique_ptr<Projectile> &projectile);
+    void destroy(std::unique_ptr<Projectile> &projectile);
+    void destroy(std::unique_ptr<Enemy> &enemy);
 
     const std::unique_ptr<GameHero> &getHero() const {
         return hero;
