@@ -113,7 +113,7 @@ void GameCharacter::updateStatus() {
         sprite.setColor(sf::Color::White); //reset sprite color
     }
     if (onFire) { //if character is on fire
-        getDamaged(0.01);  //take damage
+        getDamaged(0.08);  //take damage
 
         if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
             onFire = false; //set on fire to off
