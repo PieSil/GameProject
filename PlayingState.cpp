@@ -14,6 +14,9 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
     createLevel(heroT);
     update();
     initView();
+    if(!game->getWindow()->setBackground(BACKGROUND_PATH, level.getHero()->getAllPositions().spritePosition.y)) {
+        //TODO: throw exception
+    }
 
 }
 
@@ -35,7 +38,7 @@ void PlayingState::update() {
 
 void PlayingState::draw() {
 
-   //game->getWindow()->clear(sf::Color::Red);
+    game->getWindow()->draw(game->getWindow()->getBackground());
 
     //draws hitboxes on window, needed to see if hitboxes correctly match the sprites
     //drawHitbox(level.getHero()->getHitbox());

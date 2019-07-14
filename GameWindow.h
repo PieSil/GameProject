@@ -54,8 +54,25 @@ public:
         return window;
     }
 
-    void clear(sf::Color color) {
+    void clear(const sf::Color &color) {
         window.clear(color);
+    }
+
+    const sf::Sprite &getBackground() const {
+        return background;
+    }
+
+    bool setBackground(const std::string &path, const float &heroPosY) {
+        bool result = false;
+        if (texture.loadFromFile(path)) {
+            background.setTexture(texture);
+            result = true;
+        }
+
+        background.setOrigin(background.getOrigin().x, background.getTextureRect().height/2.);
+        background.setPosition(background.getPosition().x, heroPosY);
+
+        return result;
     }
 
 
@@ -70,6 +87,8 @@ private:
     sf::RenderWindow window;
     sf::Vector2u windowSize;
     std::string windowTitle;
+    sf::Texture texture;
+    sf::Sprite background;
     bool closed;
     bool fullScreen;
 

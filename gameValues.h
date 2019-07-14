@@ -38,6 +38,9 @@ enum class EntityState {
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
 const float FRAMERATE = 60.;
 
+//WINDOW
+const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
+
 
 //sets walking animation duration
 const float WALK_ANIM_TIME = 0.5;

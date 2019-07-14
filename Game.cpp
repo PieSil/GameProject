@@ -110,7 +110,7 @@ GameState *Game::getCurrentState() const {
 }
 
 void Game::createView() {
-    view.reset(new sf::View(sf::View(sf::Vector2f(window->getWindowSize().x, window->getWindowSize().y), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y))));
+    view.reset(new sf::View(sf::View(sf::Vector2f(window->getWindowSize().x/2., window->getWindowSize().y/2.), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y))));
     window->setView(*view);
 }
 
