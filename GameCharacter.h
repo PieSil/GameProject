@@ -74,6 +74,7 @@ protected:
     float health;
     float strength;
     float attackRange;
+    float attackTimeStep;
 
     sf::Clock attackClock;
 

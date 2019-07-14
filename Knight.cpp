@@ -23,7 +23,7 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
     giveHitbox();
 
     attackRange = KNIGHT_ATTACK_RANGE;
-
+    attackTimeStep = HERO_ATT_TIMESTEP;
     setupAnimations(getParameters());
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }

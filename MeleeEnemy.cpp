@@ -24,6 +24,7 @@ MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const flo
     giveHitbox();
     setupAnimations(getParameters());
     attackRange = MELEE_ATTACK_RANGE;
+    attackTimeStep = MELEE_ATT_TIMESTEP;
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
 

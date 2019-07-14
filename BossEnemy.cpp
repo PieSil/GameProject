@@ -15,12 +15,12 @@ const SpriteParams BossEnemy::bossParams(BOSS_WIDTH, BOSS_HEIGHT, BOSS_HITBOX_X,
                                          BOSS_ATT_LAST_COL, BOSS_ATT_OFFSET, BOSS_SHOOT_ROW, BOSS_SHOOT_LAST_COL, BOSS_DEATH_ROW, BOSS_DEATH_LAST_COL);
 
 BossEnemy::BossEnemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par, const bool &onf,
-                     const float &h, const bool &facingR, const float &s) : Enemy(hero, x, y, str, par, onf, h, facingR,
-                                                                                  s) {
+                     const float &h, const bool &facingR, const float &s) : Enemy(hero, x, y, str, par, onf, h, facingR, s) {
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
     attackRange = BOSS_SHOOT_RANGE;
+    attackTimeStep = BOSS_ATT_TIMESTEP;
     shootingBehaviour = std::make_shared<ShootingBehaviour>();
     meleeBehaviour = std::make_shared<MeleeBehaviour>();
     setAttackBehaviour(shootingBehaviour);

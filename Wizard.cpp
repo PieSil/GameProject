@@ -27,6 +27,7 @@ Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    attackTimeStep = HERO_ATT_TIMESTEP;
     attackRange = WIZARD_ATTACK_RANGE;
     setAttackBehaviour(std::make_shared<ShootingBehaviour>());
 }

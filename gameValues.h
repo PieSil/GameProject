@@ -32,6 +32,7 @@ enum class EntityState {
 };
 
 
+
 //GAME
 
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
@@ -74,13 +75,15 @@ const int EDGE_THICKNESS = 1;
 //HERO
 
 //default health value for all game heroes:
-const float DEF_HERO_HEALTH = 1.;
+const float DEF_HERO_HEALTH = 80.;
 
 //default strength value for all game heroes:
-const float DEF_HERO_STRENGTH = 5.;
+const float DEF_HERO_STRENGTH = 10.;
 
 //default attack range for all game heroes:
 const float HERO_ATTACK_RANGE = 16;
+
+const float HERO_ATT_TIMESTEP = 0.5;
 
 
 //default value for hero movementSpeed parameter:
@@ -170,14 +173,23 @@ const int WIZARD_DEATH_LAST_COL = 9;
 const float DEF_ENEMY_HEALTH = 35.;
 
 //default strength value for all enemies:
-const float DEF_ENEMY_STRENGTH = 3.;
+const float DEF_ENEMY_STRENGTH = 5.;
 
 //default value for enemy movementSpeed parameter:
 const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
 
+//default health value for all enemies:
+const float DEF_MELEE_HEALTH = 35.;
+
+//default strength value for all enemies:
+const float DEF_MELEE_STRENGTH = 5.;
+
+
 const float MELEE_ATTACK_RANGE = 16;
+
+const float MELEE_ATT_TIMESTEP = 3;
 
 //values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
 const int MELEE_WIDTH = 48;
@@ -216,8 +228,13 @@ const int MELEE_DEATH_LAST_COL = 7;
 
 //BOSS
 
+const float DEF_BOSS_HEALTH = 80.;
+const float DEF_BOSS_STRENGTH = 10.;
+
 const float BOSS_ATTACK_RANGE =32;
 const float BOSS_SHOOT_RANGE = 64;
+
+const float BOSS_ATT_TIMESTEP = 3;
 
 const float BOSS_SPEED = 15;
 

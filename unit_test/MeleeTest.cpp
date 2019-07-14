@@ -18,10 +18,10 @@ TEST(MeleeTest, Constructor) {
     MeleeEnemy m(&knight, 5, 0);
     EXPECT_EQ(5, m.getSprite().getPosition().x);
     EXPECT_EQ(0, m.getSprite().getPosition().y);
-    EXPECT_EQ(DEF_ENEMY_STRENGTH, m.getStrength());
+    EXPECT_EQ(DEF_MELEE_STRENGTH, m.getStrength());
     EXPECT_EQ(false, m.isParalyzed());
     EXPECT_EQ(false, m.isOnFire());
-    EXPECT_EQ(DEF_ENEMY_HEALTH, m.getHealth());
+    EXPECT_EQ(DEF_MELEE_HEALTH, m.getHealth());
     EXPECT_EQ(true, m.isFacingRight());
     EXPECT_EQ(ENEMY_SPEED, m.getMovementSpeed());
     EXPECT_EQ(false, m.isAggro());
@@ -34,7 +34,7 @@ TEST(MeleeTest, NotDefStrength) {
     EXPECT_EQ(25., m.getStrength());
     EXPECT_EQ(false, m.isParalyzed());
     EXPECT_EQ(false, m.isOnFire());
-    EXPECT_EQ(DEF_ENEMY_HEALTH, m.getHealth());
+    EXPECT_EQ(DEF_MELEE_HEALTH, m.getHealth());
     EXPECT_EQ(true, m.isFacingRight());
     EXPECT_EQ(ENEMY_SPEED, m.getMovementSpeed());
     EXPECT_EQ(false, m.isAggro());
@@ -47,7 +47,7 @@ TEST(MeleeTest, NegativeStrength) {
     EXPECT_EQ(25., m.getStrength());
     EXPECT_EQ(false, m.isParalyzed());
     EXPECT_EQ(false, m.isOnFire());
-    EXPECT_EQ(DEF_ENEMY_HEALTH, m.getHealth());
+    EXPECT_EQ(DEF_MELEE_HEALTH, m.getHealth());
     EXPECT_EQ(true, m.isFacingRight());
     EXPECT_EQ(ENEMY_SPEED, m.getMovementSpeed());
     EXPECT_EQ(false, m.isAggro());
@@ -61,7 +61,7 @@ TEST(MeleeTest, IsOnFire) {
     EXPECT_EQ(25., m.getStrength());
     EXPECT_EQ(false, m.isParalyzed());
     EXPECT_EQ(true, m.isOnFire());
-    EXPECT_EQ(DEF_ENEMY_HEALTH, m.getHealth());
+    EXPECT_EQ(DEF_MELEE_HEALTH, m.getHealth());
     EXPECT_EQ(true, m.isFacingRight());
     EXPECT_EQ(ENEMY_SPEED, m.getMovementSpeed());
     EXPECT_EQ(false, m.isAggro());
@@ -103,7 +103,7 @@ TEST(MeleeTest, IsFacingLeft) {
     EXPECT_EQ(5., m.getStrength());
     EXPECT_EQ(false, m.isParalyzed());
     EXPECT_EQ(false, m.isOnFire());
-    EXPECT_EQ(DEF_ENEMY_HEALTH, m.getHealth());
+    EXPECT_EQ(DEF_MELEE_HEALTH, m.getHealth());
     EXPECT_EQ(false, m.isFacingRight());
     EXPECT_EQ(ENEMY_SPEED, m.getMovementSpeed());
     EXPECT_EQ(false, m.isAggro());
@@ -113,10 +113,10 @@ TEST(MeleeTest, MovementSpeed) {
     MeleeEnemy m(&knight, 0, -5, DEF_ENEMY_STRENGTH, false, false, DEF_ENEMY_HEALTH, false, 10.);
     EXPECT_EQ(0, m.getSprite().getPosition().x);
     EXPECT_EQ(-5, m.getSprite().getPosition().y);
-    EXPECT_EQ(DEF_ENEMY_STRENGTH, m.getStrength());
+    EXPECT_EQ(DEF_MELEE_STRENGTH, m.getStrength());
     EXPECT_EQ(false, m.isParalyzed());
     EXPECT_EQ(false, m.isOnFire());
-    EXPECT_EQ(DEF_ENEMY_HEALTH, m.getHealth());
+    EXPECT_EQ(DEF_MELEE_HEALTH, m.getHealth());
     EXPECT_EQ(false, m.isFacingRight());
     EXPECT_EQ(10., m.getMovementSpeed());
     EXPECT_EQ(false, m.isAggro());
