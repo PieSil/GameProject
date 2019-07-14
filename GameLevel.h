@@ -16,6 +16,7 @@
 #include "Map.h"
 #include <algorithm>
 #include <fstream>
+#include <typeinfo>
 
 class GameLevel {
 public:
@@ -35,6 +36,7 @@ public:
     void createMap();
 
     void detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
+
     const bool detectMapCollisions(std::unique_ptr<Projectile> &projectile);
 
     void animateCharacters();

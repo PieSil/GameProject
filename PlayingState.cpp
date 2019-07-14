@@ -84,7 +84,7 @@ void PlayingState::handleInput() {
         keyPressed = true;
     }
 
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && level.getHero()->isOnGround()) {
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))) {
         level.getHero()->jump();
         keyPressed = true;
     }

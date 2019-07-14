@@ -100,29 +100,8 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
             //only perform collision check if character's hitbox intersects current tile
             if (character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
 
-
-                if (prevPosition.rightEdgePosition.x <= currentTile.getHitbox().getLeftEdge().getPosition().x &&
-                    character->getAllPositions().rightEdgePosition.x >
-                    currentTile.getHitbox().getLeftEdge().getPosition().x) {
-                    //if before movement character's right edge was left of tile's left edge and after movement
-                    //it's right of tile's left edge then there's been a collision
-
-                    //move the character back on the x axis
-                    character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
-
-                }
-
-                //same reasoning as previous if statement
-                if (prevPosition.leftEdgePosition.x >= currentTile.getHitbox().getRightEdge().getPosition().x &&
-                    character->getAllPositions().leftEdgePosition.x <
-                    currentTile.getHitbox().getRightEdge().getPosition().x) {
-
-                    //move the character back
-                    character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
-
-                }
-
-                //same reasoning as previous if statement on the x axis
+                //if before movement character's upper edge was below of tile's lower edge and after movement
+                //it's above of tile's lower edge then there's been a collision
                 if (prevPosition.upperEdgePosition.y >= currentTile.getHitbox().getLowerEdge().getPosition().y &&
                     character->getAllPositions().upperEdgePosition.y <
                     currentTile.getHitbox().getLowerEdge().getPosition().y) {
@@ -142,6 +121,37 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
                     character->setPosition(character->getSprite().getPosition().x, prevPosition.spritePosition.y);
                     character->setVelocityY(0);
                     character->setOnGround(true);
+                }
+
+                //if before movement character's right edge was left of tile's left edge and after movement
+                //it's right of tile's left edge then there's been a collision
+                if (prevPosition.rightEdgePosition.x <= currentTile.getHitbox().getLeftEdge().getPosition().x &&
+                    character->getAllPositions().rightEdgePosition.x >
+                    currentTile.getHitbox().getLeftEdge().getPosition().x) {
+
+                    //move the character back on the x axis
+                    character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
+
+                    if (auto e = dynamic_cast<Enemy*>(character)) {
+                        if (e->isFacingRight())
+                            character->jump();
+                    }
+
+                }
+
+                //same reasoning as previous if statement
+                if (prevPosition.leftEdgePosition.x >= currentTile.getHitbox().getRightEdge().getPosition().x &&
+                    character->getAllPositions().leftEdgePosition.x <
+                    currentTile.getHitbox().getRightEdge().getPosition().x) {
+
+                    //move the character back
+                    character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
+
+                    if (auto e = dynamic_cast<Enemy*>(character)) {
+                        if (!e->isFacingRight())
+                            character->jump();
+                    }
+
                 }
 
             }

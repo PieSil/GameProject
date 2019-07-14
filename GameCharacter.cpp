@@ -100,7 +100,7 @@ void GameCharacter::getDamaged(const float &damage) {
 }
 
 void GameCharacter::jump() {
-    if(state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) {
+    if(onGround && state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) {
         onGround = false;
         velocityY = JUMP_VELOCITY;
     }
