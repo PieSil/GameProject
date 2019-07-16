@@ -51,11 +51,11 @@ void PlayingState::draw() {
     }
     */
 
-    /*
-    for (auto tile : gameMap.getTiles()) {
+/*
+    for (auto tile : level.getGameMap().getTiles()) {
         drawHitbox(tile.getHitbox());
     }
-    */
+*/
 
     //draws sprites on window:
     game->getWindow()->draw(level.getHero()->getSprite());

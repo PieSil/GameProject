@@ -87,7 +87,7 @@ const EntityPositions GameCharacter::move(const Direction &direction, const floa
 
 void GameCharacter::getDamaged(const float &damage) {
 
-    if (health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2 && health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
 
         health -= damage;
         sprite.setColor(sf::Color::Red);

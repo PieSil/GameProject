@@ -48,7 +48,7 @@ void Map::load() {
 
                 if (tileNumber != 0) {
                     tiles.emplace_back(Tile(sf::Vector2f((quad[0].position.x + quad[1].position.x) / 2.,
-                                                         (quad[0].position.y + quad[3].position.y) / 2.)));
+                                                         (quad[0].position.y + quad[3].position.y) / 2.), tileNumber));
                     // define its 4 texture coordinates
                     quad[0].texCoords = sf::Vector2f(tileTop * tileSize.x, tileLeft * tileSize.y); //top left corner
                     quad[1].texCoords = sf::Vector2f((tileTop + 1) * tileSize.x, tileLeft * tileSize.y); //top right corner
@@ -59,7 +59,7 @@ void Map::load() {
 
                 } else {
                     tiles.emplace_back(Tile(sf::Vector2f((quad[0].position.x + quad[1].position.x) / 2.,
-                                                         (quad[0].position.y + quad[3].position.y) / 2.), true));
+                                                         (quad[0].position.y + quad[3].position.y) / 2.), tileNumber));
                 }
         }
     }

@@ -97,8 +97,8 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
 
             Tile currentTile = gameMap.getTiles()[tilePosition];
 
-            //only perform collision check if character's hitbox intersects current tile
-            if (character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+            //only perform collision check if character's hitbox intersects current tile and tile is not walkable
+            if ((!currentTile.isWalkable()) && character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
 
                 //if before movement character's upper edge was below of tile's lower edge and after movement
                 //it's above of tile's lower edge then there's been a collision
