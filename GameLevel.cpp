@@ -399,7 +399,7 @@ const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectil
 
             Tile currentTile = gameMap.getTiles()[tilePosition];
 
-            if (projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+            if (!currentTile.isWalkable() && projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
                 toDelete = true;
             }
         }

@@ -8,7 +8,6 @@
 
 #include "GameCharacter.h"
 #include "GameHero.h"
-#include "SpriteObserver.h"
 #include <math.h>
 
 
