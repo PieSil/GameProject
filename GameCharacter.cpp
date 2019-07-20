@@ -20,23 +20,6 @@ GameCharacter::GameCharacter(const float &x, const float &y, const float &str, c
 
 GameCharacter::~GameCharacter() {};
 
-
-const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
-
-    std::pair<bool, Hitbox> result;
-    result.first = false;
-
-    if (state != EntityState::DYING && state != EntityState::DEAD) {
-
-        if ((clocks.attackClock.getElapsedTime().asSeconds() >= attackTimeStep) || bypassClock) {
-            clocks.attackClock.restart();
-            result = attackBehaviour->attack(state, allPositions, attackRange);
-        }
-
-    }
-    return result;
-}
-
 GameCharacter::GameCharacter() : GameCharacter(0, 0) {
 
 }
@@ -85,6 +68,29 @@ const EntityPositions GameCharacter::move(const Direction &direction, const floa
         return allPositions;
 }
 
+void GameCharacter::jump() {
+    if(onGround && state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) {
+        onGround = false;
+        velocityY = JUMP_VELOCITY;
+    }
+}
+
+const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
+
+    std::pair<bool, Hitbox> result;
+    result.first = false;
+
+    if (state != EntityState::DYING && state != EntityState::DEAD) {
+
+        if ((clocks.attackClock.getElapsedTime().asSeconds() >= attackTimeStep) || bypassClock) {
+            clocks.attackClock.restart();
+            result = attackBehaviour->attack(state, allPositions, attackRange);
+        }
+
+    }
+    return result;
+}
+
 void GameCharacter::getDamaged(const float &damage) {
 
     if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2 && health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
@@ -93,16 +99,8 @@ void GameCharacter::getDamaged(const float &damage) {
         sprite.setColor(sf::Color::Red);
 
         if (health <= 0) {
-            //TODO: set state to dying
             state = EntityState::DYING;
         }
-    }
-}
-
-void GameCharacter::jump() {
-    if(onGround && state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) {
-        onGround = false;
-        velocityY = JUMP_VELOCITY;
     }
 }
 

@@ -43,9 +43,9 @@ public:
 
     void animate() override;
 
-    virtual void updateStatus();
-
     void setupAnimations(const SpriteParams *parameters) override;
+
+    virtual void updateStatus();
 
     virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
         this->attackBehaviour = std::move(attackBehaviourPtr);

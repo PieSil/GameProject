@@ -30,9 +30,6 @@ public:
 
     void updateProjectiles(const float &elapsedTime);
 
-    void createProjectile(Enemy *enemy, const bool &isFireball = true);
-    void createProjectile(GameHero *hero, const bool &isFireball = true);
-
     void createMap();
 
     void detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
@@ -56,7 +53,14 @@ public:
     void updateCombat(Enemy* enemy);
 
     void destroy(std::unique_ptr<Projectile> &projectile);
+
     void destroy(std::unique_ptr<Enemy> &enemy);
+
+    /*
+void createProjectile(Enemy *enemy, const bool &isFireball = true);
+void createProjectile(GameHero *hero, const bool &isFireball = true);
+ */
+
 
     const std::unique_ptr<GameHero> &getHero() const {
         return hero;
@@ -68,10 +72,6 @@ public:
 
     const Map &getGameMap() const {
         return gameMap;
-    }
-
-    void setGameMap(const Map &gameMap) {
-        GameLevel::gameMap = gameMap;
     }
 
     const std::vector<std::unique_ptr<Projectile>> &getProjectiles() const {

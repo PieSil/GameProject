@@ -48,7 +48,7 @@ void GameLevel::createMap() {
         gameMap.load();
 
     } else {
-        std::cout << "\nCouldn't open map matrix file, map not loaded.\nTerminating the program." << std::endl;
+        std::cout << "\nCould not open map matrix file, map not loaded.\nTerminating the program." << std::endl;
 
         exit(EXIT_FAILURE);
 
@@ -85,17 +85,17 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
         for (int j = -1; j <= 1; j++) {
             int tileColumn = (character->getAllPositions().gridPositionX + i);
             int tileRow = (character->getAllPositions().gridPositionY + j);
-            int tilePosition = (tileRow * MAP_COLUMNS + tileColumn);
+            int tileIndex = (tileRow * MAP_COLUMNS + tileColumn);
 
             //check out of bound
-            if (tilePosition < 0) {
-                tilePosition = 0;
-            } else if (tilePosition >= (MAP_COLUMNS * MAP_ROWS)) {
-                tilePosition = MAP_ROWS * MAP_COLUMNS;
+            if (tileIndex < 0) {
+                tileIndex = 0;
+            } else if (tileIndex >= (MAP_COLUMNS * MAP_ROWS)) {
+                tileIndex = (MAP_ROWS * MAP_COLUMNS-1);
             }
 
 
-            Tile currentTile = gameMap.getTiles()[tilePosition];
+            Tile currentTile = gameMap.getTiles()[tileIndex];
 
             //only perform collision check if character's hitbox intersects current tile and tile is not walkable
             if ((!currentTile.isWalkable()) && character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
@@ -164,6 +164,34 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
     }
 }
 
+const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
+
+    bool toDelete = false;
+
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -1; j <= 1; j++) {
+            int tileColumn = (projectile->getAllPositions().gridPositionX + i);
+            int tileRow = (projectile->getAllPositions().gridPositionY + j);
+            int tilePosition = (tileRow * MAP_COLUMNS + tileColumn);
+
+            //check out of bound
+            if (tilePosition < 0) {
+                tilePosition = 0;
+            } else if (tilePosition >= (MAP_COLUMNS * MAP_ROWS)) {
+                tilePosition = MAP_ROWS * MAP_COLUMNS;
+            }
+
+
+            Tile currentTile = gameMap.getTiles()[tilePosition];
+
+            if (!currentTile.isWalkable() && projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+                toDelete = true;
+            }
+        }
+    }
+    return toDelete;
+}
+
 
 void GameLevel::updateLevel(const float &elapsedTime) {
     updateHero();
@@ -180,11 +208,15 @@ void GameLevel::moveCharacter(Enemy *enemy, const float &distance) {
     detectMapCollisions(enemy->move(distance), enemy);
 }
 
+void GameLevel::updateHero() {
+    updatePhysics(hero.get());
+    hero->updateStatus();
+}
+
 void GameLevel::updatePhysics(GameCharacter *character) {
 
     //moves character on Y axis based on its velocity
     //call moving entity method to bypass check on character state
-    //TODO: find a better way to bypass check on character state
 
     detectMapCollisions(character->MovingEntity::move(Direction::UP, character->getVelocityY()), character);
 
@@ -223,11 +255,6 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
     }
 }
 
-void GameLevel::updateHero() {
-    updatePhysics(hero.get());
-    hero->updateStatus();
-}
-
 void GameLevel::animateCharacters() {
     hero->animate();
     for (auto &enemy : enemies) {
@@ -243,8 +270,7 @@ void GameLevel::updateCombat(GameHero *hero) {
 
         if (hero->getState() == EntityState::MELEE) {
 
-
-            Hitbox attackHitbox = createAttackHitbox(hero);
+            Hitbox attackHitbox = attackPair.second;
 
             for (const auto &enemy :enemies) {
                 if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
@@ -319,7 +345,7 @@ void GameLevel::createProjectile(GameHero *hero, const bool &isFireball) {
     }
 
 }
- */
+
 
 void GameLevel::createProjectile(Enemy *enemy, const bool &isFireball) {
 
@@ -330,6 +356,7 @@ void GameLevel::createProjectile(Enemy *enemy, const bool &isFireball) {
     }
 
 }
+*/
 
 void GameLevel::updateProjectiles(const float &elapsedTime) {
 
@@ -378,36 +405,6 @@ void GameLevel::updateProjectiles(const float &elapsedTime) {
 
 }
 
-
-const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
-
-    bool toDelete = false;
-
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
-            int tileColumn = (projectile->getAllPositions().gridPositionX + i);
-            int tileRow = (projectile->getAllPositions().gridPositionY + j);
-            int tilePosition = (tileRow * MAP_COLUMNS + tileColumn);
-
-            //check out of bound
-            if (tilePosition < 0) {
-                tilePosition = 0;
-            } else if (tilePosition >= (MAP_COLUMNS * MAP_ROWS)) {
-                tilePosition = MAP_ROWS * MAP_COLUMNS;
-            }
-
-
-            Tile currentTile = gameMap.getTiles()[tilePosition];
-
-            if (!currentTile.isWalkable() && projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
-                toDelete = true;
-            }
-        }
-    }
-    return toDelete;
-}
-
-
 void GameLevel::destroy(std::unique_ptr<Projectile> &projectile) {
 
     auto itr = std::find(projectiles.begin(), projectiles.end(), projectile);
@@ -417,7 +414,10 @@ void GameLevel::destroy(std::unique_ptr<Projectile> &projectile) {
 }
 
 
-
+void GameLevel::destroy(std::unique_ptr<Enemy> &enemy) {
+    auto itr = std::find(enemies.begin(), enemies.end(), enemy);
+    enemies.erase(itr);
+}
 
 //ONLY USED FOR UNIT TESTING
 GameLevel::GameLevel() : gameMap(Map()) {
@@ -427,11 +427,6 @@ GameLevel::GameLevel() : gameMap(Map()) {
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), 0, 0)));
 
-}
-
-void GameLevel::destroy(std::unique_ptr<Enemy> &enemy) {
-    auto itr = std::find(enemies.begin(), enemies.end(), enemy);
-    enemies.erase(itr);
 }
 
 
