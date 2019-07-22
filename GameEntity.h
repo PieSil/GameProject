@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Hitbox.h"
-#include "spriteParameters.h"
+#include "SpriteParameters.h"
 #include "AnimationManager.h"
 
 class GameEntity {

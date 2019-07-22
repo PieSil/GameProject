@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "gameValues.h"
-#include "spriteParameters.h"
+#include "SpriteParameters.h"
 
 
 class Animation {

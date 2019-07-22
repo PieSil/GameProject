@@ -29,6 +29,33 @@ const EntityPositions GameHero::move(const Direction &direction, const float &di
     return  prevPosition;
 }
 
+void GameHero::registerObserver(Observer *obs) {
+    observers.push_back(obs);
+}
+
+void GameHero::removeObserver(Observer *obs) {
+    observers.remove(obs);
+}
+
+void GameHero::notifyObservers() const {
+    for (auto& observer : observers) {
+        observer->update(counters.distanceWalked, counters.enemiesKilled, counters.bossKilled);
+    }
+}
+
+void GameHero::incrDistanceWalked(const float &distance) {
+    counters.distanceWalked += distance;
+    notifyObservers();
+}
+
+void GameHero::incrEnemiesKilled(const int &enemies) {
+    counters.enemiesKilled += enemies;
+}
+
+void GameHero::setBossKilled(const bool &isKilled) {
+    counters.bossKilled = isKilled;
+}
+
 /*
 void GameHero::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
 }

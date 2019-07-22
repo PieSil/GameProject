@@ -91,7 +91,9 @@ const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
     return result;
 }
 
-void GameCharacter::getDamaged(const float &damage) {
+const bool & GameCharacter::getDamaged(const float &damage) {
+
+    bool damaged = false;
 
     if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2 && health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
 
@@ -101,7 +103,11 @@ void GameCharacter::getDamaged(const float &damage) {
         if (health <= 0) {
             state = EntityState::DYING;
         }
+
+        damaged = true;
     }
+
+    return damaged;
 }
 
 void GameCharacter::updateStatus() {

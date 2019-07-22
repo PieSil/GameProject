@@ -20,6 +20,7 @@
 #include "RangedEnemy.h"
 #include "BossEnemy.h"
 #include "Map.h"
+#include "Achievement.h"
 
 class PlayingState : public  GameState {
 
@@ -35,6 +36,7 @@ public:
 
     void handleInput() override;
 
+    void createAchievement(const AchievementType& type);
 
 private:
 
@@ -49,6 +51,7 @@ private:
     void drawHitbox(const Hitbox &hitbox) const;
 
     GameLevel level;
+    std::list<Achievement> achievements;
 
 };
 

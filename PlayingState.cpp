@@ -18,6 +18,10 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
         //TODO: throw exception
     }
 
+    createAchievement(AchievementType::DistanceWalked);
+    createAchievement(AchievementType::EnemiesKilled);
+    createAchievement(AchievementType::BossKilled);
+
 }
 
 void PlayingState::update() {
@@ -135,4 +139,8 @@ void PlayingState::drawHitbox(const Hitbox &hitbox) const {
 void PlayingState::initView() {
     game->getView()->setCenter(level.getHero()->getSprite().getPosition());
     updateView();
+}
+
+void PlayingState::createAchievement(const AchievementType & type) {
+    achievements.emplace_back(Achievement(level.getHero().get(), type));
 }

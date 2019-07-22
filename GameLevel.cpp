@@ -31,7 +31,7 @@ void GameLevel::createMap() {
 
     std::ifstream file("../GameAssets/Tileset/MapMatrix.txt");
 
-    if(file.is_open()) {
+    if (file.is_open()) {
         unsigned short i;
         unsigned short j;
 
@@ -40,7 +40,7 @@ void GameLevel::createMap() {
         for (i = 0; i < MAP_ROWS; i++) {
             for (j = 0; j < MAP_COLUMNS; j++) {
 
-                file >> level[i*MAP_COLUMNS + j];
+                file >> level[i * MAP_COLUMNS + j];
             }
         }
 
@@ -71,7 +71,7 @@ void GameLevel::createMap() {
      */
 }
 
-void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character) {
+const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character) {
 
     //if character is out of map put it back
     if (!character->getHitbox().checkHitbox().intersects(gameMap.getVertices().getBounds())) {
@@ -91,14 +91,15 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
             if (tileIndex < 0) {
                 tileIndex = 0;
             } else if (tileIndex >= (MAP_COLUMNS * MAP_ROWS)) {
-                tileIndex = (MAP_ROWS * MAP_COLUMNS-1);
+                tileIndex = (MAP_ROWS * MAP_COLUMNS - 1);
             }
 
 
             Tile currentTile = gameMap.getTiles()[tileIndex];
 
             //only perform collision check if character's hitbox intersects current tile and tile is not walkable
-            if ((!currentTile.isWalkable()) && character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+            if ((!currentTile.isWalkable()) &&
+                character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
 
                 //if before movement character's upper edge was below of tile's lower edge and after movement
                 //it's above of tile's lower edge then there's been a collision
@@ -132,7 +133,7 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
                     //move the character back on the x axis
                     character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
 
-                    if (auto e = dynamic_cast<Enemy*>(character)) {
+                    if (auto e = dynamic_cast<Enemy *>(character)) {
                         if (e->isFacingRight())
                             character->jump();
                     }
@@ -147,7 +148,7 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
                     //move the character back
                     character->setPosition(prevPosition.spritePosition.x, character->getSprite().getPosition().y);
 
-                    if (auto e = dynamic_cast<Enemy*>(character)) {
+                    if (auto e = dynamic_cast<Enemy *>(character)) {
                         if (!e->isFacingRight())
                             character->jump();
                     }
@@ -162,6 +163,8 @@ void GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCha
     if (prevPosition.spritePosition.y != character->getSprite().getPosition().y) {
         character->setOnGround(false);
     }
+
+    return prevPosition;
 }
 
 const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectile) {
@@ -184,7 +187,8 @@ const bool GameLevel::detectMapCollisions(std::unique_ptr<Projectile> &projectil
 
             Tile currentTile = gameMap.getTiles()[tilePosition];
 
-            if (!currentTile.isWalkable() && projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
+            if (!currentTile.isWalkable() &&
+                projectile->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
                 toDelete = true;
             }
         }
@@ -201,7 +205,8 @@ void GameLevel::updateLevel(const float &elapsedTime) {
 }
 
 void GameLevel::moveCharacter(GameHero *hero, const Direction &direction, const float &distance) {
-    detectMapCollisions(hero->move(direction, distance), hero);
+    const EntityPositions prevPosition = detectMapCollisions(hero->move(direction, distance), hero);
+    hero->incrDistanceWalked(abs(hero->getAllPositions().spritePosition.x - prevPosition.spritePosition.x));
 }
 
 void GameLevel::moveCharacter(Enemy *enemy, const float &distance) {
@@ -275,13 +280,15 @@ void GameLevel::updateCombat(GameHero *hero) {
             for (const auto &enemy :enemies) {
                 if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
                     //TODO: do damage to enemy
-                    enemy->getDamaged(hero->getStrength());
+                    if (enemy->getDamaged(hero->getStrength())) { // if enemy got damaged
+                        if (enemy->getState() == EntityState::DYING) { //and it's dying
+                            hero->incrEnemiesKilled(); //increase the counter of enemies killed by the hero
+                        }
+                    }
                 }
             }
 
         } else {
-
-            //TODO: shoot projectile;
             projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, hero)));
         }
     }
@@ -328,7 +335,8 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
         attackHitbox = Hitbox(
                 sf::Vector2f(character->getAllPositions().leftEdgePosition.x - character->getAttackRange() / 2.,
                              character->getAllPositions().spritePosition.y), character->getAttackRange(),
-                (abs(character->getAllPositions().upperEdgePosition.y - character->getAllPositions().lowerEdgePosition.y)));
+                (abs(character->getAllPositions().upperEdgePosition.y -
+                     character->getAllPositions().lowerEdgePosition.y)));
 
 
     return attackHitbox;

@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
-#include "spriteParameters.h"
+#include "SpriteParameters.h"
 #include <map>
 #include <iostream>
 

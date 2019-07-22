@@ -32,7 +32,7 @@ public:
 
     void createMap();
 
-    void detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
+    const EntityPositions & detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
 
     const bool detectMapCollisions(std::unique_ptr<Projectile> &projectile);
 
