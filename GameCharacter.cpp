@@ -95,7 +95,8 @@ const bool & GameCharacter::getDamaged(const float &damage) {
 
     bool damaged = false;
 
-    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2 && health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.5 && health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
+        clocks.damagedClock.restart();
 
         health -= damage;
         sprite.setColor(sf::Color::Red);
@@ -112,12 +113,11 @@ const bool & GameCharacter::getDamaged(const float &damage) {
 
 void GameCharacter::updateStatus() {
 
-    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.5) {
-        clocks.damagedClock.restart();
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2) {
         sprite.setColor(sf::Color::White); //reset sprite color
     }
     if (onFire) { //if character is on fire
-        getDamaged(0.08);  //take damage
+        getDamaged(2.4);  //take damage
 
         if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
             onFire = false; //set on fire to off
