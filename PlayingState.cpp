@@ -24,8 +24,10 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
 void PlayingState::updateAchievements() {
     for (const auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
+            /*
             std::string name = achievement.getName().getString();
             std::cout <<  name << std::endl;
+             */
         }
     }
 }
