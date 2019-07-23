@@ -7,6 +7,7 @@
 
 #include "Observer.h"
 #include "Subject.h"
+#include "gameValues.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <list>
@@ -19,16 +20,43 @@ class Achievement : public Observer {
 
 public:
     Achievement(Subject *subject, const AchievementType &type);
+
+    Achievement(const Achievement& copied);
+
     virtual ~Achievement() {
         removeSubject();
     };
 
     void update(const float &distanceWalked, const int &enemiesKilled, const bool &bossKilled) override;
 
-    void removeSubject();
+    bool isUnlocked() const {
+        return unlocked;
+    }
+
+    AchievementType getType() const {
+        return type;
+    }
+
+    Subject *getSubject() const {
+        return subject;
+    }
+
+    const sf::Text &getName() const {
+        return name;
+    }
+
+    const sf::Sprite &getIcon() const {
+        return icon;
+    }
+
+    const sf::Text &getDescription() const {
+        return description;
+    }
 
 protected:
     void unlock();
+    void setup(const AchievementType& type);
+    void removeSubject();
 
     AchievementType type;
     bool unlocked;

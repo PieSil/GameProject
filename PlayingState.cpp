@@ -17,11 +17,17 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
     if(!game->getWindow()->setBackground(BACKGROUND_PATH, level.getHero()->getAllPositions().spritePosition.y)) {
         //TODO: throw exception
     }
+    createAchievements();
 
-    createAchievement(AchievementType::DistanceWalked);
-    createAchievement(AchievementType::EnemiesKilled);
-    createAchievement(AchievementType::BossKilled);
+}
 
+void PlayingState::updateAchievements() {
+    for (const auto& achievement : achievements) {
+        if (achievement.isUnlocked()) {
+            std::string name = achievement.getName().getString();
+            std::cout <<  name << std::endl;
+        }
+    }
 }
 
 void PlayingState::update() {
@@ -35,6 +41,8 @@ void PlayingState::update() {
         PlayingState::updateView();
 
         level.animateCharacters();
+
+        updateAchievements();
 
         if (level.getHero()->getState() == EntityState::DEAD)
             game->setState(State::GAMEOVER);
@@ -141,6 +149,8 @@ void PlayingState::initView() {
     updateView();
 }
 
-void PlayingState::createAchievement(const AchievementType & type) {
-    achievements.emplace_back(Achievement(level.getHero().get(), type));
+void PlayingState::createAchievements() {
+    achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::DistanceWalked));
+    achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::EnemiesKilled));
+    achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::BossKilled));
 }

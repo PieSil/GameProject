@@ -36,8 +36,6 @@ public:
 
     void handleInput() override;
 
-    void createAchievement(const AchievementType& type);
-
 private:
 
     void createLevel(const Herotype& heroT);
@@ -49,6 +47,10 @@ private:
     void moveHero(const Direction &direction, const float &distance);
 
     void drawHitbox(const Hitbox &hitbox) const;
+
+    void createAchievements();
+
+    void updateAchievements();
 
     GameLevel level;
     std::list<Achievement> achievements;

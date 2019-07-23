@@ -282,7 +282,9 @@ void GameLevel::updateCombat(GameHero *hero) {
                     //TODO: do damage to enemy
                     if (enemy->getDamaged(hero->getStrength())) { // if enemy got damaged
                         if (enemy->getState() == EntityState::DYING) { //and it's dying
-                            hero->incrEnemiesKilled(); //increase the counter of enemies killed by the hero
+                            hero->incrEnemiesKilled();//increase the counter of enemies killed by the hero
+                            if (typeid(*(enemy.get())) == typeid(BossEnemy))
+                                hero->setBossKilled();
                         }
                     }
                 }

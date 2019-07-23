@@ -38,6 +38,8 @@ enum class EntityState {
 //used to set game framerate and updating speed (avoid setting framerate to an excessive value)
 const float FRAMERATE = 60.;
 
+const std::string FONT_PATH = "../GameAssets/Font/manaspc.ttf";
+
 //WINDOW
 const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
 
