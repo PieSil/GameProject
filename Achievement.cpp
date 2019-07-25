@@ -11,6 +11,7 @@ Achievement::Achievement(Subject *subject, const AchievementType &type) : subjec
 }
 
 void Achievement::unlock() {
+    clock.restart();
     unlocked = true;
     //removeSubject();
 }
@@ -53,32 +54,35 @@ void Achievement::removeSubject() {
 
 void Achievement::setup(const AchievementType &type) {
 
-    sf::Font font;
     if (!font.loadFromFile(FONT_PATH)) {
         //TODO: throw exception
     }
 
+    description = sf::Text("Achievement Unlocked: ", font, 10);
 
     switch (type) {
         case AchievementType::DistanceWalked:
             if (!texture.loadFromFile(WALKER_PATH)) {
                 //TODO: throw exception
             }
-            name = sf::Text("Explorer", font, 14);
+            name = sf::Text("Explorer", font, 10);
+            description.setString(description.getString() + name.getString());
             break;
 
         case AchievementType::EnemiesKilled:
             if (!texture.loadFromFile(KILLER_PATH)) {
                 //TODO: throw exception
             }
-            name = sf::Text("Killer", font, 14);
+            name = sf::Text("Killer", font, 10);
+            description.setString(description.getString() + name.getString());
             break;
 
         case AchievementType::BossKilled:
             if (!texture.loadFromFile(THESEUS_PATH)) {
                 //TODO: throw exception
             }
-            name = sf::Text("Theseus", font, 14);
+            name = sf::Text("Theseus", font, 10);
+            description.setString(description.getString() + name.getString());
             break;
 
         default:
@@ -86,6 +90,8 @@ void Achievement::setup(const AchievementType &type) {
             break;
     }
 
+    sf::FloatRect textRect = description.getLocalBounds();
+    description.setOrigin(textRect.width/2., description.getOrigin().y);
     icon.setTexture(texture);
     icon.setOrigin(icon.getOrigin().x + icon.getTextureRect().width, icon.getOrigin().y);
 

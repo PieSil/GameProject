@@ -50,10 +50,12 @@ void GameHero::incrDistanceWalked(const float &distance) {
 
 void GameHero::incrEnemiesKilled(const int &enemies) {
     counters.enemiesKilled += enemies;
+    notifyObservers();
 }
 
 void GameHero::setBossKilled(const bool &isKilled) {
     counters.bossKilled = isKilled;
+    notifyObservers();
 }
 
 /*

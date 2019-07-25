@@ -25,8 +25,15 @@ void PlayingState::updateAchievements() {
     unsigned short index = 0;
     for (auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
+
             float top = game->getView()->getCenter().y - game->getView()->getSize().y/2.;
             float right = game->getView()->getCenter().x + game->getView()->getSize().x/2.;
+
+            if (achievement.getElapsedTime().asSeconds() <= 3) {
+                achievement.setDescriptionPos(game->getView()->getCenter().x, top +  achievement.getIcon().getTextureRect().height);
+            }
+
+
             achievement.setIconPosition(right - (achievement.getIcon().getTextureRect().width*index), top);
 
             /*
@@ -166,8 +173,18 @@ void PlayingState::createAchievements() {
 }
 
 void PlayingState::drawAchievements() {
-    for (const auto& achievement : achievements) {
+    for (auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
+
+            if (achievement.getElapsedTime().asSeconds() <= 3) {
+                /*
+                std::string descripton = achievement.getDescription().getString();
+                std::cout << descripton << std::endl;
+                 */
+
+                game->getWindow()->draw(achievement.getDescription());
+            }
+
             game->getWindow()->draw(achievement.getIcon());
 
         }

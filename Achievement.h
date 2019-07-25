@@ -33,6 +33,22 @@ public:
         return unlocked;
     }
 
+    void setNamePos(const float& x, const float& y) {
+        name.setPosition(x, y);
+    }
+
+    void setNamePos(const sf::Vector2f& position) {
+        name.setPosition(position);
+    }
+
+    void setDescriptionPos(const float& x, const float& y) {
+        description.setPosition(x, y);
+    }
+
+    void setDescriptionPos(const sf::Vector2f& position) {
+        description.setPosition(position);
+    }
+
     void setIconPosition(const float& x, const float& y) {
         icon.setPosition(x, y);
     }
@@ -61,6 +77,10 @@ public:
         return description;
     }
 
+    const sf::Time getElapsedTime() {
+        return clock.getElapsedTime();
+    }
+
 protected:
     void unlock();
     void setup(const AchievementType& type);
@@ -74,7 +94,9 @@ protected:
     sf::Sprite icon;
     sf::Text name;
     sf::Text description;
+    sf::Font font;
 
+    sf::Clock clock;
 };
 
 
