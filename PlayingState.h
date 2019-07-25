@@ -52,8 +52,10 @@ private:
 
     void updateAchievements();
 
+    void drawAchievements();
+
     GameLevel level;
-    std::list<Achievement> achievements;
+    std::vector<Achievement> achievements;
 
 };
 

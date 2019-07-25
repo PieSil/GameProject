@@ -22,12 +22,18 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
 }
 
 void PlayingState::updateAchievements() {
-    for (const auto& achievement : achievements) {
+    unsigned short index = 0;
+    for (auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
+            float top = game->getView()->getCenter().y - game->getView()->getSize().y/2.;
+            float right = game->getView()->getCenter().x + game->getView()->getSize().x/2.;
+            achievement.setIconPosition(right - (achievement.getIcon().getTextureRect().width*index), top);
+
             /*
             std::string name = achievement.getName().getString();
             std::cout <<  name << std::endl;
              */
+            index++;
         }
     }
 }
@@ -82,6 +88,8 @@ void PlayingState::draw() {
     for (const auto& projectile : level.getProjectiles()) {
         game->getWindow()->draw(projectile->getSprite());
     }
+
+    drawAchievements();
 }
 
 void PlayingState::handleInput() {
@@ -155,4 +163,13 @@ void PlayingState::createAchievements() {
     achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::DistanceWalked));
     achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::EnemiesKilled));
     achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::BossKilled));
+}
+
+void PlayingState::drawAchievements() {
+    for (const auto& achievement : achievements) {
+        if (achievement.isUnlocked()) {
+            game->getWindow()->draw(achievement.getIcon());
+
+        }
+    }
 }

@@ -40,6 +40,13 @@ const float FRAMERATE = 60.;
 
 const std::string FONT_PATH = "../GameAssets/Font/manaspc.ttf";
 
+//ACHIEVEMENTS
+const std::string WALKER_PATH = "../GameAssets/Sprites/Achievements/Walker.png";
+
+const std::string THESEUS_PATH = "../GameAssets/Sprites/Achievements/Theseus.png";
+
+const std::string KILLER_PATH = "../GameAssets/Sprites/Achievements/Killer.png";
+
 //WINDOW
 const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
 

@@ -33,6 +33,14 @@ public:
         return unlocked;
     }
 
+    void setIconPosition(const float& x, const float& y) {
+        icon.setPosition(x, y);
+    }
+
+    void setIconPosition(const sf::Vector2f& position) {
+        icon.setPosition(position);
+    }
+
     AchievementType getType() const {
         return type;
     }
@@ -66,6 +74,7 @@ protected:
     sf::Sprite icon;
     sf::Text name;
     sf::Text description;
+
 };
 
 
