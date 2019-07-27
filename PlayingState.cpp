@@ -23,6 +23,7 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
 
 void PlayingState::updateAchievements() {
     unsigned short index = 0;
+    unsigned short drawIndex = 1;
     for (auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
 
@@ -30,7 +31,8 @@ void PlayingState::updateAchievements() {
             float right = game->getView()->getCenter().x + game->getView()->getSize().x/2.;
 
             if (achievement.getElapsedTime().asSeconds() <= 3) {
-                achievement.setDescriptionPos(game->getView()->getCenter().x, top +  achievement.getIcon().getTextureRect().height);
+                achievement.setDescriptionPos(game->getView()->getCenter().x, top + achievement.getIcon().getTextureRect().height * drawIndex);
+                drawIndex++;
             }
 
 
