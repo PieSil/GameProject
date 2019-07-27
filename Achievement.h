@@ -33,14 +33,6 @@ public:
         return unlocked;
     }
 
-    void setNamePos(const float& x, const float& y) {
-        name.setPosition(x, y);
-    }
-
-    void setNamePos(const sf::Vector2f& position) {
-        name.setPosition(position);
-    }
-
     void setDescriptionPos(const float& x, const float& y) {
         description.setPosition(x, y);
     }
@@ -63,10 +55,6 @@ public:
 
     Subject *getSubject() const {
         return subject;
-    }
-
-    const sf::Text &getName() const {
-        return name;
     }
 
     const sf::Sprite &getIcon() const {
@@ -92,7 +80,6 @@ protected:
 
     sf::Texture texture;
     sf::Sprite icon;
-    sf::Text name;
     sf::Text description;
     sf::Font font;
 

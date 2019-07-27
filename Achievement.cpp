@@ -59,30 +59,28 @@ void Achievement::setup(const AchievementType &type) {
     }
 
     description = sf::Text("Achievement Unlocked: ", font, 10);
+    std::string name;
 
     switch (type) {
         case AchievementType::DistanceWalked:
             if (!texture.loadFromFile(WALKER_PATH)) {
                 //TODO: throw exception
             }
-            name = sf::Text("Explorer", font, 10);
-            description.setString(description.getString() + name.getString());
+            name = "Explorer";
             break;
 
         case AchievementType::EnemiesKilled:
             if (!texture.loadFromFile(KILLER_PATH)) {
                 //TODO: throw exception
             }
-            name = sf::Text("Killer", font, 10);
-            description.setString(description.getString() + name.getString());
+            name = "Killer";
             break;
 
         case AchievementType::BossKilled:
             if (!texture.loadFromFile(THESEUS_PATH)) {
                 //TODO: throw exception
             }
-            name = sf::Text("Theseus", font, 10);
-            description.setString(description.getString() + name.getString());
+            name = "Theseus";
             break;
 
         default:
@@ -90,8 +88,14 @@ void Achievement::setup(const AchievementType &type) {
             break;
     }
 
+    //create achievement description
+    description.setString(description.getString() + name);
+
+    //store bounding rectangle of text in a variable and use it to reset its origin point
     sf::FloatRect textRect = description.getLocalBounds();
     description.setOrigin(textRect.width/2., description.getOrigin().y);
+
+    //set icon texture
     icon.setTexture(texture);
     icon.setOrigin(icon.getOrigin().x + icon.getTextureRect().width, icon.getOrigin().y);
 
