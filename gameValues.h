@@ -47,6 +47,8 @@ const std::string THESEUS_PATH = "../GameAssets/Sprites/Achievements/Theseus.png
 
 const std::string KILLER_PATH = "../GameAssets/Sprites/Achievements/Killer.png";
 
+const float NOTIFY_DURATION = 3;
+
 //WINDOW
 const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
 

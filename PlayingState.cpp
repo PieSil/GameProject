@@ -21,32 +21,6 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) 
 
 }
 
-void PlayingState::updateAchievements() {
-    unsigned short index = 0;
-    unsigned short drawIndex = 1;
-    for (auto& achievement : achievements) {
-        if (achievement.isUnlocked()) {
-
-            float top = game->getView()->getCenter().y - game->getView()->getSize().y/2.;
-            float right = game->getView()->getCenter().x + game->getView()->getSize().x/2.;
-
-            if (achievement.getElapsedTime().asSeconds() <= 3) {
-                achievement.setDescriptionPos(game->getView()->getCenter().x, top + achievement.getIcon().getTextureRect().height * drawIndex);
-                drawIndex++;
-            }
-
-
-            achievement.setIconPosition(right - (achievement.getIcon().getTextureRect().width*index), top);
-
-            /*
-            std::string name = achievement.getName().getString();
-            std::cout <<  name << std::endl;
-             */
-            index++;
-        }
-    }
-}
-
 void PlayingState::update() {
 
     sf::Time elapsed = game->getElapsed();
@@ -174,15 +148,35 @@ void PlayingState::createAchievements() {
     achievements.emplace_back(Achievement(level.getHero().get(), AchievementType::BossKilled));
 }
 
+void PlayingState::updateAchievements() {
+
+    unsigned short index = 0;
+    unsigned short drawIndex = 1;
+
+    for (auto& achievement : achievements) {
+        if (achievement.isUnlocked()) {
+
+            float top = game->getView()->getCenter().y - game->getView()->getSize().y/2.;
+            float right = game->getView()->getCenter().x + game->getView()->getSize().x/2.;
+
+            if (achievement.getElapsedTime().asSeconds() <= NOTIFY_DURATION) {
+                achievement.setDescriptionPos(game->getView()->getCenter().x, top + achievement.getIcon().getTextureRect().height * drawIndex);
+                drawIndex++;
+            }
+
+
+            achievement.setIconPosition(right - (achievement.getIcon().getTextureRect().width*index), top);
+
+            index++;
+        }
+    }
+}
+
 void PlayingState::drawAchievements() {
     for (auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
 
-            if (achievement.getElapsedTime().asSeconds() <= 3) {
-                /*
-                std::string descripton = achievement.getDescription().getString();
-                std::cout << descripton << std::endl;
-                 */
+            if (achievement.getElapsedTime().asSeconds() <= NOTIFY_DURATION) {
 
                 game->getWindow()->draw(achievement.getDescription());
             }
