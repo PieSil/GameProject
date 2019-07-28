@@ -91,7 +91,7 @@ const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
     return result;
 }
 
-const bool & GameCharacter::getDamaged(const float &damage) {
+const bool GameCharacter::getDamaged(const float &damage) {
 
     bool damaged = false;
 

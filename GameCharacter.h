@@ -39,7 +39,7 @@ public:
 
     virtual const std::pair<bool, Hitbox> attack(const bool &bypassClock = false); //BYPASS CLOCK USED FOR UNIT TESTING
 
-    const bool & getDamaged(const float &damage);
+    const bool getDamaged(const float &damage);
 
     void animate() override;
 
