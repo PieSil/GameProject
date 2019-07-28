@@ -86,6 +86,20 @@ const int MAP_ROWS = 10;
 //excessive value may cause problems with collision
 const int EDGE_THICKNESS = 1;
 
+//COLLECTIBLES - HEART
+
+const std::string HEART_PATH = "../GameAssets/Sprites/Collectibles/Heart.png";
+
+const int HEART_WIDTH = 500;
+const int HEART_HEIGHT = 500;
+
+const float HEART_SCALE = 0.032;
+
+const int HEART_IDLE_ROW = 0;
+const int HEART_IDLE_LAST_COL = 2;
+
+
+
 //HERO
 
 //default health value for all game heroes:

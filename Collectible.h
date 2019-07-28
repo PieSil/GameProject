@@ -18,7 +18,8 @@ public:
 
 virtual void characterCollision(GameCharacter *character) = 0;
 
-protected:
+virtual const bool updateBehaviour() = 0;
+
 };
 
 #endif //_COLLECTIBLE_H

@@ -17,6 +17,8 @@
 #include <algorithm>
 #include <fstream>
 #include <typeinfo>
+#include "Collectible.h"
+#include "Heart.h"
 
 class GameLevel {
 public:
@@ -46,6 +48,8 @@ public:
 
     void updateLevel(const float &elapsedTime);
 
+    void updateCollectibles();
+
     const Hitbox createAttackHitbox(GameCharacter *character);
 
     void updateCombat(GameHero* hero);
@@ -55,6 +59,9 @@ public:
     void destroy(std::unique_ptr<Projectile> &projectile);
 
     void destroy(std::unique_ptr<Enemy> &enemy);
+
+    void destroy(std::unique_ptr<Collectible> &collectible);
+
 
     /*
 void createProjectile(Enemy *enemy, const bool &isFireball = true);
@@ -78,10 +85,15 @@ void createProjectile(GameHero *hero, const bool &isFireball = true);
         return projectiles;
     }
 
+    const std::vector<std::unique_ptr<Collectible>> &getCollectibles() const {
+        return collectibles;
+    }
+
 private:
     std::unique_ptr<GameHero> hero;
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<std::unique_ptr<Projectile>> projectiles;
+    std::vector<std::unique_ptr<Collectible>> collectibles;
     Map gameMap;
 
 
