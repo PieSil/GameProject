@@ -78,7 +78,7 @@ const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &pre
         character->setPosition(prevPosition.spritePosition);
     }
 
-    //get the 8 tiles around the character and the tile it's standing in and check collsisions with those:
+    //get the 8 tiles around the character and the tile it's standing in and check collisions with those:
 
     //[i][j] == [i*col + j]
     for (int i = -1; i <= 1; i++) {
@@ -98,6 +98,12 @@ const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &pre
             Tile currentTile = gameMap.getTiles()[tileIndex];
 
             //only perform collision check if character's hitbox intersects current tile and tile is not walkable
+
+            if(currentTile.isDeadly()) {
+                if (character->getState() != EntityState::DYING && character->getState() != EntityState::DEAD)
+                character->setState(EntityState::DYING);
+            }
+
             if ((!currentTile.isWalkable()) &&
                 character->getHitbox().checkHitbox().intersects(currentTile.getHitbox().checkHitbox())) {
 
