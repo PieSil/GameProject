@@ -3,12 +3,13 @@
 //
 
 #include "gtest/gtest.h"
-#include "math.h"
+#include <math.h>
+#include <algorithm>
 #include "GameLevel.h"
 
 
 
-TEST(CollisionsTest, CreateAttackHitbox) {
+TEST(CollisionsTest, AttackHitbox) {
 
     GameLevel level;
     Hitbox testHitbox = level.getHero()->attack(true).second;
@@ -29,7 +30,7 @@ TEST(CollisionsTest, CreateAttackHitbox) {
     ASSERT_EQ(testHitbox.getLowerEdge().getPosition().y, level.getHero()->getAllPositions().lowerEdgePosition.y);
 }
 
-TEST(CollisionsTest, HitboxSize) {
+TEST(CollisionsTest, AttackHitboxSize) {
     GameLevel level;
     auto hero = level.getHero().get();
     hero->setState(EntityState::IDLE);
@@ -129,4 +130,42 @@ TEST(CollisionTest, EnemyIntersection) {
 }
 
 
+TEST(CollisionsTest, TileCollision) {
+    GameLevel level;
+    auto hero = level.getHero().get();
+    hero->setPosition(0, 0);
+    Tile testTile(sf::Vector2f(0, 0), 1);
 
+    std::vector<Tile> tiles;
+    tiles.push_back(testTile);
+    level.setMapTiles(tiles);
+
+    hero->setPosition(TILE_SIZE.x/2 + hero->getHitbox().getHitbox().getSize().x/2., hero->getSprite().getPosition().y);
+    EXPECT_EQ(false, hero->getHitbox().checkHitbox().intersects(testTile.getHitbox().checkHitbox()));
+
+    sf::Vector2f prevPosition = hero->getSprite().getPosition();
+
+    level.detectMapCollisions(hero->move(Direction::LEFT, 1), hero, true);
+    EXPECT_EQ(prevPosition, hero->getSprite().getPosition());
+
+    tiles.clear();
+
+    Tile testEmpty(sf::Vector2f(0, 0), 0);
+    tiles.push_back(testEmpty);
+    level.setMapTiles(tiles);
+
+    prevPosition = hero->getSprite().getPosition();
+
+    level.detectMapCollisions(hero->move(Direction::LEFT, 1), hero, true);
+    EXPECT_EQ(prevPosition.x -1, hero->getSprite().getPosition().x);
+
+    tiles.clear();
+
+    Tile testSpikes(sf::Vector2f(0, 0), 8);
+    tiles.push_back(testSpikes);
+    level.setMapTiles(tiles);
+
+    level.detectMapCollisions(hero->move(Direction::LEFT, 0), hero, true);
+    EXPECT_EQ(EntityState::DYING, hero->getState());
+
+}

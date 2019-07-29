@@ -32,7 +32,8 @@ public:
 
     void createMap();
 
-    const EntityPositions & detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character);
+    const EntityPositions &
+    detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character, const bool &bypassInMap = false);
 
     const bool detectMapCollisions(std::unique_ptr<Projectile> &projectile);
 
@@ -76,6 +77,11 @@ void createProjectile(GameHero *hero, const bool &isFireball = true);
 
     const std::vector<std::unique_ptr<Projectile>> &getProjectiles() const {
         return projectiles;
+    }
+
+    //used for unit testing
+    void setMapTiles(std::vector<Tile> tiles) {
+        gameMap.setTiles(tiles);
     }
 
 private:

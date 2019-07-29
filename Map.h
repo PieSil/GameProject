@@ -18,7 +18,14 @@ public:
 
     void load();
 
-    const std::vector<Tile> &getTiles() const;
+    const std::vector<Tile> &getTiles() const {
+        return tiles;
+    }
+
+
+    void setTiles(const std::vector<Tile> &tiles) {
+        Map::tiles = tiles;
+    }
 
     const sf::VertexArray &getVertices() const {
         return vertices;

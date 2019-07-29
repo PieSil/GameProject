@@ -61,9 +61,6 @@ void Map::load() {
     }
 }
 
-const std::vector<Tile> &Map::getTiles() const {
-    return tiles;
-}
 
 void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 

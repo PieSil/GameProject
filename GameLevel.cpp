@@ -71,10 +71,12 @@ void GameLevel::createMap() {
      */
 }
 
-const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character) {
+const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character,
+                                                      const bool &bypassInMap) {
 
-    //if character is out of map put it back
-    if (!character->getHitbox().checkHitbox().intersects(gameMap.getVertices().getBounds())) {
+    //bypassInMap set to true in unit testing
+
+    if (!bypassInMap && !character->getHitbox().checkHitbox().intersects(gameMap.getVertices().getBounds())) {
         character->setPosition(prevPosition.spritePosition);
     }
 
