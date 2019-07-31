@@ -25,7 +25,7 @@ public:
     //assignment operator
     Knight& operator=(const Knight& knight) = default;
 
-    void specialBehaviour() override;
+    const bool specialBehaviour() override;
 
     const SpriteParams *getParameters() const override {
         return &knightParams; //overrides getParameters to return a pointer to knightParams instead of entityParams

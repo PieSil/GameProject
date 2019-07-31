@@ -24,7 +24,7 @@ public:
     //assignment operator
     Wizard& operator =(const Wizard& wizard) = default;
 
-    void specialBehaviour() override;
+    const bool specialBehaviour() override;
 
     //void updateBehaviour();
 

@@ -18,8 +18,15 @@ const SpriteParams Wizard::wizardParams(
         WIZARD_ATT_LAST_COL, WIZARD_ATT_OFFSET, WIZARD_SHOOT_ROW, WIZARD_SHOOT_LAST_COL, WIZARD_DEATH_ROW,
         WIZARD_DEATH_LAST_COL, WIZARD_ABILITY_ROW, WIZARD_ABILITY_LAST_COL);
 
-void Wizard::specialBehaviour() {
+const bool Wizard::specialBehaviour() {
+    bool canUse = false;
 
+    if(GameHero::specialBehaviour()) {
+        canUse = true;
+        //TODO: use ability
+    }
+
+    return canUse;
 }
 
 Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const float &m, const float &h,

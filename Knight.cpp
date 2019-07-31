@@ -29,8 +29,16 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
 
-void Knight::specialBehaviour() {
+const bool Knight::specialBehaviour() {
 
+    bool canUse = false;
+
+    if(GameHero::specialBehaviour()) {
+        canUse = true;
+        //TODO: use ability
+    }
+
+    return canUse;
 }
 
 Knight::Knight() : Knight(0, 0) {

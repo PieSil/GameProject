@@ -65,10 +65,30 @@ void GameHero::setupAnimations(const SpriteParams *parameters) {
     animManager.createAnimation(EntityState::ABILITY);
 }
 
-void GameHero::specialBehaviour() {
+const bool GameHero::specialBehaviour() {
+
+    bool canUse = false;
+
     if(state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) {
         state = EntityState::ABILITY;
+        canUse = true;
     }
+
+    return canUse;
+
+}
+
+void GameHero::animate() {
+
+    if (state == EntityState::ABILITY) {
+        if (animManager.getCurrentFrame(EntityState::ABILITY) ==
+            getParameters()->abilityLastCol) { //if animation is on last frame
+            animManager.resetAnimation(EntityState::ABILITY); //reset animation to the beginning
+            state = EntityState::IDLE; //reset state to idle to avoid looping the animation
+        }
+    }
+
+    GameCharacter::animate();
 }
 
 /*

@@ -103,6 +103,11 @@ void PlayingState::handleInput() {
         keyPressed = true;
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+        level.getHero()->specialBehaviour();
+        keyPressed = true;
+    }
+
     if (!keyPressed && level.getHero()->getState() != EntityState::MELEE && level.getHero()->getState() != EntityState::SHOOTING && level.getHero()->getState() != EntityState::DYING  && level.getHero()->getState() != EntityState::DEAD) {
         level.getHero()->setState(EntityState::IDLE);
     }

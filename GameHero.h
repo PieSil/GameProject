@@ -34,9 +34,11 @@ public:
 
     const EntityPositions move(const Direction &direction, const float &distance) override;
 
-    virtual void specialBehaviour();
+    virtual const bool specialBehaviour();
 
     void setupAnimations(const SpriteParams *parameters) override;
+
+    void animate() override;
 
     void incrDistanceWalked(const float& distance);
 
