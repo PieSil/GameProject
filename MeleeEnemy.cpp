@@ -9,10 +9,11 @@
  * MeleeEnemy implementation
  */
 
-const SpriteParams MeleeEnemy::meleeParams(MELEE_WIDTH, MELEE_HEIGHT, MELEE_HITBOX_X, MELEE_HITBOX_Y, MELEE_SCALE,
-                                           MELEE_PATH, MELEE_IDLE_ROW,
-                                           MELEE_IDLE_LAST_COL, MELEE_MOV_ROW, MELEE_MOV_LAST_COL, MELEE_ATT_ROW,
-                                           MELEE_ATT_LAST_COL, MELEE_ATT_OFFSET, MELEE_SHOOT_ROW, MELEE_SHOOT_LAST_COL, MELEE_DEATH_ROW, MELEE_DEATH_LAST_COL);
+const SpriteParams MeleeEnemy::meleeParams(
+        MELEE_PATH, MELEE_WIDTH, MELEE_HEIGHT, MELEE_SCALE, MELEE_HITBOX_X, MELEE_HITBOX_Y, MELEE_IDLE_ROW,
+        MELEE_IDLE_LAST_COL, MELEE_MOV_ROW, MELEE_MOV_LAST_COL, MELEE_ATT_ROW,
+        MELEE_ATT_LAST_COL, MELEE_ATT_OFFSET, MELEE_SHOOT_ROW, MELEE_SHOOT_LAST_COL, MELEE_DEATH_ROW,
+        MELEE_DEATH_LAST_COL);
 
 
 MeleeEnemy::MeleeEnemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par,

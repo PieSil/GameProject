@@ -72,6 +72,10 @@ void PlayingState::draw() {
         game->getWindow()->draw(projectile->getSprite());
     }
 
+    for (const auto& collectible : level.getCollectibles()) {
+        game->getWindow()->draw(collectible->getSprite());
+    }
+
     drawAchievements();
 }
 

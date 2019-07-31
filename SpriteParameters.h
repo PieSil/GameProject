@@ -9,10 +9,11 @@
 
 struct SpriteParams {
 public:
-    SpriteParams(const int &width, const int &height, const float &widthRed, const float &heightRed, const float scale,
-                 const std::string &path,
-                 const unsigned short &idleRow, const unsigned short idleCol, const unsigned short movRow,
-                 const unsigned short movLastCol, const int &attRow, const int &attLastCol, const int &attOffset, const int &shootRow, const int &shootLastCol, const int &deathRow, const int &deathLastCol)
+    SpriteParams(const std::string &path, const int &width, const int &height, const float scale = 1, const float &widthRed = 1,
+                 const float &heightRed = 1, const unsigned short &idleRow = 0, const unsigned short idleCol = 0,
+                 const unsigned short movRow = 0, const unsigned short movLastCol = 0, const int &attRow = 0, const int &attLastCol = 0,
+                 const int &attOffset = 0, const int &shootRow = 0, const int &shootLastCol = 0, const int &deathRow = 0,
+                 const int &deathLastCol = 0)
             : width(width), height(height), widthRed(widthRed), heightRed(heightRed), scale(scale), path(path),
               idleRow(idleRow), idleLastCol(idleCol), movRow(movRow), movLastCol(movLastCol), attRow(attRow),
               attLastCol(attLastCol), attOffset(attOffset), shootRow(shootRow), shootLastCol(shootLastCol), deathRow(deathRow), deathLastCol(deathLastCol) {};

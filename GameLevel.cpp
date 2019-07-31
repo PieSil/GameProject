@@ -22,6 +22,9 @@ GameLevel::GameLevel(Herotype heroT) {
     enemies.emplace_back(std::unique_ptr<BossEnemy>(
             new BossEnemy(hero.get(), 7 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
 
+    collectibles.emplace_back(std::unique_ptr<Collectible>(
+            new Heart(hero.get(), 18 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
+
     createMap();
 
 }
@@ -209,7 +212,7 @@ void GameLevel::updateLevel(const float &elapsedTime) {
     updateHero();
     updateEnemies(elapsedTime);
     updateProjectiles(elapsedTime);
-
+    updateCollectibles();
 }
 
 void GameLevel::moveCharacter(GameHero *hero, const Direction &direction, const float &distance) {
@@ -224,6 +227,7 @@ void GameLevel::moveCharacter(Enemy *enemy, const float &distance) {
 void GameLevel::updateHero() {
     updatePhysics(hero.get());
     hero->updateStatus();
+    //std::cout << hero->getHealth() << "/" << DEF_HERO_HEALTH  << "\n" << std::endl;
 }
 
 void GameLevel::updatePhysics(GameCharacter *character) {
@@ -423,6 +427,27 @@ void GameLevel::updateProjectiles(const float &elapsedTime) {
 
 }
 
+void GameLevel::updateCollectibles() {
+    auto collectible = collectibles.begin();
+
+
+    while (!collectibles.empty() && collectible != collectibles.end()) {
+
+        (*collectible)->animate();
+
+        bool toDelete = (*collectible)->updateBehaviour();
+
+        if (toDelete) {
+            destroy(*collectible);
+
+        } else
+            collectible++;
+
+    }
+
+
+}
+
 void GameLevel::destroy(std::unique_ptr<Projectile> &projectile) {
 
     auto itr = std::find(projectiles.begin(), projectiles.end(), projectile);
@@ -445,6 +470,11 @@ GameLevel::GameLevel() : gameMap(Map()) {
     enemies.push_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), 0, 0)));
 
+}
+
+void GameLevel::destroy(std::unique_ptr<Collectible> &collectible) {
+    auto itr = std::find(collectibles.begin(), collectibles.end(), collectible);
+    collectibles.erase(itr);
 }
 
 

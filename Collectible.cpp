@@ -8,8 +8,6 @@
 /**
  * Collectible implementation
  */
-
-
-void Collectible::characterCollision() {
+Collectible::Collectible(const float &x, const float &y) : GameEntity(x, y) {
 
 }
