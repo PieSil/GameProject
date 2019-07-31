@@ -27,7 +27,7 @@ enum class Herotype {
 
 enum class EntityState {
 
-    IDLE, WALKING, MELEE, SHOOTING, DYING, DEAD
+    IDLE, WALKING, MELEE, SHOOTING, ABILITY, DYING, DEAD
 
 };
 
@@ -60,9 +60,14 @@ const float WALK_ANIM_TIME = 0.5;
 const float IDLE_ANIM_TIME = 1;
 
 const float ATT_ANIM_TIME = 0.5;
+
 const float SHOOT_ANIM_TIME = 0.5;
 
 const float DEATH_ANIM_TIME = 1;
+
+const float ABILITY_ANIM_TIME = 0.5;
+
+
 
 //GRAVITY modifying this values may break game physics
 
@@ -157,6 +162,9 @@ const int KNIGHT_SHOOT_LAST_COL = 8;
 const int KNIGHT_DEATH_ROW = 3;
 const int KNIGHT_DEATH_LAST_COL = 8;
 
+const int KNIGHT_ABILITY_ROW = 0;
+const int KNIGHT_ABILITY_LAST_COL = 6;
+
 //WIZARD
 
 const float WIZARD_ATTACK_RANGE = 0;
@@ -194,6 +202,9 @@ const int WIZARD_SHOOT_LAST_COL = 9;
 
 const int WIZARD_DEATH_ROW = 4;
 const int WIZARD_DEATH_LAST_COL = 9;
+
+const int WIZARD_ABILITY_ROW = 3;
+const int WIZARD_ABILITY_LAST_COL = 9;
 
 //ENEMY
 

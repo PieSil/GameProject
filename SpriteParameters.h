@@ -13,10 +13,11 @@ public:
                  const float &heightRed = 1, const unsigned short &idleRow = 0, const unsigned short idleCol = 0,
                  const unsigned short movRow = 0, const unsigned short movLastCol = 0, const int &attRow = 0, const int &attLastCol = 0,
                  const int &attOffset = 0, const int &shootRow = 0, const int &shootLastCol = 0, const int &deathRow = 0,
-                 const int &deathLastCol = 0)
+                 const int &deathLastCol = 0, const int &abilityRow = 0, const int &abilityLastCol = 0)
             : width(width), height(height), widthRed(widthRed), heightRed(heightRed), scale(scale), path(path),
               idleRow(idleRow), idleLastCol(idleCol), movRow(movRow), movLastCol(movLastCol), attRow(attRow),
-              attLastCol(attLastCol), attOffset(attOffset), shootRow(shootRow), shootLastCol(shootLastCol), deathRow(deathRow), deathLastCol(deathLastCol) {};
+              attLastCol(attLastCol), attOffset(attOffset), shootRow(shootRow), shootLastCol(shootLastCol), deathRow(deathRow), deathLastCol(deathLastCol),
+              abilityRow(abilityRow), abilityLastCol(abilityLastCol){};
 
     //values used to determine sprite width and heigth to correctly select it when cutting sprite sheet:
     const int width;
@@ -51,6 +52,9 @@ public:
 
     const int deathRow;
     const int deathLastCol;
+
+    const int abilityRow;
+    const int abilityLastCol;
 };
 
 #endif //GAMEPROJECT_SPRITEPARAMETERS_H

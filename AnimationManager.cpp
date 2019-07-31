@@ -58,6 +58,16 @@ void AnimationManager::createAnimation(const EntityState &state) {
             animations.emplace(EntityState::SHOOTING, Animation(framesVector, sprite, parameters, SHOOT_ANIM_TIME));
             break;
 
+        case EntityState::ABILITY:
+            for (auto col = 0; col <= parameters->abilityLastCol; col++) {
+                framesVector.emplace_back(
+                        sf::IntRect(col * parameters->width, parameters->abilityRow * parameters->height,
+                                    parameters->width, parameters->height));
+            }
+
+            animations.emplace(EntityState::ABILITY, Animation(framesVector, sprite, parameters, ABILITY_ANIM_TIME));
+            break;
+
         case EntityState::DYING :
             for (auto col = 0; col <= parameters->deathLastCol; col++) {
                 framesVector.emplace_back(

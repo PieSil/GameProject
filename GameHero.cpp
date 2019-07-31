@@ -22,6 +22,8 @@ GameHero::GameHero(const GameHero &copied) : GameCharacter(copied) {
 
 }
 
+GameHero::~GameHero() {}
+
 const EntityPositions GameHero::move(const Direction &direction, const float &distance) {
     EntityPositions prevPosition;
     prevPosition = GameCharacter::move(direction, distance);
@@ -56,6 +58,17 @@ void GameHero::incrEnemiesKilled(const int &enemies) {
 void GameHero::setBossKilled(const bool &isKilled) {
     counters.bossKilled = isKilled;
     notifyObservers();
+}
+
+void GameHero::setupAnimations(const SpriteParams *parameters) {
+    GameCharacter::setupAnimations(parameters);
+    animManager.createAnimation(EntityState::ABILITY);
+}
+
+void GameHero::specialBehaviour() {
+    if(state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) {
+        state = EntityState::ABILITY;
+    }
 }
 
 /*

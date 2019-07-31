@@ -23,7 +23,6 @@ class GameHero: public GameCharacter, public Subject {
 public:
     GameHero(const float &x, const float &y, const float &str = DEF_HERO_STRENGTH, const bool &onf = false,
              const float &h = DEF_HERO_HEALTH, const bool &facingR = true, const float &s = HERO_SPEED);
-    virtual ~GameHero() {};
 
     //default constructor
     GameHero();
@@ -31,9 +30,13 @@ public:
     //copy constructor
     GameHero(const GameHero &copied);
 
+    virtual ~GameHero() = 0;
+
     const EntityPositions move(const Direction &direction, const float &distance) override;
 
-    virtual void specialBehaviour() = 0;
+    virtual void specialBehaviour();
+
+    void setupAnimations(const SpriteParams *parameters) override;
 
     void incrDistanceWalked(const float& distance);
 
@@ -50,6 +53,7 @@ public:
     //void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
 
 protected:
+
     std::list<Observer*> observers;
     achievementCounters counters;
 
