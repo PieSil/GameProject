@@ -16,6 +16,8 @@ public:
     virtual const std::pair<bool, Hitbox>
     attack(EntityState &state, const EntityPositions &allPositions, const float &attackRange) = 0;
 
+    const bool canAttack(const EntityState &state);
+
 };
 
 

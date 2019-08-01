@@ -9,7 +9,7 @@ const std::pair<bool, Hitbox> ShootingBehaviour::attack(EntityState &state, cons
 
     std::pair<bool, Hitbox> result;
 
-    if (state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY) {
+    if (this->canAttack(state)) {
         state = EntityState::SHOOTING;
         result.first = true;
         result.second = Hitbox(allPositions.spritePosition, 0, 0);
