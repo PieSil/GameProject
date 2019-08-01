@@ -10,7 +10,7 @@ const std::pair<bool, Hitbox> MeleeBehaviour::attack(EntityState &state, const E
 
     std::pair<bool, Hitbox> result;
 
-    if (state != EntityState::MELEE && state != EntityState::SHOOTING) {
+    if (state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY) {
         state = EntityState::MELEE;
         result.first = true;
 

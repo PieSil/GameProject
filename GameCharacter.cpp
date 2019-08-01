@@ -61,7 +61,7 @@ void GameCharacter::animate() {
 }
 
 const EntityPositions GameCharacter::move(const Direction &direction, const float &distance) {
-    if (state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) //enable movement only if not attacking
+    if (state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) //enable movement only if not attacking
        return(MovingEntity::move(direction, distance));
 
     else
@@ -69,7 +69,7 @@ const EntityPositions GameCharacter::move(const Direction &direction, const floa
 }
 
 void GameCharacter::jump() {
-    if(onGround && state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::DYING && state != EntityState::DEAD) {
+    if(onGround && state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) {
         onGround = false;
         velocityY = JUMP_VELOCITY;
     }
