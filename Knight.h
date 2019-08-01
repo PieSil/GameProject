@@ -34,6 +34,7 @@ public:
 protected:
 
     static const SpriteParams knightParams;
+    bool invincible;
 
 };
 

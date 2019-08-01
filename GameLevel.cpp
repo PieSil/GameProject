@@ -291,7 +291,6 @@ void GameLevel::updateCombat(GameHero *hero) {
 
             for (const auto &enemy :enemies) {
                 if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
-                    //TODO: do damage to enemy
                     if (enemy->getDamaged(hero->getStrength())) { // if enemy got damaged
                         if (enemy->getState() == EntityState::DYING) { //and it's dying
                             hero->incrEnemiesKilled();//increase the counter of enemies killed by the hero
@@ -319,12 +318,10 @@ void GameLevel::updateCombat(Enemy *enemy) {
 
 
             if (attackPair.second.checkHitbox().intersects(hero->getHitbox().checkHitbox())) {
-                //TODO: damage the hero
                 hero->getDamaged(enemy->getStrength());
             }
 
         } else {
-            //TODO: shoot projectile
             projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, enemy)));
         }
     }

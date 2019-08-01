@@ -36,7 +36,7 @@ const std::pair<bool, Hitbox> BossEnemy::updateCombat() {
     }
 
     else if (typeid(attackBehaviour.get()) != typeid(ShootingBehaviour*)) {
-                setAttackBehaviour(this->shootingBehaviour);
+        setAttackBehaviour(this->shootingBehaviour);
         attackRange = BOSS_SHOOT_RANGE;
     }
 

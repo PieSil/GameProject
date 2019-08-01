@@ -108,7 +108,7 @@ void PlayingState::handleInput() {
         keyPressed = true;
     }
 
-    if (!keyPressed && level.getHero()->getState() != EntityState::MELEE && level.getHero()->getState() != EntityState::SHOOTING && level.getHero()->getState() != EntityState::ABILITY && level.getHero()->getState() != EntityState::DYING  && level.getHero()->getState() != EntityState::DEAD) {
+    if (!keyPressed && !(level.getHero()->isAttacking()) && !(level.getHero()->isDying())) {
         level.getHero()->setState(EntityState::IDLE);
     }
 }

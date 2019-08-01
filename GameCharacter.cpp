@@ -61,7 +61,7 @@ void GameCharacter::animate() {
 }
 
 const EntityPositions GameCharacter::move(const Direction &direction, const float &distance) {
-    if (state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) //enable movement only if not attacking
+    if (!isAttacking() && !isDying()) //enable movement only if not attacking
        return(MovingEntity::move(direction, distance));
 
     else
@@ -69,7 +69,7 @@ const EntityPositions GameCharacter::move(const Direction &direction, const floa
 }
 
 void GameCharacter::jump() {
-    if(onGround && state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) {
+    if(onGround && !isAttacking() && !isDying()) {
         onGround = false;
         velocityY = JUMP_VELOCITY;
     }
@@ -80,7 +80,7 @@ const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
     std::pair<bool, Hitbox> result;
     result.first = false;
 
-    if (state != EntityState::DYING && state != EntityState::DEAD) {
+    if (!isDying()) {
 
         if ((clocks.attackClock.getElapsedTime().asSeconds() >= attackTimeStep) || bypassClock) {
             clocks.attackClock.restart();
@@ -95,7 +95,7 @@ const bool GameCharacter::getDamaged(const float &damage) {
 
     bool damaged = false;
 
-    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.5 && health > 0 && state != EntityState::DYING && state != EntityState::DEAD) {
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.5 && health > 0 && !isDying()) {
         clocks.damagedClock.restart();
 
         health -= damage;
@@ -125,3 +125,24 @@ void GameCharacter::updateStatus() {
     }
 
 }
+
+const bool GameCharacter::isAttacking() {
+
+    bool isAttacking = false;
+
+    if (this->state == EntityState::MELEE || this->state == EntityState::SHOOTING || this->state == EntityState::ABILITY)
+        isAttacking = true;
+
+    return isAttacking;
+}
+
+const bool GameCharacter::isDying() {
+
+    bool isDying = false;
+
+    if (this->state == EntityState::DYING || this->state == EntityState::DEAD)
+        isDying = true;
+
+    return isDying;
+}
+

@@ -19,7 +19,7 @@ const SpriteParams Knight::knightParams(
         KNIGHT_DEATH_LAST_COL, KNIGHT_ABILITY_ROW, KNIGHT_ABILITY_LAST_COL);
 
 Knight::Knight(const float &x, const float &y, const float &str, const bool &onf, const float &h, const bool &facingR,
-               const float &s) : GameHero(x, y, str, onf, h, facingR, s) {
+               const float &s) : GameHero(x, y, str, onf, h, facingR, s), invincible(false) {
     initSprite(x, y);
     giveHitbox();
 
