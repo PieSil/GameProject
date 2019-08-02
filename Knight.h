@@ -27,6 +27,10 @@ public:
 
     const bool specialBehaviour() override;
 
+    const bool getDamaged(const float &damage) override;
+
+    void updateStatus() override;
+
     const SpriteParams *getParameters() const override {
         return &knightParams; //overrides getParameters to return a pointer to knightParams instead of entityParams
     }

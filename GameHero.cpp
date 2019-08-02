@@ -10,7 +10,7 @@
  */
 
 GameHero::GameHero(const float &x, const float &y, const float &str, const bool &onf, const float &h,
-                   const bool &facingR, const float &s) : GameCharacter(x, y, str, onf, h, s, facingR) {
+                   const bool &facingR, const float &s) : GameCharacter(x, y, str, onf, h, s, facingR), abilityTimeStep(KNIGHT_ABILITY_TIMESTEP) {
 
 }
 
@@ -69,7 +69,8 @@ const bool GameHero::specialBehaviour() {
 
     bool canUse = false;
 
-    if(state != EntityState::MELEE && state != EntityState::SHOOTING && state != EntityState::ABILITY && state != EntityState::DYING && state != EntityState::DEAD) {
+    if(this->clocks.abilityClock.getElapsedTime().asSeconds() >= abilityTimeStep && !this->isAttacking() && !this->isDying()) {
+        clocks.abilityClock.restart();
         state = EntityState::ABILITY;
         canUse = true;
     }
@@ -81,14 +82,18 @@ const bool GameHero::specialBehaviour() {
 void GameHero::animate() {
 
     if (state == EntityState::ABILITY) {
-        if (animManager.getCurrentFrame(EntityState::ABILITY) ==
-            getParameters()->abilityLastCol) { //if animation is on last frame
+        if (animManager.getCurrentFrame(EntityState::ABILITY) == getParameters()->abilityLastCol) { //if animation is on last frame
             animManager.resetAnimation(EntityState::ABILITY); //reset animation to the beginning
             state = EntityState::IDLE; //reset state to idle to avoid looping the animation
         }
     }
 
     GameCharacter::animate();
+}
+
+const bool GameHero::getDamaged(const float &damage) {
+    std::cout << health << "/" << DEF_HERO_HEALTH << std::endl;
+    return GameCharacter::getDamaged(damage);
 }
 
 /*

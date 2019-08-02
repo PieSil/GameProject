@@ -25,6 +25,7 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
 
     attackRange = KNIGHT_ATTACK_RANGE;
     attackTimeStep = HERO_ATT_TIMESTEP;
+    abilityTimeStep = KNIGHT_ABILITY_TIMESTEP;
     setupAnimations(getParameters());
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
@@ -35,7 +36,8 @@ const bool Knight::specialBehaviour() {
 
     if(GameHero::specialBehaviour()) {
         canUse = true;
-        //TODO: use ability
+        invincible = true;
+        clocks.invincibilityClock.restart();
     }
 
     return canUse;
@@ -48,6 +50,29 @@ Knight::Knight() : Knight(0, 0) {
 Knight::Knight(const Knight &copied) : GameHero(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
+}
+
+const bool Knight::getDamaged(const float &damage) {
+
+    bool damaged = false;
+
+    //if knight is invincible don't get damaged
+    if (!invincible)
+        damaged = GameHero::getDamaged(damage);
+    else
+        std::cout << "Invincible" << std::endl;
+
+    return damaged;
+
+}
+
+void Knight::updateStatus() {
+
+    GameCharacter::updateStatus();
+
+    if (clocks.invincibilityClock.getElapsedTime().asSeconds() >= 5) {
+        invincible = false;
+    }
 }
 
 

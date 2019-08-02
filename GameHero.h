@@ -34,6 +34,8 @@ public:
 
     const EntityPositions move(const Direction &direction, const float &distance) override;
 
+    const bool getDamaged(const float &damage) override;
+
     virtual const bool specialBehaviour();
 
     void setupAnimations(const SpriteParams *parameters) override;
@@ -58,6 +60,7 @@ protected:
 
     std::list<Observer*> observers;
     achievementCounters counters;
+    float abilityTimeStep;
 
 };
 

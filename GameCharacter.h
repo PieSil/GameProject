@@ -17,6 +17,7 @@ struct Clocks {
     sf::Clock paralyzedClock;
     sf::Clock abilityClock;
     sf::Clock damagedClock;
+    sf::Clock invincibilityClock;
 };
 
 class GameCharacter : public MovingEntity {
@@ -39,7 +40,7 @@ public:
 
     virtual const std::pair<bool, Hitbox> attack(const bool &bypassClock = false); //BYPASS CLOCK USED FOR UNIT TESTING
 
-    const bool getDamaged(const float &damage);
+    virtual const bool getDamaged(const float &damage);
 
     void animate() override;
 

@@ -124,9 +124,11 @@ const float HERO_SPEED = 60; //sets hero speed (measured in pixels/second ?)
 
 //KNIGHT
 
-//values used to determine knight's sprite width and heigth to correctly select it when cutting sprite sheet:
-
 const float KNIGHT_ATTACK_RANGE = 16;
+
+const float KNIGHT_ABILITY_TIMESTEP = 10;
+
+//values used to determine knight's sprite width and heigth to correctly select it when cutting sprite sheet:
 
 const int KNIGHT_WIDTH = 42;
 const int KNIGHT_HEIGHT = 42;
@@ -168,6 +170,8 @@ const int KNIGHT_ABILITY_LAST_COL = 6;
 //WIZARD
 
 const float WIZARD_ATTACK_RANGE = 0;
+
+const float WIZARD_ABILITY_TIMESTEP = 0;
 
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
 const int WIZARD_WIDTH = 32;
