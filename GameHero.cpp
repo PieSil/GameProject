@@ -79,18 +79,6 @@ const bool GameHero::specialBehaviour() {
 
 }
 
-void GameHero::animate() {
-
-    if (state == EntityState::ABILITY) {
-        if (animManager.getCurrentFrame(EntityState::ABILITY) == getParameters()->abilityLastCol) { //if animation is on last frame
-            animManager.resetAnimation(EntityState::ABILITY); //reset animation to the beginning
-            state = EntityState::IDLE; //reset state to idle to avoid looping the animation
-        }
-    }
-
-    GameCharacter::animate();
-}
-
 const bool GameHero::getDamaged(const float &damage) {
     std::cout << health << "/" << DEF_HERO_HEALTH << std::endl;
     return GameCharacter::getDamaged(damage);

@@ -145,4 +145,3 @@ const bool GameCharacter::isDying() {
 
     return isDying;
 }
-

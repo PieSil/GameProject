@@ -9,9 +9,9 @@
  * Fireball implementation
  */
 
-//TODO: complete implementation
-
-
+const SpriteParams Fireball::fireballParams(
+        FIREB_PATH, FIREB_WIDTH, FIREB_HEIGHT, FIREB_SCALE, FIREB_HITBOX_X, FIREB_HITBOX_Y, FIREB_IDLE_ROW,
+        FIREB_IDLE_LAST_COL, FIREB_MOV_ROW, FIREB_MOV_LAST_COL);
 
 Fireball::Fireball(const float &x, const float &y, const bool &facingR, const bool& friendly, const float &movSpeed) :
         Projectile(x, y, facingR, friendly, movSpeed) {
@@ -33,20 +33,11 @@ Fireball::Fireball(const Hitbox &hitbox, GameHero *hero, const float &movSpeed) 
     setupAnimations(getParameters());
 }
 
-const SpriteParams Fireball::fireballParams(
-        FIREB_PATH, FIREB_WIDTH, FIREB_HEIGHT, FIREB_SCALE, FIREB_HITBOX_X, FIREB_HITBOX_Y, FIREB_IDLE_ROW,
-        FIREB_IDLE_LAST_COL, FIREB_MOV_ROW, FIREB_MOV_LAST_COL, FIREB_ATT_ROW,
-        FIREB_ATT_LAST_COL, 0, FIREB_SHOOT_ROW, FIREB_SHOOT_LAST_COL, 0, 0);
-
 void Fireball::characterCollision(GameCharacter *character) {
     if (!character->isOnFire()) {
         character->getClocks().burnClock.restart();
         character->setOnFire(true);
     }
-}
-
-void Fireball::destroy() {
-    this->~Fireball();
 }
 
 const SpriteParams *Fireball::getParameters() const {

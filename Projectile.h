@@ -28,8 +28,6 @@ public:
         return friendly;
     }
 
-    virtual void destroy();
-
 protected:
     bool friendly;
 

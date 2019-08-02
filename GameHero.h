@@ -40,8 +40,6 @@ public:
 
     void setupAnimations(const SpriteParams *parameters) override;
 
-    void animate() override;
-
     void incrDistanceWalked(const float& distance);
 
     void incrEnemiesKilled(const int& enemies = 1);

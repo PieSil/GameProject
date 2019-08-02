@@ -27,10 +27,6 @@ Projectile::Projectile(const Hitbox &hitbox, GameHero *hero, const float &movSpe
 }
 
 
-void Projectile::destroy() {
-    this->~Projectile(); //destroy the projectile
-}
-
 const EntityPositions Projectile::move(const float &distance) {
 
     EntityPositions prevPosition;

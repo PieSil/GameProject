@@ -82,7 +82,11 @@ const std::pair<bool, Hitbox> Enemy::updateCombat() {
 void Enemy::updateStatus() {
     GameCharacter::updateStatus();
 
-    if (paralyzed)
-        if (clocks.paralyzedClock.getElapsedTime().asSeconds() >= 4)
+    if (paralyzed) {
+        state = EntityState::IDLE;
+        
+        if (clocks.paralyzedClock.getElapsedTime().asSeconds() >= 5)
             paralyzed = false;
+    }
+
 }

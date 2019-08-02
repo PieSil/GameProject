@@ -351,4 +351,35 @@ const int FIREB_SHOOT_ROW =0;
 const int FIREB_SHOOT_LAST_COL = 7;
 
 
+//PARALYZING
+const int PARA_WIDTH = 100;
+const int PARA_HEIGHT = 100;
+
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float PARA_HITBOX_X = 3;
+const float PARA_HITBOX_Y = 3;
+
+//value used to scale up/down or flip sprite:
+const float PARA_SCALE = 0.15;
+
+//value used to set path of texture file
+const std::string PARA_PATH = "../GameAssets/Sprites/Projectiles/Fireball/Fireball.png";
+
+//values used to choose starting sprite
+const int PARA_IDLE_ROW = 0;
+const int PARA_IDLE_LAST_COL = 7;
+
+
+//values used to choose row and last column of walking animation in the spritesheet:
+const int PARA_MOV_ROW =0;
+const int PARA_MOV_LAST_COL = 7;
+
+const int PARA_ATT_ROW =0;
+const int PARA_ATT_LAST_COL = 7;
+
+const int PARA_SHOOT_ROW =0;
+const int PARA_SHOOT_LAST_COL = 7;
+
+
 #endif //GAMEPROJECT_GAMEVALUES_H
