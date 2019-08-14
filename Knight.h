@@ -25,7 +25,7 @@ public:
     //assignment operator
     Knight& operator=(const Knight& knight) = default;
 
-    const bool specialBehaviour() override;
+    void specialBehaviour() override;
 
     const bool getDamaged(const float &damage) override;
 

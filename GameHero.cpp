@@ -31,6 +31,17 @@ const EntityPositions GameHero::move(const Direction &direction, const float &di
     return  prevPosition;
 }
 
+const bool GameHero::canUseAbility() {
+    bool canUse = false;
+
+    if(this->clocks.abilityClock.getElapsedTime().asSeconds() >= abilityTimeStep && !this->isAttacking() && !this->isDying()) {
+        canUse = true;
+    }
+
+    return canUse;
+}
+
+
 void GameHero::registerObserver(Observer *obs) {
     observers.push_back(obs);
 }
@@ -65,25 +76,22 @@ void GameHero::setupAnimations(const SpriteParams *parameters) {
     animManager.createAnimation(EntityState::ABILITY);
 }
 
-const bool GameHero::specialBehaviour() {
-
-    bool canUse = false;
-
-    if(this->clocks.abilityClock.getElapsedTime().asSeconds() >= abilityTimeStep && !this->isAttacking() && !this->isDying()) {
-        clocks.abilityClock.restart();
-        state = EntityState::ABILITY;
-        canUse = true;
-    }
-
-    return canUse;
-
-}
-
 const bool GameHero::getDamaged(const float &damage) {
     std::cout << health << "/" << DEF_HERO_HEALTH << std::endl;
     return GameCharacter::getDamaged(damage);
 }
 
+void GameHero::animate() {
+
+    if (state == EntityState::ABILITY) {
+        if (animManager.getCurrentFrame(EntityState::ABILITY) == getParameters()->abilityLastCol) { //if animation is on last frame
+            animManager.resetAnimation(EntityState::ABILITY); //reset animation to the beginning
+            state = EntityState::IDLE; //reset state to idle to avoid looping the animation
+        }
+    }
+
+    GameCharacter::animate();
+}
 /*
 void GameHero::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
 }

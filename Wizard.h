@@ -8,6 +8,8 @@
 
 #include "GameHero.h"
 #include "ShootingBehaviour.h"
+#include "Projectile.h"
+#include "Paralyzing.h"
 
 class Wizard: public GameHero {
 public:
@@ -24,7 +26,9 @@ public:
     //assignment operator
     Wizard& operator =(const Wizard& wizard) = default;
 
-    const bool specialBehaviour() override;
+    void specialBehaviour() override;
+
+    void specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles);
 
     //void updateBehaviour();
 

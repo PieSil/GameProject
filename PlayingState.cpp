@@ -104,7 +104,7 @@ void PlayingState::handleInput() {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-        level.getHero()->specialBehaviour();
+        level.updateAbility(level.getHero().get());
         keyPressed = true;
     }
 

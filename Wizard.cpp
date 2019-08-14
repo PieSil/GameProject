@@ -18,15 +18,8 @@ const SpriteParams Wizard::wizardParams(
         WIZARD_ATT_LAST_COL, WIZARD_ATT_OFFSET, WIZARD_SHOOT_ROW, WIZARD_SHOOT_LAST_COL, WIZARD_DEATH_ROW,
         WIZARD_DEATH_LAST_COL, WIZARD_ABILITY_ROW, WIZARD_ABILITY_LAST_COL);
 
-const bool Wizard::specialBehaviour() {
-    bool canUse = false;
+void Wizard::specialBehaviour() {
 
-    if(GameHero::specialBehaviour()) {
-        canUse = true;
-        //TODO: use ability
-    }
-
-    return canUse;
 }
 
 Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const float &m, const float &h,
@@ -54,4 +47,18 @@ Wizard::Wizard() : Wizard(0, 0) {
 Wizard::Wizard(const Wizard &copied) : mana(copied.getMana()), GameHero(copied) {
     initSprite(copied.getSprite().getPosition().x, copied.getSprite().getPosition().y);
     giveHitbox();
+}
+
+void Wizard::specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles) {
+
+
+    if(canUseAbility()) {
+
+        clocks.abilityClock.restart();
+        state = EntityState::ABILITY;
+
+        levelProjectiles.push_back(std::unique_ptr<Paralyzing>(new Paralyzing(this)));
+
+    }
+
 }

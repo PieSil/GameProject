@@ -36,7 +36,11 @@ public:
 
     const bool getDamaged(const float &damage) override;
 
-    virtual const bool specialBehaviour();
+    virtual void specialBehaviour() = 0;
+
+    virtual const bool canUseAbility();
+
+    void animate() override;
 
     void setupAnimations(const SpriteParams *parameters) override;
 

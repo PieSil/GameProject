@@ -57,6 +57,8 @@ public:
 
     void updateCombat(Enemy* enemy);
 
+    void updateAbility(GameHero *hero);
+
     void destroy(std::unique_ptr<Projectile> &projectile);
 
     void destroy(std::unique_ptr<Enemy> &enemy);

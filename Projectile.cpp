@@ -16,13 +16,13 @@ Projectile::Projectile(const float &x, const float &y, const bool &facingR, cons
 
 }
 
-Projectile::Projectile(const Hitbox &hitbox, Enemy *enemy, const float &movSpeed = PROJ_SPEED)
-        : friendly(false), MovingEntity(hitbox.getHitbox().getPosition().x, hitbox.getHitbox().getPosition().y, movSpeed){
+Projectile::Projectile(Enemy *enemy, const float &movSpeed = PROJ_SPEED)
+        : friendly(false), MovingEntity(enemy->getAllPositions().spritePosition.x, enemy->getAllPositions().spritePosition.y, movSpeed){
     facingRight = enemy->isFacingRight();
 }
 
-Projectile::Projectile(const Hitbox &hitbox, GameHero *hero, const float &movSpeed = PROJ_SPEED)
-        : friendly(true), MovingEntity(hitbox.getHitbox().getPosition().x, hitbox.getHitbox().getPosition().y, movSpeed) {
+Projectile::Projectile(GameHero *hero, const float &movSpeed = PROJ_SPEED)
+        : friendly(true), MovingEntity(hero->getAllPositions().spritePosition.x, hero->getAllPositions().spritePosition.y, movSpeed) {
     facingRight = hero->isFacingRight();
 }
 

@@ -302,7 +302,7 @@ void GameLevel::updateCombat(GameHero *hero) {
             }
 
         } else {
-            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, hero)));
+            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(hero)));
         }
     }
 }
@@ -322,11 +322,20 @@ void GameLevel::updateCombat(Enemy *enemy) {
             }
 
         } else {
-            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(attackPair.second, enemy)));
+            projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(enemy)));
         }
     }
 }
 
+void GameLevel::updateAbility(GameHero *hero) {
+
+    if (auto k = dynamic_cast<Knight*>(hero)) {
+        k->specialBehaviour();
+
+    } else if (auto w = dynamic_cast<Wizard*>(hero)) {
+        w->specialBehaviour(projectiles);
+    }
+}
 
 const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
     Hitbox attackHitbox;

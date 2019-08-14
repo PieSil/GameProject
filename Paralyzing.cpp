@@ -21,8 +21,8 @@ Paralyzing::Paralyzing(const float &x, const float &y, const bool &facingR, cons
 
 }
 
-Paralyzing::Paralyzing(const Hitbox &hitbox, GameHero *hero, const float &movSpeed) : Projectile(hitbox, hero, movSpeed) {
-    initSprite(hitbox.getHitbox().getPosition().x, hitbox.getHitbox().getPosition().y);
+Paralyzing::Paralyzing(GameHero *hero, const float &movSpeed) : Projectile(hero, movSpeed) {
+    initSprite(hero->getAllPositions().spritePosition.x, hero->getAllPositions().spritePosition.y);
     giveHitbox();
     setupAnimations(getParameters());
 }

@@ -15,8 +15,8 @@ public:
     Projectile(const float &x, const float &y, const bool &facingR = true, const bool &friendly = true,
                const float &movSpeed = PROJ_SPEED);
 
-    Projectile(const Hitbox &hitbox, GameHero *hero, const float &movSpeed);
-    Projectile(const Hitbox &hitbox, Enemy *enemy, const float &movSpeed);
+    Projectile(GameHero *hero, const float &movSpeed);
+    Projectile(Enemy *enemy, const float &movSpeed);
 
     ~Projectile() {};
 

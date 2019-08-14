@@ -30,17 +30,20 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
     setAttackBehaviour(std::make_shared<MeleeBehaviour>());
 }
 
-const bool Knight::specialBehaviour() {
+void Knight::specialBehaviour() {
 
     bool canUse = false;
 
-    if(GameHero::specialBehaviour()) {
-        canUse = true;
+    if(canUseAbility()) {
+
+        clocks.abilityClock.restart();
+        state = EntityState::ABILITY;
+
         invincible = true;
         clocks.invincibilityClock.restart();
     }
 
-    return canUse;
+
 }
 
 Knight::Knight() : Knight(0, 0) {
@@ -70,6 +73,7 @@ void Knight::updateStatus() {
 
     GameCharacter::updateStatus();
 
+    //if set amount of time has passed since the activation of invincibility turn it off
     if (clocks.invincibilityClock.getElapsedTime().asSeconds() >= 5) {
         invincible = false;
     }
