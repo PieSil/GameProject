@@ -108,9 +108,7 @@ void AnimationManager::createAnimation(const EntityState &state) {
 void AnimationManager::play(const EntityState &state, const bool &right) {
     animations.find(state)->second.play(right); //find selected animation and play it
 
-    for (auto& animation : animations) {
-        animation.second.checkTime(); //check weather elapsed attribute should be reset or not and restart the clock, do this for every animation
-    }
+    checkAnimState();
 }
 
 AnimationManager::AnimationManager(const AnimationManager &copied) : AnimationManager(copied.getSprite(),
@@ -123,4 +121,10 @@ AnimationManager &AnimationManager::operator=(const AnimationManager &assigned) 
     parameters = assigned.getParameters();
     sprite = assigned.getSprite();
     return *this;
+}
+
+void AnimationManager::checkAnimState() {
+    for (auto& animation : animations) {
+        animation.second.checkTime(); //check weather elapsed attribute should be reset or not and restart the clock, do this for every animation
+    }
 }

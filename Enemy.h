@@ -30,6 +30,8 @@ public:
 
     const std::pair<bool, Hitbox> attack(const bool &bypassClock = false) override; //BYPASS CLOCK USED FOR UNIT TESTING
 
+    void animate() override;
+
     virtual const std::pair<bool, Hitbox> updateCombat();
 
     const EntityPositions move(const float &distance);

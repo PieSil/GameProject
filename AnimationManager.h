@@ -23,6 +23,8 @@ public:
 
     void play(const EntityState &state, const bool &right);
 
+    void checkAnimState();
+
     void resetAnimation(const EntityState& state) {
         animations.find(state)->second.setCurrentFrame(0);
     };

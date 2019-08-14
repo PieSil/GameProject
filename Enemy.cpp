@@ -83,10 +83,37 @@ void Enemy::updateStatus() {
     GameCharacter::updateStatus();
 
     if (paralyzed) {
-        state = EntityState::IDLE;
         
         if (clocks.paralyzedClock.getElapsedTime().asSeconds() >= 5)
             paralyzed = false;
+    }
+
+}
+
+void Enemy::animate() {
+    if(!paralyzed)
+        GameCharacter::animate();
+
+    else {
+        if (state == EntityState::MELEE) {
+            if (animManager.getCurrentFrame(EntityState::MELEE) == getParameters()->attLastCol) { //if animation is on last frame
+                animManager.resetAnimation(EntityState::MELEE); //reset animation to the beginning
+                state = EntityState::IDLE; //reset state to idle to avoid looping the animation
+            }
+
+        } else if (state == EntityState::SHOOTING) {
+            if (animManager.getCurrentFrame(EntityState::SHOOTING) == getParameters()->shootLastCol) { //if animation is on last frame
+                animManager.resetAnimation(EntityState::SHOOTING); //reset animation to the beginning
+                state = EntityState::IDLE; //reset state to idle to avoid looping the animation
+            }
+
+        } else if (state == EntityState::DYING) {
+            if (animManager.getCurrentFrame(EntityState::DYING) == getParameters()->deathLastCol) { //if animation is on last frame
+                state = EntityState::DEAD;
+            }
+        }
+
+        animManager.checkAnimState();
     }
 
 }

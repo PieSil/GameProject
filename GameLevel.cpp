@@ -104,9 +104,9 @@ const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &pre
 
             //only perform collision check if character's hitbox intersects current tile and tile is not walkable
 
-            if(currentTile.isDeadly()) {
+            if (currentTile.isDeadly()) {
                 if (character->getState() != EntityState::DYING && character->getState() != EntityState::DEAD)
-                character->setState(EntityState::DYING);
+                    character->setState(EntityState::DYING);
             }
 
             if ((!currentTile.isWalkable()) &&
@@ -263,7 +263,12 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
          */
 
         if ((*enemy)->getState() == EntityState::DEAD) {
+            hero->incrEnemiesKilled(); //increase the counter of enemies killed by the hero
+
+            if (typeid(*enemy->get()) == typeid(BossEnemy))
+                hero->setBossKilled();
             destroy(*enemy);
+
             //projectiles.erase(projectile);
 
         } else
@@ -291,13 +296,9 @@ void GameLevel::updateCombat(GameHero *hero) {
 
             for (const auto &enemy :enemies) {
                 if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
-                    if (enemy->getDamaged(hero->getStrength())) { // if enemy got damaged
-                        if (enemy->getState() == EntityState::DYING) { //and it's dying
-                            hero->incrEnemiesKilled();//increase the counter of enemies killed by the hero
-                            if (typeid(*(enemy.get())) == typeid(BossEnemy))
-                                hero->setBossKilled();
-                        }
-                    }
+
+                    enemy->getDamaged(hero->getStrength());
+
                 }
             }
 
@@ -306,7 +307,6 @@ void GameLevel::updateCombat(GameHero *hero) {
         }
     }
 }
-
 
 void GameLevel::updateCombat(Enemy *enemy) {
 
@@ -329,10 +329,10 @@ void GameLevel::updateCombat(Enemy *enemy) {
 
 void GameLevel::updateAbility(GameHero *hero) {
 
-    if (auto k = dynamic_cast<Knight*>(hero)) {
+    if (auto k = dynamic_cast<Knight *>(hero)) {
         k->specialBehaviour();
 
-    } else if (auto w = dynamic_cast<Wizard*>(hero)) {
+    } else if (auto w = dynamic_cast<Wizard *>(hero)) {
         w->specialBehaviour(projectiles);
     }
 }
@@ -344,8 +344,9 @@ const Hitbox GameLevel::createAttackHitbox(GameCharacter *character) {
 
         //x position of the hitbox is set so that attackHitbox's left edge overlaps with chracter's hitbox right edge
         attackHitbox = Hitbox(
-                sf::Vector2f(character->getAllPositions().rightEdgePosition.x + character->getAttackRange() / 2.,
-                             character->getAllPositions().spritePosition.y), character->getAttackRange(),
+                sf::Vector2f(
+                        character->getAllPositions().rightEdgePosition.x + character->getAttackRange() / 2.,
+                        character->getAllPositions().spritePosition.y), character->getAttackRange(),
                 abs(character->getAllPositions().upperEdgePosition.y -
                     character->getAllPositions().lowerEdgePosition.y));
 
