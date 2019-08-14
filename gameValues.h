@@ -364,22 +364,22 @@ const float PARA_HITBOX_Y = 3;
 const float PARA_SCALE = 0.15;
 
 //value used to set path of texture file
-const std::string PARA_PATH = "../GameAssets/Sprites/Projectiles/Fireball/Fireball.png";
+const std::string PARA_PATH = "../GameAssets/Sprites/Projectiles/Paralyzing/Paralyzing.png";
 
 //values used to choose starting sprite
 const int PARA_IDLE_ROW = 0;
-const int PARA_IDLE_LAST_COL = 7;
+const int PARA_IDLE_LAST_COL = 9;
 
 
 //values used to choose row and last column of walking animation in the spritesheet:
 const int PARA_MOV_ROW =0;
-const int PARA_MOV_LAST_COL = 7;
+const int PARA_MOV_LAST_COL = 9;
 
 const int PARA_ATT_ROW =0;
-const int PARA_ATT_LAST_COL = 7;
+const int PARA_ATT_LAST_COL = 9;
 
 const int PARA_SHOOT_ROW =0;
-const int PARA_SHOOT_LAST_COL = 7;
+const int PARA_SHOOT_LAST_COL = 9;
 
 
 #endif //GAMEPROJECT_GAMEVALUES_H
