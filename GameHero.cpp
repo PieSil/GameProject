@@ -77,7 +77,6 @@ void GameHero::setupAnimations(const SpriteParams *parameters) {
 }
 
 const bool GameHero::getDamaged(const float &damage) {
-    std::cout << health << "/" << DEF_HERO_HEALTH << std::endl;
     return GameCharacter::getDamaged(damage);
 }
 

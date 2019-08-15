@@ -35,7 +35,7 @@ Game *Game::getGame() {
 
 Game::Game(std::unique_ptr<GameWindow> w) : frameTime(1. / FRAMERATE), window(std::move(w)) {
 
-    createView();
+    createViews();
     setState(State::SELECTION);
 
 }
@@ -109,9 +109,10 @@ GameState *Game::getCurrentState() const {
         return nullptr;
 }
 
-void Game::createView() {
-    view.reset(new sf::View(sf::View(sf::Vector2f(window->getWindowSize().x/2., window->getWindowSize().y/2.), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y))));
-    window->setView(*view);
+void Game::createViews() {
+    playerView.reset(new sf::View(sf::View(sf::Vector2f(window->getWindowSize().x/2., window->getWindowSize().y/2.), sf::Vector2f(8 * TILE_SIZE.x, 8 * TILE_SIZE.y))));
+    hudView.reset(new sf::View(sf::View(sf::Vector2f(window->getWindowSize().x/2., window->getWindowSize().y/2.), sf::Vector2f(window->getWindowSize().x, window->getWindowSize().y))));
+    window->setView(*playerView);
 }
 
 

@@ -6,6 +6,7 @@
 #include "GameOver.h"
 
 GameOver::GameOver(Game *game) : GameState(game) {
+    game->getWindow()->setView(*game->getPlayerView());
 
 }
 

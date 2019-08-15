@@ -12,6 +12,7 @@
 PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) {
 
     createLevel(heroT);
+    hud = HeadsUpDisplay(level.getHero().get(), game->getWindow().get());
     update();
     initView();
     if(!game->getWindow()->setBackground(BACKGROUND_PATH, level.getHero()->getAllPositions().spritePosition.y)) {
@@ -35,11 +36,16 @@ void PlayingState::update() {
 
         updateAchievements();
 
+        hud.updateHUD();
+
         if (level.getHero()->getState() == EntityState::DEAD)
             game->setState(State::GAMEOVER);
 }
 
 void PlayingState::draw() {
+
+    //set view to player view
+    game->getWindow()->setView(*game->getPlayerView());
 
     game->getWindow()->draw(game->getWindow()->getBackground());
 
@@ -77,6 +83,10 @@ void PlayingState::draw() {
     }
 
     drawAchievements();
+
+    game->getWindow()->setView(*game->getHudView());
+
+    game->getWindow()->draw(hud.getHealth());
 }
 
 void PlayingState::handleInput() {
@@ -121,10 +131,9 @@ void PlayingState::updateView() {
 
     auto hero = level.getHero().get();
 
-    if (!(hero->getSprite().getPosition().x - game->getView()->getSize().x / 2. < 0 ||
-          hero->getSprite().getPosition().x + game->getView()->getSize().x / 2. > MAP_COLUMNS * TILE_SIZE.x)) {
-        game->getView()->setCenter(hero->getSprite().getPosition().x, game->getView()->getCenter().y);
-        game->getWindow()->setView(*game->getView());
+    if (!(hero->getSprite().getPosition().x - game->getPlayerView()->getSize().x / 2. < 0 ||
+          hero->getSprite().getPosition().x + game->getPlayerView()->getSize().x / 2. > MAP_COLUMNS * TILE_SIZE.x)) {
+        game->getPlayerView()->setCenter(hero->getSprite().getPosition().x, game->getPlayerView()->getCenter().y);
     }
 
 }
@@ -147,7 +156,7 @@ void PlayingState::drawHitbox(const Hitbox &hitbox) const {
 }
 
 void PlayingState::initView() {
-    game->getView()->setCenter(level.getHero()->getSprite().getPosition());
+    game->getPlayerView()->setCenter(level.getHero()->getSprite().getPosition());
     updateView();
 }
 
@@ -165,11 +174,11 @@ void PlayingState::updateAchievements() {
     for (auto& achievement : achievements) {
         if (achievement.isUnlocked()) {
 
-            float top = game->getView()->getCenter().y - game->getView()->getSize().y/2.;
-            float right = game->getView()->getCenter().x + game->getView()->getSize().x/2.;
+            float top = game->getPlayerView()->getCenter().y - game->getPlayerView()->getSize().y/2.;
+            float right = game->getPlayerView()->getCenter().x + game->getPlayerView()->getSize().x/2.;
 
             if (achievement.getElapsedTime().asSeconds() <= NOTIFY_DURATION) {
-                achievement.setDescriptionPos(game->getView()->getCenter().x, top + achievement.getIcon().getTextureRect().height * drawIndex);
+                achievement.setDescriptionPos(game->getPlayerView()->getCenter().x, top + achievement.getIcon().getTextureRect().height * drawIndex);
                 drawIndex++;
             }
 

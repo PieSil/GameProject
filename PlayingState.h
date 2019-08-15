@@ -21,6 +21,7 @@
 #include "BossEnemy.h"
 #include "Map.h"
 #include "Achievement.h"
+#include "HeadsUpDisplay.h"
 
 class PlayingState : public  GameState {
 
@@ -56,7 +57,7 @@ private:
 
     GameLevel level;
     std::vector<Achievement> achievements;
-
+    HeadsUpDisplay hud;
 };
 
 

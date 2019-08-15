@@ -62,8 +62,6 @@ const bool Knight::getDamaged(const float &damage) {
     //if knight is invincible don't get damaged
     if (!invincible)
         damaged = GameHero::getDamaged(damage);
-    else
-        std::cout << "Invincible" << std::endl;
 
     return damaged;
 

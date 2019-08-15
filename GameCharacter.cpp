@@ -102,6 +102,7 @@ const bool GameCharacter::getDamaged(const float &damage) {
         sprite.setColor(sf::Color::Red);
 
         if (health <= 0) {
+            health = 0;
             state = EntityState::DYING;
         }
 

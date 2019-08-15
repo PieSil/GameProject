@@ -8,6 +8,8 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
 
     //create a wizard and a knight to display their sprites, create them into a pair to associate them with a RectangleShape
 
+    game->getWindow()->setView(*game->getPlayerView());
+
     std::pair<Knight*, sf::RectangleShape> knight;
     knight.first = new Knight(0,0);
 
@@ -34,7 +36,8 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
         //set their position so that the rectangles are placed nicely in the window no matter the number of heroes
         //position on X axis = view center - (view size)/4 + (index of current hero) * (view size)/(2*(number of heroes-1))
         //position on Y axis = view center
-        hero.second.setPosition(game->getView()->getCenter().x - game->getView()->getSize().x/4 + index * (game->getView()->getSize().x/(2*(heroes.size()-1))), game->getView()->getCenter().y);
+        hero.second.setPosition(game->getPlayerView()->getCenter().x - game->getPlayerView()->getSize().x/4 + index * (game->getPlayerView()->getSize().x/(2*(heroes.size()-1))),
+                                game->getPlayerView()->getCenter().y);
 
         //set the heroes' position to match rectangles' position
         hero.first->setPosition(hero.second.getPosition());

@@ -47,7 +47,7 @@ public:
 
     static Game* getGame();
 
-    void createView();
+    void createViews();
 
     void pushState(State state, Herotype heroT = Herotype::KNGT);
 
@@ -61,8 +61,12 @@ public:
         return window;
     }
 
-    const std::unique_ptr<sf::View> &getView() const {
-        return view;
+    const std::unique_ptr<sf::View> &getPlayerView() const {
+        return playerView;
+    }
+
+    const std::unique_ptr<sf::View> &getHudView() const {
+        return hudView;
     }
 
     const sf::Time &getElapsed() const {
@@ -92,7 +96,8 @@ private:
     float frameTime; //allows to use a fixed time-step to update the game
 
     std::unique_ptr<GameWindow> window;
-    std::unique_ptr<sf::View> view;
+    std::unique_ptr<sf::View> playerView;
+    std::unique_ptr<sf::View> hudView;
 
     static std::unique_ptr<Game> gameInstance;
 
