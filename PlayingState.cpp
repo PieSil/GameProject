@@ -86,7 +86,7 @@ void PlayingState::draw() {
 
     game->getWindow()->setView(*game->getHudView());
 
-    game->getWindow()->draw(hud.getHealth());
+    hud.display();
 }
 
 void PlayingState::handleInput() {

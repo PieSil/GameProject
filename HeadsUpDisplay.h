@@ -8,6 +8,7 @@
 
 #include "gameValues.h"
 #include "GameHero.h"
+#include "Wizard.h"
 #include "GameWindow.h"
 #include <iomanip>
 #include <sstream>
@@ -18,9 +19,9 @@ public:
     HeadsUpDisplay() = default;
     ~HeadsUpDisplay() = default;
 
-    void updateHealth();
-
     void updateHUD();
+
+    void display();
 
     const sf::Text getHealth() const {
 
@@ -41,6 +42,15 @@ public:
 private:
     void setup();
 
+    const std::string getNewHealth();
+
+    void updateHealth();
+
+    const std::string getNewMana();
+
+    void updateMana();
+
+    bool hasMana;
     GameWindow *window;
     GameHero *hero;
     sf::Font font;

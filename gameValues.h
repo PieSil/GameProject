@@ -169,6 +169,8 @@ const int KNIGHT_ABILITY_LAST_COL = 6;
 
 //WIZARD
 
+const int DEF_MANA = 10;
+
 const float WIZARD_ATTACK_RANGE = 0;
 
 const float WIZARD_ABILITY_TIMESTEP = 0;

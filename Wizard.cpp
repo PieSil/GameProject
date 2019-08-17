@@ -22,7 +22,7 @@ void Wizard::specialBehaviour() {
 
 }
 
-Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const float &m, const float &h,
+Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const int &m, const float &h,
                const bool &facingR, const float &s)
         : GameHero(x, y, str, onf, h, facingR, s), mana(m) {
     initSprite(x, y);

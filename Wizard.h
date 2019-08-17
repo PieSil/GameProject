@@ -14,7 +14,7 @@
 class Wizard: public GameHero {
 public:
     Wizard(const float &x, const float &y, const float &str = DEF_HERO_STRENGTH, const bool &onf = false,
-           const float &m = 10., const float &h = DEF_HERO_HEALTH, const bool &facingR = true,
+           const int &m = DEF_MANA, const float &h = DEF_HERO_HEALTH, const bool &facingR = true,
            const float &s = HERO_SPEED);
 
     //default constructor
@@ -32,11 +32,11 @@ public:
 
     //void updateBehaviour();
 
-    float getMana() const {
+    int getMana() const {
         return mana;
     }
 
-    void setMana(float mana) {
+    void setMana(int mana) {
         Wizard::mana = mana;
     }
 
@@ -45,7 +45,7 @@ public:
     }
 
 private:
-    float mana;
+    int mana;
 
     static const SpriteParams wizardParams;
 };
