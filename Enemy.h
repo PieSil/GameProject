@@ -40,6 +40,8 @@ public:
 
     void updateStatus() override;
 
+    void checkIfOnFire() override;
+
     bool isParalyzed() const {
         return paralyzed;
     }

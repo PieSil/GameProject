@@ -18,10 +18,6 @@ const SpriteParams Wizard::wizardParams(
         WIZARD_ATT_LAST_COL, WIZARD_ATT_OFFSET, WIZARD_SHOOT_ROW, WIZARD_SHOOT_LAST_COL, WIZARD_DEATH_ROW,
         WIZARD_DEATH_LAST_COL, WIZARD_ABILITY_ROW, WIZARD_ABILITY_LAST_COL);
 
-void Wizard::specialBehaviour() {
-
-}
-
 Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf, const int &m, const float &h,
                const bool &facingR, const float &s)
         : GameHero(x, y, str, onf, h, facingR, s), mana(m) {
@@ -59,6 +55,51 @@ void Wizard::specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelPro
 
         levelProjectiles.push_back(std::unique_ptr<Paralyzing>(new Paralyzing(this)));
 
+        mana -= 1;
     }
 
+}
+
+const std::pair<bool, Hitbox> Wizard::attack(const bool &bypassClock) {
+
+    std::pair<bool, Hitbox> attackPair;
+
+    attackPair.first = false;
+
+    if (mana >= 2) {
+
+        attackPair = GameCharacter::attack(bypassClock);
+        if (attackPair.first) {
+            mana -= 2;
+        }
+    }
+
+    return attackPair;
+}
+
+const bool Wizard::canUseAbility() {
+
+    bool canUse = false;
+
+    if (GameHero::canUseAbility() && mana >= 1) {
+        canUse = true;
+    }
+
+    return canUse;
+}
+
+void Wizard::regenerateMana() {
+    if (clocks.manaClock.getElapsedTime().asSeconds() >= 5) {
+        clocks.manaClock.restart();
+        mana += 3;
+        if (mana > 10) {
+            mana = 10;
+        }
+    }
+}
+
+void Wizard::updateStatus() {
+    GameCharacter::updateStatus();
+
+    regenerateMana();
 }

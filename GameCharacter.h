@@ -18,6 +18,7 @@ struct Clocks {
     sf::Clock abilityClock;
     sf::Clock damagedClock;
     sf::Clock invincibilityClock;
+    sf::Clock manaClock;
 };
 
 class GameCharacter : public MovingEntity {
@@ -47,6 +48,8 @@ public:
     void setupAnimations(const SpriteParams *parameters) override;
 
     virtual void updateStatus();
+
+    virtual void checkIfOnFire();
 
     const bool isAttacking();
 

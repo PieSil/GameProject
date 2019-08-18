@@ -117,6 +117,13 @@ void GameCharacter::updateStatus() {
     if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2) {
         sprite.setColor(sf::Color::White); //reset sprite color
     }
+
+    checkIfOnFire();
+
+}
+
+void GameCharacter::checkIfOnFire() {
+
     if (onFire) { //if character is on fire
         getDamaged(2.4);  //take damage
 
@@ -124,7 +131,6 @@ void GameCharacter::updateStatus() {
             onFire = false; //set on fire to off
         }
     }
-
 }
 
 const bool GameCharacter::isAttacking() {

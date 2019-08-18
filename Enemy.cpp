@@ -90,6 +90,17 @@ void Enemy::updateStatus() {
 
 }
 
+void Enemy::checkIfOnFire() {
+    if (onFire) { //if character is on fire
+        getDamaged(5);  //take damage
+
+        if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
+            onFire = false; //set on fire to off
+        }
+    }
+}
+
+
 void Enemy::animate() {
     if(!paralyzed)
         GameCharacter::animate();

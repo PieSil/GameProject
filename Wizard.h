@@ -26,7 +26,15 @@ public:
     //assignment operator
     Wizard& operator =(const Wizard& wizard) = default;
 
-    void specialBehaviour() override;
+    const std::pair<bool, Hitbox> attack(const bool &bypassClock) override;
+
+    const bool canUseAbility() override;
+
+    void updateStatus() override;
+
+    void regenerateMana();
+
+    void specialBehaviour() override {};
 
     void specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles);
 
