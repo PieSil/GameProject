@@ -22,7 +22,7 @@ const bool Game::createGame() {
     bool created = false;
 
     if (!gameInstance) {
-        gameInstance.reset(new Game(std::unique_ptr<GameWindow>(new GameWindow("Game", sf::Vector2u(TILE_SIZE.x * 5 * 10, TILE_SIZE.y * 8 * 10)))));
+        gameInstance.reset(new Game(std::unique_ptr<GameWindow>(new GameWindow("Game", sf::Vector2u(TILE_SIZE.x * 8 * 5.8, TILE_SIZE.y * 8 * 5.8)))));
         created = true;
     }
 

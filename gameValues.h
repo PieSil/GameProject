@@ -359,8 +359,8 @@ const int PARA_HEIGHT = 100;
 
 //values that allow to reduce hitbox size when giving it to the sprite
 //THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
-const float PARA_HITBOX_X = 3;
-const float PARA_HITBOX_Y = 3;
+const float PARA_HITBOX_X = 2;
+const float PARA_HITBOX_Y = 2;
 
 //value used to scale up/down or flip sprite:
 const float PARA_SCALE = 0.15;

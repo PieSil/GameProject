@@ -82,9 +82,9 @@ void PlayingState::draw() {
         game->getWindow()->draw(collectible->getSprite());
     }
 
-    drawAchievements();
-
     game->getWindow()->setView(*game->getHudView());
+
+    drawAchievements();
 
     hud.display();
 }
@@ -170,31 +170,32 @@ void PlayingState::updateAchievements() {
 
     unsigned short index = 0;
     unsigned short drawIndex = 1;
+    const float windowWidth = game->getWindow()->getWindowSize().x;
 
     for (auto& achievement : achievements) {
-        if (achievement.isUnlocked()) {
 
-            float top = game->getPlayerView()->getCenter().y - game->getPlayerView()->getSize().y/2.;
-            float right = game->getPlayerView()->getCenter().x + game->getPlayerView()->getSize().x/2.;
-
-            if (achievement.getElapsedTime().asSeconds() <= NOTIFY_DURATION) {
-                achievement.setDescriptionPos(game->getPlayerView()->getCenter().x, top + achievement.getIcon().getTextureRect().height * drawIndex);
-                drawIndex++;
-            }
-
-
-            achievement.setIconPosition(right - (achievement.getIcon().getTextureRect().width*index), top);
+        if (achievement.calculateIconPos(index, windowWidth)) {
+            //calculateIconPos returns true if achievement is unlocked, false otherwise
 
             index++;
         }
+
+        if (achievement.calculateDescPos(drawIndex, windowWidth)) {
+            //calculateDescPos returns true if achievement has just been
+            //unlocked (and thus description needs to be drawn on screen), false otherwise
+
+            drawIndex++;
+        }
+
     }
 }
 
 void PlayingState::drawAchievements() {
     for (auto& achievement : achievements) {
+
         if (achievement.isUnlocked()) {
 
-            if (achievement.getElapsedTime().asSeconds() <= NOTIFY_DURATION) {
+            if (achievement.isJustUnlocked()) {
 
                 game->getWindow()->draw(achievement.getDescription());
             }

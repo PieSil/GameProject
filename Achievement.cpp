@@ -58,7 +58,7 @@ void Achievement::setup(const AchievementType &type) {
         //TODO: throw exception
     }
 
-    description = sf::Text("Achievement Unlocked: ", font, 10);
+    description = sf::Text("Achievement Unlocked: ", font, 50);
     std::string name;
 
     switch (type) {
@@ -98,6 +98,7 @@ void Achievement::setup(const AchievementType &type) {
     //set icon texture
     icon.setTexture(texture);
     icon.setOrigin(icon.getOrigin().x + icon.getTextureRect().width, icon.getOrigin().y);
+    icon.setScale(8,8);
 
 }
 
@@ -105,4 +106,44 @@ Achievement::Achievement(const Achievement &copied) : subject(copied.getSubject(
                                                       unlocked(copied.isUnlocked()) {
     subject->registerObserver(this);
     setup(type);
+}
+
+const bool Achievement::calculateDescPos(const int &index, const float &windowWidth) {
+
+    bool descriptionUpdated = false;
+
+    if (isJustUnlocked()) {
+
+        float descriptionTop = 150;
+        float descriptionOffset = 30;
+
+        description.setPosition(windowWidth/2., descriptionTop + (description.getCharacterSize()) * index);
+        descriptionUpdated = true;
+    }
+
+    return descriptionUpdated;
+}
+
+const bool Achievement::calculateIconPos(const int &index, const float &windowWidth) {
+
+    if (unlocked) {
+
+        float iconTop = 0;
+        float right = windowWidth;
+
+        icon.setPosition((right - (icon.getGlobalBounds().width * index)), iconTop);
+    }
+
+    return unlocked;
+}
+
+const bool Achievement::isJustUnlocked()  {
+
+    bool justUnlocked = false;
+
+    if (clock.getElapsedTime().asSeconds() <= NOTIFY_DURATION) {
+        justUnlocked = true;
+    }
+
+    return justUnlocked;
 }

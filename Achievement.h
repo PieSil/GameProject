@@ -29,25 +29,15 @@ public:
 
     void update(const float &distanceWalked, const int &enemiesKilled, const bool &bossKilled) override;
 
+    const bool calculateDescPos(const int &index, const float &windowWidth);
+
+    const bool calculateIconPos(const int &index, const float &windowWidth);
+
     bool isUnlocked() const {
         return unlocked;
     }
 
-    void setDescriptionPos(const float& x, const float& y) {
-        description.setPosition(x, y);
-    }
-
-    void setDescriptionPos(const sf::Vector2f& position) {
-        description.setPosition(position);
-    }
-
-    void setIconPosition(const float& x, const float& y) {
-        icon.setPosition(x, y);
-    }
-
-    void setIconPosition(const sf::Vector2f& position) {
-        icon.setPosition(position);
-    }
+    const bool isJustUnlocked();
 
     AchievementType getType() const {
         return type;
@@ -65,10 +55,6 @@ public:
         return description;
     }
 
-    const sf::Time getElapsedTime() {
-        return clock.getElapsedTime();
-    }
-
 protected:
     void unlock();
     void setup(const AchievementType& type);
@@ -82,7 +68,6 @@ protected:
     sf::Sprite icon;
     sf::Text description;
     sf::Font font;
-
     sf::Clock clock;
 };
 
