@@ -35,6 +35,10 @@ public:
         return &knightParams; //overrides getParameters to return a pointer to knightParams instead of entityParams
     }
 
+    bool isInvincible() const {
+        return invincible;
+    }
+
 protected:
 
     static const SpriteParams knightParams;

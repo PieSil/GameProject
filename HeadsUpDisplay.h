@@ -9,6 +9,7 @@
 #include "gameValues.h"
 #include "GameHero.h"
 #include "Wizard.h"
+#include "Knight.h"
 #include "GameWindow.h"
 #include <iomanip>
 #include <sstream>
@@ -50,12 +51,17 @@ private:
 
     void updateMana();
 
+    const std::string getNewStatus();
+
+    void updateStatus();
+
     bool hasMana;
     GameWindow *window;
     GameHero *hero;
     sf::Font font;
     sf::Text health;
     sf::Text mana;
+    sf::Text status;
 
 
 };
