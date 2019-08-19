@@ -4,6 +4,7 @@
 
 
 #include "RangedEnemy.h"
+#include "Enemy.h"
 
 /**
  * RangedEnemy implementation
@@ -17,7 +18,7 @@ const SpriteParams RangedEnemy::rangedParams(RANGED_PATH, RANGED_WIDTH, RANGED_H
 
 RangedEnemy::RangedEnemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par,
                          const bool &onf, const float &h, const bool &facingR, const float &s) :
-                         Enemy(hero, x, y, str, par, onf, h, facingR, s) {
+        Enemy(hero, x, y, str, par, onf, h, facingR, s) {
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
@@ -27,8 +28,8 @@ RangedEnemy::RangedEnemy(GameHero *hero, const float &x, const float &y, const f
 }
 
 RangedEnemy::RangedEnemy(const RangedEnemy &copied) : Enemy(copied) {
-        this->aggro = false;
-        this->paralyzed = false;
+    this->aggro = false;
+    this->paralyzed = false;
 }
 
 RangedEnemy &RangedEnemy::operator=(const RangedEnemy &rangedEnemy) {
@@ -38,28 +39,66 @@ RangedEnemy &RangedEnemy::operator=(const RangedEnemy &rangedEnemy) {
     return *this;
 }
 
-/*
-const EntityPositions RangedEnemy::move(const Direction &direction, const float &distance) {
+const EntityPositions RangedEnemy::move(const float &distance) {
     EntityPositions prevPosition;
 
     updateAggro();
 
     prevPosition = allPositions;
 
-    if (!paralyzed && aggro) {
+    if (!paralyzed && aggro) { //if enemy is not paralyzed and aggro is active
 
-        if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >= attackRange) { //if enemy is not paralyzed and aggro is active
+        if (facingRight) { //if enemy is facing right
+            prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
 
-            if (facingRight) { //if enemy is facing right
-                prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
-
-            } else {
-                prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
-            }
-
+        } else {
+            prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
         }
+
     }
 
     return prevPosition;
 }
- */
+
+void RangedEnemy::updateAggro() {
+
+    if (state != EntityState::DYING && state != EntityState::DEAD) {
+
+        //if aggro is not activated and hero sprite is in aggro range
+        // (if absolute value of hero x coordinate - enemy x coordinate is < aggro range then hero is in aggro range)
+        if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange &&
+            heroIsInRange()) {
+            aggro = true; //activate aggro
+        }
+
+        //ranged enemy behaves the opposite of other enemies, it will not chase the player but will run from it
+
+        if (hero->getSprite().getPosition().x <=
+            this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
+            facingRight = true; //turn right
+
+        } else {
+            facingRight = false; //else turn left
+        }
+    }
+}
+
+
+const std::pair<bool, Hitbox> RangedEnemy::attack(const bool &bypassClock) {
+
+    std::pair<bool, Hitbox> attackResult = Enemy::attack(bypassClock);
+
+    if (attackResult.first) {
+        if (hero->getSprite().getPosition().x <=
+            this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
+            facingRight = false; //turn left
+
+        } else {
+            facingRight = true; //else turn right
+        }
+    }
+
+    return attackResult;
+
+}
+

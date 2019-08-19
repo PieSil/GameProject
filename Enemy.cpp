@@ -3,6 +3,7 @@
  */
 
 
+#include "RangedEnemy.h"
 #include "Enemy.h"
 
 /**
@@ -25,7 +26,7 @@ const std::pair<bool, Hitbox> Enemy::attack(const bool &bypassClock) {
 
     result.first = false;
 
-    if (!paralyzed)
+    if (!paralyzed && heroIsInRange())
         result = GameCharacter::attack();
 
     return  result;
@@ -127,4 +128,15 @@ void Enemy::animate() {
         animManager.checkAnimState();
     }
 
+}
+
+const bool Enemy::heroIsInRange() {
+
+    bool inRange = false;
+
+    if (abs(hero->getSprite().getPosition().y - this->sprite.getPosition().y) <= hero->getSprite().getGlobalBounds().height) {
+        inRange = true;
+    }
+
+    return inRange;
 }

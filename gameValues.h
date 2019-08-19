@@ -283,11 +283,13 @@ const float DEF_RANGED_HEALTH = 25.;
 //default strength value for melee enemies:
 const float DEF_RANGED_STRENGTH = 5.;
 
-const float RANGED_SPEED = 10;
+const float RANGED_SPEED = 30;
 
 const float RANGED_ATTACK_RANGE = 30;
 
 const float RANGED_ATT_TIMESTEP = 3;
+
+const float RANGED_SAFE_DISTANCE = 100;
 
 //values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
 const int RANGED_WIDTH = 32;

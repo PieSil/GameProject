@@ -34,13 +34,15 @@ public:
 
     virtual const std::pair<bool, Hitbox> updateCombat();
 
-    const EntityPositions move(const float &distance);
+    virtual const EntityPositions move(const float &distance);
 
-    void updateAggro();
+    virtual void updateAggro();
 
     void updateStatus() override;
 
     void checkIfOnFire() override;
+
+    const bool heroIsInRange();
 
     bool isParalyzed() const {
         return paralyzed;

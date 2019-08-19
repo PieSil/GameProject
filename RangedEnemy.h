@@ -23,7 +23,11 @@ public:
 
     ~RangedEnemy() = default;
 
-    //const EntityPositions move(const Direction &direction, const float &distance) override;
+    const EntityPositions move(const float &distance) override;
+
+    void updateAggro() override;
+
+    const std::pair<bool, Hitbox> attack(const bool &bypassClock) override;
 
     const SpriteParams *getParameters() const override {
         return &rangedParams;
