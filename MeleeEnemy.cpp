@@ -35,10 +35,10 @@ MeleeEnemy::MeleeEnemy(const MeleeEnemy &copied) : Enemy(copied) {
 }
 
 MeleeEnemy &MeleeEnemy::operator=(const MeleeEnemy &meleeEnemy) {
-    this->hero = meleeEnemy.getHero();
-    this->aggro = false;
-    this->paralyzed = false;
-    return *this;
+        this->hero = meleeEnemy.getHero();
+        this->aggro = false;
+        this->paralyzed = false;
+        return *this;
 }
 
 const std::pair<bool, Hitbox> MeleeEnemy::attack(const bool &bypassClock) {
@@ -47,8 +47,8 @@ const std::pair<bool, Hitbox> MeleeEnemy::attack(const bool &bypassClock) {
 
     result.first = false;
 
-    if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) <= 16)
-        result = Enemy::attack();
+    if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) <= attackRange)
+        result = Enemy::attack(bypassClock);
 
     return  result;
 }

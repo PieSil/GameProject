@@ -11,6 +11,27 @@
 
 
 class RangedEnemy: public Enemy {
+
+public:
+    RangedEnemy(GameHero *hero, const float &x, const float &y, const float &str = DEF_RANGED_STRENGTH,
+    const bool &par = false, const bool &onf = false, const float &h = DEF_RANGED_HEALTH,
+    const bool &facingR = true, const float &s = RANGED_SPEED);
+
+    RangedEnemy(const RangedEnemy& copied);
+
+    RangedEnemy& operator = (const RangedEnemy& rangedEnemy);
+
+    ~RangedEnemy() = default;
+
+    //const EntityPositions move(const Direction &direction, const float &distance) override;
+
+    const SpriteParams *getParameters() const override {
+        return &rangedParams;
+    }
+
+protected:
+    static const SpriteParams rangedParams;
+
 };
 
 #endif //_RANGEDENEMY_H

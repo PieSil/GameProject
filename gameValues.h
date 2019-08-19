@@ -175,6 +175,10 @@ const float WIZARD_ATTACK_RANGE = 0;
 
 const float WIZARD_ABILITY_TIMESTEP = 0;
 
+const unsigned short FIREB_COST = 2;
+
+const unsigned short PARA_COST = 5;
+
 //values used to determine wizard's sprite width and heigth to correctly select it when cutting sprite sheet:
 const int WIZARD_WIDTH = 32;
 const int WIZARD_HEIGHT = 32;
@@ -225,10 +229,10 @@ const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
 
-//default health value for all enemies:
+//default health value for melee enemies:
 const float DEF_MELEE_HEALTH = 35.;
 
-//default strength value for all enemies:
+//default strength value for melee enemies:
 const float DEF_MELEE_STRENGTH = 5.;
 
 
@@ -270,6 +274,55 @@ const int MELEE_SHOOT_LAST_COL = 7;
 
 const int MELEE_DEATH_ROW = 3;
 const int MELEE_DEATH_LAST_COL = 7;
+
+//RANGED
+
+//default health value for melee enemies:
+const float DEF_RANGED_HEALTH = 25.;
+
+//default strength value for melee enemies:
+const float DEF_RANGED_STRENGTH = 5.;
+
+const float RANGED_SPEED = 10;
+
+const float RANGED_ATTACK_RANGE = 30;
+
+const float RANGED_ATT_TIMESTEP = 3;
+
+//values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
+const int RANGED_WIDTH = 32;
+const int RANGED_HEIGHT = 32;
+
+//values that allow to reduce hitbox size when giving it to the sprite
+//THESE DO NOT DIRECTLY SET HITBOX SIZE, they allow to resize it based on sprite size
+const float RANGED_HITBOX_X = 2.8;
+const float RANGED_HITBOX_Y = 1.0;
+
+//value used to scale up/down or flip sprite:
+const float RANGED_SCALE = 0.8;
+
+//value used to set path of texture file
+const std::string RANGED_PATH = "../GameAssets/Sprites/Enemies/Orc/Orc.png";
+
+//values used to choose starting sprite
+const int RANGED_IDLE_ROW = 6;
+const int RANGED_IDLE_LAST_COL = 9;
+
+
+//values used to choose row and last column of walking animation in the spritesheet:
+const int RANGED_MOV_ROW =7;
+const int RANGED_MOV_LAST_COL = 9;
+
+const int RANGED_ATT_ROW =8;
+const int RANGED_ATT_LAST_COL = 9;
+
+const int RANGED_ATT_OFFSET = 0;
+
+const int RANGED_SHOOT_ROW =8;
+const int RANGED_SHOOT_LAST_COL = 9;
+
+const int RANGED_DEATH_ROW = 9;
+const int RANGED_DEATH_LAST_COL = 9;
 
 //BOSS
 

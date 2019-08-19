@@ -55,7 +55,7 @@ void Wizard::specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelPro
 
         levelProjectiles.push_back(std::unique_ptr<Paralyzing>(new Paralyzing(this)));
 
-        mana -= 1;
+        decreaseMana(PARA_COST);
     }
 
 }
@@ -66,11 +66,11 @@ const std::pair<bool, Hitbox> Wizard::attack(const bool &bypassClock) {
 
     attackPair.first = false;
 
-    if (mana >= 2) {
+    if (mana >= FIREB_COST) {
 
         attackPair = GameCharacter::attack(bypassClock);
         if (attackPair.first) {
-            mana -= 2;
+            decreaseMana(FIREB_COST);
         }
     }
 
@@ -81,7 +81,7 @@ const bool Wizard::canUseAbility() {
 
     bool canUse = false;
 
-    if (GameHero::canUseAbility() && mana >= 1) {
+    if (GameHero::canUseAbility() && mana >= PARA_COST) {
         canUse = true;
     }
 
@@ -102,4 +102,13 @@ void Wizard::updateStatus() {
     GameCharacter::updateStatus();
 
     regenerateMana();
+}
+
+void Wizard::decreaseMana(const unsigned short & amount) {
+    mana -= amount;
+
+    if (mana < 0) {
+        mana = 0;
+    }
+
 }

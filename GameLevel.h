@@ -9,6 +9,7 @@
 #include "Knight.h"
 #include "Wizard.h"
 #include "MeleeEnemy.h"
+#include "RangedEnemy.h"
 #include "BossEnemy.h"
 #include "Projectile.h"
 #include "Fireball.h"

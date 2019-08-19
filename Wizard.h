@@ -34,6 +34,8 @@ public:
 
     void regenerateMana();
 
+    void decreaseMana(const unsigned short& amount);
+
     void specialBehaviour() override {};
 
     void specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles);

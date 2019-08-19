@@ -19,8 +19,8 @@ GameLevel::GameLevel(Herotype heroT) {
     enemies.emplace_back(std::unique_ptr<MeleeEnemy>(
             new MeleeEnemy(hero.get(), 14 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
 
-    enemies.emplace_back(std::unique_ptr<BossEnemy>(
-            new BossEnemy(hero.get(), 7 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
+    enemies.emplace_back(std::unique_ptr<RangedEnemy>(
+            new RangedEnemy(hero.get(), 7 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
 
     collectibles.emplace_back(std::unique_ptr<Collectible>(
             new Heart(hero.get(), 18 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
