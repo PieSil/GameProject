@@ -46,13 +46,19 @@ const EntityPositions RangedEnemy::move(const float &distance) {
 
     prevPosition = allPositions;
 
-    if (!paralyzed && aggro) { //if enemy is not paralyzed and aggro is active
+    if (!paralyzed && aggro && !isAttacking() && !isDying()) {//if enemy is not paralyzed and aggro is active
 
-        if (facingRight) { //if enemy is facing right
-            prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
+        if (abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= attackRange) {
+
+                if (facingRight) { //if enemy is facing right
+                    prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
+
+                } else {
+                    prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
+                }
 
         } else {
-            prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
+            state = EntityState::IDLE;
         }
 
     }
@@ -62,12 +68,12 @@ const EntityPositions RangedEnemy::move(const float &distance) {
 
 void RangedEnemy::updateAggro() {
 
-    if (state != EntityState::DYING && state != EntityState::DEAD) {
+    if (!isDying()) {
 
         //if aggro is not activated and hero sprite is in aggro range
         // (if absolute value of hero x coordinate - enemy x coordinate is < aggro range then hero is in aggro range)
         if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange &&
-            heroIsInRange()) {
+                heroIsInFront()) {
             aggro = true; //activate aggro
         }
 

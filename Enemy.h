@@ -42,7 +42,7 @@ public:
 
     void checkIfOnFire() override;
 
-    const bool heroIsInRange();
+    const bool heroIsInFront();
 
     bool isParalyzed() const {
         return paralyzed;

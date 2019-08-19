@@ -108,8 +108,10 @@ const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &pre
             //only perform collision check if character's hitbox intersects current tile and tile is not walkable
 
             if (currentTile.isDeadly()) {
-                if (character->getState() != EntityState::DYING && character->getState() != EntityState::DEAD)
-                    character->setState(EntityState::DYING);
+                if (auto e = dynamic_cast<GameHero *>(character)) {
+                    if (character->getState() != EntityState::DYING && character->getState() != EntityState::DEAD)
+                        character->setState(EntityState::DYING);
+                }
             }
 
             if ((!currentTile.isWalkable()) &&
@@ -170,6 +172,7 @@ const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &pre
                 }
 
             }
+
         }
     }
 

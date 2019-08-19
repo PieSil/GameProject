@@ -89,7 +89,7 @@ const bool Wizard::canUseAbility() {
 }
 
 void Wizard::regenerateMana() {
-    if (clocks.manaClock.getElapsedTime().asSeconds() >= 5) {
+    if (clocks.manaClock.getElapsedTime().asSeconds() >= 4) {
         clocks.manaClock.restart();
         mana += 3;
         if (mana > 10) {

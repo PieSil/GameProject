@@ -26,7 +26,7 @@ const std::pair<bool, Hitbox> Enemy::attack(const bool &bypassClock) {
 
     result.first = false;
 
-    if (!paralyzed && heroIsInRange())
+    if (!paralyzed && heroIsInFront())
         result = GameCharacter::attack();
 
     return  result;
@@ -40,13 +40,18 @@ const EntityPositions Enemy::move(const float &distance) {
 
     prevPosition = allPositions;
 
-    if (!paralyzed && aggro && abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >= attackRange) { //if enemy is not paralyzed and aggro is active
+    if (!paralyzed && aggro && !isAttacking() && !isDying()) { //if enemy is not paralyzed and aggro is active
 
-        if (facingRight) { //if enemy is facing right
-            prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
+        if (abs(hero->getSprite().getPosition().x - sprite.getPosition().x) >= attackRange) {
 
+            if (facingRight) { //if enemy is facing right
+                prevPosition = GameCharacter::move(Direction::RIGHT, distance); //move right
+
+            } else {
+                prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
+            }
         } else {
-            prevPosition = GameCharacter::move(Direction::LEFT, distance); //else move left
+            state = EntityState::IDLE;
         }
 
     }
@@ -57,11 +62,12 @@ const EntityPositions Enemy::move(const float &distance) {
 
 void Enemy::updateAggro() {
 
-    if (state != EntityState::DYING && state != EntityState::DEAD) {
+    if (!isDying()) {
 
         //if aggro is not activated and hero sprite is in aggro range
         // (if absolute value of hero x coordinate - enemy x coordinate is < aggro range then hero is in aggro range)
-        if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange) {
+        if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange &&
+                heroIsInFront()) {
             aggro = true; //activate aggro
         }
 
@@ -130,11 +136,11 @@ void Enemy::animate() {
 
 }
 
-const bool Enemy::heroIsInRange() {
+const bool Enemy::heroIsInFront() {
 
     bool inRange = false;
 
-    if (abs(hero->getSprite().getPosition().y - this->sprite.getPosition().y) <= hero->getSprite().getGlobalBounds().height) {
+    if (abs(hero->getSprite().getPosition().y - this->sprite.getPosition().y) <= hero->getSprite().getGlobalBounds().height/2.) {
         inRange = true;
     }
 
