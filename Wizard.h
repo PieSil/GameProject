@@ -28,7 +28,7 @@ public:
 
     const std::pair<bool, Hitbox> attack(const bool &bypassClock) override;
 
-    const bool canUseAbility() override;
+    const bool hasEnoughMana(const int &cost);
 
     void updateStatus() override;
 

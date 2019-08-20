@@ -19,7 +19,13 @@ BossEnemy::BossEnemy(GameHero *hero, const float &x, const float &y, const float
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
-    attackRange = BOSS_SHOOT_RANGE;
+
+    if (typeid(*hero) == typeid(Wizard)) {
+        attackRange = BOSS_MELEE_RANGE;
+        movementSpeed = BOSS_AGGRESSIVE_SPEED;
+    } else {
+        attackRange = BOSS_SHOOT_RANGE;
+    }
     attackTimeStep = BOSS_ATT_TIMESTEP;
     shootingBehaviour = std::make_shared<ShootingBehaviour>();
     meleeBehaviour = std::make_shared<MeleeBehaviour>();
@@ -30,14 +36,14 @@ BossEnemy::BossEnemy(GameHero *hero, const float &x, const float &y, const float
 
 const std::pair<bool, Hitbox> BossEnemy::updateCombat() {
 
-    if (abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= 32 && typeid(attackBehaviour.get()) != typeid(MeleeBehaviour*)) {
+    if (abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= BOSS_MELEE_RANGE && typeid(attackBehaviour.get()) != typeid(MeleeBehaviour*)) {
         setAttackBehaviour(this->meleeBehaviour);
-        attackRange = BOSS_ATTACK_RANGE;
+        //attackRange = BOSS_MELEE_RANGE;
     }
 
     else if (typeid(attackBehaviour.get()) != typeid(ShootingBehaviour*)) {
         setAttackBehaviour(this->shootingBehaviour);
-        attackRange = BOSS_SHOOT_RANGE;
+        //attackRange = BOSS_SHOOT_RANGE;
     }
 
     return Enemy::updateCombat();

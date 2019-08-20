@@ -10,6 +10,8 @@
 #include "Enemy.h"
 #include "MeleeBehaviour.h"
 #include "ShootingBehaviour.h"
+#include "Wizard.h"
+#include "Knight.h"
 
 
 class BossEnemy: public Enemy {

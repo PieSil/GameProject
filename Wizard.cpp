@@ -48,7 +48,7 @@ Wizard::Wizard(const Wizard &copied) : mana(copied.getMana()), GameHero(copied) 
 void Wizard::specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles) {
 
 
-    if(canUseAbility()) {
+    if(canUseAbility && !isDying() && !isAttacking()) {
 
         clocks.abilityClock.restart();
         state = EntityState::ABILITY;
@@ -66,7 +66,7 @@ const std::pair<bool, Hitbox> Wizard::attack(const bool &bypassClock) {
 
     attackPair.first = false;
 
-    if (mana >= FIREB_COST) {
+    if (hasEnoughMana(FIREB_COST)) {
 
         attackPair = GameCharacter::attack(bypassClock);
         if (attackPair.first) {
@@ -77,15 +77,15 @@ const std::pair<bool, Hitbox> Wizard::attack(const bool &bypassClock) {
     return attackPair;
 }
 
-const bool Wizard::canUseAbility() {
+const bool Wizard::hasEnoughMana(const int &cost) {
 
-    bool canUse = false;
+    bool hasEnough = false;
 
-    if (GameHero::canUseAbility() && mana >= PARA_COST) {
-        canUse = true;
+    if (mana >= cost) {
+        hasEnough = true;
     }
 
-    return canUse;
+    return hasEnough;
 }
 
 void Wizard::regenerateMana() {
@@ -99,9 +99,11 @@ void Wizard::regenerateMana() {
 }
 
 void Wizard::updateStatus() {
-    GameCharacter::updateStatus();
+    GameHero::updateStatus();
 
     regenerateMana();
+
+    canUseAbility = hasEnoughMana(PARA_COST);
 }
 
 void Wizard::decreaseMana(const unsigned short & amount) {

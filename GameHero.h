@@ -38,7 +38,9 @@ public:
 
     virtual void specialBehaviour() = 0;
 
-    virtual const bool canUseAbility();
+    void updateStatus() override;
+
+    //virtual const bool canUseAbility();
 
     void animate() override;
 
@@ -63,6 +65,7 @@ protected:
     std::list<Observer*> observers;
     achievementCounters counters;
     float abilityTimeStep;
+    bool canUseAbility;
 
 };
 

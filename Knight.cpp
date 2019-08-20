@@ -34,13 +34,14 @@ void Knight::specialBehaviour() {
 
     bool canUse = false;
 
-    if(canUseAbility()) {
+    if(canUseAbility && !isDying() && !isAttacking()) {
 
         clocks.abilityClock.restart();
         state = EntityState::ABILITY;
 
         invincible = true;
         clocks.invincibilityClock.restart();
+        canUseAbility = false;
     }
 
 
@@ -69,7 +70,7 @@ const bool Knight::getDamaged(const float &damage) {
 
 void Knight::updateStatus() {
 
-    GameCharacter::updateStatus();
+    GameHero::updateStatus();
 
     //if set amount of time has passed since the activation of invincibility turn it off
     if (clocks.invincibilityClock.getElapsedTime().asSeconds() >= 5) {
