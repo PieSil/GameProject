@@ -48,7 +48,7 @@ Wizard::Wizard(const Wizard &copied) : mana(copied.getMana()), GameHero(copied) 
 void Wizard::specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles) {
 
 
-    if(canUseAbility && !isDying() && !isAttacking()) {
+    if(abilityAvailable && !isDying() && !isAttacking()) {
 
         clocks.abilityClock.restart();
         state = EntityState::ABILITY;
@@ -103,7 +103,7 @@ void Wizard::updateStatus() {
 
     regenerateMana();
 
-    canUseAbility = hasEnoughMana(PARA_COST);
+    abilityAvailable = hasEnoughMana(PARA_COST);
 }
 
 void Wizard::decreaseMana(const unsigned short & amount) {

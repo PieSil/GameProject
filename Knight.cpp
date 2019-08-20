@@ -34,14 +34,14 @@ void Knight::specialBehaviour() {
 
     bool canUse = false;
 
-    if(canUseAbility && !isDying() && !isAttacking()) {
+    if(abilityAvailable && !isDying() && !isAttacking()) {
 
         clocks.abilityClock.restart();
         state = EntityState::ABILITY;
 
         invincible = true;
         clocks.invincibilityClock.restart();
-        canUseAbility = false;
+        abilityAvailable = false;
     }
 
 

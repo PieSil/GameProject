@@ -10,7 +10,7 @@
  */
 
 GameHero::GameHero(const float &x, const float &y, const float &str, const bool &onf, const float &h,
-                   const bool &facingR, const float &s) : GameCharacter(x, y, str, onf, h, s, facingR), abilityTimeStep(KNIGHT_ABILITY_TIMESTEP), canUseAbility(true) {
+                   const bool &facingR, const float &s) : GameCharacter(x, y, str, onf, h, s, facingR), abilityTimeStep(KNIGHT_ABILITY_TIMESTEP), abilityAvailable(true) {
 
 }
 
@@ -32,7 +32,7 @@ const EntityPositions GameHero::move(const Direction &direction, const float &di
 }
 
 /*
-const bool GameHero::canUseAbility() {
+const bool GameHero::abilityAvailable() {
     bool canUse = false;
 
     if(this->clocks.abilityClock.getElapsedTime().asSeconds() >= abilityTimeStep && !this->isAttacking() && !this->isDying()) {
@@ -97,7 +97,7 @@ void GameHero::updateStatus() {
     GameCharacter::updateStatus();
 
     if(this->clocks.abilityClock.getElapsedTime().asSeconds() >= abilityTimeStep && !this->isAttacking() && !this->isDying()) {
-        canUseAbility = true;
+        abilityAvailable = true;
     }
 
 }

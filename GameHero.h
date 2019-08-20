@@ -40,7 +40,7 @@ public:
 
     void updateStatus() override;
 
-    //virtual const bool canUseAbility();
+    //virtual const bool abilityAvailable();
 
     void animate() override;
 
@@ -58,6 +58,10 @@ public:
 
     void notifyObservers() const override;
 
+    bool isAbilityAvailable() const {
+        return abilityAvailable;
+    }
+
     //void updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) override;
 
 protected:
@@ -65,7 +69,7 @@ protected:
     std::list<Observer*> observers;
     achievementCounters counters;
     float abilityTimeStep;
-    bool canUseAbility;
+    bool abilityAvailable;
 
 };
 
