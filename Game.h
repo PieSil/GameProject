@@ -33,8 +33,6 @@ public:
 
     ~Game() {};
 
-    //TODO: delegate hero selction to other class, not the game constructor
-
     void updateGame();
     void renderLevel() const;
 

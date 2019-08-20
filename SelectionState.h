@@ -8,6 +8,11 @@
 #include "GameState.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <map>
+
+enum class TextType {
+    TITLE, ACTION,
+};
 
 class SelectionState : public GameState {
 
@@ -27,8 +32,10 @@ public:
     void handleInput() override;
 
 protected:
+    sf::Font font;
     Herotype heroT;
     std::vector<std::pair<GameHero*, sf::RectangleShape>> heroes;
+    std::map<TextType, sf::Text> textLines;
 };
 
 
