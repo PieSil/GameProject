@@ -38,8 +38,10 @@ void PlayingState::update() {
 
         hud.updateHUD();
 
-        if (level.getHero()->getState() == EntityState::DEAD)
+        if (level.getHero()->getState() == EntityState::DEAD) {
+            sf::sleep(sf::seconds(0.5));
             game->setState(State::GAMEOVER);
+        }
 }
 
 void PlayingState::draw() {

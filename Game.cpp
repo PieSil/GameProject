@@ -80,6 +80,7 @@ void Game::updateGame() {
 
             case State::GAMEOVER:
                 states.emplace(new GameOver(this));
+                break;
 
             default:
                 states.emplace(new SelectionState(this));

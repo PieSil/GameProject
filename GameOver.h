@@ -7,6 +7,10 @@
 
 #include "GameState.h"
 
+enum class SelectedOption {
+    CONTINUE, QUIT, NONE
+};
+
 class GameOver : public GameState {
 public:
     explicit GameOver(Game *game);
@@ -18,6 +22,13 @@ public:
     void draw() override;
 
     void handleInput() override;
+
+private:
+
+    SelectedOption selected;
+    sf::Font font;
+    sf::Text gameOverText;
+    std::vector<std::pair<sf::Text, sf::RectangleShape>> options;
 };
 
 

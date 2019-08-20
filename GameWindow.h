@@ -42,6 +42,10 @@ public:
         return closed;
     }
 
+    void setClosed(bool closed) {
+        GameWindow::closed = closed;
+    }
+
     bool isFullScreen() const {
         return fullScreen;
     }
