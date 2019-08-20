@@ -24,7 +24,7 @@ void HeadsUpDisplay::setup() {
     //to desired amount of decimal digits
 
     unsigned short lineNumber = 0; //number of text lines that needs to be separated
-    //from each other (ex health, mana, ecc.) increment after initialization of new text attribute
+    //from each other (ex health, ability state, mana, ecc.) increment after initialization of new text attribute
 
     unsigned short lineOffset = 70; //height offset between separated lines of text
 
@@ -36,17 +36,15 @@ void HeadsUpDisplay::setup() {
 
     lineNumber++;
 
-    if (hasMana) {
-        std::string manaString = getNewMana();
+    std::string abilityString = getAbilityState();
 
-        mana = sf::Text(manaString, font, 50);
+    ability = sf::Text(abilityString, font, 50);
 
-        mana.setPosition(0,lineOffset * lineNumber);
+    ability.setPosition(0,lineOffset * lineNumber);
 
-        lineNumber++;
+    lineNumber++;
 
-        mana.setFillColor(sf::Color::Blue);
-    }
+    ability.setFillColor(sf::Color::Cyan);
 
     std::string statusString = getNewStatus();
 
@@ -63,9 +61,7 @@ void HeadsUpDisplay::setup() {
 void HeadsUpDisplay::updateHUD() {
     updateHealth();
 
-    if (hasMana) {
-        updateMana();
-    }
+    updateAbility();
 
     updateStatus();
 }
@@ -73,9 +69,7 @@ void HeadsUpDisplay::updateHUD() {
 void HeadsUpDisplay::display() {
     window->draw(health);
 
-    if (hasMana) {
-        window->draw(mana);
-    }
+    window->draw(ability);
 
     window->draw(status);
 }
@@ -102,28 +96,43 @@ void HeadsUpDisplay::updateHealth() {
     health.setFont(font);
 }
 
-const std::string HeadsUpDisplay::getNewMana() {
+const std::string HeadsUpDisplay::getAbilityState() {
 
-    std::string manaString;
+    std::string abilityString;
 
-    if (auto w = dynamic_cast<Wizard*>(hero) ) {
+    if (hasMana) {
 
-        std::string currentMana = std::to_string(w->getMana());
+        if (auto w = dynamic_cast<Wizard *>(hero)) {
 
-        std::string maxMana = std::to_string(DEF_MANA);
+            std::string currentMana = std::to_string(w->getMana());
 
-        //create the text that will be displayed
-        manaString = "Mana: " + currentMana + "/" + maxMana;
+            std::string maxMana = std::to_string(DEF_MANA);
+
+            //create the text that will be displayed
+            abilityString = "Mana: " + currentMana + "/" + maxMana;
+        }
+
+    } else {
+
+        abilityString = "Ability: ";
+
+        if (hero->isAbilityAvailable()) {
+            abilityString += "Available";
+        } else {
+            abilityString += "Recharging";
+        }
+
+        return abilityString;
     }
 
-    return manaString;
+    return abilityString;
 
 }
 
-void HeadsUpDisplay::updateMana() {
-    std::string manaString = getNewMana();
-    mana.setString(manaString);
-    mana.setFont(font);
+void HeadsUpDisplay::updateAbility() {
+        std::string abilityString = getAbilityState();
+        ability.setString(abilityString);
+        ability.setFont(font);
 }
 
 void HeadsUpDisplay::updateStatus() {
@@ -164,5 +173,4 @@ const std::string HeadsUpDisplay::getNewStatus() {
 
     return statusString;
 }
-
 

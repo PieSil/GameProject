@@ -34,7 +34,7 @@ public:
     };
 
     const sf::Text getMana() const {
-        sf::Text manaText = mana;
+        sf::Text manaText = ability;
         manaText.setFont(font);
 
         return manaText;
@@ -47,9 +47,9 @@ private:
 
     void updateHealth();
 
-    const std::string getNewMana();
+    const std::string getAbilityState();
 
-    void updateMana();
+    void updateAbility();
 
     const std::string getNewStatus();
 
@@ -60,7 +60,7 @@ private:
     GameHero *hero;
     sf::Font font;
     sf::Text health;
-    sf::Text mana;
+    sf::Text ability;
     sf::Text status;
 
 
