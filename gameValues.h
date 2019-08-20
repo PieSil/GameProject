@@ -326,14 +326,14 @@ const int RANGED_DEATH_LAST_COL = 9;
 
 //BOSS
 
-const float DEF_BOSS_HEALTH = 80.;
+const float DEF_BOSS_HEALTH = 150.;
 const float DEF_BOSS_STRENGTH = 25.;
 
 const float BOSS_MELEE_RANGE =25;
 const float BOSS_AGGRESSIVE_RANGE =32;
 const float BOSS_SHOOT_RANGE = 64;
 
-const float BOSS_ATT_TIMESTEP = 3;
+const float BOSS_ATT_TIMESTEP = 2;
 
 const float BOSS_SPEED = 15;
 const float BOSS_AGGRESSIVE_SPEED = 40;
