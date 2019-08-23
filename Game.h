@@ -24,7 +24,7 @@
 class GameState;
 
 enum class State {
-    SELECTION, PLAYING, GAMEOVER
+    SELECTION, PLAYING, GAMEOVER, VICTORY
 };
 
 class Game {

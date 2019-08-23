@@ -20,13 +20,13 @@ void Achievement::update(const float &distanceWalked, const int &enemiesKilled, 
     if (!unlocked) {
         switch (type) {
             case AchievementType::DistanceWalked:
-                if (distanceWalked >= 100) {
+                if (distanceWalked >= 46 * TILE_SIZE.x) {
                     unlock();
                 }
                 break;
 
             case AchievementType::EnemiesKilled:
-                if (enemiesKilled >= 2) {
+                if (enemiesKilled >= 11) {
                     unlock();
                 }
                 break;

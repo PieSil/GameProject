@@ -25,6 +25,12 @@ enum class Herotype {
 
 };
 
+enum class Entitytype {
+
+    MELEE, RANGED, BOSS, HEART
+
+};
+
 enum class EntityState {
 
     IDLE, WALKING, MELEE, SHOOTING, ABILITY, DYING, DEAD
@@ -225,7 +231,7 @@ const float DEF_ENEMY_HEALTH = 35.;
 const float DEF_ENEMY_STRENGTH = 5.;
 
 //default value for enemy movementSpeed parameter:
-const float ENEMY_SPEED = 30; //sets hero speed (measured in pixels/second ?)
+const float ENEMY_SPEED = 40; //sets hero speed (measured in pixels/second ?)
 
 //MELEE
 
@@ -336,7 +342,7 @@ const float BOSS_SHOOT_RANGE = 64;
 const float BOSS_ATT_TIMESTEP = 2;
 
 const float BOSS_SPEED = 15;
-const float BOSS_AGGRESSIVE_SPEED = 40;
+const float BOSS_AGGRESSIVE_SPEED = 25;
 
 const int BOSS_WIDTH = 96;
 const int BOSS_HEIGHT = 96;

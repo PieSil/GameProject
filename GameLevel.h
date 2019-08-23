@@ -35,6 +35,12 @@ public:
 
     void createMap();
 
+    void createEnemies();
+
+    void createCollectibles();
+
+    void placeEntity(const Entitytype &type, const unsigned short &column, const unsigned short &row);
+
     const EntityPositions &
     detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character, const bool &bypassInMap = false);
 

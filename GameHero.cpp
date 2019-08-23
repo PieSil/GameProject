@@ -72,6 +72,10 @@ void GameHero::setBossKilled(const bool &isKilled) {
     notifyObservers();
 }
 
+const bool GameHero::isBossKilled() {
+    return counters.bossKilled;
+}
+
 void GameHero::setupAnimations(const SpriteParams *parameters) {
     GameCharacter::setupAnimations(parameters);
     animManager.createAnimation(EntityState::ABILITY);

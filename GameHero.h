@@ -52,6 +52,8 @@ public:
 
     void setBossKilled(const bool& isKilled = true);
 
+    const bool isBossKilled();
+
     void registerObserver(Observer *obs) override;
 
     void removeObserver(Observer *obs) override;

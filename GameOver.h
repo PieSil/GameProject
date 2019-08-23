@@ -13,7 +13,7 @@ enum class SelectedOption {
 
 class GameOver : public GameState {
 public:
-    explicit GameOver(Game *game);
+    explicit GameOver(Game *game, const bool &victory);
 
     ~GameOver() override;
 
@@ -23,12 +23,17 @@ public:
 
     void handleInput() override;
 
+    void cycleColor();
+
 private:
 
     SelectedOption selected;
     sf::Font font;
-    sf::Text gameOverText;
+    sf::Text mainText;
     std::vector<std::pair<sf::Text, sf::RectangleShape>> options;
+    bool victory;
+
+    sf::Clock colorCycleClock;
 };
 
 

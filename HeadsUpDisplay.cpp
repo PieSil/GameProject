@@ -118,8 +118,10 @@ const std::string HeadsUpDisplay::getAbilityState() {
 
         if (hero->isAbilityAvailable()) {
             abilityString += "Available";
+            ability.setFillColor(sf::Color::Cyan);
         } else {
             abilityString += "Recharging";
+            ability.setFillColor(sf::Color::Red);
         }
 
         return abilityString;

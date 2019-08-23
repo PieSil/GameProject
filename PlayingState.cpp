@@ -9,7 +9,7 @@
 #include "Game.h"
 #include "PlayingState.h"
 
-PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game) {
+PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game), gameWon(false) {
 
     createLevel(heroT);
     hud = HeadsUpDisplay(level.getHero().get(), game->getWindow().get());
@@ -41,6 +41,13 @@ void PlayingState::update() {
         if (level.getHero()->getState() == EntityState::DEAD) {
             sf::sleep(sf::seconds(0.5));
             game->setState(State::GAMEOVER);
+
+        } else if (!gameWon && level.getHero()->isBossKilled()) {
+            gameWon = true;
+            victoryClock.restart();
+
+        } else if (gameWon && victoryClock.getElapsedTime().asSeconds() >= 1.5) {
+            game->setState(State::VICTORY);
         }
 }
 

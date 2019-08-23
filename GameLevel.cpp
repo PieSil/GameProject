@@ -16,19 +16,11 @@ GameLevel::GameLevel(Herotype heroT) {
         //TODO: throw exception
     }
 
-    enemies.emplace_back(std::unique_ptr<RangedEnemy>(
-            new RangedEnemy(hero.get(), 14 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
-
-    enemies.emplace_back(std::unique_ptr<MeleeEnemy>(
-            new MeleeEnemy(hero.get(), 14 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
-
-    enemies.emplace_back(std::unique_ptr<BossEnemy>(
-            new BossEnemy(hero.get(), 7 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
-
-    collectibles.emplace_back(std::unique_ptr<Collectible>(
-            new Heart(hero.get(), 18 * TILE_SIZE.x, 5 * TILE_SIZE.y)));
-
     createMap();
+
+    createEnemies();
+
+    createCollectibles();
 
 }
 
@@ -75,6 +67,71 @@ void GameLevel::createMap() {
 
     };
      */
+}
+
+void GameLevel::placeEntity(const Entitytype &type, const unsigned short &column, const unsigned short &row) {
+
+    switch(type) {
+        case Entitytype::MELEE :
+
+            enemies.emplace_back(std::unique_ptr<MeleeEnemy>(
+                    new MeleeEnemy(hero.get(), (column * TILE_SIZE.x) + TILE_SIZE.x/2., (row * TILE_SIZE.y) + TILE_SIZE.y/2.)));
+            break;
+
+        case Entitytype::RANGED :
+
+            enemies.emplace_back(std::unique_ptr<RangedEnemy>(
+                    new RangedEnemy(hero.get(), (column * TILE_SIZE.x) + TILE_SIZE.x/2., (row * TILE_SIZE.y) + TILE_SIZE.y/2.)));
+            break;
+
+        case Entitytype::BOSS :
+
+            enemies.emplace_back(std::unique_ptr<BossEnemy>(
+                    new BossEnemy(hero.get(), (column * TILE_SIZE.x) + TILE_SIZE.x/2., (row * TILE_SIZE.y) + TILE_SIZE.y/2.)));
+            break;
+
+        case Entitytype::HEART :
+
+            collectibles.emplace_back(std::unique_ptr<Collectible>(
+                    new Heart(hero.get(), (column * TILE_SIZE.x) + TILE_SIZE.x/2., (row * TILE_SIZE.y) + TILE_SIZE.y/2.)));
+
+            break;
+
+    }
+}
+
+
+void GameLevel::createEnemies() {
+
+    placeEntity(Entitytype::RANGED, 14, 5);
+
+    placeEntity(Entitytype::RANGED, 31, 3);
+
+    placeEntity(Entitytype::RANGED, 40, 6);
+
+    //placeEntity(Entitytype::RANGED, 66, 6);
+
+    placeEntity(Entitytype::MELEE, 16, 3);
+
+    placeEntity(Entitytype::MELEE, 34, 1);
+
+    placeEntity(Entitytype::MELEE, 37, 6);
+
+    placeEntity(Entitytype::MELEE, 50, 3);
+
+    placeEntity(Entitytype::MELEE, 20, 6);
+
+    placeEntity(Entitytype::MELEE, 26, 6);
+
+    //placeEntity(Entitytype::MELEE, 62, 6);
+
+    placeEntity(Entitytype::BOSS, 64, 6);
+}
+
+void GameLevel::createCollectibles() {
+    placeEntity(Entitytype::HEART, 18, 4);
+    placeEntity(Entitytype::HEART, 29, 7);
+    placeEntity(Entitytype::HEART, 55, 5);
 }
 
 const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character,
@@ -489,5 +546,4 @@ void GameLevel::destroy(std::unique_ptr<Collectible> &collectible) {
     auto itr = std::find(collectibles.begin(), collectibles.end(), collectible);
     collectibles.erase(itr);
 }
-
 

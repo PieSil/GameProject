@@ -58,6 +58,9 @@ private:
     GameLevel level;
     std::vector<Achievement> achievements;
     HeadsUpDisplay hud;
+
+    sf::Clock victoryClock;
+    bool gameWon;
 };
 
 

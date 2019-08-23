@@ -67,7 +67,6 @@ void Game::updateGame() {
     void Game::pushState(State state, Herotype heroT) {
         switch (state) {
 
-
             //emplace new state on top of the stack based on function parameters
 
             case State::PLAYING:
@@ -79,7 +78,11 @@ void Game::updateGame() {
                 break;
 
             case State::GAMEOVER:
-                states.emplace(new GameOver(this));
+                states.emplace(new GameOver(this, false));
+                break;
+
+            case State::VICTORY:
+                states.emplace(new GameOver(this, true));
                 break;
 
             default:

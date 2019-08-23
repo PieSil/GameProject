@@ -66,8 +66,7 @@ void Enemy::updateAggro() {
 
         //if aggro is not activated and hero sprite is in aggro range
         // (if absolute value of hero x coordinate - enemy x coordinate is < aggro range then hero is in aggro range)
-        if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange &&
-                heroIsInFront()) {
+        if (!aggro && abs(hero->getSprite().getPosition().x - this->sprite.getPosition().x) <= aggroRange) {
             aggro = true; //activate aggro
         }
 
