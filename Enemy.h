@@ -68,6 +68,8 @@ public:
         return hero;
     }
 
+    void setupAudio() override;
+
 protected:
     bool paralyzed;
     bool aggro;

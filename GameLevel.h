@@ -20,6 +20,7 @@
 #include <typeinfo>
 #include "Collectible.h"
 #include "Heart.h"
+#include "AudioPlayer.h"
 
 class GameLevel {
 public:
@@ -38,6 +39,8 @@ public:
     void createEnemies();
 
     void createCollectibles();
+
+   // void setupAudio();
 
     void placeEntity(const Entitytype &type, const unsigned short &column, const unsigned short &row);
 
@@ -71,6 +74,8 @@ public:
     void destroy(std::unique_ptr<Enemy> &enemy);
 
     void destroy(std::unique_ptr<Collectible> &collectible);
+
+    const bool isCloseToHero(const GameEntity& entity);
 
 
     /*

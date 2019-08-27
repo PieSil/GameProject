@@ -40,6 +40,8 @@ public:
 
     void specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelProjectiles);
 
+    void setupAudio() override;
+
     //void updateBehaviour();
 
     int getMana() const {

@@ -30,7 +30,7 @@ public:
 
     virtual void animate();
 
-    void setupAudio() {}
+    virtual void setupAudio() {}
 
     virtual const SpriteParams* getParameters() const {
         return &entityParams;
@@ -67,6 +67,10 @@ public:
 
     void setState(EntityState state) {
         GameEntity::state = state;
+    }
+
+    AudioPlayer* getAudioPlayer() {
+        return &audioPlayer;
     }
 
 protected:

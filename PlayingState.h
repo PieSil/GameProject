@@ -37,6 +37,9 @@ public:
 
     void handleInput() override;
 
+    PlayingState(const PlayingState&) = delete;
+    PlayingState&operator=(const PlayingState&) = delete;
+
 private:
 
     void createLevel(const Herotype& heroT);

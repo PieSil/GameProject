@@ -367,6 +367,7 @@ void GameLevel::updateCombat(GameHero *hero) {
 
         } else {
             projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(hero)));
+            hero->getAudioPlayer()->play(SoundID::FIREBALL);
         }
     }
 }
@@ -386,6 +387,10 @@ void GameLevel::updateCombat(Enemy *enemy) {
 
         } else {
             projectiles.push_back(std::unique_ptr<Fireball>(new Fireball(enemy)));
+
+            if (isCloseToHero(*enemy)) {
+                enemy->getAudioPlayer()->play(SoundID::FIREBALL);
+            }
         }
     }
 }
@@ -545,5 +550,16 @@ GameLevel::GameLevel() : gameMap(Map()) {
 void GameLevel::destroy(std::unique_ptr<Collectible> &collectible) {
     auto itr = std::find(collectibles.begin(), collectibles.end(), collectible);
     collectibles.erase(itr);
+}
+
+const bool GameLevel::isCloseToHero(const GameEntity& entity) {
+
+    bool isClose = false;
+
+    if (abs(hero->getAllPositions().spritePosition.x - entity.getSprite().getPosition().x) <= 4 * TILE_SIZE.x) {
+        isClose = true;
+    }
+
+    return isClose;
 }
 

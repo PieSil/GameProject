@@ -24,6 +24,7 @@ Wizard::Wizard(const float &x, const float &y, const float &str, const bool &onf
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    setupAudio();
     attackRange = WIZARD_ATTACK_RANGE;
     attackTimeStep = HERO_ATT_TIMESTEP;
     abilityTimeStep = WIZARD_ABILITY_TIMESTEP,
@@ -113,4 +114,9 @@ void Wizard::decreaseMana(const unsigned short & amount) {
         mana = 0;
     }
 
+}
+
+void Wizard::setupAudio() {
+    GameEntity::setupAudio();
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH);
 }

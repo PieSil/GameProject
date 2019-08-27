@@ -18,6 +18,8 @@ public:
     virtual void draw() = 0;
     virtual void handleInput() = 0;
 
+    GameState(const GameState&) = delete;
+    GameState&operator=(const GameState&) = delete;
 protected:
     Game* game;
 
