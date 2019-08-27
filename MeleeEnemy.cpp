@@ -53,3 +53,8 @@ const std::pair<bool, Hitbox> MeleeEnemy::attack(const bool &bypassClock) {
 
     return  result;
 }
+
+void MeleeEnemy::setupAudio() {
+    Enemy::setupAudio();
+    audioPlayer.insertSound(SoundID::MELEE, ENEMY_ATT_SOUND_PATH, 1, 10);
+}

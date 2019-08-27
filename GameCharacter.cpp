@@ -88,6 +88,13 @@ const std::pair<bool, Hitbox> GameCharacter::attack(const bool &bypassClock) {
         }
 
     }
+
+    AttackBehaviour* currentBehaviour = attackBehaviour.get();
+
+    if (result.first && typeid(*currentBehaviour) == typeid(MeleeBehaviour)) {
+        audioPlayer.play(SoundID::MELEE);
+    }
+
     return result;
 }
 

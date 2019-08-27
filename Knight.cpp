@@ -42,6 +42,9 @@ void Knight::specialBehaviour() {
 
         invincible = true;
         clocks.invincibilityClock.restart();
+
+        audioPlayer.play(SoundID::GUARDUP);
+
         abilityAvailable = false;
     }
 
@@ -77,6 +80,12 @@ void Knight::updateStatus() {
     if (clocks.invincibilityClock.getElapsedTime().asSeconds() >= 5) {
         invincible = false;
     }
+}
+
+void Knight::setupAudio() {
+    GameHero::setupAudio();
+    audioPlayer.insertSound(SoundID::MELEE, KNIGHT_ATT_SOUND_PATH, 1, 10);
+    audioPlayer.insertSound(SoundID::GUARDUP, GUARDUP_SOUND_PATH, 0.8, 10);
 }
 
 

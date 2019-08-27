@@ -56,6 +56,8 @@ void Wizard::specialBehaviour(std::vector<std::unique_ptr<Projectile>>& levelPro
 
         levelProjectiles.push_back(std::unique_ptr<Paralyzing>(new Paralyzing(this)));
 
+        audioPlayer.play(SoundID::PARALYZING);
+
         decreaseMana(PARA_COST);
     }
 
@@ -119,4 +121,5 @@ void Wizard::decreaseMana(const unsigned short & amount) {
 void Wizard::setupAudio() {
     GameHero::setupAudio();
     audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 10);
+    audioPlayer.insertSound(SoundID::PARALYZING, PARA_SOUND_PATH, 1.2, 10);
 }

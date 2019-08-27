@@ -111,6 +111,6 @@ const std::pair<bool, Hitbox> RangedEnemy::attack(const bool &bypassClock) {
 
 void RangedEnemy::setupAudio() {
     Enemy::setupAudio();
-    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 50);
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 10);
 }
 

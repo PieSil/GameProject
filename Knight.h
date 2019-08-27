@@ -31,6 +31,8 @@ public:
 
     void updateStatus() override;
 
+    void setupAudio() override;
+
     const SpriteParams *getParameters() const override {
         return &knightParams; //overrides getParameters to return a pointer to knightParams instead of entityParams
     }

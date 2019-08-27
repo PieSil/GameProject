@@ -69,6 +69,16 @@ const std::string FIREB_SOUND_PATH = "../GameAssets/Sounds/Fireball.wav";
 
 const std::string HIT_SOUND_PATH = "../GameAssets/Sounds/Hit.wav";
 
+const std::string HEAL_SOUND_PATH = "../GameAssets/Sounds/Heal.wav";
+
+const std::string KNIGHT_ATT_SOUND_PATH = "../GameAssets/Sounds/Knight_Attack.wav";
+
+const std::string PARA_SOUND_PATH = "../GameAssets/Sounds/Paralyzing.wav";
+
+const std::string ENEMY_ATT_SOUND_PATH = "../GameAssets/Sounds/Sword_Bandit.wav";
+
+const std::string GUARDUP_SOUND_PATH = "../GameAssets/Sounds/GuardUp.wav";
+
 //WINDOW
 const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
 

@@ -26,7 +26,7 @@ void Achievement::update(const float &distanceWalked, const int &enemiesKilled, 
                 break;
 
             case AchievementType::EnemiesKilled:
-                if (enemiesKilled >= 11) {
+                if (enemiesKilled >= 5) {
                     unlock();
                 }
                 break;

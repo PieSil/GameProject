@@ -21,6 +21,8 @@ public:
 
     void characterCollision(GameCharacter *character) override;
 
+    void setupAudio() override;
+
     const SpriteParams *getParameters() const override {
         return &heartParams;
     }

@@ -11,7 +11,7 @@
 
 
 enum class SoundID {
-    FIREBALL, HIT
+    FIREBALL, HIT, PARALYZING, MELEE, HEAL, GUARDUP
 };
 
 enum class MusicID {

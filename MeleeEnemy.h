@@ -30,6 +30,8 @@ public:
         return &meleeParams; //overrides getParameters to return a pointer to meleeParams instead of entityParams
     }
 
+    void setupAudio() override;
+
 protected:
 
     static const SpriteParams meleeParams;

@@ -15,10 +15,10 @@ Heart::Heart(GameHero *hero, const float &x, const float &y, const float &heal) 
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    setupAudio();
 }
 
 Heart::~Heart() {
-
 }
 
 
@@ -32,6 +32,7 @@ void Heart::characterCollision(GameCharacter *character) {
             newHealth = DEF_HERO_HEALTH;
 
         character->setHealth(newHealth);
+        audioPlayer.play(SoundID::HEAL);
     }
 }
 
@@ -44,4 +45,9 @@ const bool Heart::updateBehaviour() {
     }
 
     return toDestroy;
+}
+
+void Heart::setupAudio() {
+    GameEntity::setupAudio();
+    audioPlayer.insertSound(SoundID::HEAL, HEAL_SOUND_PATH, 1, 10);
 }
