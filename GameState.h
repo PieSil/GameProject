@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "AudioPlayer.h"
 
 class GameState {
 public:
@@ -18,10 +19,13 @@ public:
     virtual void draw() = 0;
     virtual void handleInput() = 0;
 
+    virtual void setupAudio() = 0;
+
     GameState(const GameState&) = delete;
     GameState&operator=(const GameState&) = delete;
 protected:
     Game* game;
+    AudioPlayer audioPlayer;
 
 };
 

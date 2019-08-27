@@ -27,6 +27,8 @@ public:
 
     const std::pair<bool, Hitbox> updateCombat() override;
 
+    void setupAudio() override;
+
 protected:
     static const SpriteParams bossParams;
     std::shared_ptr<ShootingBehaviour> shootingBehaviour;

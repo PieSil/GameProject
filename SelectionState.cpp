@@ -6,6 +6,8 @@
 
 SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NOHERO) {
 
+    setupAudio();
+
     if (!font.loadFromFile(FONT_PATH)) {
         //TODO: throw exception?
     }
@@ -69,6 +71,8 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
         //increase index
         index++;
     }
+
+    audioPlayer.play(MusicID::SELECTION);
 }
 
 void SelectionState::update() {
@@ -78,8 +82,10 @@ void SelectionState::update() {
 
     handleInput();
 
-    if (heroT != Herotype::NOHERO) //if hero has been selected set state to playing with current hero
+    if (heroT != Herotype::NOHERO) {//if hero has been selected set state to playing with current hero
+        audioPlayer.stop(MusicID::SELECTION);
         game->setState(State::PLAYING, heroT);
+    }
 
 }
 
@@ -139,4 +145,8 @@ void SelectionState::handleInput() {
         }
 
     }
+}
+
+void SelectionState::setupAudio() {
+    audioPlayer.insertMusic(MusicID::SELECTION, SELECTION_MUSIC_PATH, true, 1, 3);
 }

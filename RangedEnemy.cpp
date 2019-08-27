@@ -22,6 +22,7 @@ RangedEnemy::RangedEnemy(GameHero *hero, const float &x, const float &y, const f
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    setupAudio();
     attackRange = RANGED_ATTACK_RANGE;
     attackTimeStep = RANGED_ATT_TIMESTEP;
     setAttackBehaviour(std::make_shared<ShootingBehaviour>());
@@ -106,5 +107,10 @@ const std::pair<bool, Hitbox> RangedEnemy::attack(const bool &bypassClock) {
 
     return attackResult;
 
+}
+
+void RangedEnemy::setupAudio() {
+    Enemy::setupAudio();
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 50);
 }
 

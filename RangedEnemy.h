@@ -29,6 +29,8 @@ public:
 
     const std::pair<bool, Hitbox> attack(const bool &bypassClock) override;
 
+    void setupAudio() override;
+
     const SpriteParams *getParameters() const override {
         return &rangedParams;
     }

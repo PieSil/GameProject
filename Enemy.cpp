@@ -12,7 +12,6 @@
 Enemy::Enemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par, const bool &onf,
              const float &h, const bool &facingR, const float &s)
         : hero(hero), paralyzed(par), aggro(false), aggroRange(100), GameCharacter(x, y, str, onf, h, s, facingR) {
-    setupAudio();
 
 }
 
@@ -150,5 +149,5 @@ const bool Enemy::heroIsInFront() {
 
 void Enemy::setupAudio() {
     GameEntity::setupAudio();
-    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH);
+    audioPlayer.insertSound(SoundID::HIT, HIT_SOUND_PATH, 0.5, 10);
 }

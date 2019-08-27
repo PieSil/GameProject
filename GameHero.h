@@ -54,6 +54,8 @@ public:
 
     const bool isBossKilled();
 
+    void setupAudio() override;
+
     void registerObserver(Observer *obs) override;
 
     void removeObserver(Observer *obs) override;

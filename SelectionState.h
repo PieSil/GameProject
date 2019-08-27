@@ -31,6 +31,8 @@ public:
 
     void handleInput() override;
 
+    void setupAudio() override;
+
     SelectionState(const SelectionState&) = delete;
     SelectionState&operator=(const SelectionState&) = delete;
 protected:

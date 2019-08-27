@@ -117,6 +117,6 @@ void Wizard::decreaseMana(const unsigned short & amount) {
 }
 
 void Wizard::setupAudio() {
-    GameEntity::setupAudio();
-    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH);
+    GameHero::setupAudio();
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 10);
 }

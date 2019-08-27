@@ -11,11 +11,11 @@
 
 
 enum class SoundID {
-    FIREBALL
+    FIREBALL, HIT
 };
 
 enum class MusicID {
-    LEVEL
+    LEVEL, SELECTION, ENDING
 };
 
 class AudioPlayer {

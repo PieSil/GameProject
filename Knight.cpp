@@ -22,6 +22,7 @@ Knight::Knight(const float &x, const float &y, const float &str, const bool &onf
                const float &s) : GameHero(x, y, str, onf, h, facingR, s), invincible(false) {
     initSprite(x, y);
     giveHitbox();
+    setupAudio();
 
     attackRange = KNIGHT_ATTACK_RANGE;
     attackTimeStep = HERO_ATT_TIMESTEP;

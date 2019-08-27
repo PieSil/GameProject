@@ -106,6 +106,8 @@ const bool GameCharacter::getDamaged(const float &damage) {
             state = EntityState::DYING;
         }
 
+        audioPlayer.play(SoundID::HIT);
+
         damaged = true;
     }
 

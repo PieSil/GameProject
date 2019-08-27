@@ -55,6 +55,20 @@ const std::string KILLER_PATH = "../GameAssets/Sprites/Achievements/Killer.png";
 
 const float NOTIFY_DURATION = 3;
 
+//SOUND
+
+const std::string LEVEL_MUSIC_PATH = "../GameAssets/Music/Level.ogg";
+
+const std::string SELECTION_MUSIC_PATH = "../GameAssets/Music/Selection.ogg";
+
+const std::string VICTORY_MUSIC_PATH = "../GameAssets/Music/Victory.ogg";
+
+const std::string GAMEOVER_MUSIC_PATH = "../GameAssets/Music/GameOver.ogg";
+
+const std::string FIREB_SOUND_PATH = "../GameAssets/Sounds/Fireball.wav";
+
+const std::string HIT_SOUND_PATH = "../GameAssets/Sounds/Hit.wav";
+
 //WINDOW
 const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
 
@@ -397,7 +411,6 @@ const float FIREB_SCALE = 0.15;
 
 //value used to set path of texture file
 const std::string FIREB_PATH = "../GameAssets/Sprites/Projectiles/Fireball/Fireball.png";
-const std::string FIREB_SOUND_PATH = "../GameAssets/Sounds/Fireball.wav";
 
 //values used to choose starting sprite
 const int FIREB_IDLE_ROW = 0;

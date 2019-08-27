@@ -19,6 +19,7 @@ BossEnemy::BossEnemy(GameHero *hero, const float &x, const float &y, const float
     initSprite(x, y);
     giveHitbox();
     setupAnimations(getParameters());
+    setupAudio();
 
     if (typeid(*hero) == typeid(Wizard)) {
         attackRange = BOSS_MELEE_RANGE;
@@ -47,6 +48,11 @@ const std::pair<bool, Hitbox> BossEnemy::updateCombat() {
     }
 
     return Enemy::updateCombat();
+}
+
+void BossEnemy::setupAudio() {
+    Enemy::setupAudio();
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 10);
 }
 
 

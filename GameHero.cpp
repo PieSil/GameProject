@@ -105,6 +105,11 @@ void GameHero::updateStatus() {
     }
 
 }
+
+void GameHero::setupAudio() {
+    GameEntity::setupAudio();
+    audioPlayer.insertSound(SoundID::HIT, HIT_SOUND_PATH, 1, 10);
+}
 /*
 void GameHero::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {
 }

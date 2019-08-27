@@ -25,6 +25,8 @@ public:
 
     void cycleColor();
 
+    void setupAudio() override;
+
 private:
 
     SelectedOption selected;

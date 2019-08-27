@@ -11,6 +11,8 @@
 
 PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game), gameWon(false) {
 
+    setupAudio();
+
     createLevel(heroT);
     hud = HeadsUpDisplay(level.getHero().get(), game->getWindow().get());
     update();
@@ -19,6 +21,8 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game),
         //TODO: throw exception
     }
     createAchievements();
+
+    audioPlayer.play(MusicID::LEVEL);
 
 }
 
@@ -40,6 +44,7 @@ void PlayingState::update() {
 
         if (level.getHero()->getState() == EntityState::DEAD) {
             sf::sleep(sf::seconds(0.5));
+            audioPlayer.stop(MusicID::LEVEL);
             game->setState(State::GAMEOVER);
 
         } else if (!gameWon && level.getHero()->isBossKilled()) {
@@ -47,6 +52,7 @@ void PlayingState::update() {
             victoryClock.restart();
 
         } else if (gameWon && victoryClock.getElapsedTime().asSeconds() >= 1.5) {
+            audioPlayer.stop(MusicID::LEVEL);
             game->setState(State::VICTORY);
         }
 }
@@ -213,4 +219,8 @@ void PlayingState::drawAchievements() {
 
         }
     }
+}
+
+void PlayingState::setupAudio() {
+    audioPlayer.insertMusic(MusicID::LEVEL, LEVEL_MUSIC_PATH, true, 1, 5);
 }

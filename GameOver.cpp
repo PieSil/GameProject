@@ -6,6 +6,9 @@
 #include "GameOver.h"
 
 GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(SelectedOption::NONE), victory(victory) {
+
+    setupAudio();
+
     game->getWindow()->setView(*game->getHudView());
 
     if (!font.loadFromFile(FONT_PATH)) {
@@ -73,6 +76,8 @@ GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(
         index++;
     }
 
+    audioPlayer.play(MusicID::ENDING);
+
 }
 
 GameOver::~GameOver() {
@@ -86,10 +91,12 @@ void GameOver::update() {
     switch (selected) {
         case SelectedOption::CONTINUE:
             sf::sleep(sf::seconds(0.5));
+            audioPlayer.stop(MusicID::ENDING);
             game->setState(State::SELECTION);
             break;
 
         case SelectedOption::QUIT:
+            audioPlayer.stop(MusicID::ENDING);
             game->getWindow()->setClosed(true);
             break;
 
@@ -156,6 +163,15 @@ void GameOver::cycleColor() {
                 mainText.setFillColor(sf::Color::Red);
             }
         }
+    }
+}
+
+void GameOver::setupAudio() {
+
+    if (victory) {
+        audioPlayer.insertMusic(MusicID::ENDING, VICTORY_MUSIC_PATH, true, 1, 25);
+    } else {
+        audioPlayer.insertMusic(MusicID::ENDING, GAMEOVER_MUSIC_PATH, false, 1, 3);
     }
 }
 
