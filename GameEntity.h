@@ -9,6 +9,10 @@
 #include "Hitbox.h"
 #include "SpriteParameters.h"
 #include "AnimationManager.h"
+#include "AttackBehaviour.h"
+#include "MeleeBehaviour.h"
+#include "ShootingBehaviour.h"
+#include "AudioPlayer.h"
 
 class GameEntity {
 public:
@@ -25,6 +29,8 @@ public:
     virtual void setupAnimations(const SpriteParams *parameters);
 
     virtual void animate();
+
+    void setupAudio() {}
 
     virtual const SpriteParams* getParameters() const {
         return &entityParams;
@@ -86,6 +92,7 @@ protected:
 
     AnimationManager animManager;
 
+    AudioPlayer audioPlayer;
 };
 
 #endif //GAMEPROJECT_GAMEENTITY_H

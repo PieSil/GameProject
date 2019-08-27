@@ -53,8 +53,7 @@ public:
 
     const bool isAttacking();
 
-    const bool isDying();
-
+    const bool isDying();;
 
     virtual void setAttackBehaviour(std::shared_ptr<AttackBehaviour> attackBehaviourPtr) {
         this->attackBehaviour = std::move(attackBehaviourPtr);

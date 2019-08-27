@@ -397,6 +397,7 @@ const float FIREB_SCALE = 0.15;
 
 //value used to set path of texture file
 const std::string FIREB_PATH = "../GameAssets/Sprites/Projectiles/Fireball/Fireball.png";
+const std::string FIREB_SOUND_PATH = "../GameAssets/Sounds/Fireball.wav";
 
 //values used to choose starting sprite
 const int FIREB_IDLE_ROW = 0;
