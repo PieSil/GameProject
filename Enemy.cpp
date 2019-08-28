@@ -98,7 +98,7 @@ void Enemy::updateStatus() {
 }
 
 void Enemy::checkIfOnFire() {
-    if (onFire) { //if character is on fire
+    if (onFire && clocks.damagedClock.getElapsedTime().asSeconds() >= 0.3) { //if character is on fire and has not been damaged in set amount of time
         getDamaged(3);  //take damage
 
         if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
