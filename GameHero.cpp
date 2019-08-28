@@ -59,7 +59,9 @@ void GameHero::notifyObservers() const {
 
 void GameHero::incrDistanceWalked(const float &distance) {
     counters.distanceWalked += distance;
-    notifyObservers();
+
+    if (counters.distanceWalked >= 46 * TILE_SIZE.x)
+        notifyObservers();
 }
 
 void GameHero::incrEnemiesKilled(const int &enemies) {
