@@ -89,18 +89,6 @@ void AnimationManager::createAnimation(const EntityState &state) {
 
             animations.emplace(EntityState::DEAD, Animation(framesVector, sprite, parameters, DEATH_ANIM_TIME));
             break;
-
-
-        default:
-            //TODO throw exception? just add another idle animation for now
-            for (auto col = 0; col <= parameters->idleLastCol; col++) {
-                framesVector.emplace_back(
-                        sf::IntRect(col * parameters->width, parameters->idleRow * parameters->height,
-                                    parameters->width, parameters->height));
-            }
-
-            animations.emplace(EntityState::IDLE, Animation(framesVector, sprite, parameters, IDLE_ANIM_TIME));
-            break;
     }
 
 }
