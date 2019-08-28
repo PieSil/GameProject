@@ -91,12 +91,12 @@ void GameOver::update() {
     switch (selected) {
         case SelectedOption::CONTINUE:
             sf::sleep(sf::seconds(0.5));
-            audioPlayer.stop(MusicID::ENDING);
+            audioPlayer.stopAllMusic();
             game->setState(State::SELECTION);
             break;
 
         case SelectedOption::QUIT:
-            audioPlayer.stop(MusicID::ENDING);
+            audioPlayer.stopAllMusic();
             game->getWindow()->setClosed(true);
             break;
 

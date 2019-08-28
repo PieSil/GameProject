@@ -42,17 +42,25 @@ void PlayingState::update() {
 
         hud.updateHUD();
 
-        if (level.getHero()->getState() == EntityState::DEAD) {
+        if (level.getHero()->getState() == EntityState::DEAD && !gameWon) {
             sf::sleep(sf::seconds(0.5));
-            audioPlayer.stop(MusicID::LEVEL);
+            audioPlayer.stopAllMusic();
             game->setState(State::GAMEOVER);
 
         } else if (!gameWon && level.getHero()->isBossKilled()) {
             gameWon = true;
             victoryClock.restart();
 
+            //kill all remaining enemies
+            for (auto& enemy : level.getEnemies()) {
+
+                if (!enemy->isDying()) {
+                    enemy->setState(EntityState::DYING);
+                }
+            }
+
         } else if (gameWon && victoryClock.getElapsedTime().asSeconds() >= 1.5) {
-            audioPlayer.stop(MusicID::LEVEL);
+            audioPlayer.stopAllMusic();
             game->setState(State::VICTORY);
         }
 }

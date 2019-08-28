@@ -36,6 +36,7 @@ public:
     void stop(const SoundID& id);
     void stop(const MusicID& id);
 
+    void stopAllMusic();
 
 private:
 

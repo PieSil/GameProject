@@ -102,7 +102,7 @@ const bool GameCharacter::getDamaged(const float &damage) {
 
     bool damaged = false;
 
-    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.5 && health > 0 && !isDying()) {
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.3 && health > 0 && !isDying()) {
         clocks.damagedClock.restart();
 
         health -= damage;
@@ -134,7 +134,7 @@ void GameCharacter::updateStatus() {
 void GameCharacter::checkIfOnFire() {
 
     if (onFire) { //if character is on fire
-        getDamaged(2.4);  //take damage
+        getDamaged(1.5);  //take damage
 
         if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
             onFire = false; //set on fire to off

@@ -4,7 +4,7 @@
 
 #include "GameLevel.h"
 
-GameLevel::GameLevel(Herotype heroT) {
+GameLevel::GameLevel(Herotype heroT): bossEncountered(false) {
     if (heroT == Herotype::KNGT) {
         hero = std::move(
                 std::unique_ptr<Knight>(new Knight(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
@@ -125,13 +125,13 @@ void GameLevel::createEnemies() {
 
     //placeEntity(Entitytype::MELEE, 62, 6);
 
-    placeEntity(Entitytype::BOSS, 64, 6);
+    placeEntity(Entitytype::BOSS, 66, 6);
 }
 
 void GameLevel::createCollectibles() {
     placeEntity(Entitytype::HEART, 18, 4);
     placeEntity(Entitytype::HEART, 29, 7);
-    placeEntity(Entitytype::HEART, 55, 5);
+    placeEntity(Entitytype::HEART, 56, 5);
 }
 
 const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character,
@@ -307,8 +307,12 @@ void GameLevel::updatePhysics(GameCharacter *character) {
 void GameLevel::updateEnemies(const float &elapsedTime) {
     auto enemy = enemies.begin();
 
-
     while (!enemies.empty() && enemy != enemies.end()) {
+
+        bool isBoss = false;
+
+        if (typeid(*enemy->get()) == typeid(BossEnemy))
+            isBoss = true;
 
         updatePhysics(enemy->get()); //update enemy physics
         //if enemy hitbox is not touching hero hitbox
@@ -316,6 +320,10 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
         (*enemy)->updateStatus();
         moveCharacter(enemy->get(), (*enemy)->getMovementSpeed() * elapsedTime);
         updateCombat(enemy->get());
+
+        if (!bossEncountered && isBoss && (*enemy)->isAggro()) {
+                bossEncountered = true;
+        }
 
         /*
         enemy->updateAggro();
@@ -328,8 +336,10 @@ void GameLevel::updateEnemies(const float &elapsedTime) {
         if ((*enemy)->getState() == EntityState::DEAD) {
             hero->incrEnemiesKilled(); //increase the counter of enemies killed by the hero
 
-            if (typeid(*enemy->get()) == typeid(BossEnemy))
+            if (isBoss) {
                 hero->setBossKilled();
+            }
+
             destroy(*enemy);
 
             //projectiles.erase(projectile);

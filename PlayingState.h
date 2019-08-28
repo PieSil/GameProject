@@ -60,6 +60,8 @@ private:
 
     void setupAudio() override;
 
+    void updateMusic();
+
     GameLevel level;
     std::vector<Achievement> achievements;
     HeadsUpDisplay hud;

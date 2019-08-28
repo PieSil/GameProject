@@ -109,6 +109,10 @@ void createProjectile(GameHero *hero, const bool &isFireball = true);
         return collectibles;
     }
 
+    bool isBossEncountered() const {
+        return bossEncountered;
+    }
+
 private:
     std::unique_ptr<GameHero> hero;
     std::vector<std::unique_ptr<Enemy>> enemies;
@@ -116,6 +120,7 @@ private:
     std::vector<std::unique_ptr<Collectible>> collectibles;
     Map gameMap;
 
+    bool bossEncountered;
 
 };
 

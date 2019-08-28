@@ -112,8 +112,8 @@ const float JUMP_VELOCITY = 8;
 
 const std::string MAP_PATH = "../GameAssets/Tileset/Tileset.png";
 const sf::Vector2u TILE_SIZE(32,32);
-const int MAP_COLUMNS = 71;
-const int MAP_ROWS = 10;
+const int MAP_COLUMNS = 73;
+const int MAP_ROWS = 12;
 
 //HITBOXES
 
@@ -255,7 +255,7 @@ const float DEF_ENEMY_HEALTH = 35.;
 const float DEF_ENEMY_STRENGTH = 5.;
 
 //default value for enemy movementSpeed parameter:
-const float ENEMY_SPEED = 40; //sets hero speed (measured in pixels/second ?)
+const float ENEMY_SPEED = 55; //sets enemy speed (measured in pixels/second ?)
 
 //MELEE
 
@@ -265,10 +265,9 @@ const float DEF_MELEE_HEALTH = 35.;
 //default strength value for melee enemies:
 const float DEF_MELEE_STRENGTH = 5.;
 
-
 const float MELEE_ATTACK_RANGE = 16;
 
-const float MELEE_ATT_TIMESTEP = 3;
+const float MELEE_ATT_TIMESTEP = 2;
 
 //values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
 const int MELEE_WIDTH = 48;
@@ -317,7 +316,7 @@ const float RANGED_SPEED = 30;
 
 const float RANGED_ATTACK_RANGE = 100;
 
-const float RANGED_ATT_TIMESTEP = 3;
+const float RANGED_ATT_TIMESTEP = 2;
 
 //values used to determine sprite's width and heigth to correctly select it when cutting sprite sheet:
 const int RANGED_WIDTH = 32;

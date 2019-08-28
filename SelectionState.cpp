@@ -83,7 +83,7 @@ void SelectionState::update() {
     handleInput();
 
     if (heroT != Herotype::NOHERO) {//if hero has been selected set state to playing with current hero
-        audioPlayer.stop(MusicID::SELECTION);
+        audioPlayer.stopAllMusic();
         game->setState(State::PLAYING, heroT);
     }
 

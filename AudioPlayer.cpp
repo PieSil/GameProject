@@ -97,3 +97,9 @@ const bool AudioPlayer::notYetInserted(const MusicID &id, const std::map<MusicID
 
     return notInserted;
 }
+
+void AudioPlayer::stopAllMusic() {
+    for (auto& musicPair : tracks) {
+        musicPair.second->stop();
+    }
+}
