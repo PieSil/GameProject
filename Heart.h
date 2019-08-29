@@ -21,15 +21,13 @@ public:
 
     void characterCollision(GameCharacter *character) override;
 
-    void setupAudio() override;
-
     const SpriteParams *getParameters() const override {
         return &heartParams;
     }
 
 protected:
     GameHero* hero;
-    float heal = DEF_HERO_HEALTH;
+    float heal;
     static const SpriteParams heartParams;
 };
 
