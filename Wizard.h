@@ -23,9 +23,6 @@ public:
     //copy constructor
     Wizard(const Wizard &copied);
 
-    //assignment operator
-    Wizard& operator =(const Wizard& wizard) = default;
-
     const std::pair<bool, Hitbox> attack(const bool &bypassClock) override;
 
     const bool hasEnoughMana(const int &cost);

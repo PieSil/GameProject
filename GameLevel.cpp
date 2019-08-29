@@ -367,10 +367,16 @@ void GameLevel::updateCombat(GameHero *hero) {
 
             Hitbox attackHitbox = attackPair.second;
 
+            bool hitSomething = false; //boolean used to check if an enemy has been hit
+
             for (const auto &enemy :enemies) {
-                if (attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
+
+                //if an enemy has already been hit stop checking for other enemies,
+                //this way the melee attack only hits one enemy at a time regardless of how many enemy intersect with attack hitbox
+                if (!hitSomething && attackPair.second.checkHitbox().intersects(enemy->getHitbox().checkHitbox())) {
 
                     enemy->getDamaged(hero->getStrength());
+                    hitSomething = true;
 
                 }
             }

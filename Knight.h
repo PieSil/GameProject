@@ -22,9 +22,6 @@ public:
     //copy constructor
     Knight(const Knight &copied);
 
-    //assignment operator
-    Knight& operator=(const Knight& knight) = default;
-
     void specialBehaviour() override;
 
     const bool getDamaged(const float &damage) override;
