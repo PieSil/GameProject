@@ -13,7 +13,6 @@ Achievement::Achievement(Subject *subject, const AchievementType &type) : subjec
 void Achievement::unlock() {
     clock.restart();
     unlocked = true;
-    //removeSubject();
 }
 
 void Achievement::update(const float &distanceWalked, const int &enemiesKilled, const bool &bossKilled) {
@@ -38,14 +37,6 @@ void Achievement::update(const float &distanceWalked, const int &enemiesKilled, 
                 break;
         }
     }
-}
-
-void Achievement::removeSubject() {
-    if (subject != nullptr) {
-        subject->removeObserver(this);
-    }
-
-    subject = nullptr;
 }
 
 void Achievement::setup(const AchievementType &type) {

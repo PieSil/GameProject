@@ -24,7 +24,12 @@ public:
     Achievement(const Achievement& copied);
 
     virtual ~Achievement() {
-        removeSubject();
+
+        if (subject != nullptr) {
+            subject->removeObserver(this);
+        }
+
+        subject = nullptr;
     };
 
     void update(const float &distanceWalked, const int &enemiesKilled, const bool &bossKilled) override;
@@ -58,7 +63,6 @@ public:
 protected:
     void unlock();
     void setup(const AchievementType& type);
-    void removeSubject();
 
     AchievementType type;
     bool unlocked;
