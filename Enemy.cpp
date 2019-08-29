@@ -11,7 +11,7 @@
  */
 Enemy::Enemy(GameHero *hero, const float &x, const float &y, const float &str, const bool &par, const bool &onf,
              const float &h, const bool &facingR, const float &s)
-        : hero(hero), paralyzed(par), aggro(false), aggroRange(100), GameCharacter(x, y, str, onf, h, s, facingR) {
+        : hero(hero), paralyzed(par), aggro(false), aggroRange(DEF_ENEMY_AGGRO_RANGE), GameCharacter(x, y, str, onf, h, s, facingR) {
 
 }
 
@@ -91,17 +91,17 @@ void Enemy::updateStatus() {
 
     if (paralyzed) {
         
-        if (clocks.paralyzedClock.getElapsedTime().asSeconds() >= 5)
+        if (clocks.paralyzedClock.getElapsedTime().asSeconds() >= PARALYSIS_DURATION)
             paralyzed = false;
     }
 
 }
 
 void Enemy::checkIfOnFire() {
-    if (onFire && clocks.damagedClock.getElapsedTime().asSeconds() >= 0.3) { //if character is on fire and has not been damaged in set amount of time
-        getDamaged(3);  //take damage
+    if (onFire && clocks.damagedClock.getElapsedTime().asSeconds() >= BURN_DAMAGE_TIMESTEP) { //if character is on fire and has not been damaged in set amount of time
+        getDamaged(ENEMY_BURN_DAMAGE);  //take damage
 
-        if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
+        if (clocks.burnClock.getElapsedTime().asSeconds() >= BURN_DURATION) { //if enough time has passed
             onFire = false; //set on fire to off
         }
     }
@@ -149,5 +149,5 @@ const bool Enemy::heroIsInFront() {
 
 void Enemy::setupAudio() {
     GameEntity::setupAudio();
-    audioPlayer.insertSound(SoundID::HIT, HIT_SOUND_PATH, 0.5, 10);
+    audioPlayer.insertSound(SoundID::HIT, HIT_SOUND_PATH, ENEMY_HIT_PITCH, DEF_SFX_VOLUME);
 }

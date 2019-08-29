@@ -17,11 +17,11 @@ GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(
 
     if (!victory) {
         //initialize and set "game over" text position
-        mainText = sf::Text("GAME OVER", font, 100);
+        mainText = sf::Text("GAME OVER", font, CHAR_SIZE_BIG);
         mainText.setFillColor(sf::Color::Red);
     } else {
         //initialize and set "game over" text position
-        mainText = sf::Text("VICTORY!", font, 100);
+        mainText = sf::Text("VICTORY!", font, CHAR_SIZE_BIG);
         mainText.setFillColor(sf::Color::Yellow);
     }
 
@@ -29,19 +29,19 @@ GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(
     sf::FloatRect textRect = mainText.getLocalBounds();
     mainText.setOrigin(textRect.width / 2., textRect.height / 2.);
 
-    mainText.setPosition(game->getHudView()->getCenter().x, (game->getHudView()->getSize().y/3.));
+    mainText.setPosition(game->getHudView()->getCenter().x, (game->getHudView()->getSize().y/MAIN_COORDINATEY_DIVIDER));
 
     //initialize options text (ex: "retry", "quit")
     std::pair<sf::Text, sf::RectangleShape> continueOpt;
 
     if (!victory) {
-        continueOpt.first = sf::Text("RETRY", font, 50);
+        continueOpt.first = sf::Text("RETRY", font, CHAR_SIZE_MEDIUM);
     } else {
-        continueOpt.first = sf::Text("RESTART", font, 50);
+        continueOpt.first = sf::Text("RESTART", font, CHAR_SIZE_MEDIUM);
     }
 
     std::pair<sf::Text, sf::RectangleShape> quitOpt;
-    quitOpt.first = sf::Text("QUIT", font, 50);
+    quitOpt.first = sf::Text("QUIT", font, CHAR_SIZE_MEDIUM);
 
     //emplace the created pairs in the heroes vector
     options.emplace_back(continueOpt);
@@ -52,7 +52,7 @@ GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(
     for (auto& option : options) {
 
         //create the rectangles
-        option.second = sf::RectangleShape(sf::Vector2f(450., 70.));
+        option.second = sf::RectangleShape(sf::Vector2f(OPTION_WIDTH, OPTION_HEIGHT));
         option.second.setFillColor(sf::Color::Transparent);
         option.second.setOutlineColor(sf::Color::White);
         option.second.setOutlineThickness(1);
@@ -62,12 +62,12 @@ GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(
 
         //set text origin point: store bounding rectangle of text in a variable and use it to reset its origin point
         textRect = option.first.getGlobalBounds();
-        option.first.setOrigin(textRect.width / 2., textRect.height/2. + 10);
+        option.first.setOrigin(textRect.width / 2., textRect.height/2. + OPT_ORIGINY_OFFSET);
 
         //set rectangles position
         option.second.setPosition(
                 game->getHudView()->getCenter().x / 2. + (index * game->getHudView()->getSize().x / 2.),
-                (game->getHudView()->getSize().y * (9./14.)));
+                (game->getHudView()->getSize().y * OPT_Y_MULTIPLIER));
 
         //set the options' position to match rectangles' position
         option.first.setPosition(option.second.getPosition());
@@ -90,7 +90,7 @@ void GameOver::update() {
 
     switch (selected) {
         case SelectedOption::CONTINUE:
-            sf::sleep(sf::seconds(0.5));
+            sf::sleep(sf::seconds(SWITCH_STATE_DELAY));
             audioPlayer.stopAllMusic();
             game->setState(State::SELECTION);
             break;
@@ -142,7 +142,7 @@ void GameOver::handleInput() {
 
 void GameOver::cycleColor() {
 
-    if (colorCycleClock.getElapsedTime().asSeconds() >= 0.5) {
+    if (colorCycleClock.getElapsedTime().asSeconds() >= COLOR_CYCLE_TIME) {
 
         colorCycleClock.restart();
 
@@ -169,9 +169,9 @@ void GameOver::cycleColor() {
 void GameOver::setupAudio() {
 
     if (victory) {
-        audioPlayer.insertMusic(MusicID::ENDING, VICTORY_MUSIC_PATH, true, 1, 25);
+        audioPlayer.insertMusic(MusicID::ENDING, VICTORY_MUSIC_PATH, true, STANDARD_PITCH, VICTORY_MUSIC_VOLUME);
     } else {
-        audioPlayer.insertMusic(MusicID::ENDING, GAMEOVER_MUSIC_PATH, false, 1, 3);
+        audioPlayer.insertMusic(MusicID::ENDING, GAMEOVER_MUSIC_PATH, false, STANDARD_PITCH, LOW_MUSIC_VOLUME);
     }
 }
 

@@ -43,7 +43,7 @@ void PlayingState::update() {
         hud.updateHUD();
 
         if (level.getHero()->getState() == EntityState::DEAD && !gameWon) {
-            sf::sleep(sf::seconds(0.5));
+            sf::sleep(sf::seconds(SWITCH_STATE_DELAY));
             audioPlayer.stopAllMusic();
             game->setState(State::GAMEOVER);
 
@@ -59,7 +59,7 @@ void PlayingState::update() {
                 }
             }
 
-        } else if (gameWon && victoryClock.getElapsedTime().asSeconds() >= 1.5) {
+        } else if (gameWon && victoryClock.getElapsedTime().asSeconds() >= VICTORY_DELAY) {
             audioPlayer.stopAllMusic();
             game->setState(State::VICTORY);
         }
@@ -230,5 +230,5 @@ void PlayingState::drawAchievements() {
 }
 
 void PlayingState::setupAudio() {
-    audioPlayer.insertMusic(MusicID::LEVEL, LEVEL_MUSIC_PATH, true, 1, 5);
+    audioPlayer.insertMusic(MusicID::LEVEL, LEVEL_MUSIC_PATH, true, STANDARD_PITCH, DEF_MUSIC_VOLUME);
 }

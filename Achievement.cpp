@@ -19,13 +19,13 @@ void Achievement::update(const float &distanceWalked, const int &enemiesKilled, 
     if (!unlocked) {
         switch (type) {
             case AchievementType::DistanceWalked:
-                if (distanceWalked >= 46 * TILE_SIZE.x) {
+                if (distanceWalked >= MINIMUM_DISTANCE_WALKED) {
                     unlock();
                 }
                 break;
 
             case AchievementType::EnemiesKilled:
-                if (enemiesKilled >= 5) {
+                if (enemiesKilled >= MINIMUM_ENEMIES_KILLED) {
                     unlock();
                 }
                 break;
@@ -45,7 +45,7 @@ void Achievement::setup(const AchievementType &type) {
         std::cout << "Could not load font file from this path: " << FONT_PATH << std::endl;
     }
 
-    description = sf::Text("Achievement Unlocked: ", font, 50);
+    description = sf::Text("Achievement Unlocked: ", font, CHAR_SIZE_MEDIUM);
     std::string name;
 
     switch (type) {
@@ -82,7 +82,7 @@ void Achievement::setup(const AchievementType &type) {
     icon.setTexture(texture);
     //set x coordinate of origin to the right edge of the icon:
     icon.setOrigin(icon.getOrigin().x + icon.getTextureRect().width, icon.getOrigin().y);
-    icon.setScale(8,8);
+    icon.setScale(ICON_SCALE, ICON_SCALE);
 
 }
 
@@ -98,7 +98,7 @@ const bool Achievement::calculateDescPos(const int &index, const float &windowWi
 
     if (isJustUnlocked()) {
 
-        float descriptionTop = 200; //set y coordinate of description upper edge
+        const float descriptionTop = 200; //set y coordinate of description upper edge
 
         description.setPosition(windowWidth/2., descriptionTop + (description.getCharacterSize()) * index);
         descriptionUpdated = true;
@@ -111,8 +111,8 @@ const bool Achievement::calculateIconPos(const int &index, const float &windowWi
 
     if (unlocked) {
 
-        float iconTop = 0; //set y coordinate of icon upper edge
-        float right = windowWidth; //set x coordinate of icon right edge
+        const float iconTop = 0; //set y coordinate of icon upper edge
+        const float right = windowWidth; //set x coordinate of icon right edge
 
         icon.setPosition((right - (icon.getGlobalBounds().width * index)), iconTop);
     }

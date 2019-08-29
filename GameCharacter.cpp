@@ -123,7 +123,7 @@ const bool GameCharacter::getDamaged(const float &damage) {
 
 void GameCharacter::updateStatus() {
 
-    if (clocks.damagedClock.getElapsedTime().asSeconds() >= 0.2) {
+    if (clocks.damagedClock.getElapsedTime().asSeconds() >= DAMAGED_COLORCHANGE_TIMESTEP) {
         sprite.setColor(sf::Color::White); //reset sprite color
     }
 
@@ -133,10 +133,10 @@ void GameCharacter::updateStatus() {
 
 void GameCharacter::checkIfOnFire() {
 
-    if (onFire && clocks.damagedClock.getElapsedTime().asSeconds() >= 0.3) { //if character is on fire and has not been damaged in set amount of time
-        getDamaged(1.5);  //take damage
+    if (onFire && clocks.damagedClock.getElapsedTime().asSeconds() >= BURN_DAMAGE_TIMESTEP) { //if character is on fire and has not been damaged in set amount of time
+        getDamaged(HERO_BURN_DAMAGE);  //take damage
 
-        if (clocks.burnClock.getElapsedTime().asSeconds() >= 3) { //if enough time has passed
+        if (clocks.burnClock.getElapsedTime().asSeconds() >= BURN_DURATION) { //if enough time has passed
             onFire = false; //set on fire to off
         }
     }

@@ -60,7 +60,7 @@ void GameHero::notifyObservers() const {
 void GameHero::incrDistanceWalked(const float &distance) {
     counters.distanceWalked += distance;
 
-    if (counters.distanceWalked >= 46 * TILE_SIZE.x)
+    if (counters.distanceWalked >= MINIMUM_DISTANCE_WALKED)
         notifyObservers();
 }
 
@@ -110,7 +110,7 @@ void GameHero::updateStatus() {
 
 void GameHero::setupAudio() {
     GameEntity::setupAudio();
-    audioPlayer.insertSound(SoundID::HIT, HIT_SOUND_PATH, 1, 10);
+    audioPlayer.insertSound(SoundID::HIT, HIT_SOUND_PATH, STANDARD_PITCH, DEF_SFX_VOLUME);
 }
 /*
 void GameHero::updateBehaviour(int width, int height, float scale, int rowSelector, int lastColumn) {

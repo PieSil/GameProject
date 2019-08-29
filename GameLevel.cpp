@@ -7,11 +7,11 @@
 GameLevel::GameLevel(Herotype heroT): bossEncountered(false) {
     if (heroT == Herotype::KNGT) {
         hero = std::move(
-                std::unique_ptr<Knight>(new Knight(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
+                std::unique_ptr<Knight>(new Knight(HERO_POS_X, HERO_POS_Y)));
 
     } else if (heroT == Herotype::WZRD) {
         hero = std::move(
-                std::unique_ptr<Wizard>(new Wizard(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
+                std::unique_ptr<Wizard>(new Wizard(HERO_POS_X, HERO_POS_Y)));
     }
 
     createMap();
@@ -101,35 +101,31 @@ void GameLevel::placeEntity(const Entitytype &type, const unsigned short &column
 
 void GameLevel::createEnemies() {
 
-    placeEntity(Entitytype::RANGED, 14, 5);
+    placeEntity(Entitytype::RANGED, FIRST_RANGED_COLUMN, FIRST_RANGED_ROW);
 
-    placeEntity(Entitytype::RANGED, 31, 3);
+    placeEntity(Entitytype::RANGED, SECOND_RANGED_COLUMN, SECOND_RANGED_ROW);
 
-    placeEntity(Entitytype::RANGED, 40, 6);
+    placeEntity(Entitytype::RANGED, THIRD_RANGED_COLUMN, THIRD_RANGED_ROW);
 
-    //placeEntity(Entitytype::RANGED, 66, 6);
+    placeEntity(Entitytype::MELEE, FIRST_MELEE_COLUMN, FIRST_MELEE_ROW);
 
-    placeEntity(Entitytype::MELEE, 16, 3);
+    placeEntity(Entitytype::MELEE, SECOND_MELEE_COLUMN, SECOND_MELEE_ROW);
 
-    placeEntity(Entitytype::MELEE, 34, 1);
+    placeEntity(Entitytype::MELEE, THIRD_MELEE_COLUMN, THIRD_MELEE_ROW);
 
-    placeEntity(Entitytype::MELEE, 37, 6);
+    placeEntity(Entitytype::MELEE, FOURTH_MELEE_COLUMN, FOURTH_MELEE_ROW);
 
-    placeEntity(Entitytype::MELEE, 50, 3);
+    placeEntity(Entitytype::MELEE, FIFTH_MELEE_COLUMN, FIFTH_MELEE_ROW);
 
-    placeEntity(Entitytype::MELEE, 20, 6);
+    placeEntity(Entitytype::MELEE, SIXTH_MELEE_COLUMN, SIXTH_MELEE_ROW);
 
-    placeEntity(Entitytype::MELEE, 26, 6);
-
-    //placeEntity(Entitytype::MELEE, 62, 6);
-
-    placeEntity(Entitytype::BOSS, 66, 6);
+    placeEntity(Entitytype::BOSS, BOSS_COLUMN, BOSS_ROW);
 }
 
 void GameLevel::createCollectibles() {
-    placeEntity(Entitytype::HEART, 18, 4);
-    placeEntity(Entitytype::HEART, 29, 7);
-    placeEntity(Entitytype::HEART, 56, 5);
+    placeEntity(Entitytype::HEART, FIRST_HEART_COLUMN, FIRST_HEART_ROW);
+    placeEntity(Entitytype::HEART, SECOND_HEART_COLUMN, SECOND_HEART_ROW);
+    placeEntity(Entitytype::HEART, THIRD_HEART_COLUMN, THIRD_HEART_ROW);
 }
 
 const EntityPositions &GameLevel::detectMapCollisions(const EntityPositions &prevPosition, GameCharacter *character,

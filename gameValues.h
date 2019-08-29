@@ -46,6 +46,42 @@ const float FRAMERATE = 60.;
 
 const std::string FONT_PATH = "../GameAssets/Font/manaspc.ttf";
 
+const unsigned CHAR_SIZE_BIG = 100;
+
+const unsigned CHAR_SIZE_MEDIUM = 50;
+
+//GAME STATES
+
+const float SWITCH_STATE_DELAY = 0.5;
+
+//SELECTION STATE:
+
+const float TITLE_COORDINATEY_DIVIDER = 8.; // window size will be divided by this value to determine title y position
+
+const float ACTION_YCOORDINATE_OFFSET = 20;
+
+const float HERO_RECT_DEF_WIDTH = 100.;
+
+const float HERO_RECT_DEF_HEIGHT = 200.;
+
+//GAME OVER STATE:
+
+const float MAIN_COORDINATEY_DIVIDER = 3.; // window size will be divided by this value to determine main text y position
+
+const float OPT_ORIGINY_OFFSET = 10;
+
+const float OPTION_WIDTH = 450.;
+
+const float OPTION_HEIGHT = 70.;
+
+const float OPT_Y_MULTIPLIER = 9./14.;
+
+const float COLOR_CYCLE_TIME = 0.5;
+
+//PLAYING STATE:
+
+const float VICTORY_DELAY = 1.5;
+
 //ACHIEVEMENTS
 const std::string WALKER_PATH = "../GameAssets/Sprites/Achievements/Walker.png";
 
@@ -77,6 +113,24 @@ const std::string ENEMY_ATT_SOUND_PATH = "../GameAssets/Sounds/Sword_Bandit.wav"
 
 const std::string GUARDUP_SOUND_PATH = "../GameAssets/Sounds/GuardUp.wav";
 
+const float STANDARD_PITCH = 1;
+
+const float DEF_MUSIC_VOLUME = 5;
+
+const float DEF_SFX_VOLUME = 10;
+
+const float KNIGHT_GUARDUP_PITCH = 0.8;
+
+const float PARALYZING_PITCH = 1.2;
+
+const float ENEMY_HIT_PITCH = 0.5;
+
+const float BOSS_ATTACK_PITCH = 0.2;
+
+const float VICTORY_MUSIC_VOLUME = 25;
+
+const float LOW_MUSIC_VOLUME = 3;
+
 //WINDOW
 const std::string BACKGROUND_PATH = "../GameAssets/Background/Background.png";
 
@@ -96,7 +150,6 @@ const float DEATH_ANIM_TIME = 1;
 const float ABILITY_ANIM_TIME = 0.5;
 
 
-
 //GRAVITY modifying this values may break game physics
 
 //controls gravity intensity, with current physics system value should be -2 or higher (meaning between -2 and 0)
@@ -112,6 +165,14 @@ const std::string MAP_PATH = "../GameAssets/Tileset/Tileset.png";
 const sf::Vector2u TILE_SIZE(32,32);
 const int MAP_COLUMNS = 73;
 const int MAP_ROWS = 12;
+
+//ACHIEVEMENTS
+
+const float MINIMUM_DISTANCE_WALKED = 46 * TILE_SIZE.x;
+
+const unsigned short MINIMUM_ENEMIES_KILLED = 5;
+
+const float ICON_SCALE = 8.;
 
 //HITBOXES
 
@@ -132,6 +193,13 @@ const int HEART_IDLE_ROW = 0;
 const int HEART_IDLE_LAST_COL = 2;
 
 
+//CHARACTERS
+
+const float DAMAGED_COLORCHANGE_TIMESTEP = 0.2;
+
+const float BURN_DURATION = 3;
+
+const float BURN_DAMAGE_TIMESTEP = 0.3;
 
 //HERO
 
@@ -150,11 +218,15 @@ const float HERO_ATT_TIMESTEP = 0.5;
 //default value for hero movementSpeed parameter:
 const float HERO_SPEED = 60; //sets hero speed (measured in pixels/second ?)
 
+const float HERO_BURN_DAMAGE = 1.5;
+
 //KNIGHT
 
 const float KNIGHT_ATTACK_RANGE = 16;
 
 const float KNIGHT_ABILITY_TIMESTEP = 10;
+
+const float KNIGHT_ABILITY_DURATION = 5;
 
 //values used to determine knight's sprite width and heigth to correctly select it when cutting sprite sheet:
 
@@ -202,6 +274,10 @@ const int DEF_MANA = 10;
 const float WIZARD_ATTACK_RANGE = 0;
 
 const float WIZARD_ABILITY_TIMESTEP = 0;
+
+const unsigned MANA_REGENERATE_VALUE = 3;
+
+const float MANA_REGENERATE_TIMESTEP = 4.;
 
 const unsigned short FIREB_COST = 2;
 
@@ -252,8 +328,15 @@ const float DEF_ENEMY_HEALTH = 35.;
 //default strength value for all enemies:
 const float DEF_ENEMY_STRENGTH = 5.;
 
+const float DEF_ENEMY_AGGRO_RANGE = 100;
+
 //default value for enemy movementSpeed parameter:
 const float ENEMY_SPEED = 55; //sets enemy speed (measured in pixels/second ?)
+
+const float PARALYSIS_DURATION = 5;
+
+const float ENEMY_BURN_DAMAGE = 3;
+
 
 //MELEE
 
@@ -464,6 +547,76 @@ const int PARA_ATT_LAST_COL = 9;
 
 const int PARA_SHOOT_ROW =0;
 const int PARA_SHOOT_LAST_COL = 9;
+
+//ENTITY POSITIONS
+
+//HERO
+
+const float HERO_POS_X = 4 * TILE_SIZE.x;
+
+const float HERO_POS_Y = 6 * TILE_SIZE.y;
+
+//ENEMIES
+
+const unsigned FIRST_RANGED_COLUMN = 14;
+
+const unsigned FIRST_RANGED_ROW = 5;
+
+const unsigned SECOND_RANGED_COLUMN = 31;
+
+const unsigned SECOND_RANGED_ROW = 3;
+
+const unsigned THIRD_RANGED_COLUMN = 40;
+
+const unsigned THIRD_RANGED_ROW = 6;
+
+const unsigned FIRST_MELEE_COLUMN = 16;
+
+const unsigned FIRST_MELEE_ROW = 3;
+
+const unsigned SECOND_MELEE_COLUMN = 20;
+
+const unsigned SECOND_MELEE_ROW = 6;
+
+const unsigned THIRD_MELEE_COLUMN = 26;
+
+const unsigned THIRD_MELEE_ROW = 6;
+
+const unsigned FOURTH_MELEE_COLUMN = 34;
+
+const unsigned FOURTH_MELEE_ROW = 1;
+
+const unsigned FIFTH_MELEE_COLUMN = 37;
+
+const unsigned FIFTH_MELEE_ROW = 6;
+
+const unsigned SIXTH_MELEE_COLUMN = 50;
+
+const unsigned SIXTH_MELEE_ROW = 3;
+
+const unsigned BOSS_COLUMN = 66;
+
+const unsigned BOSS_ROW = 6;
+
+//HEARTS
+
+/*
+ *  placeEntity(Entitytype::HEART, 18, 4);
+    placeEntity(Entitytype::HEART, 29, 7);
+    placeEntity(Entitytype::HEART, 56, 5);
+ */
+
+const unsigned FIRST_HEART_COLUMN = 18;
+
+const unsigned FIRST_HEART_ROW = 4;
+
+const unsigned SECOND_HEART_COLUMN = 29;
+
+const unsigned SECOND_HEART_ROW = 7;
+
+const unsigned THIRD_HEART_COLUMN = 56;
+
+const unsigned THIRD_HEART_ROW = 5;
 
 
 #endif //GAMEPROJECT_GAMEVALUES_H

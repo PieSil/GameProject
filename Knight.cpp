@@ -77,15 +77,15 @@ void Knight::updateStatus() {
     GameHero::updateStatus();
 
     //if set amount of time has passed since the activation of invincibility turn it off
-    if (clocks.invincibilityClock.getElapsedTime().asSeconds() >= 5) {
+    if (clocks.invincibilityClock.getElapsedTime().asSeconds() >= KNIGHT_ABILITY_DURATION) {
         invincible = false;
     }
 }
 
 void Knight::setupAudio() {
     GameHero::setupAudio();
-    audioPlayer.insertSound(SoundID::MELEE, KNIGHT_ATT_SOUND_PATH, 1, 10);
-    audioPlayer.insertSound(SoundID::GUARDUP, GUARDUP_SOUND_PATH, 0.8, 10);
+    audioPlayer.insertSound(SoundID::MELEE, KNIGHT_ATT_SOUND_PATH, STANDARD_PITCH, DEF_SFX_VOLUME);
+    audioPlayer.insertSound(SoundID::GUARDUP, GUARDUP_SOUND_PATH, KNIGHT_GUARDUP_PITCH, DEF_SFX_VOLUME);
 }
 
 

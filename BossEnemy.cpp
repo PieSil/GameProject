@@ -52,8 +52,8 @@ const std::pair<bool, Hitbox> BossEnemy::updateCombat() {
 
 void BossEnemy::setupAudio() {
     Enemy::setupAudio();
-    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 10);
-    audioPlayer.insertSound(SoundID::MELEE, ENEMY_ATT_SOUND_PATH, 0.2, 10);
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, STANDARD_PITCH, DEF_SFX_VOLUME);
+    audioPlayer.insertSound(SoundID::MELEE, ENEMY_ATT_SOUND_PATH, BOSS_ATTACK_PITCH, DEF_SFX_VOLUME);
 }
 
 

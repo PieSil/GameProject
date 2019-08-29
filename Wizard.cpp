@@ -92,11 +92,11 @@ const bool Wizard::hasEnoughMana(const int &cost) {
 }
 
 void Wizard::regenerateMana() {
-    if (clocks.manaClock.getElapsedTime().asSeconds() >= 4) {
+    if (clocks.manaClock.getElapsedTime().asSeconds() >= MANA_REGENERATE_TIMESTEP) {
         clocks.manaClock.restart();
-        mana += 3;
-        if (mana > 10) {
-            mana = 10;
+        mana += MANA_REGENERATE_VALUE;
+        if (mana > DEF_MANA) {
+            mana = DEF_MANA;
         }
     }
 }
@@ -120,6 +120,6 @@ void Wizard::decreaseMana(const unsigned short & amount) {
 
 void Wizard::setupAudio() {
     GameHero::setupAudio();
-    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, 1, 10);
-    audioPlayer.insertSound(SoundID::PARALYZING, PARA_SOUND_PATH, 1.2, 10);
+    audioPlayer.insertSound(SoundID::FIREBALL, FIREB_SOUND_PATH, STANDARD_PITCH, DEF_SFX_VOLUME);
+    audioPlayer.insertSound(SoundID::PARALYZING, PARA_SOUND_PATH, PARALYZING_PITCH, DEF_SFX_VOLUME);
 }

@@ -12,8 +12,8 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
         std::cout << "Could not load font file from this path: " << FONT_PATH << std::endl;
     }
 
-    textLines.emplace(TextType::TITLE, sf::Text("ORDEAL", font, 100));
-    textLines.emplace(TextType::ACTION, sf::Text("SELECT YOUR HERO", font, 50));
+    textLines.emplace(TextType::TITLE, sf::Text("ORDEAL", font, CHAR_SIZE_BIG));
+    textLines.emplace(TextType::ACTION, sf::Text("SELECT YOUR HERO", font, CHAR_SIZE_MEDIUM));
 
     sf::Text &title = textLines.find(TextType::TITLE)->second;
     sf::Text &action = textLines.find(TextType::ACTION)->second;
@@ -29,10 +29,10 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
 
     title.setFillColor(sf::Color::Yellow);
 
-    title.setPosition(game->getHudView()->getCenter().x, (game->getHudView()->getSize().y / 8.));
+    title.setPosition(game->getHudView()->getCenter().x, (game->getHudView()->getSize().y / TITLE_COORDINATEY_DIVIDER));
 
     //setup action
-    action.setPosition(title.getPosition().x, title.getPosition().y + title.getGlobalBounds().height + 20);
+    action.setPosition(title.getPosition().x, title.getPosition().y + title.getGlobalBounds().height + ACTION_YCOORDINATE_OFFSET);
 
     //create a wizard and a knight to display their sprites, create them into a pair to associate them with a RectangleShape
     std::pair<Knight *, sf::RectangleShape> knight;
@@ -50,7 +50,7 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
     for (auto &hero : heroes) {
 
         //create the rectangles
-        hero.second = sf::RectangleShape(sf::Vector2f(100. / heroes.size(), 200. / heroes.size()));
+        hero.second = sf::RectangleShape(sf::Vector2f(HERO_RECT_DEF_WIDTH / heroes.size(), HERO_RECT_DEF_HEIGHT / heroes.size()));
         hero.second.setFillColor(sf::Color::Transparent);
         hero.second.setOutlineColor(sf::Color::White);
         hero.second.setOutlineThickness(1);
@@ -148,5 +148,5 @@ void SelectionState::handleInput() {
 }
 
 void SelectionState::setupAudio() {
-    audioPlayer.insertMusic(MusicID::SELECTION, SELECTION_MUSIC_PATH, true, 1, 3);
+    audioPlayer.insertMusic(MusicID::SELECTION, SELECTION_MUSIC_PATH, true, STANDARD_PITCH, LOW_MUSIC_VOLUME);
 }
