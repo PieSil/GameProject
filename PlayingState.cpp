@@ -18,7 +18,7 @@ PlayingState::PlayingState(Game *game, const Herotype &heroT) : GameState(game),
     update();
     initView();
     if(!game->getWindow()->setBackground(BACKGROUND_PATH, level.getHero()->getAllPositions().spritePosition.y)) {
-        //TODO: throw exception
+        std::cout << "Could not load background from this path: " << BACKGROUND_PATH <<std::endl;
     }
     createAchievements();
 
@@ -191,8 +191,8 @@ void PlayingState::createAchievements() {
 
 void PlayingState::updateAchievements() {
 
-    unsigned short index = 0;
-    unsigned short drawIndex = 1;
+    unsigned short index = 0; //counts number of unlocked achievements
+    unsigned short descIndex = 0; // counts number of descriptions to draw on screen
     const float windowWidth = game->getWindow()->getWindowSize().x;
 
     for (auto& achievement : achievements) {
@@ -203,11 +203,11 @@ void PlayingState::updateAchievements() {
             index++;
         }
 
-        if (achievement.calculateDescPos(drawIndex, windowWidth)) {
+        if (achievement.calculateDescPos(descIndex, windowWidth)) {
             //calculateDescPos returns true if achievement has just been
             //unlocked (and thus description needs to be drawn on screen), false otherwise
 
-            drawIndex++;
+            descIndex++;
         }
 
     }

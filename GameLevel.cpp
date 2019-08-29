@@ -12,8 +12,6 @@ GameLevel::GameLevel(Herotype heroT): bossEncountered(false) {
     } else if (heroT == Herotype::WZRD) {
         hero = std::move(
                 std::unique_ptr<Wizard>(new Wizard(4 * TILE_SIZE.x, 6 * TILE_SIZE.y)));
-    } else {
-        //TODO: throw exception
     }
 
     createMap();

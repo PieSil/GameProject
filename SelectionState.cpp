@@ -9,7 +9,7 @@ SelectionState::SelectionState(Game *game) : GameState(game), heroT(Herotype::NO
     setupAudio();
 
     if (!font.loadFromFile(FONT_PATH)) {
-        //TODO: throw exception?
+        std::cout << "Could not load font file from this path: " << FONT_PATH << std::endl;
     }
 
     textLines.emplace(TextType::TITLE, sf::Text("ORDEAL", font, 100));

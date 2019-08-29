@@ -58,9 +58,6 @@ const EntityPositions MovingEntity::move(const Direction &direction, const float
     } else if (direction == Direction::DOWN) {
         sprite.move(0, distance); //move downwards
 
-    } else {
-
-        //TODO: throw exception
     }
 
     //moves hitbox with sprite

@@ -17,42 +17,43 @@ HeadsUpDisplay::HeadsUpDisplay(GameHero *hero, GameWindow *window) : hero(hero),
 
 void HeadsUpDisplay::setup() {
     if (!font.loadFromFile(FONT_PATH)) {
-        //TODO: throw exception?
+        std::cout << "Could not load font file from this path: " << FONT_PATH << std::endl;
     }
 
     //use string stream to be able to round current health and max health values
     //to desired amount of decimal digits
 
     unsigned short lineNumber = 0; //number of text lines that needs to be separated
-    //from each other (ex health, ability state, mana, ecc.) increment after initialization of new text attribute
+                                   //from each other (ex health, ability state, mana, ecc.) 
+                                   //increment after initialization of new text attribute
 
     unsigned short lineOffset = 70; //height offset between separated lines of text
 
     std::string healthString = getNewHealth();
 
-    health = sf::Text(healthString, font, 50);
+    healthText = sf::Text(healthString, font, 50);
 
-    health.setPosition(0,lineOffset * lineNumber);
+    healthText.setPosition(0, lineOffset * lineNumber);
 
     lineNumber++;
 
     std::string abilityString = getAbilityState();
 
-    ability = sf::Text(abilityString, font, 50);
+    abilityText = sf::Text(abilityString, font, 50);
 
-    ability.setPosition(0,lineOffset * lineNumber);
+    abilityText.setPosition(0, lineOffset * lineNumber);
 
     lineNumber++;
 
-    ability.setFillColor(sf::Color::Cyan);
+    abilityText.setFillColor(sf::Color::Cyan);
 
     std::string statusString = getNewStatus();
 
-    status = sf::Text(statusString, font, 50);
+    statusText = sf::Text(statusString, font, 50);
 
-    status.setPosition(0,lineOffset * lineNumber);
+    statusText.setPosition(0, lineOffset * lineNumber);
 
-    status.setFillColor(sf::Color::Magenta);
+    statusText.setFillColor(sf::Color::Magenta);
 
     lineNumber++;
 
@@ -67,11 +68,11 @@ void HeadsUpDisplay::updateHUD() {
 }
 
 void HeadsUpDisplay::display() {
-    window->draw(health);
+    window->draw(healthText);
 
-    window->draw(ability);
+    window->draw(abilityText);
 
-    window->draw(status);
+    window->draw(statusText);
 }
 
 const std::string HeadsUpDisplay::getNewHealth() {
@@ -92,8 +93,8 @@ const std::string HeadsUpDisplay::getNewHealth() {
 
 void HeadsUpDisplay::updateHealth() {
     std::string healthString = getNewHealth();
-    health.setString(healthString);
-    health.setFont(font);
+    healthText.setString(healthString);
+    healthText.setFont(font);
 }
 
 const std::string HeadsUpDisplay::getAbilityState() {
@@ -118,10 +119,10 @@ const std::string HeadsUpDisplay::getAbilityState() {
 
         if (hero->isAbilityAvailable()) {
             abilityString += "Available";
-            ability.setFillColor(sf::Color::Cyan);
+            abilityText.setFillColor(sf::Color::Cyan);
         } else {
             abilityString += "Recharging";
-            ability.setFillColor(sf::Color::Red);
+            abilityText.setFillColor(sf::Color::Red);
         }
 
         return abilityString;
@@ -133,14 +134,14 @@ const std::string HeadsUpDisplay::getAbilityState() {
 
 void HeadsUpDisplay::updateAbility() {
         std::string abilityString = getAbilityState();
-        ability.setString(abilityString);
-        ability.setFont(font);
+        abilityText.setString(abilityString);
+        abilityText.setFont(font);
 }
 
 void HeadsUpDisplay::updateStatus() {
     std::string statusString = getNewStatus();
-    status.setString(statusString);
-    status.setFont(font);
+    statusText.setString(statusString);
+    statusText.setFont(font);
 }
 
 const std::string HeadsUpDisplay::getNewStatus() {

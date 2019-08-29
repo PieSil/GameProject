@@ -26,7 +26,7 @@ public:
 
     const sf::Text getHealth() const {
 
-        sf::Text healthText = health;
+        sf::Text healthText = healthText;
         healthText.setFont(font);
 
         return healthText;
@@ -34,7 +34,7 @@ public:
     };
 
     const sf::Text getMana() const {
-        sf::Text manaText = ability;
+        sf::Text manaText = abilityText;
         manaText.setFont(font);
 
         return manaText;
@@ -59,9 +59,9 @@ private:
     GameWindow *window;
     GameHero *hero;
     sf::Font font;
-    sf::Text health;
-    sf::Text ability;
-    sf::Text status;
+    sf::Text healthText;
+    sf::Text abilityText;
+    sf::Text statusText;
 
 
 };

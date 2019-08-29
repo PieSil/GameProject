@@ -24,7 +24,7 @@ void GameEntity::loadTexture(const std::string &path) {
 
 
     if (!texture.loadFromFile(path)) {
-        //TODO: exception?
+        std::cout << "Could not load texture file from this path: " << path << std::endl;
     }
 
     sprite = sf::Sprite(texture);

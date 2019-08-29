@@ -12,7 +12,7 @@ GameOver::GameOver(Game *game, const bool &victory) : GameState(game), selected(
     game->getWindow()->setView(*game->getHudView());
 
     if (!font.loadFromFile(FONT_PATH)) {
-        //TODO: throw exception?
+        std::cout << "Could not load font file from this path: " << FONT_PATH << std::endl;
     }
 
     if (!victory) {

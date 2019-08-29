@@ -96,6 +96,8 @@ const std::pair<bool, Hitbox> RangedEnemy::attack(const bool &bypassClock) {
     std::pair<bool, Hitbox> attackResult = Enemy::attack(bypassClock);
 
     if (attackResult.first) {
+
+        //turn enemy to face towards hero and shoot in his direction
         if (hero->getSprite().getPosition().x <=
             this->sprite.getPosition().x) { //if hero is at enemy's left (hero x coordinate is < sprite x coordinate)
             facingRight = false; //turn left

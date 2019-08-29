@@ -33,11 +33,11 @@ public:
 
     const bool calculateIconPos(const int &index, const float &windowWidth);
 
+    const bool isJustUnlocked();
+
     bool isUnlocked() const {
         return unlocked;
     }
-
-    const bool isJustUnlocked();
 
     AchievementType getType() const {
         return type;

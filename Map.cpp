@@ -11,7 +11,7 @@
 Map::Map(const int *tilesArray, const int &arrayColumns, const int &arrayRows, const std::string &path, sf::Vector2u tileSize)
         : tilesArray(tilesArray), columns(arrayColumns), rows(arrayRows), tileSize(tileSize) {
     if (!tileset.loadFromFile(path)) {
-        //TODO: throw exception
+        std::cout << "Could not load tileset from this path: " << path << std::endl;
     }
 
     load();

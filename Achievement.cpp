@@ -36,10 +36,6 @@ void Achievement::update(const float &distanceWalked, const int &enemiesKilled, 
                     unlock();
                 }
                 break;
-
-            default:
-                //TODO: throw exception?
-                break;
         }
     }
 }
@@ -55,7 +51,7 @@ void Achievement::removeSubject() {
 void Achievement::setup(const AchievementType &type) {
 
     if (!font.loadFromFile(FONT_PATH)) {
-        //TODO: throw exception
+        std::cout << "Could not load font file from this path: " << FONT_PATH << std::endl;
     }
 
     description = sf::Text("Achievement Unlocked: ", font, 50);
@@ -64,27 +60,23 @@ void Achievement::setup(const AchievementType &type) {
     switch (type) {
         case AchievementType::DistanceWalked:
             if (!texture.loadFromFile(WALKER_PATH)) {
-                //TODO: throw exception
+                std::cout << "Could not load texture file from this path: " << WALKER_PATH << std::endl;
             }
             name = "Explorer";
             break;
 
         case AchievementType::EnemiesKilled:
             if (!texture.loadFromFile(KILLER_PATH)) {
-                //TODO: throw exception
+                std::cout << "Could not load texture file from this path: " << KILLER_PATH << std::endl;
             }
             name = "Killer";
             break;
 
         case AchievementType::BossKilled:
             if (!texture.loadFromFile(THESEUS_PATH)) {
-                //TODO: throw exception
+                std::cout << "Could not load texture file from this path: " << THESEUS_PATH << std::endl;
             }
             name = "Theseus";
-            break;
-
-        default:
-            //TODO: throw exception?
             break;
     }
 
@@ -97,6 +89,7 @@ void Achievement::setup(const AchievementType &type) {
 
     //set icon texture
     icon.setTexture(texture);
+    //set x coordinate of origin to the right edge of the icon:
     icon.setOrigin(icon.getOrigin().x + icon.getTextureRect().width, icon.getOrigin().y);
     icon.setScale(8,8);
 
@@ -114,8 +107,7 @@ const bool Achievement::calculateDescPos(const int &index, const float &windowWi
 
     if (isJustUnlocked()) {
 
-        float descriptionTop = 150;
-        float descriptionOffset = 30;
+        float descriptionTop = 200; //set y coordinate of description upper edge
 
         description.setPosition(windowWidth/2., descriptionTop + (description.getCharacterSize()) * index);
         descriptionUpdated = true;
@@ -128,8 +120,8 @@ const bool Achievement::calculateIconPos(const int &index, const float &windowWi
 
     if (unlocked) {
 
-        float iconTop = 0;
-        float right = windowWidth;
+        float iconTop = 0; //set y coordinate of icon upper edge
+        float right = windowWidth; //set x coordinate of icon right edge
 
         icon.setPosition((right - (icon.getGlobalBounds().width * index)), iconTop);
     }
