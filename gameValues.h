@@ -50,6 +50,8 @@ const unsigned CHAR_SIZE_BIG = 100;
 
 const unsigned CHAR_SIZE_MEDIUM = 50;
 
+const std::string DEFAULT_SPRITE_PATH = "../GameAssets/Sprites/Default_Sprite.png";
+
 //GAME STATES
 
 const float SWITCH_STATE_DELAY = 0.5;
@@ -161,6 +163,7 @@ const float JUMP_VELOCITY = 8;
 
 //MAP
 
+const std::string MAP_MATRIX_PATH = "../GameAssets/Tileset/MapMatrix.txt";
 const std::string MAP_PATH = "../GameAssets/Tileset/Tileset.png";
 const sf::Vector2u TILE_SIZE(32,32);
 const int MAP_COLUMNS = 73;

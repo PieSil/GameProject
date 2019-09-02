@@ -25,7 +25,7 @@ GameLevel::GameLevel(Herotype heroT): bossEncountered(false) {
 
 void GameLevel::createMap() {
 
-    std::ifstream file("../GameAssets/Tileset/MapMatrix.txt");
+    std::ifstream file(MAP_MATRIX_PATH);
 
     if (file.is_open()) {
         unsigned short i;
